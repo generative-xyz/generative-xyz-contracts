@@ -1,0 +1,44 @@
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+
+#Hardhat files
+cache
+#artifacts
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# vim
+[._]*.s[a-v][a-z]mint
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+netrwhist
+*~
+tags
+[._]*.un~
+
+# Logs
+logs
+*.log
+
+# local env variables
+.env
+
+# macOS
+.DS_Store
+
+#artifacts
+
+cache
+
+yarn.lock
+
+package-lock.json
