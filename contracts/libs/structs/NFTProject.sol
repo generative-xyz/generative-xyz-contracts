@@ -4,18 +4,19 @@ library NFTProject {
     struct Project {
         uint24 _maxSupply; // required
         uint24 _limit;// required
-        uint256 _mintPrice;
+        uint256 _mintPrice;// not require
+        address _mintPriceAddr; // erc20 addr if possible, not require
         string _name;// required
         string _creator;// required
         address _creatorAddr;// required
-        string _desc;
+        string _desc;// not require
         string _image;// base64 of image
-        ProjectSocial _social;
-        string _scriptType;
+        ProjectSocial _social;// not require
+        string _scriptType;// not require
         string[] _scripts;// required
-        string _styles;
-        uint256 _completeTime;
-        address _genNFTAddr;
+        string _styles;// not require
+        uint256 _completeTime;// init = 0
+        address _genNFTAddr; // init = 0x0
     }
 
     struct ProjectSocial {
