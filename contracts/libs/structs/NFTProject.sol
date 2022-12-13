@@ -26,6 +26,7 @@ library NFTProject {
 
     struct ProjectData {
         address _projectAddr;// parent project addr
+        address _projectDataAddr;
         uint256 _projectId;// parent project id
         uint24 _maxSupply;// max
         uint24 _limit; // limit for not reserve
@@ -34,5 +35,13 @@ library NFTProject {
         string _creator;
         address _creatorAddr;
         uint256 _mintPrice;
+        address _mintPriceAddr; // erc20 addr if possible
+    }
+
+    struct ProjectURIContext {
+        string script;
+        string imageURI;
+        string animationURI;
+        string name;
     }
 }

@@ -10,6 +10,7 @@ import "../interfaces/IGenerativeProject.sol";
 import "../services/Randomizer.sol";
 import "../interfaces/IGenerativeNFT.sol";
 import "../interfaces/IParameterControl.sol";
+import "../interfaces/IGenerativeProjectData.sol";
 
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
     mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
@@ -22,6 +23,8 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         _admin = admin;
     }
 
+    /* @ProjectInfo: data for project data
+    */
     function init(NFTProject.ProjectData memory project, address admin, address paramsAddr, address randomizer, address[] memory reserves) external {
         require(_admin != address(0x0));
         require(admin != address(0x0), "INV_ADD");
@@ -35,6 +38,8 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         transferOwnership(_admin);
     }
 
+    /* @Mint
+    */
     function setTokenSeed(uint256 tokenId, bytes32 seed) internal {
         require(_ownersAndHashSeeds[tokenId]._seed == bytes12(0), "Token hash already set");
         require(seed != bytes12(0), "No zero hash seed");
@@ -123,6 +128,12 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
 
     /* @TokenData:
     */
+
+    function tokenURI(uint256 tokenId) override public view returns (string memory) {
+        IGenerativeProjectData projectData = IGenerativeProjectData(_project._projectDataAddr);
+        bytes32 seed = this.tokenIdToHash(tokenId);
+        return projectData.tokenURI(tokenId, seed);
+    }
 
     function tokenIdToHash(uint256 _tokenId) external view returns (bytes32) {
         if (_ownersAndHashSeeds[_tokenId]._seed == 0) {
