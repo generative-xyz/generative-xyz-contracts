@@ -5,20 +5,24 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/ClonesUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/interfaces/IERC2981Upgradeable.sol";
-import "../interfaces/IGenerativrProject.sol";
+import "../interfaces/IGenerativeProject.sol";
 import "../libs/helpers/Errors.sol";
 import "../interfaces/IParameterControl.sol";
 import "../interfaces/IGenerativeNFT.sol";
 
-contract GenerativeProject is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, IERC2981Upgradeable, IGenerativrProject {
+contract GenerativeProject is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, IERC2981Upgradeable, IGenerativeProject {
 
     // super admin
     address public _admin;
     // parameter control address
     address public _paramsAddress;
+    // randomizer
+    address public _randomizerAddr;
 
     // projectId is tokenID of project nft
     uint256 private _currentProjectId;
+
+    mapping(uint256 => NFTProject.Project) _projects;
 
     function initialize(
         string memory name,
@@ -71,7 +75,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         }
     }
 
-    function createProject() external returns (uint256) {
+    function createProject(address[] memory reserves) external returns (uint256) {
         _currentProjectId++;
         IParameterControl _p = IParameterControl(_paramsAddress);
         paymentMintProject();
@@ -80,8 +84,14 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress("GENERATIVE_NFT_TEMPLATE"));
         IGenerativeNFT nft = IGenerativeNFT(generativeNFTAdd);
         NFTProject.ProjectData memory data;
-        nft.init(data, _admin);
+
+        nft.init(data, _admin, _randomizerAddr, reserves);
         return _currentProjectId;
+    }
+
+    function completeProject(uint256 projectId) external {
+        require(msg.sender == _projects[projectId]._genNFTAddr);
+        _projects[projectId]._completeTime = block.timestamp;
     }
 
     /** @dev EIP2981 royalties implementation. */
