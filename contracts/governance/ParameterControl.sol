@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 import "../interfaces/IParameterControl.sol";
 import "../libs/helpers/Errors.sol";
 
@@ -12,11 +14,12 @@ import "../libs/helpers/Errors.sol";
  *
  */
 
-contract ParameterControl is IParameterControl {
+contract ParameterControl is Ownable, IParameterControl {
     event AdminChanged (address previousAdmin, address newAdmin);
     event SetEvent (string key, string value);
 
-    address public _admin; // is a mutil sig address when deploy
+    // is a mutil sig address when deploy
+    address public _admin;
     mapping(string => string) private _params;
     mapping(string => int) private _paramsInt;
     mapping(string => uint256) private _paramsUInt256;
