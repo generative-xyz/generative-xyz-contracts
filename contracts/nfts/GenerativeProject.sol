@@ -9,6 +9,7 @@ import "../interfaces/IGenerativeProject.sol";
 import "../libs/helpers/Errors.sol";
 import "../interfaces/IParameterControl.sol";
 import "../interfaces/IGenerativeNFT.sol";
+import "../interfaces/IGenerativeProjectData.sol";
 
 contract GenerativeProject is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, IERC2981Upgradeable, IGenerativeProject {
 
@@ -18,6 +19,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     address public _paramsAddress;
     // randomizer
     address public _randomizerAddr;
+    // project data
+    address public _projectDataContextAddr;
 
     // projectId is tokenID of project nft
     uint256 private _currentProjectId;
@@ -75,16 +78,26 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         }
     }
 
-    function createProject(address[] memory reserves) external returns (uint256) {
+    function createProject(
+        bytes[] memory traits,
+        bytes[][] memory listValues,
+        address[] memory reserves
+    ) external returns (uint256) {
+        // safe mint
         _currentProjectId++;
         IParameterControl _p = IParameterControl(_paramsAddress);
         paymentMintProject();
         NFTProject.Project storage project;
         _safeMint(msg.sender, _currentProjectId);
+
+        // init to project data context
+        IGenerativeProjectData ctx = IGenerativeProjectData(_projectDataContextAddr);
+        ctx.initTrait(_currentProjectId, traits, listValues);
+
+        // set to generative nft
         address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress("GENERATIVE_NFT_TEMPLATE"));
         IGenerativeNFT nft = IGenerativeNFT(generativeNFTAdd);
         NFTProject.ProjectData memory data;
-
         nft.init(data, _admin, _paramsAddress, _randomizerAddr, reserves);
         return _currentProjectId;
     }

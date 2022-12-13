@@ -26,6 +26,22 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         __Ownable_init();
     }
 
+    function initTrait(uint256 projectId, bytes[] memory traits, bytes[][] memory listValues) external {
+        require(msg.sender == _admin || msg.sender == _generativeProjectAddr, Errors.INV_ADD);
+        for (uint256 i = 0; i < traits.length; i++) {
+            bytes memory name = traits[i];
+            bytes[] memory values = listValues[i];
+            // push trait
+            _traits[projectId].push(name);
+            // apply available values for trait
+            _traitsAvailableValues[projectId][_traits[projectId][_traits[projectId].length - 1]] = new bytes[](values.length);
+            for (uint256 i = 0; i < values.length; i++) {
+                _traitsAvailableValues[projectId][_traits[projectId][_traits[projectId].length - 1]][i] = values[i];
+            }
+        }
+
+    }
+
     function addTrait(uint256 projectId, bytes memory name, bytes[] memory values) external {
         require(msg.sender == _admin || msg.sender == _generativeProjectAddr, Errors.INV_ADD);
 
