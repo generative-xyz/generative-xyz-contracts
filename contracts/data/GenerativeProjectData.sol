@@ -12,6 +12,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     address public _admin;
     address public _paramAddr;
     address public _generativeProjectAddr;
+    string public _baseURI;
 
     // project traits
     mapping(uint256 => mapping(bytes => bytes[])) public _traitsAvailableValues;
@@ -75,12 +76,12 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         return result;
     }
 
-    function tokenURI(uint256 projectId, bytes32 seed) external view returns (string memory result) {
+    function tokenURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         // TODO with seed
         NFTProject.ProjectURIContext memory ctx;
         ctx.animationURI = string(abi.encodePacked(
                 ', "animation_url":"data:text/html;charset=utf-8,',
-                this.tokenHTML(projectId, seed),
+                this.tokenHTML(projectId, tokenId, seed),
                 '"'
             ));
         result = string(
@@ -96,12 +97,12 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         );
     }
 
-    function tokenHTML(uint256 projectId, bytes32 seed) external view returns (string memory result) {
+    function tokenHTML(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         // TODO with seed
         IParameterControl param = IParameterControl(_paramAddr);
         result = string(abi.encodePacked("<html><head><meta charset='UTF-8'><style>html,body,svg{margin:0;padding:0; height:100%;text-align:center;}</style>",
             param.get("three.js"), // load threejs lib here
-            "<script>let seed = ", string(abi.encodePacked(seed)), ";</script></head><body>",
+            '<script>let tokenData = {"tokenId":', StringsUpgradeable.toString(tokenId), ', "seed": "', string(abi.encodePacked(seed)), '"};</script></head><body>',
             "<div id='container-el'></div>",
             "<script>//TODO running script</script>",
             "</body></html>"
