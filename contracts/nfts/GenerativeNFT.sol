@@ -3,9 +3,11 @@ pragma solidity ^0.8.0;
 import "./BaseERC721OwnerSeed.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
+import "../libs/structs/NFTProject.sol";
 
 contract GenerativeNFT is BaseERC721OwnerSeed {
     mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
+    NFTProject.ProjectData public _project;
 
     constructor (string memory name,
         string memory symbol,
@@ -13,9 +15,20 @@ contract GenerativeNFT is BaseERC721OwnerSeed {
         _admin = admin;
     }
 
+    function init(NFTProject.ProjectData memory project, address admin) external {
+        require(_admin != address(0x0));
+        require(admin != address(0x0), "INV_ADD");
+        _project = project;
+        _admin = admin;
+        transferOwnership(_admin);
+    }
+
     function mint(uint256 projectId) external returns (uint256 tokenId) {
-        _mint(msg.sender, 1);
-        return 0;
+        _project._index ++;
+        uint256 tokenId = (_project._projectId * 1000000) + _project._index;
+        _safeMint(msg.sender, tokenId);
+        
+        return tokenId;
     }
 
     /* @dev EIP2981 royalties implementation. 
