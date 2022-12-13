@@ -79,15 +79,23 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     }
 
     function createProject(
+        NFTProject.Project memory project,
         bytes[] memory traits,
         bytes[][] memory listValues,
         address[] memory reserves
     ) external returns (uint256) {
+        // verify
+        require(bytes(project._name).length > 0);
+        require(bytes(project._creator).length > 0);
+        require(project._maxSupply > 0);
+        require(project._limit > 0 && project._limit <= project._maxSupply);
+        require(project._creatorAddr != address(0x0));
+
         // safe mint
         _currentProjectId++;
         IParameterControl _p = IParameterControl(_paramsAddress);
         paymentMintProject();
-        NFTProject.Project storage project;
+        _projects[_currentProjectId] = project;
         _safeMint(msg.sender, _currentProjectId);
 
         // init to project data context
@@ -96,8 +104,9 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
 
         // set to generative nft
         address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress("GENERATIVE_NFT_TEMPLATE"));
+        _projects[_currentProjectId]._genNFTAddr = generativeNFTAdd;
         IGenerativeNFT nft = IGenerativeNFT(generativeNFTAdd);
-        NFTProject.ProjectData memory data;
+        NFTProject.ProjectMinting memory data;
         nft.init(data, _admin, _paramsAddress, _randomizerAddr, reserves);
         return _currentProjectId;
     }
@@ -107,9 +116,20 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         _projects[projectId]._completeTime = block.timestamp;
     }
 
+    /* @tokenData:
+    */
+    function projectDetails(uint256 projectId) external view returns (NFTProject.Project memory project){
+        project = _projects[projectId];
+    }
+
+    function tokenURI(uint256 projectId) override public view returns (string memory result) {
+        IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
+        result = projectData.projectURI(projectId);
+    }
+
     /** @dev EIP2981 royalties implementation. */
     // EIP2981 standard royalties return.
-    function royaltyInfo(uint256 _tokenId, uint256 _salePrice) external view override
+    function royaltyInfo(uint256 projectId, uint256 _salePrice) external view override
     returns (address receiver, uint256 royaltyAmount)
     {
         receiver = _admin;

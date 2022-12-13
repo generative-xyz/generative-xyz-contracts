@@ -2,16 +2,16 @@ pragma solidity ^0.8.0;
 
 library NFTProject {
     struct Project {
-        uint24 _maxSupply;
-        uint24 _limit;
+        uint24 _maxSupply; // required
+        uint24 _limit;// required
         uint256 _mintPrice;
-        string _name;
-        string _creator;
-        address _creatorAddr;
+        string _name;// required
+        string _creator;// required
+        address _creatorAddr;// required
         string _desc;
+        string _image;// base64 of image
         ProjectSocial _social;
-        mapping(uint256 => string) scripts;
-        uint256[] scriptIndex;
+        string[] scripts;// required
         uint256 _completeTime;
         address _genNFTAddr;
     }
@@ -24,7 +24,7 @@ library NFTProject {
         string _instagram;
     }
 
-    struct ProjectData {
+    struct ProjectMinting {
         address _projectAddr;// parent project addr
         address _projectDataAddr;
         uint256 _projectId;// parent project id

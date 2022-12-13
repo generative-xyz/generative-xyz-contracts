@@ -7,6 +7,8 @@ import "../libs/helpers/Base64.sol";
 import "../interfaces/IParameterControl.sol";
 import "../libs/structs/NFTProject.sol";
 import "../interfaces/IGenerativeProjectData.sol";
+import "../interfaces/IGenerativeProject.sol";
+import "../libs/structs/NFTProject.sol";
 
 contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     address public _admin;
@@ -26,6 +28,8 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         __Ownable_init();
     }
 
+    /* @ProjectTraits
+    */
     function initTrait(uint256 projectId, bytes[] memory traits, bytes[][] memory listValues) external {
         require(msg.sender == _admin || msg.sender == _generativeProjectAddr, Errors.INV_ADD);
         for (uint256 i = 0; i < traits.length; i++) {
@@ -92,6 +96,25 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         return result;
     }
 
+    /* @ProjectURI:
+    */
+    function projectURI(uint256 projectId) external view returns (string memory result) {
+        IGenerativeProject p = IGenerativeProject(_generativeProjectAddr);
+        NFTProject.Project memory d = p.projectDetails(projectId);
+        result = string(
+            abi.encodePacked('data:application/json;base64,',
+            Base64.encode(abi.encodePacked(
+                '{"name":"', d._name,
+                '","description":"', d._desc, '"',
+                '","image":"', d._image, '"',
+                '}'
+            ))
+            )
+        );
+    }
+
+    /* @TokenURI
+    */
     function tokenURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         // TODO with seed
         NFTProject.ProjectURIContext memory ctx;

@@ -14,7 +14,7 @@ import "../interfaces/IGenerativeProjectData.sol";
 
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
     mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
-    NFTProject.ProjectData public _project;
+    NFTProject.ProjectMinting public _project;
     mapping(address => bool) _reserves;
 
     constructor (string memory name,
@@ -25,7 +25,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
 
     /* @ProjectInfo: data for project data
     */
-    function init(NFTProject.ProjectData memory project, address admin, address paramsAddr, address randomizer, address[] memory reserves) external {
+    function init(NFTProject.ProjectMinting memory project, address admin, address paramsAddr, address randomizer, address[] memory reserves) external {
         require(_admin != address(0x0));
         require(admin != address(0x0), "INV_ADD");
         _project = project;
