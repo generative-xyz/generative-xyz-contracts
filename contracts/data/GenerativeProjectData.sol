@@ -159,7 +159,6 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
             '<style>', d._styles, '</style>',
             '</head><body>',
             "<div id='container-el'></div>",
-            "<script>//TODO running script</script>",
             "</body></html>"
             ));
     }
