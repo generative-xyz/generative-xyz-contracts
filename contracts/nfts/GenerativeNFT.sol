@@ -43,6 +43,9 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
 
     function paymentMintNFT() internal {
         uint256 mintPrice = _project._mintPrice;
+        if (mintPrice == 0) {
+            return;
+        }
         address mintPriceAddr = address(0x0);
         IGenerativeProject project = IGenerativeProject(_project._projectAddr);
         IParameterControl _p = IParameterControl(_paramsAddress);
