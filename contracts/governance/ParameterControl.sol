@@ -24,6 +24,7 @@ contract ParameterControl is Ownable, IParameterControl {
     mapping(string => int) private _paramsInt;
     mapping(string => uint256) private _paramsUInt256;
     mapping(string => address) private _paramsAddress;
+    mapping(string => bytes32) private _paramsBytes32;
 
     constructor(
         address admin
@@ -53,6 +54,10 @@ contract ParameterControl is Ownable, IParameterControl {
         return _paramsAddress[key];
     }
 
+    function getBytes32(string memory key) external view returns (bytes32) {
+        return _paramsBytes32[key];
+    }
+
     function set(string memory key, string memory value) external adminOnly {
         _params[key] = value;
         emit SetEvent(key, value);
@@ -68,6 +73,10 @@ contract ParameterControl is Ownable, IParameterControl {
 
     function setAddress(string memory key, address value) external adminOnly {
         _paramsAddress[key] = value;
+    }
+
+    function setBytes32(string memory key, bytes32 value) external adminOnly {
+        _paramsBytes32[key] = value;
     }
 
     function updateAdmin(address admin_) external adminOnly {

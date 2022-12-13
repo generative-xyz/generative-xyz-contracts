@@ -9,6 +9,7 @@ library NFTProject {
         string _name;// required
         string _creator;// required
         address _creatorAddr;// required
+        string _license;
         string _desc;// not require
         string _image;// base64 of image
         ProjectSocial _social;// not require

@@ -7,6 +7,8 @@ interface IParameterControl {
 
     function getAddress(string memory key) external view returns (address);
 
+    function getBytes32(string memory key) external view returns (bytes32);
+
     function set(string memory key, string memory value) external;
 
     function setInt(string memory key, int value) external;
@@ -14,4 +16,6 @@ interface IParameterControl {
     function setUInt256(string memory key, uint256 value) external;
 
     function setAddress(string memory key, address value) external;
+
+    function setBytes32(string memory key, bytes32 value) external;
 }

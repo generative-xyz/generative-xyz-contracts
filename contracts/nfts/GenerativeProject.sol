@@ -56,6 +56,9 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         }
     }
 
+    /* @Mint project
+    */
+
     function paymentMintProject() internal {
         if (msg.sender != _admin) {
             IParameterControl _p = IParameterControl(_paramsAddress);
@@ -111,12 +114,61 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         return _currentProjectId;
     }
 
+    function updateProjectScriptType(
+        uint256 projectId,
+        string memory scriptType
+    )
+    external
+    {
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        _projects[projectId]._scriptType = scriptType;
+    }
+
+    function addProjectScript(uint256 projectId, string memory _script)
+    external
+    {
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        _projects[projectId]._scripts.push(_script);
+    }
+
+    function updateProjectScript(uint256 projectId, uint256 scriptIndex, string memory script)
+    external
+    {
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        _projects[projectId]._scripts[scriptIndex] = script;
+    }
+
+    function deleteProjectScript(uint256 projectId, uint256 scriptIndex)
+    external
+    {
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        delete _projects[projectId]._scripts[scriptIndex];
+    }
+
     function completeProject(uint256 projectId) external {
         require(msg.sender == _projects[projectId]._genNFTAddr);
         _projects[projectId]._completeTime = block.timestamp;
     }
 
-    /* @tokenData:
+    function updateProjectName(uint256 projectId, string memory projectName)
+    external {
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        _projects[projectId]._name = projectName;
+    }
+
+    function updateProjectCreatorName(uint256 projectId, string memory creatorName)
+    external {
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        _projects[projectId]._creator = creatorName;
+    }
+
+    function updateProjectLicense(uint256 projectId, string memory license)
+    external {
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        _projects[projectId]._license = license;
+    }
+
+    /* @projectData:
     */
     function projectDetails(uint256 projectId) external view returns (NFTProject.Project memory project){
         project = _projects[projectId];

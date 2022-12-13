@@ -153,7 +153,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         }
         result = string(abi.encodePacked("<html>",
             "<head><meta charset='UTF-8'>",
-            param.get(d._scriptType), // load lib here
+            param.getBytes32(d._scriptType), // load lib here
             '<script>let tokenData = {"tokenId":', StringsUpgradeable.toString(tokenId), ', "seed": "', string(abi.encodePacked(seed)), '"};</script>',
             scripts,
             '<style>', d._styles, '</style>',
