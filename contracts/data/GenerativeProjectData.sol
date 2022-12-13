@@ -96,24 +96,30 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         return result;
     }
 
-    /* @ProjectURI:
+    /* @GenerativeProjectDATA:
     */
     function projectURI(uint256 projectId) external view returns (string memory result) {
         IGenerativeProject p = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory d = p.projectDetails(projectId);
+        string memory animationURI = string(abi.encodePacked(
+                ', "animation_url":"data:text/html;charset=utf-8,',
+                this.tokenHTML(projectId, 0, keccak256(abi.encodePacked(uint256(0)))),
+                '"'
+            ));
         result = string(
             abi.encodePacked('data:application/json;base64,',
             Base64.encode(abi.encodePacked(
                 '{"name":"', d._name,
                 '","description":"', d._desc, '"',
                 '","image":"', d._image, '"',
+                animationURI,
                 '}'
             ))
             )
         );
     }
 
-    /* @TokenURI
+    /* @GenerativeTokenDATA
     */
     function tokenURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         // TODO with seed
@@ -137,11 +143,21 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     }
 
     function tokenHTML(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
-        // TODO with seed
+        IGenerativeProject p = IGenerativeProject(_generativeProjectAddr);
+        NFTProject.Project memory d = p.projectDetails(projectId);
+
         IParameterControl param = IParameterControl(_paramAddr);
-        result = string(abi.encodePacked("<html><head><meta charset='UTF-8'><style>html,body,svg{margin:0;padding:0; height:100%;text-align:center;}</style>",
-            param.get("three.js"), // load threejs lib here
-            '<script>let tokenData = {"tokenId":', StringsUpgradeable.toString(tokenId), ', "seed": "', string(abi.encodePacked(seed)), '"};</script></head><body>',
+        string memory scripts = "";
+        for (uint256 i; i < d._scripts.length; i++) {
+            scripts = string(abi.encodePacked(scripts, '<script>', d._scripts[i], '</script>'));
+        }
+        result = string(abi.encodePacked("<html>",
+            "<head><meta charset='UTF-8'>",
+            param.get(d._scriptType), // load lib here
+            '<script>let tokenData = {"tokenId":', StringsUpgradeable.toString(tokenId), ', "seed": "', string(abi.encodePacked(seed)), '"};</script>',
+            scripts,
+            '<style>', d._styles, '</style>',
+            '</head><body>',
             "<div id='container-el'></div>",
             "<script>//TODO running script</script>",
             "</body></html>"

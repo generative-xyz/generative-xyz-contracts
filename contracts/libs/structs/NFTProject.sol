@@ -11,7 +11,9 @@ library NFTProject {
         string _desc;
         string _image;// base64 of image
         ProjectSocial _social;
-        string[] scripts;// required
+        string _scriptType;
+        string[] _scripts;// required
+        string _styles;
         uint256 _completeTime;
         address _genNFTAddr;
     }
