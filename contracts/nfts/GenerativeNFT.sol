@@ -1,5 +1,7 @@
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
 import "./BaseERC721OwnerSeed.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
@@ -7,6 +9,7 @@ import "../libs/structs/NFTProject.sol";
 import "../interfaces/IGenerativeProject.sol";
 import "../services/Randomizer.sol";
 import "../interfaces/IGenerativeNFT.sol";
+import "../interfaces/IParameterControl.sol";
 
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
     mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
@@ -19,10 +22,11 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         _admin = admin;
     }
 
-    function init(NFTProject.ProjectData memory project, address admin, address randomizer, address[] memory reserves) external {
+    function init(NFTProject.ProjectData memory project, address admin, address paramsAddr, address randomizer, address[] memory reserves) external {
         require(_admin != address(0x0));
         require(admin != address(0x0), "INV_ADD");
         _project = project;
+        _paramsAddress = paramsAddr;
         _admin = admin;
         _randomizer = randomizer;
         for (uint256 i; i < reserves.length; i++) {
@@ -37,16 +41,41 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         _ownersAndHashSeeds[tokenId]._seed = bytes12(seed);
     }
 
+    function paymentMintNFT() internal {
+        uint256 mintPrice = _project._mintPrice;
+        address mintPriceAddr = address(0x0);
+        IGenerativeProject project = IGenerativeProject(_project._projectAddr);
+        IParameterControl _p = IParameterControl(_paramsAddress);
+        // default 5% getting, 95% pay for owner of project
+        uint256 operationFee = 500;
+        if (_paramsAddress != address(0)) {
+            operationFee = _p.getUInt256("MINT_NFT_OPERATOR_FEE");
+        }
+        if (mintPriceAddr == address(0x0)) {
+            require(msg.value >= mintPrice);
+
+            // pay for owner project
+            (bool success,) = project.ownerOf(_project._projectId).call{value : mintPrice - (mintPrice * operationFee / 10000)}("");
+            require(success);
+            // pay for project admin
+            (success,) = _admin.call{value : mintPrice * operationFee / 10000}("");
+        } else {
+            IERC20 tokenERC20 = IERC20(mintPriceAddr);
+            // transfer all fee erc-20 token to this contract
+            require(tokenERC20.transferFrom(
+                    msg.sender,
+                    address(this),
+                    mintPrice
+                ));
+
+            // pay for owner project
+            require(tokenERC20.transfer(project.ownerOf(_project._projectId), mintPrice - (mintPrice * operationFee / 10000)));
+            // pay for project admin
+            require(tokenERC20.transfer(_admin, mintPrice * operationFee / 10000));
+        }
+    }
+
     function mint() external returns (uint256 tokenId) {
-        require(
-            _project._active,
-            "Project must exist and be active"
-        );
-        require(
-            !_project._paused,
-            "Purchases are paused."
-        );
-        
         // safe mint
         _project._index ++;
         require(_project._index <= _project._limit);
@@ -62,19 +91,13 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         bytes32 seed = random.generateTokenHash(tokenId);
         setTokenSeed(tokenId, seed);
 
+        // pay
+        paymentMintNFT();
+
         emit NFTCollection.Mint(msg.sender, tokenId);
     }
 
     function reserveMint() external returns (uint256 tokenId) {
-        require(
-            _project._active,
-            "Project must exist and be active"
-        );
-        require(
-            !_project._paused,
-            "Purchases are paused."
-        );
-
         _project._indexReserve ++;
         require(_project._indexReserve + _project._limit <= _project._maxSupply);
         if (_project._index + _project._indexReserve == _project._maxSupply) {

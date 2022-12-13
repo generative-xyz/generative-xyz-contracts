@@ -11,6 +11,7 @@ import "../libs/structs/NFTCollection.sol";
 contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, Ownable {
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
     address public _admin;
+    address public _paramsAddress;
     address public _randomizer;
 
     constructor(

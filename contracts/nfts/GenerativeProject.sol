@@ -85,7 +85,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         IGenerativeNFT nft = IGenerativeNFT(generativeNFTAdd);
         NFTProject.ProjectData memory data;
 
-        nft.init(data, _admin, _randomizerAddr, reserves);
+        nft.init(data, _admin, _paramsAddress, _randomizerAddr, reserves);
         return _currentProjectId;
     }
 

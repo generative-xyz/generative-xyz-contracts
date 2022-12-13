@@ -4,8 +4,7 @@ library NFTProject {
     struct Project {
         uint24 _maxSupply;
         uint24 _limit;
-        bool _active;
-        bool _paused;
+        uint256 _mintPrice;
         string _name;
         string _creator;
         address _creatorAddr;
@@ -28,13 +27,12 @@ library NFTProject {
     struct ProjectData {
         address _projectAddr;// parent project addr
         uint256 _projectId;// parent project id
-        uint24 _index;// index for not reserve
-        uint24 _limit; // limit for not reserve
-        uint24 _indexReserve;// index for reserve
         uint24 _maxSupply;// max
-        bool _active;// 1st priority status
-        bool _paused;// 2st priority status
+        uint24 _limit; // limit for not reserve
+        uint24 _index;// index for not reserve
+        uint24 _indexReserve;// index for reserve
         string _creator;
         address _creatorAddr;
+        uint256 _mintPrice;
     }
 }
