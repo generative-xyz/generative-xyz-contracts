@@ -4,7 +4,7 @@ import {RandomizerService} from "./randomizerService";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "mumbai") {
+        if (process.env.NETWORK != "local") {
             console.log("wrong network");
             return;
         }

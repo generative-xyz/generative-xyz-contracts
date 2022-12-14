@@ -4,7 +4,7 @@ import {Bytes32Ty} from "hardhat/internal/hardhat-network/stack-traces/logger";
 import {ethers as eth1} from "ethers";
 
 const {ethers, upgrades} = require("hardhat");
-const hardhatConfig = require("../../hardhat.config");
+const hardhatConfig = require("../../../hardhat.config");
 
 class RandomizerService {
     network: string;
@@ -18,10 +18,10 @@ class RandomizerService {
     }
 
     async deployUpgradeable() {
-        if (this.network == "local") {
-            console.log("not run local");
-            return;
-        }
+        // if (this.network == "local") {
+        //     console.log("not run local");
+        //     return;
+        // }
 
         const contract = await ethers.getContractFactory("Randomizer");
         console.log("Randomizer.deploying ...")
@@ -35,10 +35,10 @@ class RandomizerService {
 
     getContract(contractAddress: any, contractName: any = "./artifacts/contracts/services/Randomizer.sol/Randomizer.json") {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
-        if (this.network == "local") {
-            console.log("not run local");
-            return;
-        }
+        // if (this.network == "local") {
+        //     console.log("not run local");
+        //     return;
+        // }
         let API_URL: any;
         API_URL = hardhatConfig.networks[hardhatConfig.defaultNetwork].url;
 
@@ -80,6 +80,21 @@ class RandomizerService {
             return sentTx;
         }
         return null;
+    }
+
+    async generateTokenHash(contractAddress: any, tokenId: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        const val: any = await temp?.nftContract.methods.generateTokenHash(tokenId).call(tx);
+        return val;
     }
 }
 
