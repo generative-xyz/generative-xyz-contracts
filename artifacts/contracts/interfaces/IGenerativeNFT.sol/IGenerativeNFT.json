@@ -1,0 +1,101 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IGenerativeNFT",
+  "sourceName": "contracts/interfaces/IGenerativeNFT.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "_projectAddr",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "_projectDataAddr",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_projectId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint24",
+              "name": "_maxSupply",
+              "type": "uint24"
+            },
+            {
+              "internalType": "uint24",
+              "name": "_limit",
+              "type": "uint24"
+            },
+            {
+              "internalType": "uint24",
+              "name": "_index",
+              "type": "uint24"
+            },
+            {
+              "internalType": "uint24",
+              "name": "_indexReserve",
+              "type": "uint24"
+            },
+            {
+              "internalType": "string",
+              "name": "_creator",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "_creatorAddr",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_mintPrice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_mintPriceAddr",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct NFTProject.ProjectMinting",
+          "name": "project",
+          "type": "tuple"
+        },
+        {
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "paramsAddr",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "randomizer",
+          "type": "address"
+        },
+        {
+          "internalType": "address[]",
+          "name": "reserves",
+          "type": "address[]"
+        }
+      ],
+      "name": "init",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
