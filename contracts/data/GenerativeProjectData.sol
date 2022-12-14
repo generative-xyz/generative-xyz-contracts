@@ -155,9 +155,9 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         result = string(abi.encodePacked(
                 "<html>",
                 "<head><meta charset='UTF-8'>",
-            //                "<title>", projectDetail._name, " #", StringsUpgradeable.toString(tokenId), "</title>",
                 param.getBytes32(projectDetail._scriptType), // load lib here
                 '<script type="text/javascript">let tokenData = {"tokenId":', StringsUpgradeable.toString(tokenId), ', "seed": "', string(abi.encodePacked(seed)), '"};</script>',
+                '<script type="text/javascript">const tokenId=tokenData.tokenId,ONE_MIL=1e6,projectNumber=Math.floor(parseInt(tokenData.tokenId)/1e6),tokenMintNumber=parseInt(tokenData.tokenId)%1e6,seed=tokenData.seed;function cyrb128($){let _=1779033703,e=3144134277,t=1013904242,n=2773480762;for(let r=0,u;r<$.length;r++)_=e^Math.imul(_^(u=$.charCodeAt(r)),597399067),e=t^Math.imul(e^u,2869860233),t=n^Math.imul(t^u,951274213),n=_^Math.imul(n^u,2716044179);return _=Math.imul(t^_>>>18,597399067),e=Math.imul(n^e>>>22,2869860233),t=Math.imul(_^t>>>17,951274213),n=Math.imul(e^n>>>19,2716044179),[(_^e^t^n)>>>0,(e^_)>>>0,(t^_)>>>0,(n^_)>>>0]}function sfc32($,_,e,t){return function(){e>>>=0,t>>>=0;var n=($>>>=0)+(_>>>=0)|0;return $=_^_>>>9,_=e+(e<<3)|0,e=(e=e<<21|e>>>11)+(n=n+(t=t+1|0)|0)|0,(n>>>0)/4294967296}}let mathRand=sfc32(...cyrb128(seed));</script>',
                 scripts,
                 '<style>', projectDetail._styles, '</style>',
                 '</head><body>',
