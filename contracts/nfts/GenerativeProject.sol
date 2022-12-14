@@ -81,10 +81,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         }
     }
 
-    function createProject(
+    function mint(
         NFTProject.Project memory project,
-        bytes[] memory traits,
-        bytes[][] memory listValues,
         address[] memory reserves
     ) external returns (uint256) {
         // verify
@@ -100,10 +98,6 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         paymentMintProject();
         _projects[_currentProjectId] = project;
         _safeMint(msg.sender, _currentProjectId);
-
-        // init to project data context
-        IGenerativeProjectData ctx = IGenerativeProjectData(_projectDataContextAddr);
-        ctx.initTrait(_currentProjectId, traits, listValues);
 
         // set to generative nft
         address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress("GENERATIVE_NFT_TEMPLATE"));

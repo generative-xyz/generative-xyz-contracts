@@ -16,84 +16,12 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     address public _generativeProjectAddr;
     string public _baseURI;
 
-    // project traits
-    mapping(uint256 => mapping(bytes => bytes[])) public _traitsAvailableValues;
-    mapping(uint256 => bytes[]) public _traits;
-
     function initialize(address admin, address paramAddr, address generativeProjectAddr, string memory baseUri) initializer public {
         _admin = admin;
         _paramAddr = paramAddr;
         _generativeProjectAddr = generativeProjectAddr;
         _baseURI = baseUri;
         __Ownable_init();
-    }
-
-    /* @ProjectTraits
-    */
-    function initTrait(uint256 projectId, bytes[] memory traits, bytes[][] memory listValues) external {
-        require(msg.sender == _admin || msg.sender == _generativeProjectAddr, Errors.INV_ADD);
-        for (uint256 i = 0; i < traits.length; i++) {
-            bytes memory name = traits[i];
-            bytes[] memory values = listValues[i];
-            // push trait
-            _traits[projectId].push(name);
-            // apply available values for trait
-            _traitsAvailableValues[projectId][_traits[projectId][_traits[projectId].length - 1]] = new bytes[](values.length);
-            for (uint256 i = 0; i < values.length; i++) {
-                _traitsAvailableValues[projectId][_traits[projectId][_traits[projectId].length - 1]][i] = values[i];
-            }
-        }
-
-    }
-
-    function addTrait(uint256 projectId, bytes memory name, bytes[] memory values) external {
-        require(msg.sender == _admin || msg.sender == _generativeProjectAddr, Errors.INV_ADD);
-
-        // push trait
-        _traits[projectId].push(name);
-        // apply available values for trait
-        _traitsAvailableValues[projectId][_traits[projectId][_traits[projectId].length - 1]] = new bytes[](values.length);
-        for (uint256 i = 0; i < values.length; i++) {
-            _traitsAvailableValues[projectId][_traits[projectId][_traits[projectId].length - 1]][i] = values[i];
-        }
-    }
-
-    function deleteTrait(uint256 projectId, uint256 index) external {
-        require(msg.sender == _admin || msg.sender == _generativeProjectAddr, Errors.INV_ADD);
-        // delete available values
-        delete _traitsAvailableValues[projectId][_traits[projectId][index]];
-        // delete trait
-        delete _traits[projectId][index];
-    }
-
-    function editTrait(uint256 projectId, uint256 index, bytes memory name) external {
-        require(msg.sender == _admin || msg.sender == _generativeProjectAddr, Errors.INV_ADD);
-        // change name of trait
-        _traits[projectId][index] = name;
-    }
-
-    function addTraitValue(uint256 projectId, uint256 indexTrait, bytes memory value) external {
-        require(msg.sender == _admin || msg.sender == _generativeProjectAddr, Errors.INV_ADD);
-        // push a new available value for trait
-        _traitsAvailableValues[projectId][_traits[projectId][indexTrait]].push(value);
-    }
-
-    function deleteTraitValue(uint256 projectId, uint256 indexTrait, uint256 indexValue) external {
-        require(msg.sender == _admin || msg.sender == _generativeProjectAddr, Errors.INV_ADD);
-        // delete an available value for trait
-        delete _traitsAvailableValues[projectId][_traits[projectId][indexTrait]][indexValue];
-    }
-
-    function getTraits(uint256 projectId) external view returns (bytes[] memory traitsName) {
-        return _traits[projectId];
-    }
-
-    function getTraitsAvailableValues(uint256 projectId) external view returns (bytes[][] memory) {
-        bytes[][] memory result = new bytes[][](_traits[projectId].length);
-        for (uint256 i = 0; i < _traits[projectId].length; i++) {
-            result[i] = _traitsAvailableValues[projectId][_traits[projectId][i]];
-        }
-        return result;
     }
 
     /* @GenerativeProjectDATA:
@@ -136,7 +64,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                     '{"name":"', projectDetail._name,
                     '","description":"Powers by generative.xyz"',
                     animationURI,
-                    tokenTraits(projectId, seed),
+                    '"attributes": "', _baseURI, "/traits/", StringsUpgradeable.toString(tokenId), "/", string(abi.encodePacked(seed)), '"',
                     '}'
                 ))
             )
@@ -178,17 +106,5 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 "</body>",
                 "</html>"
             ));
-    }
-
-    function tokenTraits(uint256 projectId, bytes32 seed) internal view returns (string memory result) {
-        // TODO with seed
-        string memory traits = "";
-        for (uint256 i = 0; i < _traits[projectId].length; i++) {
-            traits = string(abi.encodePacked(traits, '{"trait_type":"', _traits[projectId][i], '","value":"', _traits[projectId][i][0], '"}'));
-            if (i < _traits[projectId].length - 1) {
-                traits = string(abi.encodePacked(traits, ','));
-            }
-        }
-        result = string(abi.encodePacked('"attributes":[', traits, ']'));
     }
 }
