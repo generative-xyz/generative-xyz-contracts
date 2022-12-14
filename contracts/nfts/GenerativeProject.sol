@@ -1,6 +1,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC721/presets/ERC721PresetMinterPauserAutoIdUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/ClonesUpgradeable.sol";
@@ -11,7 +12,7 @@ import "../interfaces/IParameterControl.sol";
 import "../interfaces/IGenerativeNFT.sol";
 import "../interfaces/IGenerativeProjectData.sol";
 
-contract GenerativeProject is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, IERC2981Upgradeable, IGenerativeProject {
+contract GenerativeProject is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IGenerativeProject {
 
     // super admin
     address public _admin;
@@ -31,16 +32,23 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         string memory name,
         string memory symbol,
         address admin,
-        address paramsAddress
+        address paramsAddress,
+        address randomizerAddr,
+        address projectDataContextAddr
     ) initializer public {
         require(admin != address(0), Errors.INV_ADD);
         require(paramsAddress != address(0), Errors.INV_ADD);
-        __ERC721_init(name, symbol);
         _paramsAddress = paramsAddress;
         _admin = admin;
+        _randomizerAddr = randomizerAddr;
+        _projectDataContextAddr = projectDataContextAddr;
+
+        __ERC721_init(name, symbol);
+        __ReentrancyGuard_init();
+        __ERC721Pausable_init();
     }
 
-    function changeAdmin(address newAdm, address newParam) external {
+    function changeAdmin(address newAdm) external {
         require(msg.sender == _admin && newAdm != address(0), Errors.ONLY_ADMIN_ALLOWED);
 
         // change admin
@@ -48,11 +56,32 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
             address _previousAdmin = _admin;
             _admin = newAdm;
         }
+    }
 
-        // change param
-        require(newParam != address(0));
-        if (_paramsAddress != newParam) {
-            _paramsAddress = newParam;
+    function changeParamAddr(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change
+        if (_paramsAddress != newAddr) {
+            _paramsAddress = newAddr;
+        }
+    }
+
+    function changeRandomizerAddr(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change
+        if (_randomizerAddr != newAddr) {
+            _randomizerAddr = newAddr;
+        }
+    }
+
+    function changeDataContextAddr(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change
+        if (_projectDataContextAddr != newAddr) {
+            _projectDataContextAddr = newAddr;
         }
     }
 
