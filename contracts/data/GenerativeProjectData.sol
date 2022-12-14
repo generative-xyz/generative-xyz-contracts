@@ -14,14 +14,39 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     address public _admin;
     address public _paramAddr;
     address public _generativeProjectAddr;
-    string public _baseURI;
 
-    function initialize(address admin, address paramAddr, address generativeProjectAddr, string memory baseUri) initializer public {
+    function initialize(address admin, address paramAddr, address generativeProjectAddr) initializer public {
         _admin = admin;
         _paramAddr = paramAddr;
         _generativeProjectAddr = generativeProjectAddr;
-        _baseURI = baseUri;
         __Ownable_init();
+    }
+
+    function changeAdmin(address newAdm) external {
+        require(msg.sender == _admin && newAdm != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change admin
+        if (_admin != newAdm) {
+            _admin = newAdm;
+        }
+    }
+
+    function changeParamAddress(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change param address
+        if (_paramAddr != newAddr) {
+            _admin = newAddr;
+        }
+    }
+
+    function changeProjectAddress(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change Generative project address
+        if (_generativeProjectAddr != newAddr) {
+            _generativeProjectAddr = newAddr;
+        }
     }
 
     /* @GenerativeProjectDATA:
@@ -50,6 +75,10 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     /* @GenerativeTokenDATA
     */
     function tokenURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
+        // get base uri
+        IParameterControl param = IParameterControl(_paramAddr);
+        string memory _baseURI = param.get("BASE_URI_TRAIT");
+        // get project info
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
         string memory animationURI = string(abi.encodePacked(
@@ -64,7 +93,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                     '{"name":"', projectDetail._name,
                     '","description":"Powers by generative.xyz"',
                     animationURI,
-                    '"attributes": "', _baseURI, "/traits/", StringsUpgradeable.toString(tokenId), "/", string(abi.encodePacked(seed)), '"',
+                    '"attributes": "', _baseURI, StringsUpgradeable.toString(tokenId), "/", string(abi.encodePacked(seed)), '"',
                     '}'
                 ))
             )
@@ -72,6 +101,10 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     }
 
     function tokenBaseURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
+        // get base uri
+        IParameterControl param = IParameterControl(_paramAddr);
+        string memory _baseURI = param.get("BASE_URI");
+        // get project info
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
 
