@@ -55,9 +55,9 @@ class GenerativeProjectData {
 
     async upgradeContract(proxyAddress: any) {
         const contractUpdated = await ethers.getContractFactory("AVATARS");
-        console.log('Upgrading AVATARS... by proxy ' + proxyAddress);
+        console.log('Upgrading GenerativeProjectData... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
-        console.log('AVATARS upgraded on tx address ' + tx.address);
+        console.log('GenerativeProjectData upgraded on tx address ' + tx.address);
         return tx;
     }
 
