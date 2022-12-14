@@ -23,10 +23,10 @@ class GenerativeProject {
                             randomizer: any,
                             datacontext: any
     ) {
-        if (this.network == "local") {
-            console.log("not run local");
-            return;
-        }
+        // if (this.network == "local") {
+        //     console.log("not run local");
+        //     return;
+        // }
 
         const contract = await ethers.getContractFactory("GenerativeProject");
         console.log("GenerativeProject.deploying ...")

@@ -22,10 +22,10 @@ class GenerativeProjectData {
                             paramAdd: any,
                             generativeProjectAdd: any
     ) {
-        if (this.network == "local") {
+        /*if (this.network == "local") {
             console.log("not run local");
             return;
-        }
+        }*/
 
         const contract = await ethers.getContractFactory("GenerativeProjectData");
         console.log("GenerativeProjectData.deploying ...")
@@ -39,10 +39,10 @@ class GenerativeProjectData {
 
     getContract(contractAddress: any, contractName: any = "./artifacts/contracts/data/GenerativeProjectData.sol/GenerativeProjectData.json") {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
-        if (this.network == "local") {
-            console.log("not run local");
-            return;
-        }
+        // if (this.network == "local") {
+        //     console.log("not run local");
+        //     return;
+        // }
         let API_URL: any;
         API_URL = hardhatConfig.networks[hardhatConfig.defaultNetwork].url;
 
@@ -54,7 +54,7 @@ class GenerativeProjectData {
     }
 
     async upgradeContract(proxyAddress: any) {
-        const contractUpdated = await ethers.getContractFactory("AVATARS");
+        const contractUpdated = await ethers.getContractFactory("GenerativeProjectData");
         console.log('Upgrading GenerativeProjectData... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
         console.log('GenerativeProjectData upgraded on tx address ' + tx.address);
