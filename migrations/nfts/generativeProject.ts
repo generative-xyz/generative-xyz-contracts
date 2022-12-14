@@ -4,7 +4,7 @@ import {Bytes32Ty} from "hardhat/internal/hardhat-network/stack-traces/logger";
 import {ethers as eth1} from "ethers";
 
 const {ethers, upgrades} = require("hardhat");
-const hardhatConfig = require("../../../hardhat.config");
+const hardhatConfig = require("../../hardhat.config");
 
 class GenerativeProject {
     network: string;
