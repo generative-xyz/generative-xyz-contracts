@@ -20,11 +20,11 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     mapping(uint256 => mapping(bytes => bytes[])) public _traitsAvailableValues;
     mapping(uint256 => bytes[]) public _traits;
 
-    function initialize(address admin, address paramAddr, address generativeProjectAddr) initializer public {
+    function initialize(address admin, address paramAddr, address generativeProjectAddr, string memory baseUri) initializer public {
         _admin = admin;
         _paramAddr = paramAddr;
         _generativeProjectAddr = generativeProjectAddr;
-
+        _baseURI = baseUri;
         __Ownable_init();
     }
 
@@ -139,6 +139,19 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                     tokenTraits(projectId, seed),
                     '}'
                 ))
+            )
+        );
+    }
+
+    function tokenBaseURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
+        IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
+        NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
+
+        result = string(
+            abi.encodePacked(
+                _baseURI, "/",
+                StringsUpgradeable.toString(tokenId), "/",
+                string(abi.encodePacked(seed))
             )
         );
     }
