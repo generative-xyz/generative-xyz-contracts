@@ -1,8 +1,14 @@
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+
 import "../interfaces/IRandomizer.sol";
 
-contract Randomizer is IRandomizer {
+contract Randomizer is OwnableUpgradeable, IRandomizer {
+
+    function initialize() initializer public {
+        __Ownable_init();
+    }
 
     function generateTokenHash(uint256 tokenId) external virtual override returns (bytes32 tokenHash) {
         uint256 time = block.timestamp;

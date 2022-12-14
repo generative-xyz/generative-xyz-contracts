@@ -17,11 +17,8 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
     NFTProject.ProjectMinting public _project;
     mapping(address => bool) _reserves;
 
-    constructor (string memory name,
-        string memory symbol,
-        address admin) BaseERC721OwnerSeed(name, symbol) {
-        _admin = admin;
-    }
+    constructor (string memory name, string memory symbol)
+    BaseERC721OwnerSeed(name, symbol) {}
 
     /* @ProjectInfo: data for project data
     */
