@@ -41,11 +41,4 @@ library NFTProject {
         uint256 _mintPrice;
         address _mintPriceAddr; // erc20 addr if possible
     }
-
-    struct ProjectURIContext {
-        string script;
-        string imageURI;
-        string animationURI;
-        string name;
-    }
 }

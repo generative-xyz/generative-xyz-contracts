@@ -122,44 +122,48 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     /* @GenerativeTokenDATA
     */
     function tokenURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
-        // TODO with seed
-        NFTProject.ProjectURIContext memory ctx;
-        ctx.animationURI = string(abi.encodePacked(
+        IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
+        NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
+        string memory animationURI = string(abi.encodePacked(
                 ', "animation_url":"data:text/html;charset=utf-8,',
                 this.tokenHTML(projectId, tokenId, seed),
                 '"'
             ));
         result = string(
-            abi.encodePacked('data:application/json;base64,',
-            Base64.encode(abi.encodePacked(
-                '{"name":"', ctx.name,
-                '","description":"Powers by generative.xyz"',
-                ctx.animationURI,
-                tokenTraits(projectId, seed),
-                '}'
-            ))
+            abi.encodePacked(
+                'data:application/json;base64,',
+                Base64.encode(abi.encodePacked(
+                    '{"name":"', projectDetail._name,
+                    '","description":"Powers by generative.xyz"',
+                    animationURI,
+                    tokenTraits(projectId, seed),
+                    '}'
+                ))
             )
         );
     }
 
     function tokenHTML(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
-        IGenerativeProject p = IGenerativeProject(_generativeProjectAddr);
-        NFTProject.Project memory d = p.projectDetails(projectId);
+        IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
+        NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
 
         IParameterControl param = IParameterControl(_paramAddr);
         string memory scripts = "";
-        for (uint256 i; i < d._scripts.length; i++) {
-            scripts = string(abi.encodePacked(scripts, '<script>', d._scripts[i], '</script>'));
+        for (uint256 i; i < projectDetail._scripts.length; i++) {
+            scripts = string(abi.encodePacked(scripts, '<script type="text/javascript">', projectDetail._scripts[i], '</script>'));
         }
-        result = string(abi.encodePacked("<html>",
-            "<head><meta charset='UTF-8'>",
-            param.getBytes32(d._scriptType), // load lib here
-            '<script>let tokenData = {"tokenId":', StringsUpgradeable.toString(tokenId), ', "seed": "', string(abi.encodePacked(seed)), '"};</script>',
-            scripts,
-            '<style>', d._styles, '</style>',
-            '</head><body>',
-            "<div id='container-el'></div>",
-            "</body></html>"
+        result = string(abi.encodePacked(
+                "<html>",
+                "<head><meta charset='UTF-8'>",
+            //                "<title>", projectDetail._name, " #", StringsUpgradeable.toString(tokenId), "</title>",
+                param.getBytes32(projectDetail._scriptType), // load lib here
+                '<script type="text/javascript">let tokenData = {"tokenId":', StringsUpgradeable.toString(tokenId), ', "seed": "', string(abi.encodePacked(seed)), '"};</script>',
+                scripts,
+                '<style>', projectDetail._styles, '</style>',
+                '</head><body>',
+                "<div id='container-el'></div>",
+                "</body>",
+                "</html>"
             ));
     }
 
