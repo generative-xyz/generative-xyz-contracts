@@ -55,7 +55,7 @@ class GenerativeProject {
     }
 
     async upgradeContract(proxyAddress: any) {
-        const contractUpdated = await ethers.getContractFactory("AVATARS");
+        const contractUpdated = await ethers.getContractFactory("GenerativeProject");
         console.log('Upgrading GenerativeProject... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
         console.log('GenerativeProject upgraded on tx address ' + tx.address);
@@ -120,6 +120,28 @@ class GenerativeProject {
             nonce: nonce,
             gas: gas,
             data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async mint(contractAddress: any, project: any, reserves: any, mintFee: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.mint(project, reserves)
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+            value: ethers.utils.parseEther(mintFee)
         }
 
         if (tx.gas == 0) {

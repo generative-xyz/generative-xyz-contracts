@@ -13,6 +13,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, Ownab
     address public _admin;
     address public _paramsAddress;
     address public _randomizer;
+    address public _projectDataContextAddr;
 
     constructor(
         string memory name,
@@ -20,9 +21,41 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, Ownab
     ) ERC721(name, symbol) {
     }
 
-    function changeAdmin(address newAdmin) external virtual {
-        require(msg.sender == _admin);
-        _admin = newAdmin;
+    function changeAdmin(address newAdm) external {
+        require(msg.sender == _admin && newAdm != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change admin
+        if (_admin != newAdm) {
+            address _previousAdmin = _admin;
+            _admin = newAdm;
+        }
+    }
+
+    function changeParamAddr(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change
+        if (_paramsAddress != newAddr) {
+            _paramsAddress = newAddr;
+        }
+    }
+
+    function changeRandomizerAddr(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change
+        if (_randomizer != newAddr) {
+            _randomizer = newAddr;
+        }
+    }
+
+    function changeDataContextAddr(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        // change
+        if (_projectDataContextAddr != newAddr) {
+            _projectDataContextAddr = newAddr;
+        }
     }
 
     function pause() external {

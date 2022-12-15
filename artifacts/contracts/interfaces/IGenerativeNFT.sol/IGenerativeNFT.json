@@ -13,11 +13,6 @@
               "type": "address"
             },
             {
-              "internalType": "address",
-              "name": "_projectDataAddr",
-              "type": "address"
-            },
-            {
               "internalType": "uint256",
               "name": "_projectId",
               "type": "uint256"
@@ -80,6 +75,11 @@
         {
           "internalType": "address",
           "name": "randomizer",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "projectDataContextAddr",
           "type": "address"
         },
         {

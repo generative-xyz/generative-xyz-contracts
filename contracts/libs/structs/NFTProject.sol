@@ -30,7 +30,6 @@ library NFTProject {
 
     struct ProjectMinting {
         address _projectAddr;// parent project addr
-        address _projectDataAddr;
         uint256 _projectId;// parent project id
         uint24 _maxSupply;// max
         uint24 _limit; // limit for not reserve

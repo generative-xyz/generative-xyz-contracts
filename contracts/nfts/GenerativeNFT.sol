@@ -21,16 +21,27 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
     constructor (string memory name, string memory symbol)
     BaseERC721OwnerSeed(name, symbol) {}
 
+    function owner() public view override returns (address) {
+        return _admin;
+    }
+
+    function _checkOwner() internal view override {
+        require(owner() == msg.sender || msg.sender == _project._projectAddr, "Ownable: caller is not the owner");
+    }
+
     /* @ProjectInfo: data for project data
     */
-    function init(NFTProject.ProjectMinting memory project, address admin, address paramsAddr, address randomizer, address[] memory reserves) external {
+    function init(NFTProject.ProjectMinting memory project, address admin, address paramsAddr, address randomizer, address projectDataContextAddr, address[] memory reserves) external {
         require(_admin == Errors.ZERO_ADDR, Errors.INV_PROJECT);
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
         _project = project;
         _paramsAddress = paramsAddr;
         _admin = admin;
         _randomizer = randomizer;
-        for (uint256 i; i < reserves.length; i++) {
+        _projectDataContextAddr = projectDataContextAddr;
+        for (uint256 i;
+            i < reserves.length;
+            i++) {
             _reserves[reserves[i]] = false;
         }
         transferOwnership(_admin);
@@ -128,13 +139,13 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
     */
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
-        IGenerativeProjectData projectData = IGenerativeProjectData(_project._projectDataAddr);
+        IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
         bytes32 seed = this.tokenIdToHash(tokenId);
         return projectData.tokenBaseURI(_project._projectId, tokenId, seed);
     }
 
     function tokenGenerativeURI(uint256 tokenId) public view returns (string memory) {
-        IGenerativeProjectData projectData = IGenerativeProjectData(_project._projectDataAddr);
+        IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
         bytes32 seed = this.tokenIdToHash(tokenId);
         return projectData.tokenURI(_project._projectId, tokenId, seed);
     }

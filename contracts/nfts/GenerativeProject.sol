@@ -132,8 +132,19 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress("GENERATIVE_NFT_TEMPLATE"));
         _projects[_currentProjectId]._genNFTAddr = generativeNFTAdd;
         IGenerativeNFT nft = IGenerativeNFT(generativeNFTAdd);
-        NFTProject.ProjectMinting memory data;
-        nft.init(data, _admin, _paramsAddress, _randomizerAddr, reserves);
+        nft.init(
+            NFTProject.ProjectMinting(
+                address(this),
+                _currentProjectId,
+                project._maxSupply,
+                project._limit,
+                0,
+                0,
+                project._creator,
+                project._creatorAddr,
+                project._mintPrice,
+                project._mintPriceAddr
+            ), _admin, _paramsAddress, _randomizerAddr, _projectDataContextAddr, reserves);
         return _currentProjectId;
     }
 
