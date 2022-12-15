@@ -1,6 +1,6 @@
 pragma solidity ^0.8.0;
 
-library Strings {
+library StringsUtils {
     function toHex16(bytes16 data) internal pure returns (bytes32 result) {
         result = bytes32(data) & 0xFFFFFFFFFFFFFFFF000000000000000000000000000000000000000000000000 |
         (bytes32(data) & 0x0000000000000000FFFFFFFFFFFFFFFF00000000000000000000000000000000) >> 64;

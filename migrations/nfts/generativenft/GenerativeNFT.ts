@@ -44,7 +44,7 @@ class GenerativeNFT {
         return {web3, nftContract};
     }
 
-    async getTokenURI(contractAddress: any, tokenID: number) {
+    async getTokenURI(contractAddress: any, tokenID: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
@@ -56,6 +56,21 @@ class GenerativeNFT {
         }
 
         const val: any = await temp?.nftContract.methods.tokenURI(tokenID).call(tx);
+        return val;
+    }
+
+    async getTokenGenerativeURI(contractAddress: any, tokenID: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        const val: any = await temp?.nftContract.methods.tokenGenerativeURI(tokenID).call(tx);
         return val;
     }
 
@@ -74,6 +89,35 @@ class GenerativeNFT {
         return val;
     }
 
+    async tokenIdToHash(contractAddress: any, tokenId: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        const val: any = await temp?.nftContract.methods.tokenIdToHash(tokenId).call(tx);
+        return val;
+    }
+
+    async randomizerAddr(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._randomizer().call(tx);
+    }
+
     async mint(contractAddress: any, price: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
@@ -86,7 +130,7 @@ class GenerativeNFT {
             nonce: nonce,
             gas: gas,
             data: fun.encodeABI(),
-            value: ethers.utils.parseEther(price),
+            value: price,
         }
 
         if (tx.gas == 0) {

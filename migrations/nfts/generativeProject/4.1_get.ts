@@ -15,6 +15,7 @@ import {GenerativeProject} from "./generativeProject";
         let a: any = {};
         // a.getTokenURI = await nft.tokenURI(contract, args[1]);
         a.project = await nft.projectDetails(contract, args[1]);
+        // a.randomizer = await nft.randomizerAddr(contract);
         console.log({a});
     } catch (e) {
         // Deal with the fact the chain failed

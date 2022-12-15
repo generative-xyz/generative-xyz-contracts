@@ -178,6 +178,20 @@ class GenerativeProject {
 
         return await temp?.nftContract.methods.tokenURI(tokenID).call(tx);
     }
+
+    async randomizerAddr(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._randomizerAddr().call(tx);
+    }
 }
 
 export {GenerativeProject};

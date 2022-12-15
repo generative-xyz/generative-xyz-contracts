@@ -1,17 +1,25 @@
 pragma solidity ^0.8.0;
 
+// external libs
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+// inheritance and interface
 import "./BaseERC721OwnerSeed.sol";
-import "../libs/configs/GenerativeNFTConfigs.sol";
-import "../libs/helpers/Errors.sol";
-import "../libs/structs/Royalty.sol";
-import "../libs/structs/NFTProject.sol";
 import "../interfaces/IGenerativeProject.sol";
-import "../services/Randomizer.sol";
 import "../interfaces/IGenerativeNFT.sol";
 import "../interfaces/IParameterControl.sol";
 import "../interfaces/IGenerativeProjectData.sol";
+
+// libs
+import "../libs/configs/GenerativeNFTConfigs.sol";
+import "../libs/helpers/Errors.sol";
+import "../libs/helpers/StringsUtils.sol";
+import "../libs/structs/Royalty.sol";
+import "../libs/structs/NFTProject.sol";
+
+// services
+import "../services/Randomizer.sol";
+
 
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
     mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
