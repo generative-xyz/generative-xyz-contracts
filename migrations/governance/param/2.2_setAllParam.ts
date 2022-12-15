@@ -14,7 +14,7 @@ import {ethers} from "ethers";
         const p = new ParamControl(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
 
         let key = 'GENERATIVE_NFT_TEMPLATE';
-        let tx = await p.setAddress(contract, key, '0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e', 0);
+        let tx = await p.setAddress(contract, key, '0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690', 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
