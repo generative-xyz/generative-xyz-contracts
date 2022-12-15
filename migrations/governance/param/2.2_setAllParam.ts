@@ -23,6 +23,15 @@ import {ethers} from "ethers";
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
+        key = "BASE_URI";
+        tx = await p.set(contract, key, "http://devnet.generative.xyz/api/token", 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "BASE_URI_TRAIT";
+        tx = await p.set(contract, key, "http://devnet.generative.xyz/api/trait", 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
         key = 'FEE_TOKEN';
         tx = await p.setAddress(contract, key, "0x0000000000000000000000000000000000000000", 0);

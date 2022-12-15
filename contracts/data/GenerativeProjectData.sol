@@ -2,15 +2,18 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
+
+import "../interfaces/IParameterControl.sol";
+import "../interfaces/IGenerativeProjectData.sol";
+import "../interfaces/IGenerativeProject.sol";
+
 import "../libs/helpers/Errors.sol";
 import "../libs/helpers/Base64.sol";
 import "../libs/helpers/StringsUtils.sol";
-import "../interfaces/IParameterControl.sol";
 import "../libs/structs/NFTProject.sol";
-import "../interfaces/IGenerativeProjectData.sol";
-import "../interfaces/IGenerativeProject.sol";
 import "../libs/structs/NFTProject.sol";
 import "../libs/configs/GenerativeNFTConfigs.sol";
+import "../libs/configs/GenerativeProjectDataConfigs.sol";
 
 contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     address public _admin;
@@ -80,7 +83,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     function tokenURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         // get base uri
         IParameterControl param = IParameterControl(_paramAddr);
-        string memory _baseURI = param.get("BASE_URI_TRAIT");
+        string memory _baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
         // get project info
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
@@ -106,7 +109,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     function tokenBaseURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         // get base uri
         IParameterControl param = IParameterControl(_paramAddr);
-        string memory _baseURI = param.get("BASE_URI");
+        string memory _baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI);
         // get project info
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
