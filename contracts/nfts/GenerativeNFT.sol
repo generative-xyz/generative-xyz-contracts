@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 import "./BaseERC721OwnerSeed.sol";
+import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
 import "../libs/structs/NFTProject.sol";
@@ -54,7 +55,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         // default 5% getting, 95% pay for owner of project
         uint256 operationFee = 500;
         if (_paramsAddress != address(0)) {
-            operationFee = _p.getUInt256("MINT_NFT_OPERATOR_FEE");
+            operationFee = _p.getUInt256(GenerativeNFTConfigs.MINT_NFT_OPERATOR_FEE);
         }
         if (mintPriceAddr == Errors.ZERO_ADDR) {
             require(msg.value >= mintPrice);
