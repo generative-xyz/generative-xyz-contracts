@@ -59,7 +59,7 @@ class GenerativeNFT {
         return val;
     }
 
-    async get_boilerplateAddr(contractAddress: any) {
+    async getProject(contractAddress: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
@@ -70,125 +70,11 @@ class GenerativeNFT {
             nonce: nonce,
         }
 
-        const val: any = await temp?.nftContract.methods._boilerplateAddr().call(tx);
+        const val: any = await temp?.nftContract.methods._project().call(tx);
         return val;
     }
 
-    async get_boilerplateId(contractAddress: any) {
-        let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-
-        //the transaction
-        const tx = {
-            from: this.senderPublicKey,
-            to: contractAddress,
-            nonce: nonce,
-        }
-
-        const val: any = await temp?.nftContract.methods._boilerplateId().call(tx);
-        return val;
-    }
-
-    async get_paramsValues(contractAddress: any, tokenId: number) {
-        let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-        console.log("asfafaf");
-        //the transaction
-        const tx = {
-            from: this.senderPublicKey,
-            to: contractAddress,
-            nonce: nonce,
-        }
-
-
-        const val: any = await temp?.nftContract.methods.getParamValues(tokenId).call(tx);
-        return val;
-    }
-
-    async getTraits(contractAddress: any) {
-        let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-        // console.log("asfafaf");
-        //the transaction
-        const tx = {
-            from: this.senderPublicKey,
-            to: contractAddress,
-            nonce: nonce,
-        }
-
-
-        const val: any = await temp?.nftContract.methods.getTraits().call(tx);
-        return val;
-    }
-
-    async getTokenTraits(contractAddress: any, tokenId: number) {
-        let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-        //the transaction
-        const tx = {
-            from: this.senderPublicKey,
-            to: contractAddress,
-            nonce: nonce,
-        }
-
-
-        const val: any = await temp?.nftContract.methods.getTokenTraits(tokenId).call(tx);
-        return val;
-    }
-
-    async getMax(contractAddress: any) {
-        let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-        //the transaction
-        const tx = {
-            from: this.senderPublicKey,
-            to: contractAddress,
-            nonce: nonce,
-        }
-
-
-        const val: any = await temp?.nftContract.methods._max().call(tx);
-        return val;
-    }
-
-    async getLimit(contractAddress: any) {
-        let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-        //the transaction
-        const tx = {
-            from: this.senderPublicKey,
-            to: contractAddress,
-            nonce: nonce,
-        }
-
-
-        const val: any = await temp?.nftContract.methods._limit().call(tx);
-        return val;
-    }
-
-    async setCustomURI(contractAddress: any, tokenId: any, uri: any,
-                       gas: any) {
-        let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-
-        const fun = temp?.nftContract.methods.setCustomURI(tokenId, uri);
-        //the transaction
-        const tx = {
-            from: this.senderPublicKey,
-            to: contractAddress,
-            nonce: nonce,
-            gas: gas,
-            data: fun.encodeABI(),
-        }
-
-        if (tx.gas == 0) {
-            tx.gas = await fun.estimateGas(tx);
-        }
-
-        return await this.signedAndSendTx(temp?.web3, tx);
-    }
-
-    async mint(contractAddress: any, gas: any) {
+    async mint(contractAddress: any, price: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
@@ -200,28 +86,7 @@ class GenerativeNFT {
             nonce: nonce,
             gas: gas,
             data: fun.encodeABI(),
-        }
-
-        if (tx.gas == 0) {
-            tx.gas = await fun.estimateGas(tx);
-        }
-
-        return await this.signedAndSendTx(temp?.web3, tx);
-    }
-
-    async updateTraits(contractAddress: any, traits: any,
-                       gas: any) {
-        let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-
-        const fun = temp?.nftContract.methods.updateTraits(traits);
-        //the transaction
-        const tx = {
-            from: this.senderPublicKey,
-            to: contractAddress,
-            nonce: nonce,
-            gas: gas,
-            data: fun.encodeABI(),
+            value: ethers.utils.parseEther(price),
         }
 
         if (tx.gas == 0) {

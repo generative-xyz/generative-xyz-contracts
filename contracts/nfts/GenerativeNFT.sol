@@ -92,7 +92,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         }
     }
 
-    function mint() external returns (uint256 tokenId) {
+    function mint() external payable nonReentrant returns (uint256 tokenId) {
         // safe mint
         _project._index ++;
         require(_project._index <= _project._limit);
@@ -114,7 +114,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         emit NFTCollection.Mint(msg.sender, tokenId);
     }
 
-    function reserveMint() external returns (uint256 tokenId) {
+    function reserveMint() external payable nonReentrant returns (uint256 tokenId) {
         _project._indexReserve ++;
         require(_project._indexReserve + _project._limit <= _project._maxSupply);
         if (_project._index + _project._indexReserve == _project._maxSupply) {
