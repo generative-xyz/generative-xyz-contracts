@@ -56,6 +56,11 @@
               "internalType": "address",
               "name": "_mintPriceAddr",
               "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "_name",
+              "type": "string"
             }
           ],
           "internalType": "struct NFTProject.ProjectMinting",

@@ -9,6 +9,7 @@ import "../interfaces/IGenerativeProject.sol";
 import "../interfaces/IGenerativeNFT.sol";
 import "../interfaces/IParameterControl.sol";
 import "../interfaces/IGenerativeProjectData.sol";
+import "../libs/operator-filter-registry/DefaultOperatorFilterer.sol";
 
 // libs
 import "../libs/configs/GenerativeNFTConfigs.sol";
@@ -21,13 +22,13 @@ import "../libs/structs/NFTProject.sol";
 import "../services/Randomizer.sol";
 
 
-contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
+contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFilterer {
     mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
     NFTProject.ProjectMinting public _project;
     mapping(address => bool) _reserves;
 
     constructor (string memory name, string memory symbol)
-    BaseERC721OwnerSeed(name, symbol) {}
+    BaseERC721OwnerSeed(name, symbol) DefaultOperatorFilterer() {}
 
     function owner() public view override returns (address) {
         return _admin;
@@ -47,6 +48,8 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         _admin = admin;
         _randomizer = randomizer;
         _projectDataContextAddr = projectDataContextAddr;
+        _nameCol = project._name;
+        _symbolCol = StringsUtils.getSlice(1, 3, _nameCol);
         for (uint256 i;
             i < reserves.length;
             i++) {
@@ -188,5 +191,23 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         } else {
             (receiver, royaltyAmount) = super.getRoyalty(_tokenId, _salePrice);
         }
+    }
+
+    /* @notice: opensea operator filter registry
+    */
+    function transferFrom(address from, address to, uint256 tokenId) public override onlyAllowedOperator(from) {
+        super.transferFrom(from, to, tokenId);
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId) public override onlyAllowedOperator(from) {
+        super.safeTransferFrom(from, to, tokenId);
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data)
+    public
+    override
+    onlyAllowedOperator(from)
+    {
+        super.safeTransferFrom(from, to, tokenId, data);
     }
 }

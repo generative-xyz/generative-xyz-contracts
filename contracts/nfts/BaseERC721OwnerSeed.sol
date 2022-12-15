@@ -14,11 +14,21 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, Ownab
     address public _paramsAddress;
     address public _randomizer;
     address public _projectDataContextAddr;
+    string public _nameCol;
+    string public _symbolCol;
 
     constructor(
         string memory name,
         string memory symbol
     ) ERC721(name, symbol) {
+    }
+
+    function name() public view override returns (string memory) {
+        return _nameCol;
+    }
+
+    function symbol() public view override returns (string memory) {
+        return _symbolCol;
     }
 
     function changeAdmin(address newAdm) external {

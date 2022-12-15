@@ -115,8 +115,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         address[] memory reserves
     ) external payable nonReentrant returns (uint256) {
         // verify
-        require(bytes(project._name).length > 0);
-        require(bytes(project._creator).length > 0);
+        require(bytes(project._name).length > 3);
+        require(bytes(project._creator).length > 3);
         require(project._maxSupply > 0);
         require(project._limit > 0 && project._limit <= project._maxSupply);
         require(project._creatorAddr != Errors.ZERO_ADDR);
@@ -143,7 +143,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
                 project._creator,
                 project._creatorAddr,
                 project._mintPrice,
-                project._mintPriceAddr
+                project._mintPriceAddr,
+                project._name
             ), _admin, _paramsAddress, _randomizerAddr, _projectDataContextAddr, reserves);
         return _currentProjectId;
     }

@@ -21,4 +21,12 @@ library StringsUtils {
     function toHex(bytes32 data) internal pure returns (string memory) {
         return string(abi.encodePacked("0x", toHex16(bytes16(data)), toHex16(bytes16(data << 128))));
     }
+
+    function getSlice(uint256 begin, uint256 end, string memory text) internal pure returns (string memory) {
+        bytes memory a = new bytes(end - begin + 1);
+        for (uint i = 0; i <= end - begin; i++) {
+            a[i] = bytes(text)[i + begin - 1];
+        }
+        return string(a);
+    }
 }

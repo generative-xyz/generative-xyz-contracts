@@ -39,5 +39,6 @@ library NFTProject {
         address _creatorAddr;
         uint256 _mintPrice;
         address _mintPriceAddr; // erc20 addr if possible
+        string _name;
     }
 }
