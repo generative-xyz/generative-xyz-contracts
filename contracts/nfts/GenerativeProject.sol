@@ -6,13 +6,17 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/ClonesUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/interfaces/IERC2981Upgradeable.sol";
+import "../libs/operator-filter-registry/upgradeable/DefaultOperatorFiltererUpgradeable.sol";
+
 import "../interfaces/IGenerativeProject.sol";
-import "../libs/helpers/Errors.sol";
 import "../interfaces/IParameterControl.sol";
 import "../interfaces/IGenerativeNFT.sol";
 import "../interfaces/IGenerativeProjectData.sol";
 
-contract GenerativeProject is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IGenerativeProject {
+import "../libs/helpers/Errors.sol";
+
+
+contract GenerativeProject is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IGenerativeProject, DefaultOperatorFiltererUpgradeable {
 
     // super admin
     address public _admin;
@@ -46,6 +50,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         __ERC721_init(name, symbol);
         __ReentrancyGuard_init();
         __ERC721Pausable_init();
+        __DefaultOperatorFilterer_init();
     }
 
     function changeAdmin(address newAdm) external {
@@ -221,5 +226,23 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     {
         receiver = _admin;
         royaltyAmount = (_salePrice * 500) / 10000;
+    }
+
+    /* @notice: opensea operator filter registry
+    */
+    function transferFrom(address from, address to, uint256 tokenId) public override(IERC721Upgradeable, ERC721Upgradeable) onlyAllowedOperator(from) {
+        super.transferFrom(from, to, tokenId);
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId) public override(IERC721Upgradeable, ERC721Upgradeable) onlyAllowedOperator(from) {
+        super.safeTransferFrom(from, to, tokenId);
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data)
+    public
+    override(IERC721Upgradeable, ERC721Upgradeable)
+    onlyAllowedOperator(from)
+    {
+        super.safeTransferFrom(from, to, tokenId, data);
     }
 }
