@@ -28,7 +28,12 @@ import {ethers} from "ethers";
         tx = await p.setAddress(contract, key, "0x0000000000000000000000000000000000000000", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
-        
+
+        key = "MINT_NFT_OPERATOR_FEE";
+        tx = await p.setUInt256(contract, key, 500, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
         key = "p5js@1.5.0"
         tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>`, 0);
         console.log("set ", key);
