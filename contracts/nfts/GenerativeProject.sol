@@ -113,13 +113,13 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     function mint(
         NFTProject.Project memory project,
         address[] memory reserves
-    ) external returns (uint256) {
+    ) external payable nonReentrant returns (uint256) {
         // verify
         require(bytes(project._name).length > 0);
         require(bytes(project._creator).length > 0);
         require(project._maxSupply > 0);
         require(project._limit > 0 && project._limit <= project._maxSupply);
-        require(project._creatorAddr != address(0x0));
+        require(project._creatorAddr != Errors.ZERO_ADDR);
 
         // safe mint
         _currentProjectId++;

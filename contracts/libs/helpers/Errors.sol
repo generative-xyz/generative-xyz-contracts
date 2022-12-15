@@ -9,6 +9,8 @@ library Errors {
 
     string public constant SUCCESS = "0";
 
+    address public constant ZERO_ADDR = address(0x0);
+
     // common errors
     string public constant INV_ADD = "100";
     string public constant ONLY_ADMIN_ALLOWED = "101";
@@ -24,4 +26,7 @@ library Errors {
     string public constant SEED_INV_1 = "206";
     string public constant SEED_INV_2 = "207";
     string public constant INV_BOILERPLATE_ADD = "208";
+    string public constant TOO_HIGH = "209";
+    string public constant TOKEN_HAS_SEED = "210";
+    string public constant ZERO_SEED = "211";
 }

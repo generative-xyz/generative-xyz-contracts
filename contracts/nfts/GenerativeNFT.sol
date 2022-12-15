@@ -23,8 +23,8 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
     /* @ProjectInfo: data for project data
     */
     function init(NFTProject.ProjectMinting memory project, address admin, address paramsAddr, address randomizer, address[] memory reserves) external {
-        require(_admin != address(0x0));
-        require(admin != address(0x0), "INV_ADD");
+        require(_admin == Errors.ZERO_ADDR, Errors.INV_PROJECT);
+        require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
         _project = project;
         _paramsAddress = paramsAddr;
         _admin = admin;
@@ -38,8 +38,8 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
     /* @Mint
     */
     function setTokenSeed(uint256 tokenId, bytes32 seed) internal {
-        require(_ownersAndHashSeeds[tokenId]._seed == bytes12(0), "Token hash already set");
-        require(seed != bytes12(0), "No zero hash seed");
+        require(_ownersAndHashSeeds[tokenId]._seed == bytes12(0), Errors.TOKEN_HAS_SEED);
+        require(seed != bytes12(0), Errors.ZERO_SEED);
         _ownersAndHashSeeds[tokenId]._seed = bytes12(seed);
     }
 
@@ -48,7 +48,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         if (mintPrice == 0) {
             return;
         }
-        address mintPriceAddr = address(0x0);
+        address mintPriceAddr = Errors.ZERO_ADDR;
         IGenerativeProject project = IGenerativeProject(_project._projectAddr);
         IParameterControl _p = IParameterControl(_paramsAddress);
         // default 5% getting, 95% pay for owner of project
@@ -56,7 +56,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         if (_paramsAddress != address(0)) {
             operationFee = _p.getUInt256("MINT_NFT_OPERATOR_FEE");
         }
-        if (mintPriceAddr == address(0x0)) {
+        if (mintPriceAddr == Errors.ZERO_ADDR) {
             require(msg.value >= mintPrice);
 
             // pay for owner project
@@ -154,7 +154,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
         uint256 _value
     ) public {
         require(msg.sender == _admin);
-        require(_value <= 10000, 'TOO_HIGH');
+        require(_value <= 10000, Errors.TOO_HIGH);
         royalties[_tokenId] = Royalty.RoyaltyInfo(_recipient, uint24(_value), true);
     }
 
