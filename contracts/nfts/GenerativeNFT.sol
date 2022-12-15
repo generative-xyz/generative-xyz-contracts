@@ -100,7 +100,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
             IGenerativeProject p = IGenerativeProject(_project._projectAddr);
             p.completeProject(_project._projectId);
         }
-        tokenId = (_project._projectId * 1000000) + _project._index;
+        tokenId = (_project._projectId * GenerativeNFTConfigs.PROJECT_PADDING) + _project._index;
         _safeMint(msg.sender, tokenId);
 
         // random seed
@@ -124,7 +124,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT {
 
         IGenerativeProject p = IGenerativeProject(_project._projectAddr);
         require(!_reserves[msg.sender] || msg.sender == p.ownerOf(_project._projectId));
-        tokenId = (_project._projectId * 1000000) + (_project._indexReserve + _project._limit);
+        tokenId = (_project._projectId * GenerativeNFTConfigs.PROJECT_PADDING) + (_project._indexReserve + _project._limit);
         _safeMint(msg.sender, tokenId);
 
         // random seed

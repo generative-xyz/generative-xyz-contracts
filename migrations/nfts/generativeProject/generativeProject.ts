@@ -150,6 +150,34 @@ class GenerativeProject {
 
         return await this.signedAndSendTx(temp?.web3, tx);
     }
+
+    async projectDetails(contractAddress: any, tokenID: number) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.projectDetails(tokenID).call(tx);
+    }
+
+    async tokenURI(contractAddress: any, tokenID: number) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.tokenURI(tokenID).call(tx);
+    }
 }
 
 export {GenerativeProject};

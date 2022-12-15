@@ -7,8 +7,10 @@ import {GenerativeProjectData} from "./generativeProjectData";
             return;
         }
 
+        const args = process.argv.slice(2);
+        const contract = args[0];
         const nft = new GenerativeProjectData(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        const address = await nft.upgradeContract("0x5FC8d32690cc91D4c39d9d3abcBD16989F875707");
+        const address = await nft.upgradeContract(contract);
         console.log({address});
     } catch (e) {
         // Deal with the fact the chain failed
