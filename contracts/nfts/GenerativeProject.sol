@@ -156,12 +156,13 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
 
     function updateProjectScriptType(
         uint256 projectId,
-        string memory scriptType
+        string memory scriptType,
+        uint256 i
     )
     external
     {
         require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
-        _projects[projectId]._scriptType = scriptType;
+        _projects[projectId]._scriptType[i] = scriptType;
     }
 
     function addProjectScript(uint256 projectId, string memory _script)

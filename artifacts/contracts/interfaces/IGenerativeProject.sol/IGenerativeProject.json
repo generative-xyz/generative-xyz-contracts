@@ -285,9 +285,9 @@
               "type": "tuple"
             },
             {
-              "internalType": "string",
+              "internalType": "string[]",
               "name": "_scriptType",
-              "type": "string"
+              "type": "string[]"
             },
             {
               "internalType": "string[]",

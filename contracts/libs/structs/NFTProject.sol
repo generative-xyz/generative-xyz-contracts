@@ -13,7 +13,7 @@ library NFTProject {
         string _desc;// not require
         string _image;// base64 of image
         ProjectSocial _social;// not require
-        string _scriptType;// not require
+        string[] _scriptType;// not require
         string[] _scripts;// required
         string _styles;// not require
         uint256 _completeTime;// init = 0

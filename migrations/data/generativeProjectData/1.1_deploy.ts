@@ -12,7 +12,7 @@ import {GenerativeProjectData} from "./generativeProjectData";
         const address = await nft.deployUpgradeable(
             process.env.PUBLIC_KEY,
             "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-            "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+            "0xCace1b78160AE76398F486c8a18044da0d66d86D",
         );
         console.log("%s GenerativeProjectData address: %s", process.env.NETWORK, address);
     } catch (e) {
