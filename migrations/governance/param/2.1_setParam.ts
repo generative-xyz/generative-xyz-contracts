@@ -17,7 +17,7 @@ import {ethers} from "ethers";
         const val: any = await nft.getAddress(contract, key);
         console.log("val", val);
 
-        let tx = await nft.setAddress(contract, key, '0xA4899D35897033b927acFCf422bc745916139776', 0);
+        let tx = await nft.setAddress(contract, key, '0x8A93d247134d91e0de6f96547cB0204e5BE8e5D8', 0);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
 

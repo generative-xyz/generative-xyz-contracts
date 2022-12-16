@@ -4,6 +4,19 @@
   "sourceName": "contracts/interfaces/IGenerativeNFT.sol",
   "abi": [
     {
+      "inputs": [],
+      "name": "getStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "components": [
@@ -91,9 +104,27 @@
           "internalType": "address[]",
           "name": "reserves",
           "type": "address[]"
+        },
+        {
+          "internalType": "bool",
+          "name": "disable",
+          "type": "bool"
         }
       ],
       "name": "init",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "enable",
+          "type": "bool"
+        }
+      ],
+      "name": "setStatus",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

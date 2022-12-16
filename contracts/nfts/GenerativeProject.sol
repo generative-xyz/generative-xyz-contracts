@@ -117,7 +117,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
 
     function mint(
         NFTProject.Project memory project,
-        address[] memory reserves
+        address[] memory reserves,
+        bool disable
     ) external payable nonReentrant returns (uint256) {
         // verify
         require(bytes(project._name).length > 3);
@@ -150,7 +151,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
                 project._mintPrice,
                 project._mintPriceAddr,
                 project._name
-            ), _admin, _paramsAddress, _randomizerAddr, _projectDataContextAddr, reserves);
+            ), _admin, _paramsAddress, _randomizerAddr, _projectDataContextAddr, reserves, disable);
         return _currentProjectId;
     }
 
@@ -209,10 +210,21 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         _projects[projectId]._license = license;
     }
 
+    function setProjectStatus(uint256 projectId, bool enable) external {
+        require(this.projectStatus(projectId) != enable);
+        IGenerativeNFT nft = IGenerativeNFT(_projects[projectId]._genNFTAddr);
+        nft.setStatus(enable);
+    }
+
     /* @projectData:
     */
     function projectDetails(uint256 projectId) external view returns (NFTProject.Project memory project){
         project = _projects[projectId];
+    }
+
+    function projectStatus(uint256 projectId) external view returns (bool enable) {
+        IGenerativeNFT nft = IGenerativeNFT(_projects[projectId]._genNFTAddr);
+        enable = nft.getStatus();
     }
 
     function tokenURI(uint256 projectId) override public view returns (string memory result) {

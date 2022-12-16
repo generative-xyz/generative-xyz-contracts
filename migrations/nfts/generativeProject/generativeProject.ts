@@ -129,11 +129,11 @@ class GenerativeProject {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async mint(contractAddress: any, project: any, reserves: any, mintFee: any, gas: any) {
+    async mint(contractAddress: any, project: any, reserves: any, disable: boolean = false, mintFee: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.mint(project, reserves)
+        const fun = temp?.nftContract.methods.mint(project, reserves, disable)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
@@ -142,6 +142,27 @@ class GenerativeProject {
             gas: gas,
             data: fun.encodeABI(),
             value: ethers.utils.parseEther(mintFee)
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async setProjectStatus(contractAddress: any, projectId: any, enable: boolean, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.setProjectStatus(projectId, enable)
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
         }
 
         if (tx.gas == 0) {
@@ -163,6 +184,20 @@ class GenerativeProject {
         }
 
         return await temp?.nftContract.methods.projectDetails(tokenID).call(tx);
+    }
+
+    async projectStatus(contractAddress: any, tokenID: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.projectStatus(tokenID).call(tx);
     }
 
     async tokenURI(contractAddress: any, tokenID: any) {

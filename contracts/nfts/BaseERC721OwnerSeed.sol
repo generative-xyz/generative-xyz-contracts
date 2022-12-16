@@ -4,11 +4,12 @@ import "@openzeppelin/contracts/token/ERC721/presets/ERC721PresetMinterPauserAut
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "../interfaces/IBaseERC721OwnerSeed.sol";
 
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/NFTCollection.sol";
 
-contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, Ownable {
+contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBaseERC721OwnerSeed, Ownable {
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
     address public _admin;
     address public _paramsAddress;
@@ -68,14 +69,16 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, Ownab
         }
     }
 
-    function pause() external {
-        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        _pause();
+    function _setStatus(bool enable) internal {
+        if (enable) {
+            _unpause();
+        } else {
+            _pause();
+        }
     }
 
-    function unpause() external {
-        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        _unpause();
+    function getStatus() external view returns (bool) {
+        return !paused();
     }
 
     function ownerOf(uint256 tokenId)

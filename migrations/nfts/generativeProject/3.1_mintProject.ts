@@ -43,11 +43,12 @@ import {GenerativeProject} from "./generativeProject";
                     _genNFTAddr: '0x0000000000000000000000000000000000000000',
                 })),
                 [process.env.PUBLIC_KEY],
+                false,
                 "0.001",
                 0
             )
         ;
-        console.log("tx:", tx);
+        console.log("tx:", tx?.transactionHash, tx?.status);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
