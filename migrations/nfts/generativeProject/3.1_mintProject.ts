@@ -46,7 +46,7 @@ import dayjs = require("dayjs");
                 })),
                 [process.env.PUBLIC_KEY],
                 false,
-                dayjs().add(1, "hour").unix(),
+                dayjs().add(3, "minute").unix(),
                 "0.001",
                 0
             )

@@ -23,8 +23,8 @@ import {GenerativeProject} from "../generativeProject/generativeProject";
         // a.randomizer = await nft.randomizerAddr(a.parent._genNFTAddr);
         // a.tokenIdToHash = await nft.tokenIdToHash(a.parent._genNFTAddr, parseInt(args[1]) * 1e6 + parseInt(args[2]));
         // a.tokenURI = await nft.getTokenURI(a.parent._genNFTAddr, parseInt(args[1]) * 1e6 + parseInt(args[2]));
-        // a.tokenGenerativeURI = await nft.getTokenGenerativeURI(a.parent._genNFTAddr, parseInt(args[1]) * 1e6 + parseInt(args[2]));
-        console.log(a.project);
+        a.tokenGenerativeURI = await nft.getTokenGenerativeURI(a.parent._genNFTAddr, parseInt(args[1]) * 1e6 + parseInt(args[2]));
+        console.log({a});
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
