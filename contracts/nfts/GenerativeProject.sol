@@ -90,6 +90,20 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         }
     }
 
+    function withdraw(address receiver, address erc20Addr, uint256 amount) external nonReentrant {
+        require(_msgSender() == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        bool success;
+        if (erc20Addr == address(0x0)) {
+            require(address(this).balance >= amount);
+            (success,) = receiver.call{value : amount}("");
+            require(success);
+        } else {
+            IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
+            // transfer erc-20 token
+            require(tokenERC20.transfer(receiver, amount));
+        }
+    }
+
     /* @Mint project
     */
 
@@ -118,7 +132,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     function mint(
         NFTProject.Project memory project,
         address[] memory reserves,
-        bool disable
+        bool disable,
+        uint256 openingTime
     ) external payable nonReentrant returns (uint256) {
         // verify
         require(bytes(project._name).length > 3);
@@ -150,7 +165,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
                 project._creatorAddr,
                 project._mintPrice,
                 project._mintPriceAddr,
-                project._name
+                project._name,
+                NFTProject.ProjectMintingSchedule(0, openingTime)
             ), _admin, _paramsAddress, _randomizerAddr, _projectDataContextAddr, reserves, disable);
         return _currentProjectId;
     }

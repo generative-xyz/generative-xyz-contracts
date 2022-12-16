@@ -18,13 +18,13 @@ import {GenerativeProject} from "../generativeProject/generativeProject";
         a.parent = await project.projectDetails(contractPro, args[1]);
 
         const nft = new GenerativeNFT(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        // a.project = await nft.getProject(a.parent._genNFTAddr);
+        a.project = await nft.getProject(a.parent._genNFTAddr);
         // a.randomizer = await nft.randomizerAddr(a.parent._genNFTAddr);
-        a.randomizer = await nft.randomizerAddr(a.parent._genNFTAddr);
+        // a.randomizer = await nft.randomizerAddr(a.parent._genNFTAddr);
         // a.tokenIdToHash = await nft.tokenIdToHash(a.parent._genNFTAddr, parseInt(args[1]) * 1e6 + parseInt(args[2]));
         // a.tokenURI = await nft.getTokenURI(a.parent._genNFTAddr, parseInt(args[1]) * 1e6 + parseInt(args[2]));
         // a.tokenGenerativeURI = await nft.getTokenGenerativeURI(a.parent._genNFTAddr, parseInt(args[1]) * 1e6 + parseInt(args[2]));
-        console.log({a});
+        console.log(a.project);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);

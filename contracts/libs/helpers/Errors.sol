@@ -29,4 +29,5 @@ library Errors {
     string public constant TOO_HIGH = "209";
     string public constant TOKEN_HAS_SEED = "210";
     string public constant ZERO_SEED = "211";
+    string public constant OPENING_SCHEDULE = "212";
 }

@@ -74,6 +74,23 @@
               "internalType": "string",
               "name": "_name",
               "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "_initBlockTime",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "_openingTime",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct NFTProject.ProjectMintingSchedule",
+              "name": "_mintingSchedule",
+              "type": "tuple"
             }
           ],
           "internalType": "struct NFTProject.ProjectMinting",

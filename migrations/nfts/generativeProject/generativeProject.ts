@@ -129,11 +129,11 @@ class GenerativeProject {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async mint(contractAddress: any, project: any, reserves: any, disable: boolean = false, mintFee: any, gas: any) {
+    async mint(contractAddress: any, project: any, reserves: any, disable: boolean = false, openTime: any, mintFee: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.mint(project, reserves, disable)
+        const fun = temp?.nftContract.methods.mint(project, reserves, disable, openTime)
         //the transaction
         const tx = {
             from: this.senderPublicKey,

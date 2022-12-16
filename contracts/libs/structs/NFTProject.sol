@@ -40,5 +40,11 @@ library NFTProject {
         uint256 _mintPrice;
         address _mintPriceAddr; // erc20 addr if possible
         string _name;
+        ProjectMintingSchedule _mintingSchedule;
+    }
+
+    struct ProjectMintingSchedule {
+        uint256 _initBlockTime; // current block.timestamp of project
+        uint256 _openingTime; // time for open minting
     }
 }

@@ -25,7 +25,7 @@ import "../services/Randomizer.sol";
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFilterer {
     mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
     NFTProject.ProjectMinting public _project;
-    mapping(address => bool) _reserves;
+    mapping(address => bool) public _reserves;
 
     constructor (string memory name, string memory symbol)
     BaseERC721OwnerSeed(name, symbol) DefaultOperatorFilterer() {}
@@ -53,12 +53,13 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         for (uint256 i;
             i < reserves.length;
             i++) {
-            _reserves[reserves[i]] = false;
+            _reserves[reserves[i]] = true;
         }
         transferOwnership(_admin);
         if (disable) {
             _pause();
         }
+        _project._mintingSchedule._initBlockTime = block.timestamp;
     }
 
     /* @Mint
@@ -112,6 +113,10 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
     }
 
     function mint() external payable nonReentrant returns (uint256 tokenId) {
+        // check time
+        if (_project._mintingSchedule._openingTime > 0) {
+            require(_project._mintingSchedule._openingTime < block.timestamp, Errors.OPENING_SCHEDULE);
+        }
         // safe mint
         _project._index ++;
         require(_project._index <= _project._limit);
@@ -142,7 +147,11 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         }
 
         IGenerativeProject p = IGenerativeProject(_project._projectAddr);
-        require(!_reserves[msg.sender] || msg.sender == p.ownerOf(_project._projectId));
+        // is owner of project or reserve list
+        require(_reserves[msg.sender] || msg.sender == p.ownerOf(_project._projectId));
+        if (_reserves[msg.sender] && _project._mintingSchedule._openingTime > 0) {
+            require(_project._mintingSchedule._openingTime < block.timestamp, Errors.OPENING_SCHEDULE);
+        }
         tokenId = (_project._projectId * GenerativeNFTConfigs.PROJECT_PADDING) + (_project._indexReserve + _project._limit);
         _safeMint(msg.sender, tokenId);
 
@@ -150,6 +159,8 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         IRandomizer random = IRandomizer(_randomizer);
         bytes32 seed = random.generateTokenHash(tokenId);
         setTokenSeed(tokenId, seed);
+
+        // no paymentMintNFT
 
         emit NFTCollection.Mint(msg.sender, tokenId);
     }

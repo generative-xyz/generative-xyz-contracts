@@ -4,6 +4,7 @@ import {ethers} from "ethers";
 import * as fs from "fs";
 import {createAlchemyWeb3} from "@alch/alchemy-web3";
 import {GenerativeProject} from "./generativeProject";
+import dayjs = require("dayjs");
 
 (async () => {
     try {
@@ -44,6 +45,7 @@ import {GenerativeProject} from "./generativeProject";
                 })),
                 [process.env.PUBLIC_KEY],
                 false,
+                dayjs().add(1, "hour").unix(),
                 "0.001",
                 0
             )
