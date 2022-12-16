@@ -308,6 +308,11 @@
               "internalType": "address",
               "name": "_genNFTAddr",
               "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "_itemDesc",
+              "type": "string"
             }
           ],
           "internalType": "struct NFTProject.Project",

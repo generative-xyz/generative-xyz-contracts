@@ -22,12 +22,9 @@ library Errors {
     string public constant INV_PROJECT = "202";
     string public constant REACH_MAX = "203";
     string public constant INV_PARAMS = "204";
-    string public constant SEED_INV = "205";
-    string public constant SEED_INV_1 = "206";
-    string public constant SEED_INV_2 = "207";
-    string public constant INV_BOILERPLATE_ADD = "208";
-    string public constant TOO_HIGH = "209";
-    string public constant TOKEN_HAS_SEED = "210";
-    string public constant ZERO_SEED = "211";
-    string public constant OPENING_SCHEDULE = "212";
+    string public constant TOO_HIGH = "205";
+    string public constant TOKEN_HAS_SEED = "206";
+    string public constant ZERO_SEED = "207";
+    string public constant OPENING_SCHEDULE = "208";
+    string public constant INV_TOKEN = "209";
 }

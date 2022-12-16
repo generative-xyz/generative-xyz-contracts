@@ -18,6 +18,7 @@ library NFTProject {
         string _styles;// not require
         uint256 _completeTime;// init = 0
         address _genNFTAddr; // init = 0x0
+        string _itemDesc; // not require
     }
 
     struct ProjectSocial {

@@ -92,12 +92,18 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 Base64.encode(abi.encodePacked(this.tokenHTML(projectId, tokenId, seed))),
                 '"'
             ));
+
+        string memory desc = projectDetail._desc;
+        if (bytes(projectDetail._itemDesc).length > 0) {
+            desc = projectDetail._itemDesc;
+        }
+
         result = string(
             abi.encodePacked(
                 'data:application/json;base64,',
                 Base64.encode(abi.encodePacked(
                     '{"name":"', projectDetail._name,
-                    '","description":"Powers by generative.xyz"',
+                    '","description": "', desc, '"',
                     animationURI,
                     ', "attributes": "', _baseURI, "/", StringsUpgradeable.toHexString(_generativeProjectAddr), "/", StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed), '"',
                     '}'

@@ -244,6 +244,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     }
 
     function tokenURI(uint256 projectId) override public view returns (string memory result) {
+        require(_exists(projectId), Errors.INV_TOKEN);
         IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
         result = projectData.projectURI(projectId);
     }
