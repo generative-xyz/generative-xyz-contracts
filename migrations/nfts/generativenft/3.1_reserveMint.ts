@@ -17,10 +17,9 @@ import {GenerativeProject} from "../generativeProject/generativeProject";
         a.parent = await project.projectDetails(contractPro, args[1]);
 
         const nft = new GenerativeNFT(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        a.project = await nft.getProject(a.parent._genNFTAddr);
         for (let i = 0; i < 100; i++) {
-            const tx = await nft.mint(a.parent._genNFTAddr, a.project._mintPrice, 0);
-            console.log("tx: ", tx?.transactionHash, tx?.status);
+            const tx = await nft.reserveMint(a.parent._genNFTAddr, 0, 0);
+            console.log("tx: ", i, tx?.transactionHash, tx?.status);
         }
     } catch (e) {
         // Deal with the fact the chain failed
