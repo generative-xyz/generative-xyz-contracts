@@ -147,7 +147,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         IParameterControl _p = IParameterControl(_paramsAddress);
         paymentMintProject();
         _projects[_currentProjectId] = project;
-        _safeMint(msg.sender, _currentProjectId);
+        _safeMint(project._creatorAddr, _currentProjectId);
 
         // set to generative nft
         address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress("GENERATIVE_NFT_TEMPLATE"));

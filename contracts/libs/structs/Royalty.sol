@@ -6,4 +6,9 @@ library Royalty {
         uint24 amount;
         bool isValue;
     }
+
+    struct CollaborationShared {
+        address[] _collaborators;
+        uint256[] _shared;
+    }
 }

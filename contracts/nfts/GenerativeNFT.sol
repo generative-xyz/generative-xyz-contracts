@@ -182,12 +182,12 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         return projectData.tokenURI(_project._projectId, tokenId, seed);
     }
 
-    function tokenIdToHash(uint256 _tokenId) external view returns (bytes32) {
+    function tokenIdToHash(uint256 tokenId) external view returns (bytes32) {
         require(_exists(tokenId), Errors.INV_TOKEN);
-        if (_ownersAndHashSeeds[_tokenId]._seed == 0) {
+        if (_ownersAndHashSeeds[tokenId]._seed == 0) {
             return 0;
         }
-        return keccak256(abi.encode(_ownersAndHashSeeds[_tokenId]._seed));
+        return keccak256(abi.encode(_ownersAndHashSeeds[tokenId]._seed));
     }
 
     /* @dev EIP2981 royalties implementation. 
