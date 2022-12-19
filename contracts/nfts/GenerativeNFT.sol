@@ -48,7 +48,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _admin = admin;
         _randomizer = randomizer;
         _projectDataContextAddr = projectDataContextAddr;
-        _nameCol = project._name;
+        _nameCol = string(abi.encodePacked(project._name, " by ", project._creator));
         _symbolCol = StringsUtils.getSlice(1, 3, _nameCol);
         for (uint256 i;
             i < reserves.length;
