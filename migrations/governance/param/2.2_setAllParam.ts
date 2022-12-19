@@ -13,6 +13,9 @@ import {ethers} from "ethers";
         const contract = args[0];
         const p = new ParamControl(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
 
+        /**
+         *  For project
+         */
         let key = 'GENERATIVE_NFT_TEMPLATE';
         let tx = await p.setAddress(contract, key, '0x5FbDB2315678afecb367f032d93F642f64180aa3', 0);
         console.log("set ", key);
@@ -22,7 +25,15 @@ import {ethers} from "ethers";
         tx = await p.setUInt256(contract, key, ethers.utils.parseEther("0.001"), 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+        key = 'FEE_TOKEN';
 
+        tx = await p.setAddress(contract, key, "0x0000000000000000000000000000000000000000", 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        /**
+         * for generative nft
+         */
         key = "ROYALTY_FIN_ADDRESS";
         tx = await p.setAddress(contract, key, process.env.PUBLIC_KEY, 0);
         console.log("set ", key);
@@ -33,6 +44,14 @@ import {ethers} from "ethers";
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
+        key = "MINT_NFT_OPERATOR_FEE";
+        tx = await p.setUInt256(contract, key, 500, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        /**
+         * For Project Data
+         */
         key = "BASE_URI";
         tx = await p.set(contract, key, "http://devnet.generative.xyz/api/token", 0);
         console.log("set ", key);
@@ -48,16 +67,15 @@ import {ethers} from "ethers";
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = 'FEE_TOKEN';
-        tx = await p.setAddress(contract, key, "0x0000000000000000000000000000000000000000", 0);
+        /**
+         * For royalty second sale
+         */
+        key = "OWNER_ROYALTY_SECOND_SALE";
+        tx = await p.setUInt256(contract, key, 9000, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = "MINT_NFT_OPERATOR_FEE";
-        tx = await p.setUInt256(contract, key, 500, 0);
-        console.log("set ", key);
-        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
-
+        // JS lib by version
         key = "p5js@1.5.0"
         tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>`, 0);
         console.log("set ", key);
