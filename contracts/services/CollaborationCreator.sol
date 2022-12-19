@@ -11,7 +11,7 @@ import "../interfaces/ICollaboration.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
 
-contract Collaboration is Ownable, ReentrancyGuard, ICollaboration, IERC721Receiver {
+contract CollaborationCreator is Ownable, ReentrancyGuard, ICollaboration, IERC721Receiver {
     mapping(address => uint256) public _collaborations;
     address[] public _collaborators;
     uint256 public _total;
