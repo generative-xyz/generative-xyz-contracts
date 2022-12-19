@@ -61,8 +61,8 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         NFTProject.Project memory d = p.projectDetails(projectId);
         uint256 tokenID = projectId * GenerativeNFTConfigs.PROJECT_PADDING;
         string memory animationURI = string(abi.encodePacked(
-                ', "animation_url":"data:text/html;charset=utf-8,',
-                this.tokenHTML(projectId, tokenID, keccak256(abi.encodePacked(tokenID))),
+                ', "animation_url":"data:text/html;base64,',
+                Base64.encode(abi.encodePacked(this.tokenHTML(projectId, tokenID, keccak256(abi.encodePacked(tokenID))))),
                 '"'
             ));
         result = string(
