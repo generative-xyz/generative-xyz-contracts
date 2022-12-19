@@ -38,7 +38,7 @@ import dayjs = require("dayjs");
                         _instagram: "",
                     })),
                     _scriptType: JSON.parse(JSON.stringify(["p5js@1.5.0", "tonejs@14.8.49"])),
-                    _scripts: [`const rand=mathRand();function T1(n){return n>.5}window.$generativeTraits={T1:T1(rand)},console.log(window.$generativeTraits);const container=document.createElement("div");container.innerHTML="<span>tokenId: "+tokenId+"</span><br><span>tokenMintNumber: "+tokenMintNumber+"</span><br><span>project: "+projectNumber+"</span><br><span>seed: "+seed+"</span><br>",document.body.prepend(container);`],
+                    _scripts: [`<script type="text/javascript">const rand=mathRand();function T1(n){return n>.5}window.$generativeTraits={T1:T1(rand)},console.log(window.$generativeTraits);const container=document.createElement("div");container.innerHTML="<span>tokenId: "+tokenId+"</span><br><span>tokenMintNumber: "+tokenMintNumber+"</span><br><span>project: "+projectNumber+"</span><br><span>seed: "+seed+"</span><br>",document.body.prepend(container);</script>`],
                     _styles: "body {}div#container-el {}",
                     _completeTime: 0,
                     _genNFTAddr: '0x0000000000000000000000000000000000000000',
