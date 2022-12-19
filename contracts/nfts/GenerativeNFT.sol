@@ -23,7 +23,7 @@ import "../services/Randomizer.sol";
 
 
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFilterer {
-    mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
+    //    mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
     NFTProject.ProjectMinting public _project;
     mapping(address => bool) public _reserves;
 
@@ -194,7 +194,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
     /* @dev EIP2981 royalties implementation. 
     // EIP2981 standard royalties return.
     */
-    function setTokenRoyalty(
+    /*function setTokenRoyalty(
         uint256 _tokenId,
         address _recipient,
         uint256 _value
@@ -202,19 +202,19 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         require(msg.sender == _admin);
         require(_value <= 10000, Errors.TOO_HIGH);
         royalties[_tokenId] = Royalty.RoyaltyInfo(_recipient, uint24(_value), true);
-    }
+    }*/
 
     function getRoyalty(uint256 _tokenId, uint256 _salePrice) internal view virtual override
     returns (address receiver, uint256 royaltyAmount)
     {
-        Royalty.RoyaltyInfo memory royalty = royalties[_tokenId];
+        /*Royalty.RoyaltyInfo memory royalty = royalties[_tokenId];
         if (royalty.isValue) {
             receiver = royalty.recipient;
             royaltyAmount = (_salePrice * royalty.amount) / 10000;
         } else {
             (receiver, royaltyAmount) = super.getRoyalty(_tokenId, _salePrice);
-        }
-        //        (receiver, royaltyAmount) = super.getRoyalty(_tokenId, _salePrice);
+        }*/
+        (receiver, royaltyAmount) = super.getRoyalty(_tokenId, _salePrice);
     }
 
     /* @notice: opensea operator filter registry
