@@ -180,6 +180,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     external
     {
         require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._scriptType[i] = scriptType;
     }
 
@@ -187,6 +188,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     external
     {
         require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._scripts.push(_script);
     }
 
@@ -194,6 +196,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     external
     {
         require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._scripts[scriptIndex] = script;
     }
 
@@ -201,33 +204,39 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     external
     {
         require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(_exists(projectId), Errors.INV_TOKEN);
         delete _projects[projectId]._scripts[scriptIndex];
     }
 
     function completeProject(uint256 projectId) external {
         require(msg.sender == _projects[projectId]._genNFTAddr);
+        require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._completeTime = block.timestamp;
     }
 
     function updateProjectName(uint256 projectId, string memory projectName)
     external {
         require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._name = projectName;
     }
 
     function updateProjectCreatorName(uint256 projectId, string memory creatorName)
     external {
         require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._creator = creatorName;
     }
 
     function updateProjectLicense(uint256 projectId, string memory license)
     external {
         require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._license = license;
     }
 
     function setProjectStatus(uint256 projectId, bool enable) external {
+        require(_exists(projectId), Errors.INV_TOKEN);
         require(this.projectStatus(projectId) != enable);
         IGenerativeNFT nft = IGenerativeNFT(_projects[projectId]._genNFTAddr);
         nft.setStatus(enable);
@@ -236,10 +245,12 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     /* @projectData:
     */
     function projectDetails(uint256 projectId) external view returns (NFTProject.Project memory project){
+        require(_exists(projectId), Errors.INV_TOKEN);
         project = _projects[projectId];
     }
 
     function projectStatus(uint256 projectId) external view returns (bool enable) {
+        require(_exists(projectId), Errors.INV_TOKEN);
         IGenerativeNFT nft = IGenerativeNFT(_projects[projectId]._genNFTAddr);
         enable = nft.getStatus();
     }
