@@ -41,8 +41,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         address randomizerAddr,
         address projectDataContextAddr
     ) initializer public {
-        require(admin != address(0), Errors.INV_ADD);
-        require(paramsAddress != address(0), Errors.INV_ADD);
+        require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
+        require(paramsAddress != Errors.ZERO_ADDR, Errors.INV_ADD);
         _paramsAddress = paramsAddress;
         _admin = admin;
         _randomizerAddr = randomizerAddr;
@@ -55,7 +55,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     }
 
     function changeAdmin(address newAdm) external {
-        require(msg.sender == _admin && newAdm != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin && newAdm != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
         // change admin
         if (_admin != newAdm) {
@@ -65,7 +65,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     }
 
     function changeParamAddr(address newAddr) external {
-        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
         // change
         if (_paramsAddress != newAddr) {
@@ -74,7 +74,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     }
 
     function changeRandomizerAddr(address newAddr) external {
-        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
         // change
         if (_randomizerAddr != newAddr) {
@@ -83,7 +83,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     }
 
     function changeDataContextAddr(address newAddr) external {
-        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
         // change
         if (_projectDataContextAddr != newAddr) {
@@ -115,7 +115,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
             uint256 operationFee = _p.getUInt256(GenerativeProjectConfigs.CREATE_PROJECT_FEE);
             if (operationFee > 0) {
                 address operationFeeToken = _p.getAddress(GenerativeProjectConfigs.FEE_TOKEN);
-                if (!(operationFeeToken == address(0))) {
+                if (!(operationFeeToken == Errors.ZERO_ADDR)) {
                     IERC20Upgradeable tokenERC20 = IERC20Upgradeable(operationFeeToken);
                     // transfer erc-20 token to this contract
                     require(tokenERC20.transferFrom(

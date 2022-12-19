@@ -213,6 +213,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         } else {
             (receiver, royaltyAmount) = super.getRoyalty(_tokenId, _salePrice);
         }
+        //        (receiver, royaltyAmount) = super.getRoyalty(_tokenId, _salePrice);
     }
 
     /* @notice: opensea operator filter registry

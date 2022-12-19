@@ -5,9 +5,10 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "../interfaces/IBaseERC721OwnerSeed.sol";
-
+import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/NFTCollection.sol";
+import "../interfaces/IParameterControl.sol";
 
 contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBaseERC721OwnerSeed, Ownable {
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
@@ -17,6 +18,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
     address public _projectDataContextAddr;
     string public _nameCol;
     string public _symbolCol;
+    uint256 public _royalty;
 
     constructor(
         string memory name,
@@ -33,7 +35,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
     }
 
     function changeAdmin(address newAdm) external {
-        require(msg.sender == _admin && newAdm != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin && newAdm != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
         // change admin
         if (_admin != newAdm) {
@@ -43,7 +45,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
     }
 
     function changeParamAddr(address newAddr) external {
-        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
         // change
         if (_paramsAddress != newAddr) {
@@ -52,7 +54,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
     }
 
     function changeRandomizerAddr(address newAddr) external {
-        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
         // change
         if (_randomizer != newAddr) {
@@ -61,7 +63,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
     }
 
     function changeDataContextAddr(address newAddr) external {
-        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
         // change
         if (_projectDataContextAddr != newAddr) {
@@ -92,7 +94,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
     }
 
     function _exists(uint256 tokenId) internal view virtual override returns (bool) {
-        return _ownersAndHashSeeds[tokenId]._owner != address(0);
+        return _ownersAndHashSeeds[tokenId]._owner != Errors.ZERO_ADDR;
     }
 
     function _mint(address to, uint256 tokenId) internal virtual override {
@@ -122,9 +124,19 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
         return getRoyalty(_tokenId, _salePrice);
     }
 
-    function getRoyalty(uint256 _tokenId, uint256 _salePrice) internal view virtual returns (address, uint256) {
-        address receiver = _admin;
-        uint256 amount = (_salePrice * 500) / 10000;
-        return (receiver, amount);
+    function getRoyalty(uint256 _tokenId, uint256 _salePrice) internal view virtual returns (address receiver, uint256 amount) {
+        receiver = _admin;
+        if (_paramsAddress != Errors.ZERO_ADDR) {
+            IParameterControl _p = IParameterControl(_paramsAddress);
+            address r = _p.getAddress(GenerativeNFTConfigs.ROYALTY_FIN_ADDRESS);
+            if (r != Errors.ZERO_ADDR) {
+                receiver = r;
+            }
+        }
+        uint256 r = _royalty;
+        if (r == 0) {
+            r = 500;
+        }
+        amount = (_salePrice * r) / 10000;
     }
 }

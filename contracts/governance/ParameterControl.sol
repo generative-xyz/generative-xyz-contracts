@@ -29,7 +29,7 @@ contract ParameterControl is Ownable, IParameterControl {
     constructor(
         address admin
     ) {
-        require(admin != address(0x0), Errors.INV_ADD);
+        require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
         _admin = admin;
     }
 
@@ -80,7 +80,7 @@ contract ParameterControl is Ownable, IParameterControl {
     }
 
     function updateAdmin(address admin_) external adminOnly {
-        require(admin_ != address(0x0) && admin_ != _admin, Errors.INV_ADD);
+        require(admin_ != Errors.ZERO_ADDR && admin_ != _admin, Errors.INV_ADD);
         address previousAdmin = _admin;
         _admin = admin_;
         emit AdminChanged(previousAdmin, _admin);
