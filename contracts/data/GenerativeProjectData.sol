@@ -14,6 +14,7 @@ import "../libs/structs/NFTProject.sol";
 import "../libs/structs/NFTProject.sol";
 import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/configs/GenerativeProjectDataConfigs.sol";
+import "../libs/structs/NFTProjectData.sol";
 
 contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     address public _admin;
@@ -81,31 +82,38 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     /* @GenerativeTokenDATA
     */
     function tokenURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
+        NFTProjectData.TokenURIContext memory ctx;
         // get base uri
         IParameterControl param = IParameterControl(_paramAddr);
-        string memory _baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
+        ctx._baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
         // get project info
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
-        string memory animationURI = string(abi.encodePacked(
+        ctx._animationURI = string(abi.encodePacked(
                 ', "animation_url":"data:text/html;base64,',
                 Base64.encode(abi.encodePacked(this.tokenHTML(projectId, tokenId, seed))),
                 '"'
             ));
 
-        string memory desc = projectDetail._desc;
+        ctx._name = string(abi.encodePacked(projectDetail._name, " #", StringsUpgradeable.toString(tokenId)));
+        ctx._desc = projectDetail._desc;
         if (bytes(projectDetail._itemDesc).length > 0) {
-            desc = projectDetail._itemDesc;
+            ctx._desc = projectDetail._itemDesc;
         }
+
+        ctx._baseURI = string(abi.encodePacked(ctx._baseURI, "/",
+            StringsUpgradeable.toHexString(_generativeProjectAddr), "/",
+            StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed)));
 
         result = string(
             abi.encodePacked(
                 'data:application/json;base64,',
                 Base64.encode(abi.encodePacked(
-                    '{"name":"', projectDetail._name,
-                    '","description": "', desc, '"',
-                    animationURI,
-                    ', "attributes": "', _baseURI, "/", StringsUpgradeable.toHexString(_generativeProjectAddr), "/", StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed), '"',
+                    '{"name":"', ctx._name,
+                    '","description": "', ctx._desc, '"',
+                    ', "image": "', ctx._baseURI, '&capture=5000"',
+                    ctx._animationURI,
+                    ', "attributes": "', ctx._baseURI, '&capture=0"',
                     '}'
                 ))
             )
