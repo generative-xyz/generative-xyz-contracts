@@ -23,6 +23,16 @@ import {ethers} from "ethers";
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
+        key = "ROYALTY_FIN_ADDRESS";
+        tx = await p.setAddress(contract, key, process.env.PUBLIC_KEY, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "DEFAULT_ROYALTY_FIN_PERCENT";
+        tx = await p.setUInt256(contract, key, 500, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
         key = "BASE_URI";
         tx = await p.set(contract, key, "http://devnet.generative.xyz/api/token", 0);
         console.log("set ", key);
