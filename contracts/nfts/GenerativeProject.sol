@@ -13,6 +13,7 @@ import "../interfaces/IParameterControl.sol";
 import "../interfaces/IGenerativeNFT.sol";
 import "../interfaces/IGenerativeProjectData.sol";
 
+import "..//libs/configs/GenerativeProjectConfigs.sol";
 import "../libs/helpers/Errors.sol";
 
 
@@ -111,9 +112,9 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         if (msg.sender != _admin) {
             IParameterControl _p = IParameterControl(_paramsAddress);
             // at least require value 1ETH
-            uint256 operationFee = _p.getUInt256("CREATE_PROJECT_FEE");
+            uint256 operationFee = _p.getUInt256(GenerativeProjectConfigs.CREATE_PROJECT_FEE);
             if (operationFee > 0) {
-                address operationFeeToken = _p.getAddress("FEE_TOKEN");
+                address operationFeeToken = _p.getAddress(GenerativeProjectConfigs.FEE_TOKEN);
                 if (!(operationFeeToken == address(0))) {
                     IERC20Upgradeable tokenERC20 = IERC20Upgradeable(operationFeeToken);
                     // transfer erc-20 token to this contract
@@ -150,7 +151,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         _safeMint(project._creatorAddr, _currentProjectId);
 
         // set to generative nft
-        address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress("GENERATIVE_NFT_TEMPLATE"));
+        address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress(GenerativeProjectConfigs.GENERATIVE_NFT_TEMPLATE));
         _projects[_currentProjectId]._genNFTAddr = generativeNFTAdd;
         IGenerativeNFT nft = IGenerativeNFT(generativeNFTAdd);
         nft.init(
