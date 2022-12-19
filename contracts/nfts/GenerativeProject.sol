@@ -134,7 +134,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         NFTProject.Project memory project,
         address[] memory reserves,
         bool disable,
-        uint256 openingTime
+        uint256 openingTime,
+        uint256 royalty
     ) external payable nonReentrant returns (uint256) {
         // verify
         require(bytes(project._name).length > 3);
@@ -168,7 +169,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
                 project._mintPriceAddr,
                 project._name,
                 NFTProject.ProjectMintingSchedule(0, openingTime)
-            ), _admin, _paramsAddress, _randomizerAddr, _projectDataContextAddr, reserves, disable);
+            ), _admin, _paramsAddress, _randomizerAddr, _projectDataContextAddr, reserves, disable, royalty);
         return _currentProjectId;
     }
 

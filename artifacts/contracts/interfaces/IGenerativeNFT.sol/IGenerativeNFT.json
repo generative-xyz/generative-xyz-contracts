@@ -126,6 +126,11 @@
           "internalType": "bool",
           "name": "disable",
           "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "royalty",
+          "type": "uint256"
         }
       ],
       "name": "init",

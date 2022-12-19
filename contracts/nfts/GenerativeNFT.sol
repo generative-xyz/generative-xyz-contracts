@@ -40,7 +40,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
 
     /* @ProjectInfo: data for project data
     */
-    function init(NFTProject.ProjectMinting memory project, address admin, address paramsAddr, address randomizer, address projectDataContextAddr, address[] memory reserves, bool disable) external {
+    function init(NFTProject.ProjectMinting memory project, address admin, address paramsAddr, address randomizer, address projectDataContextAddr, address[] memory reserves, bool disable, uint256 royalty) external {
         require(_admin == Errors.ZERO_ADDR, Errors.INV_PROJECT);
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
         _project = project;
@@ -60,6 +60,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
             _pause();
         }
         _project._mintingSchedule._initBlockTime = block.timestamp;
+        _royalty = royalty;
     }
 
     /* @Mint
