@@ -1,4 +1,4 @@
-import {GenerativeProject} from "../generativeProject/generativeProject";
+import {GenerativeProject} from "./generativeProject";
 
 (async () => {
     try {
