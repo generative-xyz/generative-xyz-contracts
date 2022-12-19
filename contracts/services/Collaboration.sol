@@ -64,6 +64,9 @@ contract Collaboration is Ownable, ReentrancyGuard, ICollaboration, IERC721Recei
         uint256 tokenId,
         bytes calldata data
     ) external returns (bytes4) {
-        return bytes4(0);
+        return
+        bytes4(
+            keccak256("onERC721Received(address,address,uint256,bytes)")
+        );
     }
 }
