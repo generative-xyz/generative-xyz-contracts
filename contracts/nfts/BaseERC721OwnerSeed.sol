@@ -126,17 +126,18 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
 
     function getRoyalty(uint256 _tokenId, uint256 _salePrice) internal view virtual returns (address receiver, uint256 amount) {
         receiver = _admin;
+        uint256 royalty = _royalty;
         if (_paramsAddress != Errors.ZERO_ADDR) {
             IParameterControl _p = IParameterControl(_paramsAddress);
-            address r = _p.getAddress(GenerativeNFTConfigs.ROYALTY_FIN_ADDRESS);
-            if (r != Errors.ZERO_ADDR) {
-                receiver = r;
+            address rv = _p.getAddress(GenerativeNFTConfigs.ROYALTY_FIN_ADDRESS);
+            if (rv != Errors.ZERO_ADDR) {
+                receiver = rv;
+            }
+            if (royalty == 0) {
+                royalty = _p.getUInt256(GenerativeNFTConfigs.DEFAULT_ROYALTY_FIN_PERCENT);
             }
         }
-        uint256 r = _royalty;
-        if (r == 0) {
-            r = 500;
-        }
-        amount = (_salePrice * r) / 10000;
+
+        amount = (_salePrice * royalty) / 10000;
     }
 }
