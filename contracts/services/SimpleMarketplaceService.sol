@@ -101,21 +101,21 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         // get offer
         Marketplace.Offering memory _offer = _offeringRegistry[offeringId];
         address hostContractOffering = _offer.hostContract;
-        ERC721Upgradeable hostContract = ERC721Upgradeable(hostContractOffering);
+        IERC721Upgradeable hostContract = IERC721Upgradeable(hostContractOffering);
         uint tokenID = _offer.tokenId;
         address offerer = _offer.offerer;
         bool isERC20 = _offer.erc20Token != address(0x0);
 
         Marketplace.CloseOfferingData memory _closeOfferingData;
-        ERC20Upgradeable token;
+        IERC20Upgradeable erc20;
         if (isERC20) {
-            token = ERC20Upgradeable(_offer.erc20Token);
+            erc20 = IERC20Upgradeable(_offer.erc20Token);
             _closeOfferingData = Marketplace.CloseOfferingData(
                 buyer,
                 _offer.price,
                 _offer.price,
-                token.balanceOf(buyer),
-                token.allowance(buyer, address(this)),
+                erc20.balanceOf(buyer),
+                erc20.allowance(buyer, address(this)),
                 _offer.erc20Token
             );
         } else {
@@ -145,7 +145,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
         // logic for 
         // benefit of operator here
-        ParameterControl parameterController = ParameterControl(_parameterAddr);
+        IParameterControl parameterController = IParameterControl(_parameterAddr);
         Marketplace.Benefit memory _benefit = Marketplace.Benefit(0, 0, 0, 0);
         _benefit.benefitPercentOperator = parameterController.getUInt256(MarketplaceServiceConfigs.MARKETPLACE_BENEFIT_PERCENT);
         if (_benefit.benefitPercentOperator == 0) {
@@ -157,8 +157,8 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         }
 
         if (isERC20) {
-            require(token.transferFrom(_closeOfferingData.buyer, address(this), _closeOfferingData.originPrice), Errors.TRANSFER_FAIL);
-            require(token.transferFrom(address(this), _offer.offerer, _closeOfferingData.price), Errors.TRANSFER_FAIL);
+            require(erc20.transferFrom(_closeOfferingData.buyer, address(this), _closeOfferingData.originPrice), Errors.TRANSFER_FAIL);
+            require(erc20.transferFrom(address(this), _offer.offerer, _closeOfferingData.price), Errors.TRANSFER_FAIL);
         } else {
             require(address(this).balance > 0, Errors.VALUE_INVALID);
             (bool success,) = _offer.offerer.call{value : _closeOfferingData.price}("");

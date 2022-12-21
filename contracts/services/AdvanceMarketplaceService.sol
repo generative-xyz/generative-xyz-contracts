@@ -43,7 +43,7 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
                 if (_multiBuyOffering[hostContractErc721][tokenId].budget > _offeringRegistry[id].price) {
                     _purchaseToken(id, address(this));
                     // transfer erc721 to buyer
-                    ERC721Upgradeable hostContract = ERC721Upgradeable(_offeringRegistry[id].hostContract);
+                    IERC721Upgradeable hostContract = IERC721Upgradeable(_offeringRegistry[id].hostContract);
                     hostContract.safeTransferFrom(address(this), _multiBuyOffering[hostContractErc721][tokenId].buyer, tokenId);
                     // calculate budget
                     _multiBuyOffering[hostContractErc721][tokenId].budget -= _offeringRegistry[id].price;
