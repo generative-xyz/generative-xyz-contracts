@@ -6,13 +6,14 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 
 import "../governance/ParameterControl.sol";
+import "../interfaces/IMarketplaceService.sol";
 
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Marketplace.sol";
 import "../libs/configs/MarketplaceServiceConfigs.sol";
 
 
-contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
+contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, IMarketplaceService {
     uint256 private _offeringNonces;
 
 
@@ -55,13 +56,13 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
     }
 
     // NFTs's owner place offering
-    function placeOffering(address _hostContract, uint _tokenId, address _erc20Token, uint _price, bool _withdrawImm) external virtual nonReentrant returns (bytes32) {
+    function listToken(address hostContractErc721, uint tokenId, address erc20Token, uint price) external virtual nonReentrant returns (bytes32) {
         // owner nft is sender
         address nftOwner = msg.sender;
 
         // get hostContract of erc-721
-        ERC721Upgradeable hostContract = ERC721Upgradeable(_hostContract);
-        require(hostContract.ownerOf(_tokenId) == nftOwner, Errors.INVALID_ERC721_OWNER);
+        ERC721Upgradeable hostContract = ERC721Upgradeable(hostContractErc721);
+        require(hostContract.ownerOf(tokenId) == nftOwner, Errors.INVALID_ERC721_OWNER);
         // check approval of erc-721 on this contract
         bool approval = hostContract.isApprovedForAll(nftOwner, address(this));
         require(approval == true, Errors.ERC_721_NOT_APPROVED);
@@ -69,24 +70,26 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
         // create offering nonce by counter
         _offeringNonces++;
         // init offering id
-        bytes32 offeringId = keccak256(abi.encodePacked(StringsUpgradeable.toString(_offeringNonces), _hostContract, StringsUpgradeable.toString(_tokenId)));
+        bytes32 offeringId = keccak256(abi.encodePacked(StringsUpgradeable.toString(_offeringNonces), hostContractErc721, StringsUpgradeable.toString(tokenId)));
         // create offering by id
         _offeringRegistry[offeringId].offerer = nftOwner;
-        _offeringRegistry[offeringId].hostContract = _hostContract;
-        _offeringRegistry[offeringId].tokenId = _tokenId;
-        _offeringRegistry[offeringId].price = _price;
-        if (_erc20Token != address(0x0)) {
-            _offeringRegistry[offeringId].erc20Token = _erc20Token;
+        _offeringRegistry[offeringId].hostContract = hostContractErc721;
+        _offeringRegistry[offeringId].tokenId = tokenId;
+        _offeringRegistry[offeringId].price = price;
+        if (erc20Token != address(0x0)) {
+            _offeringRegistry[offeringId].erc20Token = erc20Token;
         } else {
             _offeringRegistry[offeringId].erc20Token = address(0x0);
         }
+        // transfer erc-721 token from offerer to this contract
+        hostContract.transferFrom(nftOwner, address(this), tokenId);
 
         _arrayOffering.push(offeringId);
-        emit Marketplace.OfferingPlaced(offeringId, _hostContract, nftOwner, _tokenId, _price);
+        emit Marketplace.ListingToken(offeringId, hostContractErc721, nftOwner, tokenId, price);
         return offeringId;
     }
 
-    function closeOffering(bytes32 _offeringId) external virtual nonReentrant payable {
+    function purchaseToken(bytes32 _offeringId) external virtual nonReentrant payable {
         // get offer
         Marketplace.Offering memory _offer = _offeringRegistry[_offeringId];
         address hostContractOffering = _offer.hostContract;
@@ -131,7 +134,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
         require(!_offeringRegistry[_offeringId].closed, Errors.OFFERING_CLOSED);
 
         // transfer erc-721
-        hostContract.safeTransferFrom(offerer, _closeOfferingData.buyer, tokenID);
+        hostContract.safeTransferFrom(address(this), _closeOfferingData.buyer, tokenID);
 
         // logic for 
         // benefit of operator here
@@ -157,7 +160,13 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
         // close offering
         _offeringRegistry[_offeringId].closed = true;
 
-        emit Marketplace.OfferingClosed(_offeringId, _closeOfferingData.buyer);
+        emit Marketplace.PurchaseToken(_offeringId, _closeOfferingData.buyer);
+    }
+
+    function cancelListing(bytes32 _offeringId) external {
+        require(msg.sender == _offeringRegistry[_offeringId].offerer, Errors.INVALID_ERC721_OWNER);
+        _offeringRegistry[_offeringId].closed = true;
+        emit Marketplace.CancelListing(_offeringId, _offeringRegistry[_offeringId].offerer);
     }
 
     function withdraw(address receiver, address erc20Addr, uint256 amount) external virtual nonReentrant {
