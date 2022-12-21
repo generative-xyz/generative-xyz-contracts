@@ -6,16 +6,15 @@ library Marketplace {
     event CancelListing(bytes32 indexed offeringId, address indexed offerer);
 
     struct Benefit {
-        uint256 benefitPercentCreator;
-        uint256 benefitCreator;
+        uint256 benefitPercentCreator;// TODO
+        uint256 benefitCreator;// TODO
         uint256 benefitPercentOperator;
         uint256 benefitOperator;
-        uint256 discountRoveToken;
     }
 
     struct Offering {
         address offerer;
-        address hostContract;
+        address hostContract; // erc-721 collection address
         uint tokenId;
         uint price;
         bool closed;
@@ -28,6 +27,12 @@ library Marketplace {
         uint originPrice;
         uint256 balanceBuyer;
         uint256 approvalToken;
+        address erc20Token;
+    }
+
+    struct MultiBuyOffering {
+        address buyer;
+        uint256 budget;
         address erc20Token;
     }
 }

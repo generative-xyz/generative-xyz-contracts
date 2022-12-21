@@ -24,7 +24,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
     bytes32[] public _arrayOffering;
 
 
-    function initialize(address admin, address parameterControl) initializer public {
+    function initialize(address admin, address parameterControl) initializer virtual public {
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(parameterControl != Errors.ZERO_ADDR, Errors.INV_ADD);
 
@@ -55,8 +55,12 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         return _arrayOffering;
     }
 
-    // NFTs's owner place offering
     function listToken(address hostContractErc721, uint tokenId, address erc20Token, uint price) external virtual nonReentrant returns (bytes32) {
+        return _listToken(hostContractErc721, tokenId, erc20Token, price);
+    }
+
+    // NFTs's owner place offering
+    function _listToken(address hostContractErc721, uint tokenId, address erc20Token, uint price) internal virtual nonReentrant returns (bytes32) {
         // owner nft is sender
         address nftOwner = msg.sender;
 
@@ -89,31 +93,34 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         return offeringId;
     }
 
-    function purchaseToken(bytes32 _offeringId) external virtual nonReentrant payable {
+    function purchaseToken(bytes32 offeringId) external virtual nonReentrant payable {
+        _purchaseToken(offeringId, msg.sender);
+    }
+
+    function _purchaseToken(bytes32 offeringId, address buyer) internal virtual {
         // get offer
-        Marketplace.Offering memory _offer = _offeringRegistry[_offeringId];
+        Marketplace.Offering memory _offer = _offeringRegistry[offeringId];
         address hostContractOffering = _offer.hostContract;
         ERC721Upgradeable hostContract = ERC721Upgradeable(hostContractOffering);
         uint tokenID = _offer.tokenId;
         address offerer = _offer.offerer;
         bool isERC20 = _offer.erc20Token != address(0x0);
 
-        // buyer is sender
         Marketplace.CloseOfferingData memory _closeOfferingData;
         ERC20Upgradeable token;
         if (isERC20) {
             token = ERC20Upgradeable(_offer.erc20Token);
             _closeOfferingData = Marketplace.CloseOfferingData(
-                msg.sender,
+                buyer,
                 _offer.price,
                 _offer.price,
-                token.balanceOf(msg.sender),
-                token.allowance(msg.sender, address(this)),
+                token.balanceOf(buyer),
+                token.allowance(buyer, address(this)),
                 _offer.erc20Token
             );
         } else {
             _closeOfferingData = Marketplace.CloseOfferingData(
-                msg.sender,
+                buyer,
                 _offer.price,
                 _offer.price,
                 0,
@@ -131,7 +138,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         } else {
             require(msg.value >= _closeOfferingData.price, Errors.VALUE_INVALID);
         }
-        require(!_offeringRegistry[_offeringId].closed, Errors.OFFERING_CLOSED);
+        require(!_offeringRegistry[offeringId].closed, Errors.OFFERING_CLOSED);
 
         // transfer erc-721
         hostContract.safeTransferFrom(address(this), _closeOfferingData.buyer, tokenID);
@@ -139,7 +146,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         // logic for 
         // benefit of operator here
         ParameterControl parameterController = ParameterControl(_parameterAddr);
-        Marketplace.Benefit memory _benefit = Marketplace.Benefit(0, 0, 0, 0, 0);
+        Marketplace.Benefit memory _benefit = Marketplace.Benefit(0, 0, 0, 0);
         _benefit.benefitPercentOperator = parameterController.getUInt256(MarketplaceServiceConfigs.MARKETPLACE_BENEFIT_PERCENT);
         if (_benefit.benefitPercentOperator == 0) {
             _benefit.benefitPercentOperator = MarketplaceServiceConfigs.DEFAULT_MARKETPLACE_BENEFIT_PERCENT;
@@ -158,9 +165,9 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             require(success, Errors.TRANSFER_FAIL);
         }
         // close offering
-        _offeringRegistry[_offeringId].closed = true;
+        _offeringRegistry[offeringId].closed = true;
 
-        emit Marketplace.PurchaseToken(_offeringId, _closeOfferingData.buyer);
+        emit Marketplace.PurchaseToken(offeringId, _closeOfferingData.buyer);
     }
 
     function cancelListing(bytes32 _offeringId) external virtual {
