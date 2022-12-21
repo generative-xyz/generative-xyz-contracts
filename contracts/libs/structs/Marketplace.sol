@@ -31,8 +31,9 @@ library Marketplace {
     }
 
     struct MultiBuyOffering {
-        address buyer;
-        uint256 budget;
-        address erc20Token;
+        address _buyer;
+        uint256 _budget;
+        address _erc20Token;
+        uint256 _durationTime;
     }
 }
