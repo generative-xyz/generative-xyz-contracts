@@ -27,6 +27,7 @@ library Errors {
     string public constant ZERO_SEED = "207";
     string public constant OPENING_SCHEDULE = "208";
     string public constant INV_TOKEN = "209";
+    string public constant FORBIDDEN_TRANSFER_PROJECT = "210";
 
     // validator market error
     string public constant INVALID_ERC721_OWNER = "300";

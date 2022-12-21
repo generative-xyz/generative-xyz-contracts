@@ -244,6 +244,17 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         nft.setStatus(enable);
     }
 
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId, /* firstTokenId */
+        uint256 batchSize
+    ) internal override {
+        // project can mint but can not transfer
+        require(from == Errors.ZERO_ADDR, Errors.FORBIDDEN_TRANSFER_PROJECT);
+        super._beforeTokenTransfer(from, to, tokenId, batchSize);
+    }
+
     /* @projectData:
     */
     function projectDetails(uint256 projectId) external view returns (NFTProject.Project memory project){
