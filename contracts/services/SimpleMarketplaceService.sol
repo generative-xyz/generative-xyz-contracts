@@ -65,7 +65,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         address nftOwner = msg.sender;
 
         // get hostContract of erc-721
-        ERC721Upgradeable hostContract = ERC721Upgradeable(hostContractErc721);
+        IERC721Upgradeable hostContract = IERC721Upgradeable(hostContractErc721);
         require(hostContract.ownerOf(tokenId) == nftOwner, Errors.INVALID_ERC721_OWNER);
         // check approval of erc-721 on this contract
         bool approval = hostContract.isApprovedForAll(nftOwner, address(this));
@@ -172,6 +172,9 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
     function cancelListing(bytes32 _offeringId) external virtual {
         require(msg.sender == _offeringRegistry[_offeringId].offerer, Errors.INVALID_ERC721_OWNER);
+        require(!_offeringRegistry[_offeringId].closed);
+        IERC721Upgradeable hostContract = IERC721Upgradeable(_offeringRegistry[_offeringId].hostContract);
+        hostContract.safeTransferFrom(address(this), msg.sender, _offeringRegistry[_offeringId].tokenId);
         _offeringRegistry[_offeringId].closed = true;
         emit Marketplace.CancelListing(_offeringId, _offeringRegistry[_offeringId].offerer);
     }
