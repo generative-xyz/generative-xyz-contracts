@@ -92,7 +92,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     }
 
     function withdraw(address receiver, address erc20Addr, uint256 amount) external nonReentrant {
-        require(_msgSender() == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         bool success;
         if (erc20Addr == address(0x0)) {
             require(address(this).balance >= amount);
