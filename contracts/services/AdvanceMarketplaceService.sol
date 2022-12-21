@@ -11,7 +11,7 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
         super.initialize(admin, parameterControl);
     }
 
-    function setMultiBuyOffering(Marketplace.MultiBuyOffering memory offer, address erc721, uint256 tokenId) external nonReentrant payable {
+    function makeMultiBuyOffering(Marketplace.MultiBuyOffering memory offer, address erc721, uint256 tokenId) external nonReentrant payable {
         _multiBuyOffering[erc721][tokenId] = offer;
         if (offer.erc20Token == Errors.ZERO_ADDR) {
             _multiBuyOffering[erc721][tokenId].budget = msg.value;
