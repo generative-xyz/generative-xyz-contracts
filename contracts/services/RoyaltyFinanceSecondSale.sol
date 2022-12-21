@@ -29,10 +29,15 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
     mapping(uint256 => mapping(address => mapping(address => uint256))) public _royaltySecondSale;
 
     function initialize(address admin, address paramAddr, address projectAddr, address proxy) initializer public {
+        require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
+        require(paramAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
+        require(projectAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         _admin = admin;
         _paramsAddress = paramAddr;
         _generativeProjectAddr = projectAddr;
-        _proxyRoyaltySecondSales[proxy] = true;
+        if (proxy != Errors.ZERO_ADDR) {
+            _proxyRoyaltySecondSales[proxy] = true;
+        }
         __Ownable_init();
     }
 

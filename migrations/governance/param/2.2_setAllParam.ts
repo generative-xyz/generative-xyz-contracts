@@ -34,17 +34,17 @@ import {ethers} from "ethers";
         /**
          * for generative nft
          */
-        key = "ROYALTY_FIN_ADDRESS";
-        tx = await p.setAddress(contract, key, process.env.PUBLIC_KEY, 0);
+        key = "ROYALTY_FIN_ADDRESS"; // royalty second sale address from service RoyaltyFinanceSecondSale
+        tx = await p.setAddress(contract, key, "0xE5C005577149b977BB4E2B9B1a31d24c06CE80c3", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = "DEFAULT_ROYALTY_FIN_PERCENT";
+        key = "DEFAULT_ROYALTY_FIN_PERCENT"; // default get for royalty second sale address 5%
         tx = await p.setUInt256(contract, key, 500, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = "MINT_NFT_OPERATOR_FEE";
+        key = "MINT_NFT_OPERATOR_FEE"; // operator fee when collector mint from project
         tx = await p.setUInt256(contract, key, 500, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);

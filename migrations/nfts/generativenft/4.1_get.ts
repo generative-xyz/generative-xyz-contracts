@@ -6,7 +6,7 @@ import {GenerativeProject} from "../generativeProject/generativeProject";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "local") {
+        if (process.env.NETWORK != "mumbai") {
             console.log("wrong network");
             return;
         }
