@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 
 import "../governance/ParameterControl.sol";
@@ -14,8 +13,7 @@ import "../libs/configs/MarketplaceServiceConfigs.sol";
 
 
 contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
-    using CountersUpgradeable for CountersUpgradeable.Counter;
-    CountersUpgradeable.Counter private _offeringNonces;
+    uint256 private _offeringNonces;
 
 
     address public _admin; // is a mutil sig address when deploy
@@ -57,7 +55,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
     }
 
     // NFTs's owner place offering
-    function placeOffering(address _hostContract, uint _tokenId, address _erc20Token, uint _price, bool _withdrawImm) external nonReentrant returns (bytes32) {
+    function placeOffering(address _hostContract, uint _tokenId, address _erc20Token, uint _price, bool _withdrawImm) external virtual nonReentrant returns (bytes32) {
         // owner nft is sender
         address nftOwner = msg.sender;
 
@@ -69,11 +67,9 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
         require(approval == true, Errors.ERC_721_NOT_APPROVED);
 
         // create offering nonce by counter
-        _offeringNonces.increment();
-        uint256 newItemId = _offeringNonces.current();
-
+        _offeringNonces++;
         // init offering id
-        bytes32 offeringId = keccak256(abi.encodePacked(newItemId, _hostContract, _tokenId));
+        bytes32 offeringId = keccak256(abi.encodePacked(StringsUpgradeable.toString(_offeringNonces), _hostContract, StringsUpgradeable.toString(_tokenId)));
         // create offering by id
         _offeringRegistry[offeringId].offerer = nftOwner;
         _offeringRegistry[offeringId].hostContract = _hostContract;
@@ -90,7 +86,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
         return offeringId;
     }
 
-    function closeOffering(bytes32 _offeringId) external nonReentrant payable {
+    function closeOffering(bytes32 _offeringId) external virtual nonReentrant payable {
         // get offer
         Marketplace.Offering memory _offer = _offeringRegistry[_offeringId];
         address hostContractOffering = _offer.hostContract;
@@ -164,7 +160,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable {
         emit Marketplace.OfferingClosed(_offeringId, _closeOfferingData.buyer);
     }
 
-    function withdraw(address receiver, address erc20Addr, uint256 amount) external nonReentrant {
+    function withdraw(address receiver, address erc20Addr, uint256 amount) external virtual nonReentrant {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         bool success;
         if (erc20Addr == address(0x0)) {

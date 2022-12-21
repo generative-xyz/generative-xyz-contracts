@@ -3,10 +3,6 @@ pragma solidity ^0.8.0;
 library Marketplace {
     event OfferingPlaced(bytes32 indexed offeringId, address indexed hostContract, address indexed offerer, uint tokenId, uint price);
     event OfferingClosed(bytes32 indexed offeringId, address indexed buyer);
-    event BalanceWithdrawn (address indexed beneficiary, uint amount);
-    event OperatorChanged (address previousOperator, address newOperator);
-    event ParameterControlChanged (address previousOperator, address newOperator);
-    event ApprovalForAll(address owner, address operator, bool approved);
 
     struct Benefit {
         uint256 benefitPercentCreator;
