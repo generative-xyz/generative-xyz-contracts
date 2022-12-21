@@ -23,7 +23,7 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
     // parameter control address
     address public _paramsAddress;
     address public _generativeProjectAddr;
-    address public _proxyRoyaltySecondSale;
+    mapping(address => bool) public _proxyRoyaltySecondSales;
 
     mapping(address => uint256) public _royaltySecondSaleAdmin;
     mapping(uint256 => mapping(address => mapping(address => uint256))) public _royaltySecondSale;
@@ -32,7 +32,7 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
         _admin = admin;
         _paramsAddress = paramAddr;
         _generativeProjectAddr = projectAddr;
-        _proxyRoyaltySecondSale = proxy;
+        _proxyRoyaltySecondSales[proxy] = true;
         __Ownable_init();
     }
 
@@ -64,13 +64,11 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
         }
     }
 
-    function changeProxyRoyaltySecondSale(address newAddr) external {
-        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+    function setProxyRoyaltySecondSale(address addr, bool approve) external {
+        require(msg.sender == _admin && addr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
-        // change
-        if (_proxyRoyaltySecondSale != newAddr) {
-            _proxyRoyaltySecondSale = newAddr;
-        }
+        // set approve
+        _proxyRoyaltySecondSales[addr] = approve;
     }
 
     function withdrawRoyalty(uint256 projectId, address erc20Addr) external {
@@ -103,7 +101,7 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
         if (erc20Addr == Errors.ZERO_ADDR) {
             require(msg.value == amount);
         }
-        require(_admin == msg.sender || msg.sender == _proxyRoyaltySecondSale, Errors.ONLY_ADMIN_ALLOWED);
+        require(_admin == msg.sender || _proxyRoyaltySecondSales[msg.sender], Errors.ONLY_ADMIN_ALLOWED);
 
         // get project id from tokenId
         uint256 projectId = tokenId / GenerativeNFTConfigs.PROJECT_PADDING;
@@ -116,9 +114,9 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
         uint256 ownerRoyaltySecondSale = RoyaltyFinanceSecondSaleConfigs.DEFAULT_OWNER_ROYALTY_SECOND_SALE;
         if (_paramsAddress != Errors.ZERO_ADDR) {
             IParameterControl _p = IParameterControl(_paramsAddress);
-            uint256 r = _p.getUInt256(RoyaltyFinanceSecondSaleConfigs.OWNER_ROYALTY_SECOND_SALE);
-            if (r > 0) {
-                ownerRoyaltySecondSale = r;
+            uint256 projectOwnerRoyalty = _p.getUInt256(RoyaltyFinanceSecondSaleConfigs.OWNER_ROYALTY_SECOND_SALE);
+            if (projectOwnerRoyalty > 0) {
+                ownerRoyaltySecondSale = projectOwnerRoyalty;
             }
         }
         // set for project's owner
