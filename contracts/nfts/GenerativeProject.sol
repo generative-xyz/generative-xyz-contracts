@@ -239,8 +239,9 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
 
     function setProjectStatus(uint256 projectId, bool enable) external {
         require(_exists(projectId), Errors.INV_TOKEN);
-        require(this.projectStatus(projectId) != enable);
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.INV_ADD);
         IGenerativeNFT nft = IGenerativeNFT(_projects[projectId]._genNFTAddr);
+        require(nft.getStatus() != enable);
         nft.setStatus(enable);
     }
 
@@ -266,6 +267,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         require(_exists(projectId), Errors.INV_TOKEN);
         IGenerativeNFT nft = IGenerativeNFT(_projects[projectId]._genNFTAddr);
         enable = nft.getStatus();
+        enable = enable && (_projects[projectId]._completeTime == 0);
     }
 
     function tokenURI(uint256 projectId) override public view returns (string memory result) {
