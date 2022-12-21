@@ -73,6 +73,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 ',"description":"', d._desc, '"',
                 ',"image":"', d._image, '"',
                 animationURI,
+                ',"attributes": [{"trait_type": "Collection Address", "value": "', StringsUpgradeable.toHexString(d._genNFTAddr), '"}]',
                 '}'
             ))
             )
