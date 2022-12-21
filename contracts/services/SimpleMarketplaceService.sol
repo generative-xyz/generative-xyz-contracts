@@ -163,7 +163,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         emit Marketplace.PurchaseToken(_offeringId, _closeOfferingData.buyer);
     }
 
-    function cancelListing(bytes32 _offeringId) external {
+    function cancelListing(bytes32 _offeringId) external virtual {
         require(msg.sender == _offeringRegistry[_offeringId].offerer, Errors.INVALID_ERC721_OWNER);
         _offeringRegistry[_offeringId].closed = true;
         emit Marketplace.CancelListing(_offeringId, _offeringRegistry[_offeringId].offerer);
