@@ -9,6 +9,7 @@ import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/NFTCollection.sol";
 import "../interfaces/IParameterControl.sol";
+import "../libs/helpers/StringsUtils.sol";
 
 contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBaseERC721OwnerSeed, Ownable {
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
@@ -17,7 +18,6 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
     address public _randomizer;
     address public _projectDataContextAddr;
     string public _nameCol;
-    string public _symbolCol;
     uint256 public _royalty;
 
     constructor(
@@ -31,7 +31,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
     }
 
     function symbol() public view override returns (string memory) {
-        return _symbolCol;
+        return StringsUtils.getSlice(1, 3, _nameCol);
     }
 
     function changeAdmin(address newAdm) external {

@@ -14,7 +14,6 @@ import "../libs/operator-filter-registry/DefaultOperatorFilterer.sol";
 // libs
 import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
-import "../libs/helpers/StringsUtils.sol";
 import "../libs/structs/Royalty.sol";
 import "../libs/structs/NFTProject.sol";
 
@@ -23,9 +22,8 @@ import "../services/Randomizer.sol";
 
 
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFilterer {
-    //    mapping(uint256 => Royalty.RoyaltyInfo) public royalties;
     NFTProject.ProjectMinting public _project;
-    mapping(address => bool) public _reserves;
+    mapping(address => bool) private _reserves;
 
     constructor (string memory name, string memory symbol)
     BaseERC721OwnerSeed(name, symbol) DefaultOperatorFilterer() {}
@@ -49,7 +47,6 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _randomizer = randomizer;
         _projectDataContextAddr = projectDataContextAddr;
         _nameCol = string(abi.encodePacked(project._name, " by ", project._creator));
-        _symbolCol = StringsUtils.getSlice(1, 3, _nameCol);
         for (uint256 i;
             i < reserves.length;
             i++) {
@@ -201,32 +198,6 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
             return 0;
         }
         return keccak256(abi.encode(_ownersAndHashSeeds[tokenId]._seed));
-    }
-
-    /* @dev EIP2981 royalties implementation. 
-    // EIP2981 standard royalties return.
-    */
-    /*function setTokenRoyalty(
-        uint256 _tokenId,
-        address _recipient,
-        uint256 _value
-    ) public {
-        require(msg.sender == _admin);
-        require(_value <= 10000, Errors.TOO_HIGH);
-        royalties[_tokenId] = Royalty.RoyaltyInfo(_recipient, uint24(_value), true);
-    }*/
-
-    function getRoyalty(uint256 _tokenId, uint256 _salePrice) internal view virtual override
-    returns (address receiver, uint256 royaltyAmount)
-    {
-        /*Royalty.RoyaltyInfo memory royalty = royalties[_tokenId];
-        if (royalty.isValue) {
-            receiver = royalty.recipient;
-            royaltyAmount = (_salePrice * royalty.amount) / 10000;
-        } else {
-            (receiver, royaltyAmount) = super.getRoyalty(_tokenId, _salePrice);
-        }*/
-        (receiver, royaltyAmount) = super.getRoyalty(_tokenId, _salePrice);
     }
 
     /* @notice: opensea operator filter registry
