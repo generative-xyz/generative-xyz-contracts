@@ -19,24 +19,46 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "_hostContract",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_tokenId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "_erc20Token",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_price",
-          "type": "uint256"
+          "components": [
+            {
+              "internalType": "address",
+              "name": "_seller",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "_collectionContract",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "_closed",
+              "type": "bool"
+            },
+            {
+              "internalType": "address",
+              "name": "_erc20Token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_durationTime",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct Marketplace.ListingTokenData",
+          "name": "listingData",
+          "type": "tuple"
         }
       ],
       "name": "listToken",

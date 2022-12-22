@@ -13,27 +13,28 @@ library Marketplace {
     }
 
     struct ListingTokenData {
-        address offerer;
-        address hostContract; // erc-721 collection address
-        uint tokenId;
-        uint price;
-        bool closed;
-        address erc20Token;
+        address _seller;
+        address _collectionContract; // erc-721 collection address
+        uint _tokenId;
+        uint _price;
+        bool _closed;
+        address _erc20Token;
+        uint256 _durationTime;
     }
 
     struct PurchaseTokenData {
-        address buyer;
-        uint price;
-        uint originPrice;
-        uint256 balanceBuyer;
-        uint256 approvalToken;
-        address erc20Token;
+        address _buyer;
+        uint _price;
+        uint _originPrice;
+        uint256 _balanceBuyer;
+        uint256 _approvalToken;
+        address _erc20Token;
     }
 
-    struct MultiBuyOffering {
+    struct MakeOfferData {
+        address _offerErc20Token; // only support WETH
+        uint256 _offerPrice;
         address _buyer;
-        uint256 _budget;
-        address _erc20Token;
         uint256 _durationTime;
     }
 }

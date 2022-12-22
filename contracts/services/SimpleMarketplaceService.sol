@@ -55,74 +55,33 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         return _arrayListingId;
     }
 
-    function listToken(address hostContractErc721, uint tokenId, address erc20Token, uint price) external virtual nonReentrant returns (bytes32) {
-        return _listToken(hostContractErc721, tokenId, erc20Token, price);
-    }
-
-    // NFTs's owner place offering
-    function _listToken(address hostContractErc721, uint tokenId, address erc20Token, uint price) internal virtual nonReentrant returns (bytes32) {
-        // owner nft is sender
-        address nftOwner = msg.sender;
-
-        // get hostContract of erc-721
-        IERC721Upgradeable hostContract = IERC721Upgradeable(hostContractErc721);
-        require(hostContract.ownerOf(tokenId) == nftOwner, Errors.INVALID_ERC721_OWNER);
-        // check approval of erc-721 on this contract
-        bool approval = hostContract.isApprovedForAll(nftOwner, address(this));
-        require(approval == true, Errors.ERC_721_NOT_APPROVED);
-
-        // create offering nonce by counter
-        _listingTokenNonces++;
-        // init offering id
-        bytes32 offeringId = keccak256(abi.encodePacked(StringsUpgradeable.toString(_listingTokenNonces), hostContractErc721, StringsUpgradeable.toString(tokenId)));
-        // create offering by id
-        _listingTokens[offeringId].offerer = nftOwner;
-        _listingTokens[offeringId].hostContract = hostContractErc721;
-        _listingTokens[offeringId].tokenId = tokenId;
-        _listingTokens[offeringId].price = price;
-        if (erc20Token != address(0x0)) {
-            _listingTokens[offeringId].erc20Token = erc20Token;
-        } else {
-            _listingTokens[offeringId].erc20Token = address(0x0);
-        }
-        // transfer erc-721 token from offerer to this contract
-        hostContract.transferFrom(nftOwner, address(this), tokenId);
-
-        _arrayListingId.push(offeringId);
-        emit Marketplace.ListingToken(offeringId, hostContractErc721, nftOwner, tokenId, price);
-        return offeringId;
-    }
-
-    function purchaseToken(bytes32 offeringId) external virtual nonReentrant payable {
-        _purchaseToken(offeringId, msg.sender);
-    }
 
     function _purchaseToken(bytes32 offeringId, address buyer) internal virtual {
         // get offer
         Marketplace.ListingTokenData memory _offer = _listingTokens[offeringId];
-        address hostContractOffering = _offer.hostContract;
+        address hostContractOffering = _offer._collectionContract;
         IERC721Upgradeable hostContract = IERC721Upgradeable(hostContractOffering);
-        uint tokenID = _offer.tokenId;
-        address offerer = _offer.offerer;
-        bool isERC20 = _offer.erc20Token != address(0x0);
+        uint tokenID = _offer._tokenId;
+        address offerer = _offer._seller;
+        bool isERC20 = _offer._erc20Token != address(0x0);
 
         Marketplace.PurchaseTokenData memory _closeOfferingData;
         IERC20Upgradeable erc20;
         if (isERC20) {
-            erc20 = IERC20Upgradeable(_offer.erc20Token);
+            erc20 = IERC20Upgradeable(_offer._erc20Token);
             _closeOfferingData = Marketplace.PurchaseTokenData(
                 buyer,
-                _offer.price,
-                _offer.price,
+                _offer._price,
+                _offer._price,
                 erc20.balanceOf(buyer),
                 erc20.allowance(buyer, address(this)),
-                _offer.erc20Token
+                _offer._erc20Token
             );
         } else {
             _closeOfferingData = Marketplace.PurchaseTokenData(
                 buyer,
-                _offer.price,
-                _offer.price,
+                _offer._price,
+                _offer._price,
                 0,
                 0,
                 address(0x0) // is ETH
@@ -133,15 +92,15 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         require(hostContract.ownerOf(tokenID) == offerer, Errors.INVALID_ERC721_OWNER);
         if (isERC20) {
             // check approval of erc-20 on this contract
-            require(_closeOfferingData.approvalToken >= _closeOfferingData.price, Errors.ERC20_NOT_APPROVED);
-            require(_closeOfferingData.balanceBuyer >= _closeOfferingData.price, Errors.ERC20_BALANCE_INVALID);
+            require(_closeOfferingData._approvalToken >= _closeOfferingData._price, Errors.ERC20_NOT_APPROVED);
+            require(_closeOfferingData._balanceBuyer >= _closeOfferingData._price, Errors.ERC20_BALANCE_INVALID);
         } else {
-            require(msg.value >= _closeOfferingData.price, Errors.VALUE_INVALID);
+            require(msg.value >= _closeOfferingData._price, Errors.VALUE_INVALID);
         }
-        require(!_listingTokens[offeringId].closed, Errors.OFFERING_CLOSED);
+        require(!_listingTokens[offeringId]._closed, Errors.OFFERING_CLOSED);
 
         // transfer erc-721
-        hostContract.safeTransferFrom(address(this), _closeOfferingData.buyer, tokenID);
+        hostContract.safeTransferFrom(address(this), _closeOfferingData._buyer, tokenID);
 
         // logic for 
         // benefit of operator here
@@ -152,31 +111,70 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             _benefit.benefitPercentOperator = MarketplaceServiceConfigs.DEFAULT_MARKETPLACE_BENEFIT_PERCENT;
         }
         if (_benefit.benefitPercentOperator > 0) {
-            _benefit.benefitOperator = _closeOfferingData.originPrice * _benefit.benefitPercentOperator / 10000;
-            _closeOfferingData.price -= _benefit.benefitOperator;
+            _benefit.benefitOperator = _closeOfferingData._originPrice * _benefit.benefitPercentOperator / 10000;
+            _closeOfferingData._price -= _benefit.benefitOperator;
         }
 
         if (isERC20) {
-            require(erc20.transferFrom(_closeOfferingData.buyer, address(this), _closeOfferingData.originPrice), Errors.TRANSFER_FAIL);
-            require(erc20.transferFrom(address(this), _offer.offerer, _closeOfferingData.price), Errors.TRANSFER_FAIL);
+            require(erc20.transferFrom(_closeOfferingData._buyer, address(this), _closeOfferingData._originPrice), Errors.TRANSFER_FAIL);
+            require(erc20.transferFrom(address(this), _offer._seller, _closeOfferingData._price), Errors.TRANSFER_FAIL);
         } else {
             require(address(this).balance > 0, Errors.VALUE_INVALID);
-            (bool success,) = _offer.offerer.call{value : _closeOfferingData.price}("");
+            (bool success,) = _offer._seller.call{value : _closeOfferingData._price}("");
             require(success, Errors.TRANSFER_FAIL);
         }
         // close offering
-        _listingTokens[offeringId].closed = true;
+        _listingTokens[offeringId]._closed = true;
 
-        emit Marketplace.PurchaseToken(offeringId, _closeOfferingData.buyer);
+        emit Marketplace.PurchaseToken(offeringId, _closeOfferingData._buyer);
+    }
+
+    function _listToken(Marketplace.ListingTokenData memory listingData) internal virtual nonReentrant returns (bytes32) {
+        // get hostContract of erc-721
+        IERC721Upgradeable hostContract = IERC721Upgradeable(listingData._collectionContract);
+        require(hostContract.ownerOf(listingData._tokenId) == msg.sender, Errors.INVALID_ERC721_OWNER);
+        // check approval of erc-721 on this contract
+        bool approval = hostContract.isApprovedForAll(msg.sender, address(this));
+        require(approval == true, Errors.ERC_721_NOT_APPROVED);
+
+        // create offering nonce by counter
+        _listingTokenNonces++;
+        // init offering id
+        bytes32 offeringId = keccak256(abi.encodePacked(StringsUpgradeable.toString(_listingTokenNonces), listingData._collectionContract, StringsUpgradeable.toString(listingData._tokenId)));
+        // create offering by id
+        _listingTokens[offeringId]._seller = msg.sender;
+        _listingTokens[offeringId]._collectionContract = listingData._collectionContract;
+        _listingTokens[offeringId]._tokenId = listingData._tokenId;
+        _listingTokens[offeringId]._price = listingData._price;
+        _listingTokens[offeringId]._durationTime = listingData._durationTime;
+        _listingTokens[offeringId]._erc20Token = listingData._erc20Token;
+        // transfer erc-721 token from offerer to this contract
+        //        hostContract.transferFrom(nftOwner, address(this), tokenId);
+
+        _arrayListingId.push(offeringId);
+        emit Marketplace.ListingToken(offeringId, listingData._collectionContract, msg.sender, listingData._tokenId, listingData._price);
+        return offeringId;
+    }
+
+    function _cancelListing(bytes32 _offeringId) internal virtual {
+        require(msg.sender == _listingTokens[_offeringId]._seller, Errors.INVALID_ERC721_OWNER);
+        require(!_listingTokens[_offeringId]._closed);
+        IERC721Upgradeable hostContract = IERC721Upgradeable(_listingTokens[_offeringId]._collectionContract);
+        hostContract.safeTransferFrom(address(this), msg.sender, _listingTokens[_offeringId]._tokenId);
+        _listingTokens[_offeringId]._closed = true;
+        emit Marketplace.CancelListing(_offeringId, _listingTokens[_offeringId]._seller);
+    }
+
+    function listToken(Marketplace.ListingTokenData memory listingData) external virtual nonReentrant returns (bytes32) {
+        return _listToken(listingData);
+    }
+
+    function purchaseToken(bytes32 offeringId) external virtual nonReentrant payable {
+        _purchaseToken(offeringId, msg.sender);
     }
 
     function cancelListing(bytes32 _offeringId) external virtual {
-        require(msg.sender == _listingTokens[_offeringId].offerer, Errors.INVALID_ERC721_OWNER);
-        require(!_listingTokens[_offeringId].closed);
-        IERC721Upgradeable hostContract = IERC721Upgradeable(_listingTokens[_offeringId].hostContract);
-        hostContract.safeTransferFrom(address(this), msg.sender, _listingTokens[_offeringId].tokenId);
-        _listingTokens[_offeringId].closed = true;
-        emit Marketplace.CancelListing(_offeringId, _listingTokens[_offeringId].offerer);
+        _cancelListing(_offeringId);
     }
 
     function withdraw(address receiver, address erc20Addr, uint256 amount) external virtual nonReentrant {

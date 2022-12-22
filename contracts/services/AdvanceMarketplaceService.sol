@@ -5,13 +5,13 @@ import "./SimpleMarketplaceService.sol";
 contract AdvanceMarketplaceService is SimpleMarketplaceService {
 
     // erc721 -> tokenId
-    mapping(address => mapping(uint256 => Marketplace.MultiBuyOffering)) public _multiBuyOffering;
+    mapping(address => mapping(uint256 => Marketplace.MakeOfferData)) public _multiBuyOffering;
 
     function initialize(address admin, address parameterControl) initializer override public {
         super.initialize(admin, parameterControl);
     }
 
-    function makeMultiBuyOffering(Marketplace.MultiBuyOffering memory offer, address erc721, uint256 tokenId) external nonReentrant payable {
+    /*function makeMultiBuyOffering(Marketplace.MakeOfferData memory offer, address erc721, uint256 tokenId) external nonReentrant payable {
         _multiBuyOffering[erc721][tokenId] = offer;
         if (offer._erc20Token == Errors.ZERO_ADDR) {
             _multiBuyOffering[erc721][tokenId]._budget = msg.value;
@@ -51,5 +51,5 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
             }
         }
         return id;
-    }
+    }*/
 }
