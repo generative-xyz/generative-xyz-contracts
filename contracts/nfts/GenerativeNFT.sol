@@ -81,14 +81,22 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         if (mintPrice == 0) {
             return;
         }
-        address mintPriceAddr = Errors.ZERO_ADDR;
+
         IGenerativeProject project = IGenerativeProject(_project._projectAddr);
         IParameterControl _p = IParameterControl(_paramsAddress);
         // default 5% getting, 95% pay for owner of project
         uint256 operationFee = _p.getUInt256(GenerativeNFTConfigs.DEFAULT_ROYALTY_FIN_PERCENT);
+        // default is admin should get operationFee
+        address operatorTreasureAddress = _admin;
         if (_paramsAddress != address(0)) {
             operationFee = _p.getUInt256(GenerativeNFTConfigs.MINT_NFT_OPERATOR_FEE);
+            address operatorTreasureConfig = _p.getAddress(GenerativeNFTConfigs.MINT_NFT_OPERATOR_TREASURE_ADDR);
+            if (operatorTreasureConfig != Errors.ZERO_ADDR) {
+                operatorTreasureAddress = operatorTreasureConfig;
+            }
         }
+        // check mintPrice using erc-20
+        address mintPriceAddr = _project._mintPriceAddr;
         if (mintPriceAddr == Errors.ZERO_ADDR) {
             require(msg.value >= mintPrice);
 
@@ -97,7 +105,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
             require(success);
             if (operationFee > 0) {
                 // pay for admin
-                (success,) = _admin.call{value : mintPrice * operationFee / 10000}("");
+                (success,) = operatorTreasureAddress.call{value : mintPrice * operationFee / 10000}("");
             }
         } else {
             IERC20 tokenERC20 = IERC20(mintPriceAddr);
@@ -112,7 +120,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
             require(tokenERC20.transfer(project.ownerOf(_project._projectId), mintPrice - (mintPrice * operationFee / 10000)));
             if (operationFee > 0) {
                 // pay for admin
-                require(tokenERC20.transfer(_admin, mintPrice * operationFee / 10000));
+                require(tokenERC20.transfer(operatorTreasureAddress, mintPrice * operationFee / 10000));
             }
         }
     }
