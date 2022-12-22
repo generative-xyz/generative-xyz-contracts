@@ -12,7 +12,7 @@ library Marketplace {
         uint256 benefitOperator;
     }
 
-    struct Offering {
+    struct ListingTokenData {
         address offerer;
         address hostContract; // erc-721 collection address
         uint tokenId;
@@ -21,7 +21,7 @@ library Marketplace {
         address erc20Token;
     }
 
-    struct CloseOfferingData {
+    struct PurchaseTokenData {
         address buyer;
         uint price;
         uint originPrice;

@@ -20,7 +20,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
     address public _admin; // is a mutil sig address when deploy
     address public _parameterAddr;
 
-    mapping(bytes32 => Marketplace.Offering) public _offeringRegistry;
+    mapping(bytes32 => Marketplace.ListingTokenData) public _offeringRegistry;
     bytes32[] public _arrayOffering;
 
 
@@ -99,18 +99,18 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
     function _purchaseToken(bytes32 offeringId, address buyer) internal virtual {
         // get offer
-        Marketplace.Offering memory _offer = _offeringRegistry[offeringId];
+        Marketplace.ListingTokenData memory _offer = _offeringRegistry[offeringId];
         address hostContractOffering = _offer.hostContract;
         IERC721Upgradeable hostContract = IERC721Upgradeable(hostContractOffering);
         uint tokenID = _offer.tokenId;
         address offerer = _offer.offerer;
         bool isERC20 = _offer.erc20Token != address(0x0);
 
-        Marketplace.CloseOfferingData memory _closeOfferingData;
+        Marketplace.PurchaseTokenData memory _closeOfferingData;
         IERC20Upgradeable erc20;
         if (isERC20) {
             erc20 = IERC20Upgradeable(_offer.erc20Token);
-            _closeOfferingData = Marketplace.CloseOfferingData(
+            _closeOfferingData = Marketplace.PurchaseTokenData(
                 buyer,
                 _offer.price,
                 _offer.price,
@@ -119,7 +119,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
                 _offer.erc20Token
             );
         } else {
-            _closeOfferingData = Marketplace.CloseOfferingData(
+            _closeOfferingData = Marketplace.PurchaseTokenData(
                 buyer,
                 _offer.price,
                 _offer.price,
