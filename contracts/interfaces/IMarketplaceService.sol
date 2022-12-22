@@ -8,4 +8,10 @@ interface IMarketplaceService {
     function purchaseToken(bytes32 _offeringId) external virtual payable;
 
     function cancelListing(bytes32 _offeringId) external virtual;
+
+    function makeOffer(Marketplace.MakeOfferData memory data) external virtual returns (bytes32);
+
+    function cancelMakeOffer(bytes32 offerId) external virtual;
+
+    function acceptMakeOffer(bytes32 offerId) external virtual;
 }
