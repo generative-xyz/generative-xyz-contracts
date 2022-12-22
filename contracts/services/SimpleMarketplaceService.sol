@@ -14,14 +14,14 @@ import "../libs/configs/MarketplaceServiceConfigs.sol";
 
 
 contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, IMarketplaceService {
-    uint256 private _offeringNonces;
+    uint256 private _listingTokenNonces;
 
 
     address public _admin; // is a mutil sig address when deploy
     address public _parameterAddr;
 
-    mapping(bytes32 => Marketplace.ListingTokenData) public _offeringRegistry;
-    bytes32[] public _arrayOffering;
+    mapping(bytes32 => Marketplace.ListingTokenData) public _listingTokens;
+    bytes32[] public _arrayListingId;
 
 
     function initialize(address admin, address parameterControl) initializer virtual public {
@@ -51,8 +51,8 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         }
     }
 
-    function arrayOffering() external view returns (bytes32[] memory) {
-        return _arrayOffering;
+    function arrayListingId() external view returns (bytes32[] memory) {
+        return _arrayListingId;
     }
 
     function listToken(address hostContractErc721, uint tokenId, address erc20Token, uint price) external virtual nonReentrant returns (bytes32) {
@@ -72,23 +72,23 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         require(approval == true, Errors.ERC_721_NOT_APPROVED);
 
         // create offering nonce by counter
-        _offeringNonces++;
+        _listingTokenNonces++;
         // init offering id
-        bytes32 offeringId = keccak256(abi.encodePacked(StringsUpgradeable.toString(_offeringNonces), hostContractErc721, StringsUpgradeable.toString(tokenId)));
+        bytes32 offeringId = keccak256(abi.encodePacked(StringsUpgradeable.toString(_listingTokenNonces), hostContractErc721, StringsUpgradeable.toString(tokenId)));
         // create offering by id
-        _offeringRegistry[offeringId].offerer = nftOwner;
-        _offeringRegistry[offeringId].hostContract = hostContractErc721;
-        _offeringRegistry[offeringId].tokenId = tokenId;
-        _offeringRegistry[offeringId].price = price;
+        _listingTokens[offeringId].offerer = nftOwner;
+        _listingTokens[offeringId].hostContract = hostContractErc721;
+        _listingTokens[offeringId].tokenId = tokenId;
+        _listingTokens[offeringId].price = price;
         if (erc20Token != address(0x0)) {
-            _offeringRegistry[offeringId].erc20Token = erc20Token;
+            _listingTokens[offeringId].erc20Token = erc20Token;
         } else {
-            _offeringRegistry[offeringId].erc20Token = address(0x0);
+            _listingTokens[offeringId].erc20Token = address(0x0);
         }
         // transfer erc-721 token from offerer to this contract
         hostContract.transferFrom(nftOwner, address(this), tokenId);
 
-        _arrayOffering.push(offeringId);
+        _arrayListingId.push(offeringId);
         emit Marketplace.ListingToken(offeringId, hostContractErc721, nftOwner, tokenId, price);
         return offeringId;
     }
@@ -99,7 +99,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
     function _purchaseToken(bytes32 offeringId, address buyer) internal virtual {
         // get offer
-        Marketplace.ListingTokenData memory _offer = _offeringRegistry[offeringId];
+        Marketplace.ListingTokenData memory _offer = _listingTokens[offeringId];
         address hostContractOffering = _offer.hostContract;
         IERC721Upgradeable hostContract = IERC721Upgradeable(hostContractOffering);
         uint tokenID = _offer.tokenId;
@@ -138,7 +138,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         } else {
             require(msg.value >= _closeOfferingData.price, Errors.VALUE_INVALID);
         }
-        require(!_offeringRegistry[offeringId].closed, Errors.OFFERING_CLOSED);
+        require(!_listingTokens[offeringId].closed, Errors.OFFERING_CLOSED);
 
         // transfer erc-721
         hostContract.safeTransferFrom(address(this), _closeOfferingData.buyer, tokenID);
@@ -165,18 +165,18 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             require(success, Errors.TRANSFER_FAIL);
         }
         // close offering
-        _offeringRegistry[offeringId].closed = true;
+        _listingTokens[offeringId].closed = true;
 
         emit Marketplace.PurchaseToken(offeringId, _closeOfferingData.buyer);
     }
 
     function cancelListing(bytes32 _offeringId) external virtual {
-        require(msg.sender == _offeringRegistry[_offeringId].offerer, Errors.INVALID_ERC721_OWNER);
-        require(!_offeringRegistry[_offeringId].closed);
-        IERC721Upgradeable hostContract = IERC721Upgradeable(_offeringRegistry[_offeringId].hostContract);
-        hostContract.safeTransferFrom(address(this), msg.sender, _offeringRegistry[_offeringId].tokenId);
-        _offeringRegistry[_offeringId].closed = true;
-        emit Marketplace.CancelListing(_offeringId, _offeringRegistry[_offeringId].offerer);
+        require(msg.sender == _listingTokens[_offeringId].offerer, Errors.INVALID_ERC721_OWNER);
+        require(!_listingTokens[_offeringId].closed);
+        IERC721Upgradeable hostContract = IERC721Upgradeable(_listingTokens[_offeringId].hostContract);
+        hostContract.safeTransferFrom(address(this), msg.sender, _listingTokens[_offeringId].tokenId);
+        _listingTokens[_offeringId].closed = true;
+        emit Marketplace.CancelListing(_offeringId, _listingTokens[_offeringId].offerer);
     }
 
     function withdraw(address receiver, address erc20Addr, uint256 amount) external virtual nonReentrant {

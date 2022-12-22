@@ -39,14 +39,14 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
         bytes32 id = _listToken(hostContractErc721, tokenId, erc20Token, price);
         // check multi buy offering
         if (_multiBuyOffering[hostContractErc721][tokenId]._buyer != Errors.ZERO_ADDR) {
-            if (_multiBuyOffering[hostContractErc721][tokenId]._erc20Token == _offeringRegistry[id].erc20Token) {
-                if (_multiBuyOffering[hostContractErc721][tokenId]._budget > _offeringRegistry[id].price) {
+            if (_multiBuyOffering[hostContractErc721][tokenId]._erc20Token == _listingTokens[id].erc20Token) {
+                if (_multiBuyOffering[hostContractErc721][tokenId]._budget > _listingTokens[id].price) {
                     _purchaseToken(id, address(this));
                     // transfer erc721 to buyer
-                    IERC721Upgradeable hostContract = IERC721Upgradeable(_offeringRegistry[id].hostContract);
+                    IERC721Upgradeable hostContract = IERC721Upgradeable(_listingTokens[id].hostContract);
                     hostContract.safeTransferFrom(address(this), _multiBuyOffering[hostContractErc721][tokenId]._buyer, tokenId);
                     // calculate budget
-                    _multiBuyOffering[hostContractErc721][tokenId]._budget -= _offeringRegistry[id].price;
+                    _multiBuyOffering[hostContractErc721][tokenId]._budget -= _listingTokens[id].price;
                 }
             }
         }
