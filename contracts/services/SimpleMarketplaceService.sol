@@ -73,32 +73,34 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         return _arrayListingId;
     }
 
-    function _purchaseToken(bytes32 offeringId, address buyer) internal virtual {
+    function _purchaseToken(bytes32 offeringId) internal virtual {
         // get offer
-        Marketplace.ListingTokenData memory _offer = _listingTokens[offeringId];
-        address hostContractOffering = _offer._collectionContract;
+        Marketplace.ListingTokenData memory listing = _listingTokens[offeringId];
+        address hostContractOffering = listing._collectionContract;
         IERC721Upgradeable hostContract = IERC721Upgradeable(hostContractOffering);
-        uint tokenID = _offer._tokenId;
-        address offerer = _offer._seller;
-        bool isERC20 = _offer._erc20Token != address(0x0);
+        uint tokenID = listing._tokenId;
+        address offerer = listing._seller;
+        bool isERC20 = listing._erc20Token != address(0x0);
 
-        Marketplace.PurchaseTokenData memory _closeOfferingData;
+        Marketplace.CloseData memory _closeOfferingData;
         IERC20Upgradeable erc20;
         if (isERC20) {
-            erc20 = IERC20Upgradeable(_offer._erc20Token);
-            _closeOfferingData = Marketplace.PurchaseTokenData(
-                buyer,
-                _offer._price,
-                _offer._price,
-                erc20.balanceOf(buyer),
-                erc20.allowance(buyer, address(this)),
-                _offer._erc20Token
+            erc20 = IERC20Upgradeable(listing._erc20Token);
+            _closeOfferingData = Marketplace.CloseData(
+                msg.sender,
+                listing._seller,
+                listing._price,
+                listing._price,
+                erc20.balanceOf(msg.sender),
+                erc20.allowance(msg.sender, address(this)),
+                listing._erc20Token
             );
         } else {
-            _closeOfferingData = Marketplace.PurchaseTokenData(
-                buyer,
-                _offer._price,
-                _offer._price,
+            _closeOfferingData = Marketplace.CloseData(
+                msg.sender,
+                listing._seller,
+                listing._price,
+                listing._price,
                 0,
                 0,
                 address(0x0) // is ETH
@@ -134,10 +136,10 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
         if (isERC20) {
             require(erc20.transferFrom(_closeOfferingData._buyer, address(this), _closeOfferingData._originPrice), Errors.TRANSFER_FAIL);
-            require(erc20.transferFrom(address(this), _offer._seller, _closeOfferingData._price), Errors.TRANSFER_FAIL);
+            require(erc20.transferFrom(address(this), listing._seller, _closeOfferingData._price), Errors.TRANSFER_FAIL);
         } else {
             require(address(this).balance > 0, Errors.VALUE_INVALID);
-            (bool success,) = _offer._seller.call{value : _closeOfferingData._price}("");
+            (bool success,) = listing._seller.call{value : _closeOfferingData._price}("");
             require(success, Errors.TRANSFER_FAIL);
         }
         // close offering
@@ -179,7 +181,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
     }
 
     function purchaseToken(bytes32 offeringId) external virtual nonReentrant payable {
-        _purchaseToken(offeringId, msg.sender);
+        _purchaseToken(offeringId);
     }
 
     function cancelListing(bytes32 _offeringId) external virtual {
@@ -227,8 +229,9 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         IERC20Upgradeable erc20 = IERC20Upgradeable(offer._erc20Token);
         require(erc20.allowance(offer._buyer, address(this)) >= offer._price);
 
-        Marketplace.PurchaseTokenData memory _closeOfferingData = Marketplace.PurchaseTokenData(
+        Marketplace.CloseData memory _closeOfferingData = Marketplace.CloseData(
             offer._buyer,
+            msg.sender,
             offer._price,
             offer._price,
             erc20.balanceOf(offer._buyer),

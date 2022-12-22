@@ -24,15 +24,6 @@ library Marketplace {
         uint256 _durationTime;
     }
 
-    struct PurchaseTokenData {
-        address _buyer;
-        uint256 _price;
-        uint256 _originPrice;
-        uint256 _balanceBuyer;
-        uint256 _approvalToken;
-        address _erc20Token;
-    }
-
     struct MakeOfferData {
         address _collectionContract; // erc-721 collection address
         uint256 _tokenId;
@@ -41,5 +32,15 @@ library Marketplace {
         uint256 _price;
         bool _closed;
         uint256 _durationTime;
+    }
+
+    struct CloseData {
+        address _buyer;
+        address _seller;
+        uint256 _price;
+        uint256 _originPrice;
+        uint256 _balanceBuyer;
+        uint256 _approvalToken;
+        address _erc20Token;
     }
 }
