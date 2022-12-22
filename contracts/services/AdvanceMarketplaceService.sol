@@ -4,8 +4,9 @@ import "./SimpleMarketplaceService.sol";
 
 contract AdvanceMarketplaceService is SimpleMarketplaceService {
 
+    // collection => tokenId => offer
     mapping(address => mapping(uint256 => Marketplace.ListingTokenData[])) public _listingTokenDataMapping;
-
+    // collection => tokenId => offer
     mapping(address => mapping(uint256 => Marketplace.MakeOfferData[])) public _makeOfferDataMapping;
 
     function initialize(address admin, address parameterControl) initializer override public {

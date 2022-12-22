@@ -69,15 +69,11 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
     /* @Listing
     */
-    function arrayListingId() external view returns (bytes32[] memory) {
-        return _arrayListingId;
-    }
-
     function _purchaseToken(bytes32 offerId) internal virtual {
         // get offer
         Marketplace.ListingTokenData memory listing = _listingTokens[offerId];
         address hostContractOffering = listing._collectionContract;
-        IERC721Upgradeable hostContract = IERC721Upgradeable(hostContractOffering);
+        IERC721Upgradeable erc721 = IERC721Upgradeable(hostContractOffering);
         bool isERC20 = listing._erc20Token != address(0x0);
 
         Marketplace.CloseData memory _closeOfferingData;
@@ -106,7 +102,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         }
 
         // check require
-        require(hostContract.ownerOf(listing._tokenId) == listing._seller, Errors.INVALID_ERC721_OWNER);
+        require(erc721.ownerOf(listing._tokenId) == listing._seller, Errors.INVALID_ERC721_OWNER);
         if (isERC20) {
             // check approval of erc-20 on this contract
             require(_closeOfferingData._approvalToken >= _closeOfferingData._price, Errors.ERC20_NOT_APPROVED);
@@ -117,7 +113,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         require(!_listingTokens[offerId]._closed, Errors.OFFERING_CLOSED);
 
         // transfer erc-721
-        hostContract.safeTransferFrom(address(this), _closeOfferingData._buyer, listing._tokenId);
+        erc721.safeTransferFrom(address(this), _closeOfferingData._buyer, listing._tokenId);
 
         // logic for 
         // benefit of operator here
@@ -148,11 +144,10 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
     function _listToken(Marketplace.ListingTokenData memory listingData) internal virtual returns (bytes32) {
         // get hostContract of erc-721
-        IERC721Upgradeable hostContract = IERC721Upgradeable(listingData._collectionContract);
-        require(hostContract.ownerOf(listingData._tokenId) == msg.sender, Errors.INVALID_ERC721_OWNER);
+        IERC721Upgradeable erc721 = IERC721Upgradeable(listingData._collectionContract);
+        require(erc721.ownerOf(listingData._tokenId) == msg.sender, Errors.INVALID_ERC721_OWNER);
         // check approval of erc-721 on this contract
-        bool approval = hostContract.isApprovedForAll(msg.sender, address(this));
-        require(approval == true, Errors.ERC_721_NOT_APPROVED);
+        require(erc721.isApprovedForAll(msg.sender, address(this)) == true, Errors.ERC_721_NOT_APPROVED);
 
         // create offering nonce by counter
         _counting++;
@@ -188,10 +183,6 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
     /* @MakeOffer 
     */
-    function arrayMakeOfferId() external view returns (bytes32[] memory) {
-        return _arrayMakeOfferId;
-    }
-
     function _makeOffer(Marketplace.MakeOfferData memory data) internal virtual returns (bytes32) {
         require(data._erc20Token != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(data._collectionContract != Errors.ZERO_ADDR, Errors.INV_ADD);
