@@ -13,16 +13,47 @@
           "type": "bytes32"
         },
         {
-          "indexed": true,
-          "internalType": "address",
-          "name": "seller",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "buyer",
-          "type": "address"
+          "components": [
+            {
+              "internalType": "address",
+              "name": "_collectionContract",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_buyer",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "_erc20Token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "_closed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_durationTime",
+              "type": "uint256"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct Marketplace.MakeOfferData",
+          "name": "data",
+          "type": "tuple"
         }
       ],
       "name": "AcceptMakeOffer",
@@ -38,10 +69,47 @@
           "type": "bytes32"
         },
         {
-          "indexed": true,
-          "internalType": "address",
-          "name": "offerer",
-          "type": "address"
+          "components": [
+            {
+              "internalType": "address",
+              "name": "_collectionContract",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_seller",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_erc20Token",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "_closed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_durationTime",
+              "type": "uint256"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct Marketplace.ListingTokenData",
+          "name": "data",
+          "type": "tuple"
         }
       ],
       "name": "CancelListing",
@@ -57,10 +125,47 @@
           "type": "bytes32"
         },
         {
-          "indexed": true,
-          "internalType": "address",
-          "name": "offerer",
-          "type": "address"
+          "components": [
+            {
+              "internalType": "address",
+              "name": "_collectionContract",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_buyer",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "_erc20Token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "_closed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_durationTime",
+              "type": "uint256"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct Marketplace.MakeOfferData",
+          "name": "data",
+          "type": "tuple"
         }
       ],
       "name": "CancelMakeOffer",
@@ -76,28 +181,47 @@
           "type": "bytes32"
         },
         {
-          "indexed": true,
-          "internalType": "address",
-          "name": "hostContract",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "offerer",
-          "type": "address"
-        },
-        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "_collectionContract",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_seller",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_erc20Token",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "_closed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_durationTime",
+              "type": "uint256"
+            }
+          ],
           "indexed": false,
-          "internalType": "uint256",
-          "name": "tokenId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "price",
-          "type": "uint256"
+          "internalType": "struct Marketplace.ListingTokenData",
+          "name": "data",
+          "type": "tuple"
         }
       ],
       "name": "ListingToken",
@@ -113,18 +237,111 @@
           "type": "bytes32"
         },
         {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "_collectionContract",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_buyer",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "_erc20Token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "_closed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_durationTime",
+              "type": "uint256"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct Marketplace.MakeOfferData",
+          "name": "data",
+          "type": "tuple"
+        }
+      ],
+      "name": "MakeOffer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
           "indexed": true,
-          "internalType": "address",
-          "name": "buyer",
-          "type": "address"
+          "internalType": "bytes32",
+          "name": "offeringId",
+          "type": "bytes32"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "_collectionContract",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_seller",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_erc20Token",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "_closed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_durationTime",
+              "type": "uint256"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct Marketplace.ListingTokenData",
+          "name": "data",
+          "type": "tuple"
         }
       ],
       "name": "PurchaseToken",
       "type": "event"
     }
   ],
-  "bytecode": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220682436a7b5e95ada2596354a523858d5ed261d75288c69a5d516392b713c8a4964736f6c634300080c0033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220682436a7b5e95ada2596354a523858d5ed261d75288c69a5d516392b713c8a4964736f6c634300080c0033",
+  "bytecode": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220e089db18f801a27a8c4cff1b8012893df4f333b0178d870c062b992ec02d934464736f6c634300080c0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220e089db18f801a27a8c4cff1b8012893df4f333b0178d870c062b992ec02d934464736f6c634300080c0033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }

@@ -1,11 +1,13 @@
 pragma solidity ^0.8.0;
 
 library Marketplace {
-    event ListingToken(bytes32 indexed offeringId, address indexed hostContract, address indexed offerer, uint tokenId, uint price);
-    event PurchaseToken(bytes32 indexed offeringId, address indexed buyer);
-    event CancelListing(bytes32 indexed offeringId, address indexed offerer);
-    event CancelMakeOffer(bytes32 indexed offeringId, address indexed offerer);
-    event AcceptMakeOffer(bytes32 indexed offeringId, address indexed seller, address indexed buyer);
+    event ListingToken(bytes32 indexed offeringId, Marketplace.ListingTokenData data);
+    event PurchaseToken(bytes32 indexed offeringId, Marketplace.ListingTokenData data);
+    event CancelListing(bytes32 indexed offeringId, Marketplace.ListingTokenData data);
+
+    event MakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
+    event CancelMakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
+    event AcceptMakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
 
     struct Benefit {
         uint256 benefitPercentCreator;// TODO

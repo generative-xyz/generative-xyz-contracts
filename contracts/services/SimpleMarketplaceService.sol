@@ -73,13 +73,11 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         return _arrayListingId;
     }
 
-    function _purchaseToken(bytes32 offeringId) internal virtual {
+    function _purchaseToken(bytes32 offerId) internal virtual {
         // get offer
-        Marketplace.ListingTokenData memory listing = _listingTokens[offeringId];
+        Marketplace.ListingTokenData memory listing = _listingTokens[offerId];
         address hostContractOffering = listing._collectionContract;
         IERC721Upgradeable hostContract = IERC721Upgradeable(hostContractOffering);
-        uint tokenID = listing._tokenId;
-        address offerer = listing._seller;
         bool isERC20 = listing._erc20Token != address(0x0);
 
         Marketplace.CloseData memory _closeOfferingData;
@@ -108,7 +106,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         }
 
         // check require
-        require(hostContract.ownerOf(tokenID) == offerer, Errors.INVALID_ERC721_OWNER);
+        require(hostContract.ownerOf(listing._tokenId) == listing._seller, Errors.INVALID_ERC721_OWNER);
         if (isERC20) {
             // check approval of erc-20 on this contract
             require(_closeOfferingData._approvalToken >= _closeOfferingData._price, Errors.ERC20_NOT_APPROVED);
@@ -116,10 +114,10 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         } else {
             require(msg.value >= _closeOfferingData._price, Errors.VALUE_INVALID);
         }
-        require(!_listingTokens[offeringId]._closed, Errors.OFFERING_CLOSED);
+        require(!_listingTokens[offerId]._closed, Errors.OFFERING_CLOSED);
 
         // transfer erc-721
-        hostContract.safeTransferFrom(address(this), _closeOfferingData._buyer, tokenID);
+        hostContract.safeTransferFrom(address(this), _closeOfferingData._buyer, listing._tokenId);
 
         // logic for 
         // benefit of operator here
@@ -143,9 +141,9 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             require(success, Errors.TRANSFER_FAIL);
         }
         // close offering
-        _listingTokens[offeringId]._closed = true;
+        _listingTokens[offerId]._closed = true;
 
-        emit Marketplace.PurchaseToken(offeringId, _closeOfferingData._buyer);
+        emit Marketplace.PurchaseToken(offerId, listing);
     }
 
     function _listToken(Marketplace.ListingTokenData memory listingData) internal virtual returns (bytes32) {
@@ -165,7 +163,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         _listingTokens[offeringId]._seller = msg.sender;
 
         _arrayListingId.push(offeringId);
-        emit Marketplace.ListingToken(offeringId, listingData._collectionContract, msg.sender, listingData._tokenId, listingData._price);
+        emit Marketplace.ListingToken(offeringId, listingData);
         return offeringId;
     }
 
@@ -173,7 +171,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         require(msg.sender == _listingTokens[_offeringId]._seller, Errors.INVALID_ERC721_OWNER);
         require(!_listingTokens[_offeringId]._closed);
         _listingTokens[_offeringId]._closed = true;
-        emit Marketplace.CancelListing(_offeringId, _listingTokens[_offeringId]._seller);
+        emit Marketplace.CancelListing(_offeringId, _listingTokens[_offeringId]);
     }
 
     function listToken(Marketplace.ListingTokenData memory listingData) external virtual nonReentrant returns (bytes32) {
@@ -209,6 +207,9 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         // create offering by id
         _makeOfferTokens[offeringId] = data;
         _makeOfferTokens[offeringId]._buyer = msg.sender;
+
+        emit Marketplace.MakeOffer(offeringId, data);
+
         return offeringId;
     }
 
@@ -216,7 +217,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         require(msg.sender == _makeOfferTokens[offerId]._buyer, Errors.INV_ADD);
         require(!_makeOfferTokens[offerId]._closed);
         _makeOfferTokens[offerId]._closed = true;
-        emit Marketplace.CancelMakeOffer(offerId, _makeOfferTokens[offerId]._buyer);
+        emit Marketplace.CancelMakeOffer(offerId, _makeOfferTokens[offerId]);
     }
 
     function _acceptMakeOffer(bytes32 offerId) internal virtual {
@@ -229,7 +230,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         IERC20Upgradeable erc20 = IERC20Upgradeable(offer._erc20Token);
         require(erc20.allowance(offer._buyer, address(this)) >= offer._price);
 
-        Marketplace.CloseData memory _closeOfferingData = Marketplace.CloseData(
+        Marketplace.CloseData memory closeData = Marketplace.CloseData(
             offer._buyer,
             msg.sender,
             offer._price,
@@ -248,18 +249,18 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             _benefit.benefitPercentOperator = MarketplaceServiceConfigs.DEFAULT_MARKETPLACE_BENEFIT_PERCENT;
         }
         if (_benefit.benefitPercentOperator > 0) {
-            _benefit.benefitOperator = _closeOfferingData._originPrice * _benefit.benefitPercentOperator / 10000;
-            _closeOfferingData._price -= _benefit.benefitOperator;
+            _benefit.benefitOperator = closeData._originPrice * _benefit.benefitPercentOperator / 10000;
+            closeData._price -= _benefit.benefitOperator;
         }
 
         // transfer erc-20
-        require(erc20.transferFrom(_closeOfferingData._buyer, address(this), _closeOfferingData._originPrice), Errors.TRANSFER_FAIL);
-        require(erc20.transferFrom(address(this), msg.sender, _closeOfferingData._price), Errors.TRANSFER_FAIL);
+        require(erc20.transferFrom(closeData._buyer, address(this), closeData._originPrice), Errors.TRANSFER_FAIL);
+        require(erc20.transferFrom(address(this), msg.sender, closeData._price), Errors.TRANSFER_FAIL);
 
         // transfer erc-721
-        hostContract.safeTransferFrom(address(this), _closeOfferingData._buyer, offer._tokenId);
+        hostContract.safeTransferFrom(address(this), closeData._buyer, offer._tokenId);
         _makeOfferTokens[offerId]._closed = true;
-        emit Marketplace.AcceptMakeOffer(offerId, msg.sender, offer._buyer);
+        emit Marketplace.AcceptMakeOffer(offerId, offer);
     }
 
     function makeOffer(Marketplace.MakeOfferData memory data) external virtual nonReentrant returns (bytes32) {
