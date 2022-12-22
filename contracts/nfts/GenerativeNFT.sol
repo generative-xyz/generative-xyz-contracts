@@ -67,13 +67,13 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         super._setStatus(enable);
     }
 
-    function setTokenSeed(uint256 tokenId, bytes32 seed) internal {
+    function _setTokenSeed(uint256 tokenId, bytes32 seed) internal {
         require(_ownersAndHashSeeds[tokenId]._seed == bytes12(0), Errors.TOKEN_HAS_SEED);
         require(seed != bytes12(0), Errors.ZERO_SEED);
         _ownersAndHashSeeds[tokenId]._seed = bytes12(seed);
     }
 
-    function paymentMintNFT() internal {
+    function _paymentMintNFT() internal {
         uint256 mintPrice = _project._mintPrice;
         if (mintPrice == 0) {
             return;
@@ -140,12 +140,10 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         // random seed
         IRandomizer random = IRandomizer(_randomizer);
         bytes32 seed = random.generateTokenHash(tokenId);
-        setTokenSeed(tokenId, seed);
+        _setTokenSeed(tokenId, seed);
 
         // pay
-        paymentMintNFT();
-
-        emit NFTCollection.Mint(msg.sender, tokenId);
+        _paymentMintNFT();
     }
 
     function reserveMint() external payable nonReentrant returns (uint256 tokenId) {
@@ -168,11 +166,9 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         // random seed
         IRandomizer random = IRandomizer(_randomizer);
         bytes32 seed = random.generateTokenHash(tokenId);
-        setTokenSeed(tokenId, seed);
+        _setTokenSeed(tokenId, seed);
 
         // no paymentMintNFT
-
-        emit NFTCollection.Mint(msg.sender, tokenId);
     }
 
     /* @TokenData:
