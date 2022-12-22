@@ -79,6 +79,14 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
         }
     }
 
+    function _tokenIdToHash(uint256 tokenId) internal view returns (bytes32) {
+        require(_exists(tokenId), Errors.INV_TOKEN);
+        if (_ownersAndHashSeeds[tokenId]._seed == 0) {
+            return 0;
+        }
+        return keccak256(abi.encode(_ownersAndHashSeeds[tokenId]._seed));
+    }
+
     function getStatus() external view returns (bool) {
         return !paused();
     }
