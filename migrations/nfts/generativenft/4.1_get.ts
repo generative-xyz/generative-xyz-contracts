@@ -19,6 +19,7 @@ import {GenerativeProject} from "../generativeProject/generativeProject";
 
         const nft = new GenerativeNFT(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         a.project = await nft.getProject(a.parent._genNFTAddr);
+        a.royalty = await nft.royalty(a.parent._genNFTAddr);
         // a.randomizer = await nft.randomizerAddr(a.parent._genNFTAddr);
         // a.randomizer = await nft.randomizerAddr(a.parent._genNFTAddr);
         // a.tokenIdToHash = await nft.tokenIdToHash(a.parent._genNFTAddr, parseInt(args[1]) * 1e6 + parseInt(args[2]));
