@@ -10,10 +10,10 @@ library Marketplace {
     event AcceptMakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
 
     struct Benefit {
-        uint256 benefitPercentCreator;// TODO
-        uint256 benefitCreator;// TODO
-        uint256 benefitPercentOperator;
-        uint256 benefitOperator;
+        address _royaltyReceiver;// contract/address get royalty second sale
+        uint256 _royalty;// royalty second sale
+        uint256 _benefitPercentOperator;
+        uint256 _benefitOperator;
     }
 
     struct ListingTokenData {

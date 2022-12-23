@@ -18,7 +18,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
     address public _randomizer;
     address public _projectDataContextAddr;
     string public _nameCol;
-    uint256 public _royalty;
+    uint256 public _royalty;// % royalty second sale
 
     constructor(
         string memory name,

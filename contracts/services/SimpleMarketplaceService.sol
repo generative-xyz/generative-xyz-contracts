@@ -4,6 +4,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
+import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
 import "../governance/ParameterControl.sol";
 import "../interfaces/IMarketplaceService.sol";
@@ -67,6 +68,10 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         }
     }
 
+    /* @Royalty: process royalty second sale
+    */
+
+
     /* @Listing
     */
     function _purchaseToken(bytes32 offerId) internal virtual {
@@ -119,23 +124,43 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         // logic for 
         // benefit of operator here
         IParameterControl parameterController = IParameterControl(_parameterAddr);
-        Marketplace.Benefit memory _benefit = Marketplace.Benefit(0, 0, 0, 0);
-        _benefit.benefitPercentOperator = parameterController.getUInt256(MarketplaceServiceConfigs.MARKETPLACE_BENEFIT_PERCENT);
-        if (_benefit.benefitPercentOperator == 0) {
-            _benefit.benefitPercentOperator = MarketplaceServiceConfigs.DEFAULT_MARKETPLACE_BENEFIT_PERCENT;
+        Marketplace.Benefit memory _benefit = Marketplace.Benefit(Errors.ZERO_ADDR, 0, 0, 0);
+        _benefit._benefitPercentOperator = parameterController.getUInt256(MarketplaceServiceConfigs.MARKETPLACE_BENEFIT_PERCENT);
+        if (_benefit._benefitPercentOperator == 0) {
+            _benefit._benefitPercentOperator = MarketplaceServiceConfigs.DEFAULT_MARKETPLACE_BENEFIT_PERCENT;
         }
-        if (_benefit.benefitPercentOperator > 0) {
-            _benefit.benefitOperator = _closeOfferingData._originPrice * _benefit.benefitPercentOperator / 10000;
-            _closeOfferingData._price -= _benefit.benefitOperator;
+        if (_benefit._benefitPercentOperator > 0) {
+            _benefit._benefitOperator = _closeOfferingData._originPrice * _benefit._benefitPercentOperator / 10000;
+            _closeOfferingData._price -= _benefit._benefitOperator;
+        }
+
+        if (erc721.supportsInterface(type(IERC2981).interfaceId)) {
+            IERC2981 erc2981 = IERC2981(hostContractOffering);
+            (address _receiver, uint256 _royaltyAmount) = erc2981.royaltyInfo(listing._tokenId, _closeOfferingData._originPrice);
+            _benefit._royalty = _royaltyAmount;
+            _benefit._royaltyReceiver = _receiver;
+            _closeOfferingData._price -= _benefit._royalty;
         }
 
         if (isERC20) {
             require(erc20.transferFrom(_closeOfferingData._buyer, address(this), _closeOfferingData._originPrice), Errors.TRANSFER_FAIL);
-            require(erc20.transferFrom(address(this), listing._seller, _closeOfferingData._price), Errors.TRANSFER_FAIL);
+            require(erc20.transfer(listing._seller, _closeOfferingData._price), Errors.TRANSFER_FAIL);
+
+            // pay royalty second sale
+            if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
+                require(erc20.transfer(_benefit._royaltyReceiver, _benefit._royalty), Errors.TRANSFER_FAIL);
+            }
         } else {
             require(address(this).balance > 0, Errors.VALUE_INVALID);
-            (bool success,) = listing._seller.call{value : _closeOfferingData._price}("");
+            bool success;
+            (success,) = listing._seller.call{value : _closeOfferingData._price}("");
             require(success, Errors.TRANSFER_FAIL);
+
+            // pay royalty second sale
+            if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
+                (success,) = _benefit._royaltyReceiver.call{value : _benefit._royalty}("");
+                require(success, Errors.TRANSFER_FAIL);
+            }
         }
         // close offering
         _listingTokens[offerId]._closed = true;
@@ -238,14 +263,14 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         // logic for 
         // benefit of operator here
         IParameterControl parameterController = IParameterControl(_parameterAddr);
-        Marketplace.Benefit memory _benefit = Marketplace.Benefit(0, 0, 0, 0);
-        _benefit.benefitPercentOperator = parameterController.getUInt256(MarketplaceServiceConfigs.MARKETPLACE_BENEFIT_PERCENT);
-        if (_benefit.benefitPercentOperator == 0) {
-            _benefit.benefitPercentOperator = MarketplaceServiceConfigs.DEFAULT_MARKETPLACE_BENEFIT_PERCENT;
+        Marketplace.Benefit memory _benefit = Marketplace.Benefit(Errors.ZERO_ADDR, 0, 0, 0);
+        _benefit._benefitPercentOperator = parameterController.getUInt256(MarketplaceServiceConfigs.MARKETPLACE_BENEFIT_PERCENT);
+        if (_benefit._benefitPercentOperator == 0) {
+            _benefit._benefitPercentOperator = MarketplaceServiceConfigs.DEFAULT_MARKETPLACE_BENEFIT_PERCENT;
         }
-        if (_benefit.benefitPercentOperator > 0) {
-            _benefit.benefitOperator = closeData._originPrice * _benefit.benefitPercentOperator / 10000;
-            closeData._price -= _benefit.benefitOperator;
+        if (_benefit._benefitPercentOperator > 0) {
+            _benefit._benefitOperator = closeData._originPrice * _benefit._benefitPercentOperator / 10000;
+            closeData._price -= _benefit._benefitOperator;
         }
 
         // transfer erc-20

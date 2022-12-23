@@ -136,7 +136,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         address[] memory reserves,
         bool disable,
         uint256 openingTime,
-        uint256 royalty
+        uint256 royalty//% royalty second sale
     ) external payable nonReentrant returns (uint256) {
         // verify
         require(bytes(project._name).length > 3);
