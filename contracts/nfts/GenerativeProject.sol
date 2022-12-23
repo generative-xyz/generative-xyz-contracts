@@ -165,7 +165,6 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
                 0,
                 0,
                 project._creator,
-                project._creatorAddr,
                 project._mintPrice,
                 project._mintPriceAddr,
                 project._name,

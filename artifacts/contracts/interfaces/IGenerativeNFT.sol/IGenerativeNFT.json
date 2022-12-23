@@ -56,11 +56,6 @@
               "type": "string"
             },
             {
-              "internalType": "address",
-              "name": "_creatorAddr",
-              "type": "address"
-            },
-            {
               "internalType": "uint256",
               "name": "_mintPrice",
               "type": "uint256"

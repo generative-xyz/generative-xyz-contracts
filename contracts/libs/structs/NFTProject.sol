@@ -37,7 +37,6 @@ library NFTProject {
         uint24 _index;// index for not reserve
         uint24 _indexReserve;// index for reserve
         string _creator;
-        address _creatorAddr;
         uint256 _mintPrice;
         address _mintPriceAddr; // erc20 addr if possible
         string _name;
