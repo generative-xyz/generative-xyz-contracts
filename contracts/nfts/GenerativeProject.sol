@@ -13,8 +13,8 @@ import "../interfaces/IParameterControl.sol";
 import "../interfaces/IGenerativeNFT.sol";
 import "../interfaces/IGenerativeProjectData.sol";
 
-import "..//libs/configs/GenerativeProjectConfigs.sol";
-import "..//libs/configs/GenerativeNFTConfigs.sol";
+import "../libs/configs/GenerativeProjectConfigs.sol";
+import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
 
 
