@@ -58,6 +58,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     /* @GenerativeProjectDATA:
     */
     function projectURI(uint256 projectId) external view returns (string memory result) {
+        NFTProjectData.ProjectURIContext memory ctx;
         IGenerativeProject p = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory d = p.projectDetails(projectId);
         uint256 tokenID = projectId * GenerativeNFTConfigs.PROJECT_PADDING;
@@ -66,14 +67,32 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 Base64.encode(abi.encodePacked(this.tokenHTML(projectId, tokenID, keccak256(abi.encodePacked(tokenID))))),
                 '"'
             ));
+
+        ctx._name = string(abi.encodePacked(d._name, " #", StringsUpgradeable.toString(projectId)));
+        ctx._desc = d._desc;
+        ctx._image = d._image;
+        ctx._animationURI = animationURI;
+        ctx._genNFTAddr = d._genNFTAddr;
+        ctx._creatorAddr = d._creatorAddr;
+        ctx._creator = d._creator;
+        string memory scriptType = "";
+        for (uint8 i; i < d._scriptType.length; i++) {
+            scriptType = string(abi.encodePacked(scriptType, ',{"trait_type": "Lib ', StringsUpgradeable.toString(i + 1), '", "value": "', d._scriptType[i], '"}'));
+        }
+        ctx._attributes = string(abi.encodePacked(',"attributes": [{"trait_type": "Collection Address", "value": "', StringsUpgradeable.toHexString(ctx._genNFTAddr), '"}',
+            ',{"trait_type": "Creator", "value": "', ctx._creator, '"}',
+            ',{"trait_type": "Creator Address", "value": "', StringsUpgradeable.toHexString(ctx._creatorAddr), '"}',
+            ',{"trait_type": "License", "value": "', d._license, '"}',
+            scriptType,
+            ']'));
         result = string(
             abi.encodePacked('data:application/json;base64,',
             Base64.encode(abi.encodePacked(
-                '{"name":"', d._name, " #", StringsUpgradeable.toString(projectId), '"',
-                ',"description":"', d._desc, '"',
-                ',"image":"', d._image, '"',
-                animationURI,
-                ',"attributes": [{"trait_type": "Collection Address", "value": "', StringsUpgradeable.toHexString(d._genNFTAddr), '"}]',
+                '{"name":"', ctx._name, '"',
+                ',"description":"', ctx._desc, '"',
+                ',"image":"', ctx._image, '"',
+                ctx._animationURI,
+                ctx._attributes,
                 '}'
             ))
             )

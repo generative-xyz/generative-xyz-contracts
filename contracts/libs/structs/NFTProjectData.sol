@@ -8,4 +8,15 @@ library NFTProjectData {
         string _animationURI;
         string _image;
     }
+
+    struct ProjectURIContext {
+        string _creator;
+        address _creatorAddr;
+        string _name;
+        string _image;
+        string _desc;
+        string _animationURI;
+        address _genNFTAddr;
+        string _attributes;
+    }
 }
