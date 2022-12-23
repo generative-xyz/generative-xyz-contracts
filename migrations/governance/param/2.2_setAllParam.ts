@@ -79,6 +79,14 @@ import {ethers} from "ethers";
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
+        /**
+         * Marketplace
+         */
+        key = "MARKETPLACE_BENEFIT_PERCENT";
+        tx = await p.setUInt256(contract, key, 250, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
         // JS lib by version
         key = "p5js@1.5.0"
         tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>`, 0);
