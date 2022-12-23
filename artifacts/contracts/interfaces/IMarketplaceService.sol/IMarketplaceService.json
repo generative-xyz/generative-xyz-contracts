@@ -62,14 +62,14 @@
               "type": "address"
             },
             {
-              "internalType": "uint256",
-              "name": "_price",
-              "type": "uint256"
-            },
-            {
               "internalType": "address",
               "name": "_erc20Token",
               "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
             },
             {
               "internalType": "bool",

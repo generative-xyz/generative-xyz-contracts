@@ -86,14 +86,14 @@
               "type": "address"
             },
             {
-              "internalType": "uint256",
-              "name": "_price",
-              "type": "uint256"
-            },
-            {
               "internalType": "address",
               "name": "_erc20Token",
               "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
             },
             {
               "internalType": "bool",
@@ -198,14 +198,14 @@
               "type": "address"
             },
             {
-              "internalType": "uint256",
-              "name": "_price",
-              "type": "uint256"
-            },
-            {
               "internalType": "address",
               "name": "_erc20Token",
               "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
             },
             {
               "internalType": "bool",
@@ -310,14 +310,14 @@
               "type": "address"
             },
             {
-              "internalType": "uint256",
-              "name": "_price",
-              "type": "uint256"
-            },
-            {
               "internalType": "address",
               "name": "_erc20Token",
               "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_price",
+              "type": "uint256"
             },
             {
               "internalType": "bool",
@@ -340,8 +340,8 @@
       "type": "event"
     }
   ],
-  "bytecode": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220e089db18f801a27a8c4cff1b8012893df4f333b0178d870c062b992ec02d934464736f6c634300080c0033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220e089db18f801a27a8c4cff1b8012893df4f333b0178d870c062b992ec02d934464736f6c634300080c0033",
+  "bytecode": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122043d84b3cb15d1d24b3178444e5f17ec037e0ad6bf94ee06faf74dc45d9c6e39564736f6c634300080c0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122043d84b3cb15d1d24b3178444e5f17ec037e0ad6bf94ee06faf74dc45d9c6e39564736f6c634300080c0033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }

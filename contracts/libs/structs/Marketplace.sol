@@ -20,8 +20,8 @@ library Marketplace {
         address _collectionContract; // erc-721 collection address
         uint256 _tokenId;
         address _seller;
-        uint _price;
         address _erc20Token;
+        uint _price;
         bool _closed;
         uint256 _durationTime;
     }
