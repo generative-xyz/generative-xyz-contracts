@@ -103,7 +103,7 @@ class AdvanceMarketplaceService {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async purchaseToken(contractAddress: any, offerId: any, gas: any) {
+    async purchaseToken(contractAddress: any, offerId: any, value: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
@@ -115,6 +115,7 @@ class AdvanceMarketplaceService {
             nonce: nonce,
             gas: gas,
             data: fun.encodeABI(),
+            value: value
         }
 
         if (tx.gas == 0) {
@@ -206,6 +207,34 @@ class AdvanceMarketplaceService {
         }
 
         return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async listingTokens(contractAddress: any, offerid: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._listingTokens(offerid).call(tx);
+    }
+
+    async makeOfferTokens(contractAddress: any, offerid: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._makeOfferTokens(offerid).call(tx);
     }
 }
 

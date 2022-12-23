@@ -5,6 +5,7 @@ import * as fs from "fs";
 import {keccak256} from "ethers/lib/utils";
 import {AdvanceMarketplaceService} from "./advanceMarketplaceService";
 import dayjs = require("dayjs");
+import {GenerativeNFT} from "../../nfts/generativenft/GenerativeNFT";
 
 (async () => {
     try {
@@ -14,7 +15,13 @@ import dayjs = require("dayjs");
         }
         const marketplaceService = new AdvanceMarketplaceService(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const args = process.argv.slice(2)
-        console.log(args);
+
+        // approve
+        const nft = new GenerativeNFT(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const approve = await nft.setApproveForAll(args[1], args[0], true, 0);
+        console.log("approve:", approve?.transactionHash, approve?.status);
+
+        // listing
         const tx = await marketplaceService.listToken(args[0],
             JSON.parse(JSON.stringify({
                 "_collectionContract": args[1],
