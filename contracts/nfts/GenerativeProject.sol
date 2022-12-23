@@ -14,6 +14,7 @@ import "../interfaces/IGenerativeNFT.sol";
 import "../interfaces/IGenerativeProjectData.sol";
 
 import "..//libs/configs/GenerativeProjectConfigs.sol";
+import "..//libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
 
 
@@ -140,10 +141,10 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         // verify
         require(bytes(project._name).length > 3);
         require(bytes(project._creator).length > 3);
-        require(project._maxSupply > 0);
+        require(project._maxSupply > 0 && project._maxSupply < GenerativeNFTConfigs.PROJECT_PADDING);
         require(project._limit > 0 && project._limit <= project._maxSupply);
         require(project._creatorAddr != Errors.ZERO_ADDR);
-        require(royalty > 0 && royalty < 10000);
+        require(royalty >= 5 && royalty < 10000);
 
         // safe mint
         _currentProjectId++;
