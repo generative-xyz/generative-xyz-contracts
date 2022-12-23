@@ -4,10 +4,15 @@ import "./SimpleMarketplaceService.sol";
 
 contract AdvanceMarketplaceService is SimpleMarketplaceService {
 
-    // collection => tokenId => offer
+    // collection => tokenId => offer[]
     mapping(address => mapping(uint256 => Marketplace.ListingTokenData[])) public _listingTokenDataMapping;
-    // collection => tokenId => offer
+    // collection => tokenId[]
+    mapping(address => uint256[]) public _listingTokenIds;
+    // collection => tokenId => offer[]
     mapping(address => mapping(uint256 => Marketplace.MakeOfferData[])) public _makeOfferDataMapping;
+    // collection => tokenId[]
+    mapping(address => uint256[]) public _makeOfferTokenIds;
+
     mapping(address => bool) public _allowableERC20MakeOffer;
     mapping(address => bool) public _allowableERC20MakeListToken;
 
@@ -31,7 +36,8 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
         require(_allowableERC20MakeListToken[listingData._erc20Token], Errors.ERC_20_NOT_ALLOW);
         bytes32 offerId = _listToken(listingData);
         Marketplace.ListingTokenData storage data = _listingTokens[offerId];
-        _listingTokenDataMapping[listingData._collectionContract][listingData._tokenId].push(data);
+        _listingTokenDataMapping[data._collectionContract][data._tokenId].push(data);
+        _listingTokenIds[data._collectionContract].push(data._tokenId);
         return offerId;
     }
 
@@ -40,6 +46,7 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
         bytes32 offerId = _makeOffer(makeOfferData);
         Marketplace.MakeOfferData storage data = _makeOfferTokens[offerId];
         _makeOfferDataMapping[data._collectionContract][data._tokenId].push(data);
+        _makeOfferTokenIds[data._collectionContract].push(data._tokenId);
         return offerId;
     }
 }
