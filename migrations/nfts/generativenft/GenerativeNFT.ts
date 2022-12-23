@@ -30,10 +30,10 @@ class GenerativeNFT {
 
     getContract(contractAddress: any) {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
-        // if (this.network == "local") {
-        //     console.log("not run local");
-        //     return;
-        // }
+        if (this.network == "local") {
+            console.log("not run local");
+            return;
+        }
         let API_URL: any;
         API_URL = hardhatConfig.networks[hardhatConfig.defaultNetwork].url;
 

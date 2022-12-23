@@ -202,6 +202,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         _makeOfferTokens[offeringId] = data;
         _makeOfferTokens[offeringId]._buyer = msg.sender;
 
+        _arrayMakeOfferId.push(offeringId);
         emit Marketplace.MakeOffer(offeringId, data);
 
         return offeringId;
@@ -249,10 +250,10 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
         // transfer erc-20
         require(erc20.transferFrom(closeData._buyer, address(this), closeData._originPrice), Errors.TRANSFER_FAIL);
-        require(erc20.transferFrom(address(this), msg.sender, closeData._price), Errors.TRANSFER_FAIL);
+        require(erc20.transfer(closeData._seller, closeData._price), Errors.TRANSFER_FAIL);
 
         // transfer erc-721
-        hostContract.safeTransferFrom(address(this), closeData._buyer, offer._tokenId);
+        hostContract.safeTransferFrom(closeData._seller, closeData._buyer, offer._tokenId);
         _makeOfferTokens[offerId]._closed = true;
         emit Marketplace.AcceptMakeOffer(offerId, offer);
     }
