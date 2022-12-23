@@ -37,4 +37,7 @@ library Errors {
     string public constant ERC20_BALANCE_INVALID = "304";
     string public constant ERC20_NOT_APPROVED = "305";
     string public constant TRANSFER_FAIL = "306";
+    string public constant ERC_20_NOT_ALLOW = "307";
+    string public constant ZERO_PRICE = "308";
+    string public constant ZERO_DURATION = "309";
 }
