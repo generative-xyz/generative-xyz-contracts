@@ -49,7 +49,7 @@ import {ethers} from "ethers";
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = "MINT_NFT_OPERATOR_TREASURE_ADDR";// hold operator fee when minting generative nft of project
+        key = "MINT_NFT_OPERATOR_TREASURE_ADDR";// hold operator fee when minting generative nft of project - default is admin
         // tx = await p.setAddress(contract, key, "", 0);
         // console.log("set ", key);
         // console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
