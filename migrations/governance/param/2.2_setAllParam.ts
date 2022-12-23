@@ -16,17 +16,17 @@ import {ethers} from "ethers";
         /**
          *  For project
          */
-        let key = 'GENERATIVE_NFT_TEMPLATE';
+        let key = 'GENERATIVE_NFT_TEMPLATE'; // template of generative nft
         let tx = await p.setAddress(contract, key, '0x5FbDB2315678afecb367f032d93F642f64180aa3', 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = 'CREATE_PROJECT_FEE';
+        key = 'CREATE_PROJECT_FEE'; // operator fee get when creator create project
         tx = await p.setUInt256(contract, key, ethers.utils.parseEther("0.001"), 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = 'FEE_TOKEN';
+        key = 'FEE_TOKEN'; // operator fee erc-20 get when creator create project
         tx = await p.setAddress(contract, key, "0x0000000000000000000000000000000000000000", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
@@ -44,7 +44,7 @@ import {ethers} from "ethers";
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = "MINT_NFT_OPERATOR_FEE"; // operator fee when collector mint from project
+        key = "MINT_NFT_OPERATOR_FEE"; // operator fee when collector mint generative nft from project
         tx = await p.setUInt256(contract, key, 500, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
@@ -74,7 +74,7 @@ import {ethers} from "ethers";
         /**
          * For royalty second sale
          */
-        key = "OWNER_ROYALTY_SECOND_SALE";
+        key = "OWNER_ROYALTY_SECOND_SALE"; // percent split from royalty second sale for owner of project
         tx = await p.setUInt256(contract, key, 9000, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
