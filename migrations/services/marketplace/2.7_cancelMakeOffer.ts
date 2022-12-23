@@ -5,7 +5,7 @@ import * as fs from "fs";
 import {keccak256} from "ethers/lib/utils";
 import {AdvanceMarketplaceService} from "./advanceMarketplaceService";
 import dayjs = require("dayjs");
-import {GenerativeNFT} from "../../nfts/generativenft/GenerativeNFT";
+import {ERC20} from "../../ERC20";
 
 (async () => {
     try {
@@ -19,17 +19,15 @@ import {GenerativeNFT} from "../../nfts/generativenft/GenerativeNFT";
         const marketplaceContract = args[0];
         const offerId = args[1];
 
+        // cancel offer
+        const tx = await marketplaceService.cancelMakeOffer(marketplaceContract, offerId, 0);
+        console.log("tx:", tx?.transactionHash, tx?.status);
+
+        // disapprove erc20
         let a: any = {};
         a.makeOfferTokens = await marketplaceService.makeOfferTokens(marketplaceContract, offerId);
-
-        // approve erc-721
-        const nft = new GenerativeNFT(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        const approve = await nft.setApproveForAll(a._collectionContract, marketplaceContract, true, 0);
-        console.log("approve:", approve?.transactionHash, approve?.status);
-
-        // accept offer
-        const tx = await marketplaceService.acceptMakeOffer(marketplaceContract, offerId, 0);
-        console.log("tx:", tx?.transactionHash, tx?.status);
+        const erc20 = new ERC20(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        await erc20.decreaseAllowance(a.makeOfferTokens._erc20Token, marketplaceContract, a.makeOfferTokens._price, 0);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);

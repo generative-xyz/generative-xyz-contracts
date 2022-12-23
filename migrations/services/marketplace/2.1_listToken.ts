@@ -16,19 +16,25 @@ import {GenerativeNFT} from "../../nfts/generativenft/GenerativeNFT";
         const marketplaceService = new AdvanceMarketplaceService(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const args = process.argv.slice(2)
 
-        // approve
+        const contractMarketplace = args[0];
+        const collection = args[1];
+        const collectionTokenId = args[2];
+        const erc20Addr = args[3];//"0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa";// mumbai WETH
+        const price = ethers.utils.parseEther(args[4]);
+
+        // approve erc-721
         const nft = new GenerativeNFT(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        const approve = await nft.setApproveForAll(args[1], args[0], true, 0);
+        const approve = await nft.setApproveForAll(collection, contractMarketplace, true, 0);
         console.log("approve:", approve?.transactionHash, approve?.status);
 
         // listing
-        const tx = await marketplaceService.listToken(args[0],
+        const tx = await marketplaceService.listToken(contractMarketplace,
             JSON.parse(JSON.stringify({
-                "_collectionContract": args[1],
-                "_tokenId": args[2],
+                "_collectionContract": collection,
+                "_tokenId": collectionTokenId,
                 "_seller": process.env.PUBLIC_KEY,
-                "_price": ethers.utils.parseEther("0.009"),
-                "_erc20Token": "0x0000000000000000000000000000000000000000",
+                "_price": price,
+                "_erc20Token": erc20Addr,
                 "_closed": false,
                 "_durationTime": dayjs().add(1, "day").unix(),
             }))
