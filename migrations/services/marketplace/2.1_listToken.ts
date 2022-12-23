@@ -24,7 +24,7 @@ import {GenerativeNFT} from "../../nfts/generativenft/GenerativeNFT";
 
         // approve erc-721
         const nft = new GenerativeNFT(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        const approve = await nft.setApproveForAll(collection, contractMarketplace, true, 0);
+        const approve = await nft.setApprovalForAll(collection, contractMarketplace, true, 0);
         console.log("approve:", approve?.transactionHash, approve?.status);
 
         // listing
