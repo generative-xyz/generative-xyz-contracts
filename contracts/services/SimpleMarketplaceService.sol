@@ -114,7 +114,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         require(!_listingTokens[offerId]._closed, Errors.OFFERING_CLOSED);
 
         // transfer erc-721
-        erc721.safeTransferFrom(address(this), _closeOfferingData._buyer, listing._tokenId);
+        erc721.safeTransferFrom(_closeOfferingData._seller, _closeOfferingData._buyer, listing._tokenId);
 
         // logic for 
         // benefit of operator here

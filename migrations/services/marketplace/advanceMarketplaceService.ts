@@ -209,6 +209,20 @@ class AdvanceMarketplaceService {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
+    async _arrayListingId(contractAddress: any, index: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._arrayListingId(index).call(tx);
+    }
+
     async listingTokens(contractAddress: any, offerid: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce

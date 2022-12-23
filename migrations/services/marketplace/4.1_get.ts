@@ -13,8 +13,9 @@ import {AdvanceMarketplaceService} from "./advanceMarketplaceService";
         const contract = args[0];
         const marketplaceService = new AdvanceMarketplaceService(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         let a: any = {};
-        a.listingTokens = await marketplaceService.listingTokens(contract, args[1]);
+        // a.listingTokens = await marketplaceService.listingTokens(contract, args[1]);
         // a.makeOfferTokens = await marketplaceService.makeOfferTokens(contract, args[1]);
+        a._arrayListingId = await marketplaceService._arrayListingId(contract, args[1]);
         console.log({a});
     } catch (e) {
         // Deal with the fact the chain failed
