@@ -25,8 +25,8 @@ import {ethers} from "ethers";
         tx = await p.setUInt256(contract, key, ethers.utils.parseEther("0.001"), 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
-        key = 'FEE_TOKEN';
 
+        key = 'FEE_TOKEN';
         tx = await p.setAddress(contract, key, "0x0000000000000000000000000000000000000000", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
@@ -49,7 +49,7 @@ import {ethers} from "ethers";
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = "MINT_NFT_OPERATOR_TREASURE_ADDR";
+        key = "MINT_NFT_OPERATOR_TREASURE_ADDR";// hold operator fee when minting generative nft of project
         // tx = await p.setAddress(contract, key, "", 0);
         // console.log("set ", key);
         // console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
