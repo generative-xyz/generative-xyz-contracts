@@ -4,25 +4,6 @@
   "sourceName": "contracts/interfaces/IRoyaltyFinanceSecondSale.sol",
   "abi": [
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "from",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "PaymentReceived",
-      "type": "event"
-    },
-    {
       "inputs": [
         {
           "internalType": "uint256",

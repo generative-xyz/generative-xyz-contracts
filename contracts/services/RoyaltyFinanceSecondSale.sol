@@ -12,6 +12,7 @@ import "../interfaces/IParameterControl.sol";
 import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/configs/RoyaltyFinanceSecondSaleConfigs.sol";
 import "../libs/helpers/Errors.sol";
+import "../libs/structs/Royalty.sol";
 
 /*
  this contract will contain royalty second sale address of generative nft
@@ -77,19 +78,21 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
 
         // set approve
         _proxyRoyaltySecondSales[addr] = approve;
+        emit Royalty.SetProxyRoyaltySecondSale(addr, approve);
     }
 
-    function withdrawRoyalty(uint256 projectId, address erc20Addr) external {
-        require(_royaltySecondSale[projectId][msg.sender][erc20Addr] > 0);
+    function withdrawRoyalty(address account, uint256 projectId, address erc20Addr) external {
+        require(_royaltySecondSale[projectId][account][erc20Addr] > 0);
         bool success;
         if (erc20Addr == address(0x0)) {
-            (success,) = msg.sender.call{value : _royaltySecondSale[projectId][msg.sender][erc20Addr]}("");
+            (success,) = msg.sender.call{value : _royaltySecondSale[projectId][account][erc20Addr]}("");
             require(success);
         } else {
             IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
             // transfer erc-20 token
-            require(tokenERC20.transfer(msg.sender, _royaltySecondSale[projectId][msg.sender][erc20Addr]));
+            require(tokenERC20.transfer(msg.sender, _royaltySecondSale[projectId][account][erc20Addr]));
         }
+        emit Royalty.WithdrawRoyalty(account, projectId, erc20Addr);
     }
 
     function withdraw(address erc20Addr) external {
@@ -103,6 +106,7 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
             // transfer erc-20 token
             require(tokenERC20.transfer(msg.sender, _royaltySecondSaleAdmin[erc20Addr]));
         }
+        emit Royalty.Withdraw(_admin, erc20Addr);
     }
 
     function setRoyaltySecondSale(uint256 tokenId, address erc20Addr, uint256 amount) external nonReentrant {
@@ -126,7 +130,12 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
                 _royaltySecondSale[projectId][receiver][erc20Addr] += ownerRoyaltySecondSale * amount / 10000;
                 // set for _admin
                 _royaltySecondSaleAdmin[erc20Addr] = amount - (ownerRoyaltySecondSale * amount / 10000);
+                emit Royalty.SetRoyaltySecondSale(msg.sender, tokenId, erc20Addr, amount);
+            } else {
+                emit Royalty.SetRoyaltySecondSaleFail(msg.sender, tokenId, erc20Addr, amount);
             }
+        } else {
+            emit Royalty.SetRoyaltySecondSaleFail(msg.sender, tokenId, erc20Addr, amount);
         }
     }
 
@@ -138,7 +147,7 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
 
     receive() external payable virtual {
         require(_admin == msg.sender || _proxyRoyaltySecondSales[msg.sender]);
-        emit PaymentReceived(msg.sender, msg.value);
+        emit Royalty.PaymentReceived(msg.sender, msg.value);
     }
 }
 
