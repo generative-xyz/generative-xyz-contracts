@@ -144,7 +144,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         require(project._maxSupply > 0 && project._maxSupply < GenerativeNFTConfigs.PROJECT_PADDING);
         require(project._limit > 0 && project._limit <= project._maxSupply);
         require(project._creatorAddr != Errors.ZERO_ADDR);
-        require(royalty >= 5 && royalty < 10000);
+        require(royalty >= 500 && royalty < 10000);
 
         // safe mint
         _currentProjectId++;
