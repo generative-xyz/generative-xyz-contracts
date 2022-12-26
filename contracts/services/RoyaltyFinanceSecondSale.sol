@@ -27,8 +27,13 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
     address public _generativeProjectAddr;
     mapping(address => bool) public _proxyRoyaltySecondSales;
 
+    // payment info
     mapping(address => uint256) public _royaltySecondSaleAdmin;
     mapping(uint256 => mapping(address => mapping(address => uint256))) public _royaltySecondSale;
+
+    // withdraw info
+    mapping(address => uint256) public _royaltySecondSaleAdminWithdrawn;
+    mapping(uint256 => mapping(address => mapping(address => uint256))) public _royaltySecondSaleWithdrawn;
 
     function initialize(address admin, address paramAddr, address projectAddr, address proxy) initializer public {
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
@@ -81,6 +86,12 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
         emit Royalty.SetProxyRoyaltySecondSale(addr, approve);
     }
 
+    /* @Withdraw payment splitting
+    */
+
+    /*
+        trigger withdraw to `account`
+    */
     function withdrawRoyalty(address account, uint256 projectId, address erc20Addr) external {
         require(_royaltySecondSale[projectId][account][erc20Addr] > 0);
         bool success;
@@ -92,6 +103,7 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
             // transfer erc-20 token
             require(tokenERC20.transfer(msg.sender, _royaltySecondSale[projectId][account][erc20Addr]));
         }
+        _royaltySecondSaleWithdrawn[projectId][account][erc20Addr] += _royaltySecondSale[projectId][account][erc20Addr];
         emit Royalty.WithdrawRoyalty(account, projectId, erc20Addr);
     }
 
@@ -106,6 +118,7 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
             // transfer erc-20 token
             require(tokenERC20.transfer(msg.sender, _royaltySecondSaleAdmin[erc20Addr]));
         }
+        _royaltySecondSaleAdminWithdrawn[erc20Addr] += _royaltySecondSaleAdmin[erc20Addr];
         emit Royalty.Withdraw(_admin, erc20Addr);
     }
 
@@ -139,12 +152,16 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
         }
     }
 
+    /* @Support interface
+    */
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165Upgradeable, IERC165Upgradeable) returns (bool) {
         return
         interfaceId == type(IRoyaltyFinanceSecondSale).interfaceId ||
         super.supportsInterface(interfaceId);
     }
 
+    /* @Receive: The Ether received will be logged with {PaymentReceived} events
+    */
     receive() external payable virtual {
         require(_admin == msg.sender || _proxyRoyaltySecondSales[msg.sender]);
         emit Royalty.PaymentReceived(msg.sender, msg.value);
