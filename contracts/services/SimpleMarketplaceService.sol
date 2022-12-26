@@ -252,8 +252,8 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         Marketplace.MakeOfferData memory offer = _makeOfferTokens[offerId];
         require(!offer._closed || block.timestamp < offer._durationTime, Errors.OFFERING_CLOSED);
         IERC721Upgradeable erc721 = IERC721Upgradeable(offer._collectionContract);
-        require(erc721.ownerOf(offer._tokenId) == msg.sender);
-        require(erc721.isApprovedForAll(msg.sender, address(this)));
+        require(erc721.ownerOf(offer._tokenId) == msg.sender, Errors.INVALID_ERC721_OWNER);
+        require(erc721.isApprovedForAll(msg.sender, address(this)), Errors.ERC_721_NOT_APPROVED);
 
         IERC20Upgradeable erc20 = IERC20Upgradeable(offer._erc20Token);
         require(erc20.allowance(offer._buyer, address(this)) >= offer._price);
