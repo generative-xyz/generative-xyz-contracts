@@ -12,6 +12,7 @@ import "../interfaces/IMarketplaceService.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Marketplace.sol";
 import "../libs/configs/MarketplaceServiceConfigs.sol";
+import "../interfaces/IRoyaltyFinanceSecondSale.sol";
 
 
 contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, IMarketplaceService {
@@ -68,8 +69,14 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         }
     }
 
-    /* @Royalty: process royalty second sale
+    /* @Royalty: process royalty second sale in case RoyaltyFinanceSecondSale
     */
+    function setRoyaltySecondSale(address royaltyReceiver, uint256 tokenId, address erc20Addr, uint256 amount) internal {
+        IRoyaltyFinanceSecondSale royaltyFinance = IRoyaltyFinanceSecondSale(royaltyReceiver);
+        if (royaltyFinance.supportsInterface(type(IRoyaltyFinanceSecondSale).interfaceId)) {
+            royaltyFinance.setRoyaltySecondSale(tokenId, erc20Addr, amount);
+        }
+    }
 
 
     /* @Listing
@@ -78,8 +85,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         // get offer
         Marketplace.ListingTokenData memory listing = _listingTokens[offerId];
         require(!listing._closed || block.timestamp < listing._durationTime, Errors.OFFERING_CLOSED);
-        address hostContractOffering = listing._collectionContract;
-        IERC721Upgradeable erc721 = IERC721Upgradeable(hostContractOffering);
+        IERC721Upgradeable erc721 = IERC721Upgradeable(listing._collectionContract);
         bool isERC20 = listing._erc20Token != address(0x0);
 
         Marketplace.CloseData memory _closeOfferingData;
@@ -135,7 +141,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         }
 
         if (erc721.supportsInterface(type(IERC2981).interfaceId)) {
-            IERC2981 erc2981 = IERC2981(hostContractOffering);
+            IERC2981 erc2981 = IERC2981(listing._collectionContract);
             (address _receiver, uint256 _royaltyAmount) = erc2981.royaltyInfo(listing._tokenId, _closeOfferingData._originPrice);
             _benefit._royalty = _royaltyAmount;
             _benefit._royaltyReceiver = _receiver;
@@ -149,6 +155,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             // pay royalty second sale
             if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
                 require(erc20.transfer(_benefit._royaltyReceiver, _benefit._royalty), Errors.TRANSFER_FAIL);
+                setRoyaltySecondSale(_benefit._royaltyReceiver, listing._tokenId, listing._erc20Token, _benefit._royalty);
             }
         } else {
             require(address(this).balance > 0, Errors.VALUE_INVALID);
@@ -160,6 +167,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
                 (success,) = _benefit._royaltyReceiver.call{value : _benefit._royalty}("");
                 require(success, Errors.TRANSFER_FAIL);
+                setRoyaltySecondSale(_benefit._royaltyReceiver, listing._tokenId, listing._erc20Token, _benefit._royalty);
             }
         }
         // close offering
@@ -243,9 +251,9 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
     function _acceptMakeOffer(bytes32 offerId) internal virtual {
         Marketplace.MakeOfferData memory offer = _makeOfferTokens[offerId];
         require(!offer._closed || block.timestamp < offer._durationTime, Errors.OFFERING_CLOSED);
-        IERC721Upgradeable hostContract = IERC721Upgradeable(offer._collectionContract);
-        require(hostContract.ownerOf(offer._tokenId) == msg.sender);
-        require(hostContract.isApprovedForAll(msg.sender, address(this)));
+        IERC721Upgradeable erc721 = IERC721Upgradeable(offer._collectionContract);
+        require(erc721.ownerOf(offer._tokenId) == msg.sender);
+        require(erc721.isApprovedForAll(msg.sender, address(this)));
 
         IERC20Upgradeable erc20 = IERC20Upgradeable(offer._erc20Token);
         require(erc20.allowance(offer._buyer, address(this)) >= offer._price);
@@ -273,12 +281,26 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             closeData._price -= _benefit._benefitOperator;
         }
 
+        if (erc721.supportsInterface(type(IERC2981).interfaceId)) {
+            IERC2981 erc2981 = IERC2981(offer._collectionContract);
+            (address _receiver, uint256 _royaltyAmount) = erc2981.royaltyInfo(offer._tokenId, closeData._originPrice);
+            _benefit._royalty = _royaltyAmount;
+            _benefit._royaltyReceiver = _receiver;
+            closeData._price -= _benefit._royalty;
+        }
+
         // transfer erc-20
         require(erc20.transferFrom(closeData._buyer, address(this), closeData._originPrice), Errors.TRANSFER_FAIL);
         require(erc20.transfer(closeData._seller, closeData._price), Errors.TRANSFER_FAIL);
 
+        // pay royalty second sale
+        if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
+            require(erc20.transfer(_benefit._royaltyReceiver, _benefit._royalty), Errors.TRANSFER_FAIL);
+            setRoyaltySecondSale(_benefit._royaltyReceiver, offer._tokenId, offer._erc20Token, _benefit._royalty);
+        }
+
         // transfer erc-721
-        hostContract.safeTransferFrom(closeData._seller, closeData._buyer, offer._tokenId);
+        erc721.safeTransferFrom(closeData._seller, closeData._buyer, offer._tokenId);
         _makeOfferTokens[offerId]._closed = true;
         emit Marketplace.AcceptMakeOffer(offerId, offer);
     }

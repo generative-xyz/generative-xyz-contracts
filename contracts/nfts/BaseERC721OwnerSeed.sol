@@ -148,4 +148,10 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
 
         amount = (_salePrice * royalty) / 10000;
     }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, IERC165) returns (bool) {
+        return
+        interfaceId == type(IBaseERC721OwnerSeed).interfaceId || interfaceId == type(IERC2981).interfaceId ||
+        super.supportsInterface(interfaceId);
+    }
 }

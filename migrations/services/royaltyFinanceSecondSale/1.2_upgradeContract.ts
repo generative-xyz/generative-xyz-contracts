@@ -2,7 +2,7 @@ import {RoyaltyFinanceSecondSale} from "./royaltyFinanceSecondSale";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "local") {
+        if (process.env.NETWORK != "mumbai") {
             console.log("wrong network");
             return;
         }

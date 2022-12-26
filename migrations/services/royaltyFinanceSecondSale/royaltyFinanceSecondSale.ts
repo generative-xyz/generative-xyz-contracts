@@ -81,6 +81,97 @@ class RoyaltyFinanceSecondSale {
         }
         return null;
     }
+
+    async setProxyRoyaltySecondSale(contractAddress: any, addr: any, approve: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        let fun = temp?.nftContract.methods.setProxyRoyaltySecondSale(addr, approve);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async withdrawRoyalty(contractAddress: any, projectId: any, erc20: any = "0x0000000000000000000000000000000000000000", gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        let fun = temp?.nftContract.methods.withdrawRoyalty(projectId, erc20);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async withdraw(contractAddress: any, erc20: any = "0x0000000000000000000000000000000000000000", gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        let fun = temp?.nftContract.methods.withdraw(erc20);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async royaltySecondSale(contractAddress: any, projectId: any, creator: any, erc20: any = '0x0000000000000000000000000000000000000000') {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._royaltySecondSale(projectId, creator, erc20).call(tx);
+    }
+
+    async royaltySecondSaleAdmin(contractAddress: any, erc20: any = '0x0000000000000000000000000000000000000000') {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._royaltySecondSaleAdmin(erc20).call(tx);
+    }
 }
 
 export {RoyaltyFinanceSecondSale};

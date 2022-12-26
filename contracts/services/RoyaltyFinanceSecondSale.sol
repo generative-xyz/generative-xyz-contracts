@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol";
 
 import "../interfaces/IGenerativeProject.sol";
 import "../interfaces/IRoyaltyFinanceSecondSale.sol";
@@ -13,11 +14,11 @@ import "../libs/configs/RoyaltyFinanceSecondSaleConfigs.sol";
 import "../libs/helpers/Errors.sol";
 
 /*
- this contract will contain royalty second sale of generative nft
+ this contract will contain royalty second sale address of generative nft
  this contract address should be set into GenerativeNFTConfigs.ROYALTY_FIN_ADDRESS
  _admin or _proxyRoyaltySecondSale can call setRoyaltySecondSale to identify how much of royalty second sale for project's owner can withdraw
 */
-contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradeable, IRoyaltyFinanceSecondSale {
+contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradeable, IRoyaltyFinanceSecondSale, ERC165Upgradeable {
     // super admin
     address public _admin;
     // parameter control address
@@ -39,6 +40,8 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
             _proxyRoyaltySecondSales[proxy] = true;
         }
         __Ownable_init();
+        __ReentrancyGuard_init();
+        __ERC165_init();
     }
 
     function changeAdmin(address newAdm) external {
@@ -102,32 +105,40 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
         }
     }
 
-    function setRoyaltySecondSale(uint256 tokenId, address erc20Addr, uint256 amount) external payable nonReentrant {
-        if (erc20Addr == Errors.ZERO_ADDR) {
-            require(msg.value == amount);
-        }
-        require(_admin == msg.sender || _proxyRoyaltySecondSales[msg.sender], Errors.ONLY_ADMIN_ALLOWED);
-
-        // get project id from tokenId
-        uint256 projectId = tokenId / GenerativeNFTConfigs.PROJECT_PADDING;
-        IGenerativeProject project = IGenerativeProject(_generativeProjectAddr);
-        // get current owner of project
-        address receiver = project.ownerOf(projectId);
-        require(receiver != Errors.ZERO_ADDR);
-
-        // 90% for owner of project
-        uint256 ownerRoyaltySecondSale = RoyaltyFinanceSecondSaleConfigs.DEFAULT_OWNER_ROYALTY_SECOND_SALE;
-        if (_paramsAddress != Errors.ZERO_ADDR) {
-            IParameterControl _p = IParameterControl(_paramsAddress);
-            uint256 projectOwnerRoyalty = _p.getUInt256(RoyaltyFinanceSecondSaleConfigs.OWNER_ROYALTY_SECOND_SALE);
-            if (projectOwnerRoyalty > 0) {
-                ownerRoyaltySecondSale = projectOwnerRoyalty;
+    function setRoyaltySecondSale(uint256 tokenId, address erc20Addr, uint256 amount) external nonReentrant {
+        if (_admin == msg.sender || _proxyRoyaltySecondSales[msg.sender]) {
+            // get project id from tokenId
+            uint256 projectId = tokenId / GenerativeNFTConfigs.PROJECT_PADDING;
+            IGenerativeProject project = IGenerativeProject(_generativeProjectAddr);
+            // get current owner of project
+            address receiver = project.ownerOf(projectId);
+            if (receiver != Errors.ZERO_ADDR) {// only apply for generative project
+                // 90% for owner of project
+                uint256 ownerRoyaltySecondSale = RoyaltyFinanceSecondSaleConfigs.DEFAULT_OWNER_ROYALTY_SECOND_SALE;
+                if (_paramsAddress != Errors.ZERO_ADDR) {
+                    IParameterControl _p = IParameterControl(_paramsAddress);
+                    uint256 projectOwnerRoyalty = _p.getUInt256(RoyaltyFinanceSecondSaleConfigs.OWNER_ROYALTY_SECOND_SALE);
+                    if (projectOwnerRoyalty > 0) {
+                        ownerRoyaltySecondSale = projectOwnerRoyalty;
+                    }
+                }
+                // set for project's owner
+                _royaltySecondSale[projectId][receiver][erc20Addr] += ownerRoyaltySecondSale * amount / 10000;
+                // set for _admin
+                _royaltySecondSaleAdmin[erc20Addr] = amount - (ownerRoyaltySecondSale * amount / 10000);
             }
         }
-        // set for project's owner
-        _royaltySecondSale[projectId][receiver][erc20Addr] += ownerRoyaltySecondSale * amount / 10000;
-        // set for _admin
-        _royaltySecondSaleAdmin[erc20Addr] = amount - (ownerRoyaltySecondSale * amount / 10000);
+    }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165Upgradeable, IERC165Upgradeable) returns (bool) {
+        return
+        interfaceId == type(IRoyaltyFinanceSecondSale).interfaceId ||
+        super.supportsInterface(interfaceId);
+    }
+
+    receive() external payable virtual {
+        require(_admin == msg.sender || _proxyRoyaltySecondSales[msg.sender]);
+        emit PaymentReceived(msg.sender, msg.value);
     }
 }
 
