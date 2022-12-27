@@ -1,7 +1,7 @@
 
 # generative-xyz-contracts
 
-## [devnet - Polygon Mumbai](https://duckduckgo.com)
+## [devnet - Polygon Mumbai](https://devnet.generative.xyz)
 | CONTRACT                  | ADDRESS                                    |
 |---------------------------|--------------------------------------------|
 | Parameter Control         | [0x47B528E9eDD8f7Dd709bCa9f7E45c499C85eccfb](https://mumbai.polygonscan.com/address/0x47B528E9eDD8f7Dd709bCa9f7E45c499C85eccfb) |
