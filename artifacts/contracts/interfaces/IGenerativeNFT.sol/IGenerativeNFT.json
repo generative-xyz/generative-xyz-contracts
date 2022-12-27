@@ -1,0 +1,154 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IGenerativeNFT",
+  "sourceName": "contracts/interfaces/IGenerativeNFT.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "getStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "_projectAddr",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_projectId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint24",
+              "name": "_maxSupply",
+              "type": "uint24"
+            },
+            {
+              "internalType": "uint24",
+              "name": "_limit",
+              "type": "uint24"
+            },
+            {
+              "internalType": "uint24",
+              "name": "_index",
+              "type": "uint24"
+            },
+            {
+              "internalType": "uint24",
+              "name": "_indexReserve",
+              "type": "uint24"
+            },
+            {
+              "internalType": "string",
+              "name": "_creator",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_mintPrice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_mintPriceAddr",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "_name",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "_initBlockTime",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "_openingTime",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct NFTProject.ProjectMintingSchedule",
+              "name": "_mintingSchedule",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct NFTProject.ProjectMinting",
+          "name": "project",
+          "type": "tuple"
+        },
+        {
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "paramsAddr",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "randomizer",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "projectDataContextAddr",
+          "type": "address"
+        },
+        {
+          "internalType": "address[]",
+          "name": "reserves",
+          "type": "address[]"
+        },
+        {
+          "internalType": "bool",
+          "name": "disable",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "royalty",
+          "type": "uint256"
+        }
+      ],
+      "name": "init",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "enable",
+          "type": "bool"
+        }
+      ],
+      "name": "setStatus",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

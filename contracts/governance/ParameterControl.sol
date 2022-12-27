@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 import "../interfaces/IParameterControl.sol";
 import "../libs/helpers/Errors.sol";
 
@@ -12,20 +14,22 @@ import "../libs/helpers/Errors.sol";
  *
  */
 
-contract ParameterControl is IParameterControl {
+contract ParameterControl is Ownable, IParameterControl {
     event AdminChanged (address previousAdmin, address newAdmin);
     event SetEvent (string key, string value);
 
-    address public _admin; // is a mutil sig address when deploy
+    // is a mutil sig address when deploy
+    address public _admin;
     mapping(string => string) private _params;
     mapping(string => int) private _paramsInt;
     mapping(string => uint256) private _paramsUInt256;
     mapping(string => address) private _paramsAddress;
+    mapping(string => bytes32) private _paramsBytes32;
 
     constructor(
         address admin
     ) {
-        require(admin != address(0x0), Errors.INV_ADD);
+        require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
         _admin = admin;
     }
 
@@ -50,6 +54,10 @@ contract ParameterControl is IParameterControl {
         return _paramsAddress[key];
     }
 
+    function getBytes32(string memory key) external view returns (bytes32) {
+        return _paramsBytes32[key];
+    }
+
     function set(string memory key, string memory value) external adminOnly {
         _params[key] = value;
         emit SetEvent(key, value);
@@ -67,9 +75,12 @@ contract ParameterControl is IParameterControl {
         _paramsAddress[key] = value;
     }
 
-    function updateAdmin(address admin_) external adminOnly {
-        require(admin_ != address(0x0), Errors.INV_ADD);
+    function setBytes32(string memory key, bytes32 value) external adminOnly {
+        _paramsBytes32[key] = value;
+    }
 
+    function updateAdmin(address admin_) external adminOnly {
+        require(admin_ != Errors.ZERO_ADDR && admin_ != _admin, Errors.INV_ADD);
         address previousAdmin = _admin;
         _admin = admin_;
         emit AdminChanged(previousAdmin, _admin);
