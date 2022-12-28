@@ -57,12 +57,12 @@ import {ethers} from "ethers";
          * For Project Data
          */
         key = "BASE_URI";
-        tx = await p.set(contract, key, "http://devnet.generative.xyz/api/token", 0);
+        tx = await p.set(contract, key, "http://devnet.generative.xyz/generative/api/token", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
         key = "BASE_URI_TRAIT";
-        tx = await p.set(contract, key, "http://devnet.generative.xyz/api/trait", 0);
+        tx = await p.set(contract, key, "http://devnet.generative.xyz/generative/api/trait", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
