@@ -165,8 +165,16 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
 
         string memory scripts = "";
+        string memory inflate;
+        Inflate.ErrorCode err;
         for (uint256 i; i < projectDetail._scripts.length; i++) {
-            scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
+            (inflate, err) = this.inflateScript(projectDetail._scripts[i]);
+            //            err = Inflate.ErrorCode.ERR_NOT_TERMINATED;
+            if (err != Inflate.ErrorCode.ERR_NONE) {
+                scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
+            } else {
+                scripts = string(abi.encodePacked(scripts, inflate));
+            }
         }
 
         string memory scriptType = "";
@@ -194,7 +202,10 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     }
 
     function inflateScript(string memory script) external view returns (string memory result, Inflate.ErrorCode err) {
-        bytes memory decode = Base64.decode(script);
+        string memory temp = StringsUtils.getSlice(9, bytes(script).length - 9, script);
+        console.log(script);
+        console.log(temp);
+        bytes memory decode = Base64.decode(temp);
         bytes memory buff;
         (err, buff) = Inflate.puff(decode, decode.length * 5);
         if (err == Inflate.ErrorCode.ERR_NONE) {
