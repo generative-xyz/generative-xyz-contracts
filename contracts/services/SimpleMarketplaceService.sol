@@ -82,6 +82,9 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
     /* @Listing
     */
     function _purchaseToken(bytes32 offerId) internal virtual {
+        // close offering
+        _listingTokens[offerId]._closed = true;
+
         // get offer
         Marketplace.ListingTokenData memory listing = _listingTokens[offerId];
         require(!listing._closed || block.timestamp < listing._durationTime, Errors.OFFERING_CLOSED);
@@ -170,8 +173,6 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
                 setRoyaltySecondSale(_benefit._royaltyReceiver, listing._tokenId, listing._erc20Token, _benefit._royalty);
             }
         }
-        // close offering
-        _listingTokens[offerId]._closed = true;
 
         emit Marketplace.PurchaseToken(offerId, listing);
     }
@@ -249,6 +250,9 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
     }
 
     function _acceptMakeOffer(bytes32 offerId) internal virtual {
+        // close make offer
+        _makeOfferTokens[offerId]._closed = true;
+
         Marketplace.MakeOfferData memory offer = _makeOfferTokens[offerId];
         require(!offer._closed || block.timestamp < offer._durationTime, Errors.OFFERING_CLOSED);
         IERC721Upgradeable erc721 = IERC721Upgradeable(offer._collectionContract);
@@ -301,7 +305,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
         // transfer erc-721
         erc721.safeTransferFrom(closeData._seller, closeData._buyer, offer._tokenId);
-        _makeOfferTokens[offerId]._closed = true;
+        
         emit Marketplace.AcceptMakeOffer(offerId, offer);
     }
 
