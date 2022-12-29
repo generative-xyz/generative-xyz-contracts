@@ -1,6 +1,13 @@
 pragma solidity ^0.8.0;
 
 library NFTProject {
+    event CompleteProject(uint256 indexed projectId, uint256 indexed time);
+    event UpdateProjectSocial(uint256 indexed projectId, ProjectSocial data);
+    event UpdateProjectName(uint256 indexed projectId, string indexed data);
+    event UpdateProjectLicense(uint256 indexed projectId, string indexed data);
+    event UpdateProjectCreatorName(uint256 indexed projectId, string indexed data);
+    event SetProjectStatus(uint256 indexed projectId, bool indexed enable);
+
     struct Project {
         uint24 _maxSupply; // required
         uint24 _limit;// required

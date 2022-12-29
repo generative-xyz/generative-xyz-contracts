@@ -109,7 +109,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     /* @Mint project
     */
 
-    function paymentMintProject() internal {
+    function _paymentMintProject() internal {
         if (msg.sender != _admin) {
             IParameterControl _p = IParameterControl(_paramsAddress);
             // at least require value 1ETH
@@ -139,17 +139,14 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         uint256 royalty//% royalty second sale
     ) external payable nonReentrant returns (uint256) {
         // verify
-        require(bytes(project._name).length > 3);
-        require(bytes(project._creator).length > 3);
-        require(project._maxSupply > 0 && project._maxSupply < GenerativeNFTConfigs.PROJECT_PADDING);
-        require(project._limit > 0 && project._limit <= project._maxSupply);
-        require(project._creatorAddr != Errors.ZERO_ADDR);
-        require(royalty >= 500 && royalty < 10000);
+        require(bytes(project._name).length > 3 && bytes(project._creator).length > 3, Errors.MISSING_NAME);
+        require(project._maxSupply > 0 && project._maxSupply < GenerativeNFTConfigs.PROJECT_PADDING && project._limit > 0 && project._limit <= project._maxSupply && royalty <= 10000, Errors.INV_PARAMS);
+        require(project._creatorAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
 
         // safe mint
         _currentProjectId++;
         IParameterControl _p = IParameterControl(_paramsAddress);
-        paymentMintProject();
+        _paymentMintProject();
         _projects[_currentProjectId] = project;
         _safeMint(project._creatorAddr, _currentProjectId);
 
@@ -181,15 +178,17 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     )
     external
     {
-        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
         require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._scriptType[i] = scriptType;
     }
 
+    /* @UpdateProject
+    */
     function addProjectScript(uint256 projectId, string memory _script)
     external
     {
-        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
         require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._scripts.push(_script);
     }
@@ -197,7 +196,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     function updateProjectScript(uint256 projectId, uint256 scriptIndex, string memory script)
     external
     {
-        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
         require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._scripts[scriptIndex] = script;
     }
@@ -205,46 +204,66 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     function deleteProjectScript(uint256 projectId, uint256 scriptIndex)
     external
     {
-        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
         require(_exists(projectId), Errors.INV_TOKEN);
         delete _projects[projectId]._scripts[scriptIndex];
     }
 
-    function completeProject(uint256 projectId) external {
+    function completeProject(uint256 projectId)
+    external {
         require(msg.sender == _projects[projectId]._genNFTAddr);
         require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._completeTime = block.timestamp;
+        emit NFTProject.CompleteProject(projectId, _projects[projectId]._completeTime);
     }
 
     function updateProjectName(uint256 projectId, string memory projectName)
     external {
-        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
         require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._name = projectName;
+        emit NFTProject.UpdateProjectName(projectId, projectName);
     }
 
     function updateProjectCreatorName(uint256 projectId, string memory creatorName)
     external {
-        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
         require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._creator = creatorName;
+        emit NFTProject.UpdateProjectCreatorName(projectId, creatorName);
     }
 
     function updateProjectLicense(uint256 projectId, string memory license)
     external {
-        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr);
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
         require(_exists(projectId), Errors.INV_TOKEN);
         _projects[projectId]._license = license;
+        emit NFTProject.UpdateProjectLicense(projectId, license);
     }
 
     function setProjectStatus(uint256 projectId, bool enable) external {
         require(_exists(projectId), Errors.INV_TOKEN);
-        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.INV_ADD);
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
         IGenerativeNFT nft = IGenerativeNFT(_projects[projectId]._genNFTAddr);
         require(nft.getStatus() != enable);
         nft.setStatus(enable);
+        emit NFTProject.SetProjectStatus(projectId, enable);
     }
 
+    function updateProjectSocial(uint256 projectId, NFTProject.ProjectSocial memory data)
+    external {
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
+        require(_exists(projectId), Errors.INV_TOKEN);
+        _projects[projectId]._social._discord = data._discord;
+        _projects[projectId]._social._twitter = data._twitter;
+        _projects[projectId]._social._instagram = data._instagram;
+        _projects[projectId]._social._medium = data._medium;
+        _projects[projectId]._social._web = data._web;
+        emit NFTProject.UpdateProjectSocial(projectId, data);
+    }
+
+    /* @OverrideTransfer: project can mint but can not transfer
+    */
     function _beforeTokenTransfer(
         address from,
         address to,
@@ -256,7 +275,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         super._beforeTokenTransfer(from, to, tokenId, batchSize);
     }
 
-    /* @projectData:
+    /* @projectDataURI
     */
     function projectDetails(uint256 projectId) external view returns (NFTProject.Project memory project){
         require(_exists(projectId), Errors.INV_TOKEN);
