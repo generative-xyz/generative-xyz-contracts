@@ -55,7 +55,6 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
 
         // change admin
         if (_admin != newAdm) {
-            address _previousAdmin = _admin;
             _admin = newAdm;
         }
     }

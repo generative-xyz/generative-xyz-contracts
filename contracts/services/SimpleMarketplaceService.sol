@@ -34,6 +34,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
         _admin = admin;
         _parameterAddr = parameterControl;
+        __ReentrancyGuard_init();
     }
 
     function changeAdmin(address newAdm) external {
@@ -41,7 +42,6 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
         // change admin
         if (_admin != newAdm) {
-            address _previousAdmin = _admin;
             _admin = newAdm;
         }
     }
@@ -305,7 +305,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
         // transfer erc-721
         erc721.safeTransferFrom(closeData._seller, closeData._buyer, offer._tokenId);
-        
+
         emit Marketplace.AcceptMakeOffer(offerId, offer);
     }
 
