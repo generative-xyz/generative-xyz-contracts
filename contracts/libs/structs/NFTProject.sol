@@ -26,6 +26,8 @@ library NFTProject {
         uint256 _completeTime;// init = 0
         address _genNFTAddr; // init = 0x0
         string _itemDesc; // not require
+        address[] _reserves;// list address for GenerativeNFT.reserveMint
+        uint256 _royalty;//% royalty second sale
     }
 
     struct ProjectSocial {
@@ -48,6 +50,8 @@ library NFTProject {
         address _mintPriceAddr; // erc20 addr if possible
         string _name;
         ProjectMintingSchedule _mintingSchedule;
+        address[] _reserves;
+        uint256 _royalty;//% royalty second sale
     }
 
     struct ProjectMintingSchedule {

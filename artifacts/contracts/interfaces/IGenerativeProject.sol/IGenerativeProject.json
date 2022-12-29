@@ -313,6 +313,16 @@
               "internalType": "string",
               "name": "_itemDesc",
               "type": "string"
+            },
+            {
+              "internalType": "address[]",
+              "name": "_reserves",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_royalty",
+              "type": "uint256"
             }
           ],
           "internalType": "struct NFTProject.Project",

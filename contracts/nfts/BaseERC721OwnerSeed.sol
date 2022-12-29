@@ -8,6 +8,7 @@ import "../interfaces/IBaseERC721OwnerSeed.sol";
 import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/NFTCollection.sol";
+import "../libs/structs/Royalty.sol";
 import "../interfaces/IParameterControl.sol";
 import "../libs/helpers/StringsUtils.sol";
 
@@ -146,7 +147,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
             }
         }
 
-        amount = (_salePrice * royalty) / 10000;
+        amount = (_salePrice * royalty) / Royalty.MINT_PERCENT_ROYALTY;
     }
 
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, IERC165) returns (bool) {

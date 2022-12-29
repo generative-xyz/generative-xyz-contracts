@@ -16,6 +16,7 @@ import "../interfaces/IGenerativeProjectData.sol";
 import "../libs/configs/GenerativeProjectConfigs.sol";
 import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
+import "../libs/structs/Royalty.sol";
 
 
 contract GenerativeProject is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IGenerativeProject, DefaultOperatorFiltererUpgradeable {
@@ -133,14 +134,12 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
 
     function mint(
         NFTProject.Project memory project,
-        address[] memory reserves,
         bool disable,
-        uint256 openingTime,
-        uint256 royalty//% royalty second sale
+        uint256 openingTime
     ) external payable nonReentrant returns (uint256) {
         // verify
         require(bytes(project._name).length > 3 && bytes(project._creator).length > 3, Errors.MISSING_NAME);
-        require(project._maxSupply > 0 && project._maxSupply < GenerativeNFTConfigs.PROJECT_PADDING && project._limit > 0 && project._limit <= project._maxSupply && royalty <= 10000, Errors.INV_PARAMS);
+        require(project._maxSupply > 0 && project._maxSupply < GenerativeNFTConfigs.PROJECT_PADDING && project._limit > 0 && project._limit <= project._maxSupply && project._royalty <= Royalty.MINT_PERCENT_ROYALTY, Errors.INV_PARAMS);
         require(project._creatorAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
 
         // safe mint
@@ -166,8 +165,10 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
                 project._mintPrice,
                 project._mintPriceAddr,
                 project._name,
-                NFTProject.ProjectMintingSchedule(0, openingTime)
-            ), _admin, _paramsAddress, _randomizerAddr, _projectDataContextAddr, reserves, disable, royalty);
+                NFTProject.ProjectMintingSchedule(0, openingTime),
+                project._reserves,
+                project._royalty
+            ), _admin, _paramsAddress, _randomizerAddr, _projectDataContextAddr, disable);
         return _currentProjectId;
     }
 
@@ -301,7 +302,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     returns (address receiver, uint256 royaltyAmount)
     {
         receiver = _admin;
-        royaltyAmount = (_salePrice * 500) / 10000;
+        royaltyAmount = (_salePrice * 500) / Royalty.MINT_PERCENT_ROYALTY;
     }
 
     /* @notice: opensea operator filter registry

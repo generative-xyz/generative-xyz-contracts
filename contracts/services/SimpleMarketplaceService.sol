@@ -13,7 +13,7 @@ import "../libs/helpers/Errors.sol";
 import "../libs/structs/Marketplace.sol";
 import "../libs/configs/MarketplaceServiceConfigs.sol";
 import "../interfaces/IRoyaltyFinanceSecondSale.sol";
-
+import "../libs/structs/Royalty.sol";
 
 contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, IMarketplaceService {
     uint256 private _counting;
@@ -139,7 +139,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             _benefit._benefitPercentOperator = MarketplaceServiceConfigs.DEFAULT_MARKETPLACE_BENEFIT_PERCENT;
         }
         if (_benefit._benefitPercentOperator > 0) {
-            _benefit._benefitOperator = _closeOfferingData._originPrice * _benefit._benefitPercentOperator / 10000;
+            _benefit._benefitOperator = _closeOfferingData._originPrice * _benefit._benefitPercentOperator / Royalty.MINT_PERCENT_ROYALTY;
             _closeOfferingData._price -= _benefit._benefitOperator;
         }
 
@@ -281,7 +281,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             _benefit._benefitPercentOperator = MarketplaceServiceConfigs.DEFAULT_MARKETPLACE_BENEFIT_PERCENT;
         }
         if (_benefit._benefitPercentOperator > 0) {
-            _benefit._benefitOperator = closeData._originPrice * _benefit._benefitPercentOperator / 10000;
+            _benefit._benefitOperator = closeData._originPrice * _benefit._benefitPercentOperator / Royalty.MINT_PERCENT_ROYALTY;
             closeData._price -= _benefit._benefitOperator;
         }
 

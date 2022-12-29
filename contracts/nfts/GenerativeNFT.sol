@@ -38,7 +38,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
 
     /* @ProjectInfo: data for project data
     */
-    function init(NFTProject.ProjectMinting memory project, address admin, address paramsAddr, address randomizer, address projectDataContextAddr, address[] memory reserves, bool disable, uint256 royalty) external {
+    function init(NFTProject.ProjectMinting memory project, address admin, address paramsAddr, address randomizer, address projectDataContextAddr, bool disable) external {
         require(_admin == Errors.ZERO_ADDR, Errors.INV_PROJECT);
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
         _project = project;
@@ -48,16 +48,16 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _projectDataContextAddr = projectDataContextAddr;
         _nameCol = string(abi.encodePacked(project._name, " by ", project._creator));
         for (uint256 i;
-            i < reserves.length;
+            i < project._reserves.length;
             i++) {
-            _reserves[reserves[i]] = true;
+            _reserves[project._reserves[i]] = true;
         }
         transferOwnership(_admin);
         if (disable) {
             _pause();
         }
         _project._mintingSchedule._initBlockTime = block.timestamp;
-        _royalty = royalty;
+        _royalty = project._royalty;
     }
 
     /* @Mint
@@ -98,11 +98,11 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
             require(msg.value >= mintPrice);
 
             // pay for owner project
-            (bool success,) = project.ownerOf(_project._projectId).call{value : mintPrice - (mintPrice * operationFee / 10000)}("");
+            (bool success,) = project.ownerOf(_project._projectId).call{value : mintPrice - (mintPrice * operationFee / Royalty.MINT_PERCENT_ROYALTY)}("");
             require(success);
             if (operationFee > 0) {
                 // pay for admin
-                (success,) = operatorTreasureAddress.call{value : mintPrice * operationFee / 10000}("");
+                (success,) = operatorTreasureAddress.call{value : mintPrice * operationFee / Royalty.MINT_PERCENT_ROYALTY}("");
             }
         } else {
             IERC20 tokenERC20 = IERC20(mintPriceAddr);
@@ -114,10 +114,10 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
                 ));
 
             // pay for owner project
-            require(tokenERC20.transfer(project.ownerOf(_project._projectId), mintPrice - (mintPrice * operationFee / 10000)));
+            require(tokenERC20.transfer(project.ownerOf(_project._projectId), mintPrice - (mintPrice * operationFee / Royalty.MINT_PERCENT_ROYALTY)));
             if (operationFee > 0) {
                 // pay for admin
-                require(tokenERC20.transfer(operatorTreasureAddress, mintPrice * operationFee / 10000));
+                require(tokenERC20.transfer(operatorTreasureAddress, mintPrice * operationFee / Royalty.MINT_PERCENT_ROYALTY));
             }
         }
     }
