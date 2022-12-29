@@ -69,8 +69,8 @@ library Base64 {
     function decode(string memory _data) internal pure returns (bytes memory) {
         bytes memory data = bytes(_data);
 
-        if (data.length == 0) return new bytes(0);
-        require(data.length % 4 == 0, "invalid base64 decoder input");
+        if (data.length == 0 || data.length % 4 != 0) {return new bytes(0);}
+        //        require(data.length % 4 == 0, "invalid base64 decoder input");
 
         // load the table into memory
         bytes memory table = TABLE_DECODE;
