@@ -8,8 +8,9 @@ library Marketplace {
     event MakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
     event CancelMakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
     event AcceptMakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
-    
+
     event Sweep(bytes32[] result);
+    event MakeCollectionOffer(bytes32[] result);
 
     struct Benefit {
         address _royaltyReceiver;// contract/address get royalty second sale
@@ -46,5 +47,15 @@ library Marketplace {
         uint256 _balanceBuyer;
         uint256 _approvalToken;
         address _erc20Token;
+    }
+
+    struct MakeOfferCollectionData {
+        address _collectionContract; // erc-721 collection address
+        uint256[] _tokenIds;
+        address _buyer;
+        address _erc20Token; // only support WETH
+        uint256 _price;
+        bool _closed;
+        uint256 _durationTime;
     }
 }

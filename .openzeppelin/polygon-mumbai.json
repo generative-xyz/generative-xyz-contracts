@@ -18509,6 +18509,322 @@
           }
         }
       }
+    },
+    "a779239a8a885433bd157b8ab42443bc0f28061701e5c7d2c5db12411325fa4a": {
+      "address": "0x91719252bdA7d5A03BcDeE7C8C0eac9c1353c8eb",
+      "txHash": "0x3db1cd5c7d5ac40a21c5e10fc29dff3ba473c9c9360594df624ca8c3e9ee0230",
+      "layout": {
+        "solcVersion": "0.8.12",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "_status",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:80"
+          },
+          {
+            "label": "_counting",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_uint256",
+            "contract": "SimpleMarketplaceService",
+            "src": "contracts/services/SimpleMarketplaceService.sol:19"
+          },
+          {
+            "label": "_admin",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_address",
+            "contract": "SimpleMarketplaceService",
+            "src": "contracts/services/SimpleMarketplaceService.sol:21"
+          },
+          {
+            "label": "_parameterAddr",
+            "offset": 0,
+            "slot": "53",
+            "type": "t_address",
+            "contract": "SimpleMarketplaceService",
+            "src": "contracts/services/SimpleMarketplaceService.sol:22"
+          },
+          {
+            "label": "_listingTokens",
+            "offset": 0,
+            "slot": "54",
+            "type": "t_mapping(t_bytes32,t_struct(ListingTokenData)4231_storage)",
+            "contract": "SimpleMarketplaceService",
+            "src": "contracts/services/SimpleMarketplaceService.sol:24"
+          },
+          {
+            "label": "_arrayListingId",
+            "offset": 0,
+            "slot": "55",
+            "type": "t_array(t_bytes32)dyn_storage",
+            "contract": "SimpleMarketplaceService",
+            "src": "contracts/services/SimpleMarketplaceService.sol:25"
+          },
+          {
+            "label": "_makeOfferTokens",
+            "offset": 0,
+            "slot": "56",
+            "type": "t_mapping(t_bytes32,t_struct(MakeOfferData)4246_storage)",
+            "contract": "SimpleMarketplaceService",
+            "src": "contracts/services/SimpleMarketplaceService.sol:27"
+          },
+          {
+            "label": "_arrayMakeOfferId",
+            "offset": 0,
+            "slot": "57",
+            "type": "t_array(t_bytes32)dyn_storage",
+            "contract": "SimpleMarketplaceService",
+            "src": "contracts/services/SimpleMarketplaceService.sol:28"
+          },
+          {
+            "label": "_listingTokenDataMapping",
+            "offset": 0,
+            "slot": "58",
+            "type": "t_mapping(t_address,t_mapping(t_uint256,t_array(t_struct(ListingTokenData)4231_storage)dyn_storage))",
+            "contract": "AdvanceMarketplaceService",
+            "src": "contracts/services/AdvanceMarketplaceService.sol:8"
+          },
+          {
+            "label": "_listingTokenIds",
+            "offset": 0,
+            "slot": "59",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "AdvanceMarketplaceService",
+            "src": "contracts/services/AdvanceMarketplaceService.sol:10"
+          },
+          {
+            "label": "_makeOfferDataMapping",
+            "offset": 0,
+            "slot": "60",
+            "type": "t_mapping(t_address,t_mapping(t_uint256,t_array(t_struct(MakeOfferData)4246_storage)dyn_storage))",
+            "contract": "AdvanceMarketplaceService",
+            "src": "contracts/services/AdvanceMarketplaceService.sol:12"
+          },
+          {
+            "label": "_makeOfferTokenIds",
+            "offset": 0,
+            "slot": "61",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "AdvanceMarketplaceService",
+            "src": "contracts/services/AdvanceMarketplaceService.sol:14"
+          },
+          {
+            "label": "_allowableERC20MakeOffer",
+            "offset": 0,
+            "slot": "62",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "AdvanceMarketplaceService",
+            "src": "contracts/services/AdvanceMarketplaceService.sol:16"
+          },
+          {
+            "label": "_allowableERC20MakeListToken",
+            "offset": 0,
+            "slot": "63",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "AdvanceMarketplaceService",
+            "src": "contracts/services/AdvanceMarketplaceService.sol:17"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_bytes32)dyn_storage": {
+            "label": "bytes32[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_struct(ListingTokenData)4231_storage)dyn_storage": {
+            "label": "struct Marketplace.ListingTokenData[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_struct(MakeOfferData)4246_storage)dyn_storage": {
+            "label": "struct Marketplace.MakeOfferData[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_mapping(t_uint256,t_array(t_struct(ListingTokenData)4231_storage)dyn_storage))": {
+            "label": "mapping(address => mapping(uint256 => struct Marketplace.ListingTokenData[]))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_mapping(t_uint256,t_array(t_struct(MakeOfferData)4246_storage)dyn_storage))": {
+            "label": "mapping(address => mapping(uint256 => struct Marketplace.MakeOfferData[]))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(ListingTokenData)4231_storage)": {
+            "label": "mapping(bytes32 => struct Marketplace.ListingTokenData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(MakeOfferData)4246_storage)": {
+            "label": "mapping(bytes32 => struct Marketplace.MakeOfferData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_array(t_struct(ListingTokenData)4231_storage)dyn_storage)": {
+            "label": "mapping(uint256 => struct Marketplace.ListingTokenData[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_array(t_struct(MakeOfferData)4246_storage)dyn_storage)": {
+            "label": "mapping(uint256 => struct Marketplace.MakeOfferData[])",
+            "numberOfBytes": "32"
+          },
+          "t_struct(ListingTokenData)4231_storage": {
+            "label": "struct Marketplace.ListingTokenData",
+            "members": [
+              {
+                "label": "_collectionContract",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_tokenId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "_seller",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "_erc20Token",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "_price",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "_closed",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "_durationTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
+          },
+          "t_struct(MakeOfferData)4246_storage": {
+            "label": "struct Marketplace.MakeOfferData",
+            "members": [
+              {
+                "label": "_collectionContract",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_tokenId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "_buyer",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "_erc20Token",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "_price",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "_closed",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "_durationTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
     }
   }
 }
