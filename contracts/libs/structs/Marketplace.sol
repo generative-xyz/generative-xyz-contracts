@@ -8,6 +8,8 @@ library Marketplace {
     event MakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
     event CancelMakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
     event AcceptMakeOffer(bytes32 indexed offeringId, Marketplace.MakeOfferData data);
+    
+    event Sweep(bytes32[] result);
 
     struct Benefit {
         address _royaltyReceiver;// contract/address get royalty second sale

@@ -49,4 +49,18 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
         _makeOfferTokenIds[data._collectionContract].push(data._tokenId);
         return offerId;
     }
+
+    function sweep(bytes32[] memory offers) external payable nonReentrant() {
+        require(offers.length <= 100);
+        bytes32[] memory result = new bytes32[](offers.length);
+        for (uint256 i; i < offers.length; i++) {
+            if (gasleft() < 300000) {break;}
+
+            if (!_listingTokens[offers[i]]._closed) {
+                _purchaseToken(offers[i]);
+                result[i] = offers[i];
+            }
+        }
+        emit Marketplace.Sweep(result);
+    }
 }
