@@ -54,12 +54,11 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
         require(offers.length <= 100);
         bytes32[] memory result = new bytes32[](offers.length);
         for (uint256 i; i < offers.length; i++) {
-            if (gasleft() < 300000) {break;}
-
             if (!_listingTokens[offers[i]]._closed) {
                 _purchaseToken(offers[i]);
                 result[i] = offers[i];
             }
+            if (gasleft() < 200000) {break;}
         }
         emit Marketplace.Sweep(result);
     }

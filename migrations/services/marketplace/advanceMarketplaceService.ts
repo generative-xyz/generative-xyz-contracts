@@ -306,6 +306,28 @@ class AdvanceMarketplaceService {
 
         return await this.signedAndSendTx(temp?.web3, tx);
     }
+
+    async sweep(contractAddress: any, offers: any, price: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        let fun = temp?.nftContract.methods.sweep(offers);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+            value: price
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
 }
 
 export {AdvanceMarketplaceService};
