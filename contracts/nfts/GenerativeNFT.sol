@@ -33,7 +33,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
     }
 
     function _checkOwner() internal view override {
-        require(owner() == msg.sender || msg.sender == _project._projectAddr, "Ownable: caller is not the owner");
+        require(owner() == msg.sender || msg.sender == _project._projectAddr, Errors.INV_ADD);
     }
 
     /* @ProjectInfo: data for project data
