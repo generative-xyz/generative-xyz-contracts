@@ -71,6 +71,12 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
 
         ctx._name = string(abi.encodePacked(d._name, " #", StringsUpgradeable.toString(projectId)));
         ctx._desc = d._desc;
+        string memory inflate;
+        Inflate.ErrorCode err;
+        (inflate, err) = inflateString(ctx._desc);
+        if (err == Inflate.ErrorCode.ERR_NONE) {
+            ctx._desc = inflate;
+        }
         ctx._image = d._image;
         ctx._animationURI = animationURI;
         ctx._genNFTAddr = d._genNFTAddr;
@@ -121,6 +127,12 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         if (bytes(projectDetail._itemDesc).length > 0) {
             ctx._desc = projectDetail._itemDesc;
         }
+        string memory inflate;
+        Inflate.ErrorCode err;
+        (inflate, err) = inflateString(ctx._desc);
+        if (err == Inflate.ErrorCode.ERR_NONE) {
+            ctx._desc = inflate;
+        }
 
         ctx._baseURI = string(abi.encodePacked(ctx._baseURI, "/",
             StringsUpgradeable.toHexString(_generativeProjectAddr), "/",
@@ -168,7 +180,6 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         Inflate.ErrorCode err;
         for (uint256 i; i < projectDetail._scripts.length; i++) {
             (inflate, err) = this.inflateScript(projectDetail._scripts[i]);
-            //            err = Inflate.ErrorCode.ERR_NOT_TERMINATED;
             if (err != Inflate.ErrorCode.ERR_NONE) {
                 scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
             } else {
@@ -200,11 +211,17 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
             ));
     }
 
-    function inflateScript(string memory script) external view returns (string memory result, Inflate.ErrorCode err) {
-        string memory temp = StringsUtils.getSlice(9, bytes(script).length - 9, script);
-        bytes memory decode = Base64.decode(temp);
+    function inflateScript(string memory script) public view returns (string memory result, Inflate.ErrorCode err) {
+        return inflateString(StringsUtils.getSlice(9, bytes(script).length - 9, script));
+    }
+
+    function inflateString(string memory data) public view returns (string memory result, Inflate.ErrorCode err) {
+        return inflate(Base64.decode(data));
+    }
+
+    function inflate(bytes memory data) internal view returns (string memory result, Inflate.ErrorCode err) {
         bytes memory buff;
-        (err, buff) = Inflate.puff(decode, decode.length * 5);
+        (err, buff) = Inflate.puff(data, data.length * 5);
         if (err == Inflate.ErrorCode.ERR_NONE) {
             uint256 breakLen = 0;
             while (true) {
@@ -216,13 +233,13 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                     break;
                 }
             }
-            bytes memory data = new bytes(breakLen);
+            bytes memory temp = new bytes(breakLen);
             uint256 i = 0;
             while (i < breakLen) {
-                data[i] = buff[i];
+                temp[i] = buff[i];
                 i++;
             }
-            result = string(data);
+            result = string(temp);
         } else {
             result = "";
         }
