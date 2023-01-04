@@ -12,6 +12,9 @@ library Marketplace {
     event Sweep(bytes32[] result);
     event MakeCollectionOffer(bytes32[] result);
 
+    event UpdateListingPrice(bytes32 indexed offeringId, uint256 indexed price);
+    event UpdateMakeOfferPrice(bytes32 indexed offeringId, uint256 indexed price);
+
     struct Benefit {
         address _royaltyReceiver;// contract/address get royalty second sale
         uint256 _royalty;// royalty second sale

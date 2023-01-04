@@ -85,4 +85,16 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
         }
         emit Marketplace.MakeCollectionOffer(result);
     }
+
+    function updateListingPrice(bytes32 offerId, uint256 price) external {
+        require(price > 0);
+        _listingTokens[offerId]._price = price;
+        emit Marketplace.UpdateListingPrice(offerId, price);
+    }
+
+    function updateMakeOfferPrice(bytes32 offerId, uint256 price) external {
+        require(price > 0);
+        _makeOfferTokens[offerId]._price = price;
+        emit Marketplace.UpdateMakeOfferPrice(offerId, price);
+    }
 }

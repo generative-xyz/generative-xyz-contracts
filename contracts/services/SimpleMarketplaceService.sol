@@ -84,7 +84,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
     function _purchaseToken(bytes32 offerId) internal virtual {
         // get offer
         Marketplace.ListingTokenData memory listing = _listingTokens[offerId];
-        require(!listing._closed && block.timestamp < listing._durationTime, Errors.OFFERING_CLOSED);
+        require(!listing._closed && (listing._durationTime == 0 || block.timestamp < listing._durationTime), Errors.OFFERING_CLOSED);
         // close offering
         _listingTokens[offerId]._closed = true;
         IERC721Upgradeable erc721 = IERC721Upgradeable(listing._collectionContract);
@@ -180,7 +180,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         IERC721Upgradeable erc721 = IERC721Upgradeable(listingData._collectionContract);
         require(erc721.ownerOf(listingData._tokenId) == msg.sender, Errors.INVALID_ERC721_OWNER);
         require(listingData._price > 0, Errors.ZERO_PRICE);
-        require(listingData._durationTime > 0, Errors.ZERO_DURATION);
+        //        require(listingData._durationTime > 0, Errors.ZERO_DURATION);
         // check approval of erc-721 on this contract
         require(erc721.isApprovedForAll(msg.sender, address(this)) == true, Errors.ERC_721_NOT_APPROVED);
 
@@ -222,7 +222,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         require(data._erc20Token != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(data._collectionContract != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(data._price > 0, Errors.ZERO_PRICE);
-        require(data._durationTime > 0, Errors.ZERO_DURATION);
+        //        require(data._durationTime > 0, Errors.ZERO_DURATION);
 
         IERC20Upgradeable erc20 = IERC20Upgradeable(data._erc20Token);
         require(erc20.allowance(msg.sender, address(this)) >= data._price);
@@ -249,7 +249,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
 
     function _acceptMakeOffer(bytes32 offerId) internal virtual {
         Marketplace.MakeOfferData memory offer = _makeOfferTokens[offerId];
-        require(!offer._closed && block.timestamp < offer._durationTime, Errors.OFFERING_CLOSED);
+        require(!offer._closed && (offer._durationTime == 0 || block.timestamp < offer._durationTime), Errors.OFFERING_CLOSED);
         // close make offer
         _makeOfferTokens[offerId]._closed = true;
         IERC721Upgradeable erc721 = IERC721Upgradeable(offer._collectionContract);
