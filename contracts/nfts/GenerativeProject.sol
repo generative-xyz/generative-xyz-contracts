@@ -138,7 +138,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         uint256 openingTime
     ) external payable nonReentrant returns (uint256) {
         // verify
-        require(bytes(project._name).length > 3 && bytes(project._creator).length > 3, Errors.MISSING_NAME);
+        require(bytes(project._name).length > 3 && bytes(project._creator).length > 3 && bytes(project._image).length > 0, Errors.MISSING_NAME);
         require(project._maxSupply > 0 && project._maxSupply < GenerativeNFTConfigs.PROJECT_PADDING && project._limit > 0 && project._limit <= project._maxSupply && project._royalty <= Royalty.MINT_PERCENT_ROYALTY, Errors.INV_PARAMS);
         require(project._creatorAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
 
