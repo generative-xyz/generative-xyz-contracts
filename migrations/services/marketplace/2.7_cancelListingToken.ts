@@ -25,7 +25,7 @@ import {GenerativeNFT} from "../../nfts/generativenft/GenerativeNFT";
         let a: any = {};
         a.listingTokens = await marketplaceService.listingTokens(args[0], args[1]);
         const nft = new GenerativeNFT(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        const disapprove = await nft.setApproveForAll(a.listingTokens._collectionContract, args[0], false, 0);
+        const disapprove = await nft.setApprovalForAll(a.listingTokens._collectionContract, args[0], false, 0);
         console.log("disapprove:", disapprove?.transactionHash, disapprove?.status);
     } catch (e) {
         // Deal with the fact the chain failed
