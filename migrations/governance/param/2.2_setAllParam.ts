@@ -102,6 +102,21 @@ import {ethers} from "ethers";
         tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>`, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "c2.min.js@1.0.0"
+        tx = await p.set(contract, key, `<script type="text/javascript" src="https://raw.githubusercontent.com/ren-yuan/c2.js/main/dist/c2.min.js"></script>`, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "chromajs@2.4.2"
+        tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js"></script>`, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "p5.grain.js@0.6.1"
+        tx = await p.set(contract, key, `<script type="text/javascript" src="https://raw.githubusercontent.com/meezwhite/p5.grain/main/dist/p5.grain.min.js"></script>`, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
