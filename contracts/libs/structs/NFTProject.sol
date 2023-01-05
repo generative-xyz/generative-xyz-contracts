@@ -7,6 +7,7 @@ library NFTProject {
     event UpdateProjectLicense(uint256 indexed projectId, string indexed data);
     event UpdateProjectCreatorName(uint256 indexed projectId, string indexed data);
     event SetProjectStatus(uint256 indexed projectId, bool indexed enable);
+    event UpdateProjectPrice(uint256 indexed projectId, uint256 indexed price);
 
     struct Project {
         uint24 _maxSupply; // required

@@ -8,4 +8,6 @@ interface IGenerativeNFT is IBaseERC721OwnerSeed {
     function init(NFTProject.ProjectMinting memory project, address admin, address paramsAddr, address randomizer, address projectDataContextAddr, bool disable) external;
 
     function setStatus(bool enable) external;
+
+    function updatePrice(uint256 price) external;
 }

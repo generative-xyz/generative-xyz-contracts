@@ -59,6 +59,11 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _project._mintingSchedule._initBlockTime = block.timestamp;
         _royalty = project._royalty;
     }
+    
+    function updatePrice(uint256 price) external {
+        require(msg.sender == _admin || msg.sender == _project._projectAddr, Errors.ONLY_ADMIN_ALLOWED);
+        _project._mintPrice = price;
+    }
 
     /* @Mint
     */

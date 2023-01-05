@@ -263,6 +263,16 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         emit NFTProject.UpdateProjectSocial(projectId, data);
     }
 
+    function updateProjectPrice(uint256 projectId, uint256 price)
+    external {
+        require(msg.sender == _admin || msg.sender == _projects[projectId]._creatorAddr, Errors.ONLY_ADMIN_ALLOWED);
+        require(_exists(projectId), Errors.INV_TOKEN);
+        _projects[projectId]._mintPrice = price;
+        IGenerativeNFT nft = IGenerativeNFT(_projects[projectId]._genNFTAddr);
+        nft.updatePrice(price);
+        emit NFTProject.UpdateProjectPrice(projectId, price);
+    }
+
     /* @OverrideTransfer: project can mint but can not transfer
     */
     function _beforeTokenTransfer(
