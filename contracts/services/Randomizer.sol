@@ -11,12 +11,12 @@ contract Randomizer is OwnableUpgradeable, IRandomizer {
     }
 
     function generateTokenHash(uint256 tokenId) external virtual override returns (bytes32 tokenHash) {
-        uint256 time = block.timestamp;
         tokenHash = keccak256(
             abi.encodePacked(
                 tokenId,
                 block.number,
-                blockhash(block.number - 1)
+                blockhash(block.number - 1),
+                block.timestamp
             )
         );
     }

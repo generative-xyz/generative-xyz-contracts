@@ -146,6 +146,21 @@ class GenerativeProjectData {
         return val;
     }
 
+    async inflateScript(contractAddress: any, script: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        const val: any = await temp?.nftContract.methods.inflateScript(script).call(tx);
+        return val;
+    }
+
     async changeProjectAddress(contractAddress: any, newAddr: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce

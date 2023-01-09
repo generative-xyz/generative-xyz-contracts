@@ -18,4 +18,6 @@ library Royalty {
         address[] _collaborators;
         uint256[] _shared;
     }
+
+    uint256 public constant MINT_PERCENT_ROYALTY = 10000;
 }

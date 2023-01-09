@@ -8,6 +8,7 @@ import "../interfaces/IBaseERC721OwnerSeed.sol";
 import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/NFTCollection.sol";
+import "../libs/structs/Royalty.sol";
 import "../interfaces/IParameterControl.sol";
 import "../libs/helpers/StringsUtils.sol";
 
@@ -36,39 +37,26 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
 
     function changeAdmin(address newAdm) external {
         require(msg.sender == _admin && newAdm != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
-
         // change admin
-        if (_admin != newAdm) {
-            address _previousAdmin = _admin;
-            _admin = newAdm;
-        }
+        _admin = newAdm;
     }
 
     function changeParamAddr(address newAddr) external {
         require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
-
         // change
-        if (_paramsAddress != newAddr) {
-            _paramsAddress = newAddr;
-        }
+        _paramsAddress = newAddr;
     }
 
     function changeRandomizerAddr(address newAddr) external {
         require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
-
         // change
-        if (_randomizer != newAddr) {
-            _randomizer = newAddr;
-        }
+        _randomizer = newAddr;
     }
 
     function changeDataContextAddr(address newAddr) external {
         require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
-
         // change
-        if (_projectDataContextAddr != newAddr) {
-            _projectDataContextAddr = newAddr;
-        }
+        _projectDataContextAddr = newAddr;
     }
 
     function _setStatus(bool enable) internal {
@@ -146,7 +134,7 @@ contract BaseERC721OwnerSeed is ERC721Pausable, ReentrancyGuard, IERC2981, IBase
             }
         }
 
-        amount = (_salePrice * royalty) / 10000;
+        amount = (_salePrice * royalty) / Royalty.MINT_PERCENT_ROYALTY;
     }
 
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, IERC165) returns (bool) {

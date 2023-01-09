@@ -49,4 +49,52 @@ contract AdvanceMarketplaceService is SimpleMarketplaceService {
         _makeOfferTokenIds[data._collectionContract].push(data._tokenId);
         return offerId;
     }
+
+    function sweep(bytes32[] memory offers) external payable nonReentrant() {
+        require(offers.length <= 100);
+        bytes32[] memory result = new bytes32[](offers.length);
+        for (uint256 i; i < offers.length; i++) {
+            if (!_listingTokens[offers[i]]._closed) {
+                _purchaseToken(offers[i]);
+                result[i] = offers[i];
+            }
+            if (gasleft() < 200000) {break;}
+        }
+        emit Marketplace.Sweep(result);
+    }
+
+    function makeOfferCollection(Marketplace.MakeOfferCollectionData memory makeOfferCollectionData) external returns (bytes32[] memory result) {
+        require(_allowableERC20MakeOffer[makeOfferCollectionData._erc20Token], Errors.ERC_20_NOT_ALLOW);
+        result = new bytes32[](makeOfferCollectionData._tokenIds.length);
+        for (uint256 i; i < makeOfferCollectionData._tokenIds.length; i++) {
+            Marketplace.MakeOfferData memory makeOfferData = Marketplace.MakeOfferData(
+                makeOfferCollectionData._collectionContract,
+                makeOfferCollectionData._tokenIds[i],
+                msg.sender,
+                makeOfferCollectionData._erc20Token,
+                makeOfferCollectionData._price / makeOfferCollectionData._tokenIds.length,
+                false,
+                makeOfferCollectionData._durationTime
+            );
+            bytes32 offerId = _makeOffer(makeOfferData);
+            Marketplace.MakeOfferData storage data = _makeOfferTokens[offerId];
+            _makeOfferDataMapping[data._collectionContract][data._tokenId].push(data);
+            _makeOfferTokenIds[data._collectionContract].push(data._tokenId);
+            result[i] = offerId;
+            if (gasleft() < 200000) {break;}
+        }
+        emit Marketplace.MakeCollectionOffer(result);
+    }
+
+    function updateListingPrice(bytes32 offerId, uint256 price) external {
+        require(price > 0);
+        _listingTokens[offerId]._price = price;
+        emit Marketplace.UpdateListingPrice(offerId, price);
+    }
+
+    function updateMakeOfferPrice(bytes32 offerId, uint256 price) external {
+        require(price > 0);
+        _makeOfferTokens[offerId]._price = price;
+        emit Marketplace.UpdateMakeOfferPrice(offerId, price);
+    }
 }

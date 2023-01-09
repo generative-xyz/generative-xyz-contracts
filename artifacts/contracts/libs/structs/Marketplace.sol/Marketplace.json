@@ -231,6 +231,19 @@
       "anonymous": false,
       "inputs": [
         {
+          "indexed": false,
+          "internalType": "bytes32[]",
+          "name": "result",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "MakeCollectionOffer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
           "indexed": true,
           "internalType": "bytes32",
           "name": "offeringId",
@@ -338,10 +351,61 @@
       ],
       "name": "PurchaseToken",
       "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32[]",
+          "name": "result",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "Sweep",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "offeringId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "name": "UpdateListingPrice",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "offeringId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "name": "UpdateMakeOfferPrice",
+      "type": "event"
     }
   ],
-  "bytecode": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122091f0c12b74f1f740007864f0bb7717d860c8a1a724fff6b88d9c5b06bf2443ca64736f6c634300080c0033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122091f0c12b74f1f740007864f0bb7717d860c8a1a724fff6b88d9c5b06bf2443ca64736f6c634300080c0033",
+  "bytecode": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220cfad89cf6607af9a4f23d0c747119c8ba3acd41ff2831e2f8dd5523e28257c7164736f6c634300080c0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220cfad89cf6607af9a4f23d0c747119c8ba3acd41ff2831e2f8dd5523e28257c7164736f6c634300080c0033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }

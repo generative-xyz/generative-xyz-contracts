@@ -50,7 +50,7 @@ class RandomizerService {
     }
 
     async upgradeContract(proxyAddress: any) {
-        const contractUpdated = await ethers.getContractFactory("AVATARS");
+        const contractUpdated = await ethers.getContractFactory("Randomizer");
         console.log('Upgrading Randomizer... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
         console.log('Randomizer upgraded on tx address ' + tx.address);

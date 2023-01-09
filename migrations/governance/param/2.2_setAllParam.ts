@@ -5,7 +5,7 @@ import {ethers} from "ethers";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "local") {
+        if (process.env.NETWORK != "goerli") {
             console.log("wrong network");
             return;
         }
@@ -16,8 +16,11 @@ import {ethers} from "ethers";
         /**
          *  For project
          */
-        let key = 'GENERATIVE_NFT_TEMPLATE'; // template of generative nft
-        let tx = await p.setAddress(contract, key, '0x5FbDB2315678afecb367f032d93F642f64180aa3', 0);
+        let key = "";
+        let tx = null;
+
+        key = 'GENERATIVE_NFT_TEMPLATE'; // template of generative nft
+        tx = await p.setAddress(contract, key, '0x23Df0DB38fc6AdD998977B717B3d8fEb95040630', 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
@@ -35,7 +38,7 @@ import {ethers} from "ethers";
          * for generative nft
          */
         key = "ROYALTY_FIN_ADDRESS"; // royalty second sale address from service RoyaltyFinanceSecondSale
-        tx = await p.setAddress(contract, key, "0xE5C005577149b977BB4E2B9B1a31d24c06CE80c3", 0);
+        tx = await p.setAddress(contract, key, "0xDb4D890eC554B380A95f35f07d275893fCfe328f", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
@@ -45,7 +48,7 @@ import {ethers} from "ethers";
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
         key = "MINT_NFT_OPERATOR_FEE"; // operator fee when collector mint generative nft from project
-        tx = await p.setUInt256(contract, key, 500, 0);
+        tx = await p.setUInt256(contract, key, 1000, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
@@ -57,12 +60,12 @@ import {ethers} from "ethers";
          * For Project Data
          */
         key = "BASE_URI";
-        tx = await p.set(contract, key, "http://devnet.generative.xyz/api/token", 0);
+        tx = await p.set(contract, key, "http://testnet.generative.xyz/generative/api/token", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
         key = "BASE_URI_TRAIT";
-        tx = await p.set(contract, key, "http://devnet.generative.xyz/api/trait", 0);
+        tx = await p.set(contract, key, "http://testnet.generative.xyz/generative/api/trait", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
@@ -100,6 +103,21 @@ import {ethers} from "ethers";
 
         key = "tonejs@14.8.49"
         tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>`, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "c2.min.js@1.0.0"
+        tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdn.generative.xyz/ajax/libs/c2/1.0.0/c2.min.js"></script>`, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "chromajs@2.4.2"
+        tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js"></script>`, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "p5.grain.js@0.6.1"
+        tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdn.generative.xyz/ajax/libs/p5.grain/0.6.1/p5.grain.min.js"></script>`, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
     } catch (e) {

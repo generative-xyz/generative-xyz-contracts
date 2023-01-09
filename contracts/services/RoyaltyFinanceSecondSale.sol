@@ -55,7 +55,6 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
 
         // change admin
         if (_admin != newAdm) {
-            address _previousAdmin = _admin;
             _admin = newAdm;
         }
     }
@@ -140,9 +139,9 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
                     }
                 }
                 // set for project's owner
-                _royaltySecondSale[projectId][receiver][erc20Addr] += ownerRoyaltySecondSale * amount / 10000;
+                _royaltySecondSale[projectId][receiver][erc20Addr] += ownerRoyaltySecondSale * amount / Royalty.MINT_PERCENT_ROYALTY;
                 // set for _admin
-                _royaltySecondSaleAdmin[erc20Addr] = amount - (ownerRoyaltySecondSale * amount / 10000);
+                _royaltySecondSaleAdmin[erc20Addr] = amount - (ownerRoyaltySecondSale * amount / Royalty.MINT_PERCENT_ROYALTY);
                 emit Royalty.SetRoyaltySecondSale(msg.sender, tokenId, erc20Addr, amount);
             } else {
                 emit Royalty.SetRoyaltySecondSaleFail(msg.sender, tokenId, erc20Addr, amount);

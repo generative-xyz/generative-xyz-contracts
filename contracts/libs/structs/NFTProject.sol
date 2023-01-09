@@ -1,6 +1,14 @@
 pragma solidity ^0.8.0;
 
 library NFTProject {
+    event CompleteProject(uint256 indexed projectId, uint256 indexed time);
+    event UpdateProjectSocial(uint256 indexed projectId, ProjectSocial data);
+    event UpdateProjectName(uint256 indexed projectId, string indexed data);
+    event UpdateProjectLicense(uint256 indexed projectId, string indexed data);
+    event UpdateProjectCreatorName(uint256 indexed projectId, string indexed data);
+    event SetProjectStatus(uint256 indexed projectId, bool indexed enable);
+    event UpdateProjectPrice(uint256 indexed projectId, uint256 indexed price);
+
     struct Project {
         uint24 _maxSupply; // required
         uint24 _limit;// required
@@ -19,6 +27,8 @@ library NFTProject {
         uint256 _completeTime;// init = 0
         address _genNFTAddr; // init = 0x0
         string _itemDesc; // not require
+        address[] _reserves;// list address for GenerativeNFT.reserveMint
+        uint256 _royalty;//% royalty second sale
     }
 
     struct ProjectSocial {
@@ -41,6 +51,8 @@ library NFTProject {
         address _mintPriceAddr; // erc20 addr if possible
         string _name;
         ProjectMintingSchedule _mintingSchedule;
+        address[] _reserves;
+        uint256 _royalty;//% royalty second sale
     }
 
     struct ProjectMintingSchedule {

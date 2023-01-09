@@ -9,6 +9,7 @@ import "../interfaces/IGenerativeProject.sol";
 
 import "../libs/helpers/Errors.sol";
 import "../libs/helpers/Base64.sol";
+import "../libs/helpers/Inflate.sol";
 import "../libs/helpers/StringsUtils.sol";
 import "../libs/structs/NFTProject.sol";
 import "../libs/structs/NFTProject.sol";
@@ -70,6 +71,12 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
 
         ctx._name = string(abi.encodePacked(d._name, " #", StringsUpgradeable.toString(projectId)));
         ctx._desc = d._desc;
+        string memory inflate;
+        Inflate.ErrorCode err;
+        (inflate, err) = inflateString(ctx._desc);
+        if (err == Inflate.ErrorCode.ERR_NONE) {
+            ctx._desc = inflate;
+        }
         ctx._image = d._image;
         ctx._animationURI = animationURI;
         ctx._genNFTAddr = d._genNFTAddr;
@@ -120,6 +127,12 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         if (bytes(projectDetail._itemDesc).length > 0) {
             ctx._desc = projectDetail._itemDesc;
         }
+        string memory inflate;
+        Inflate.ErrorCode err;
+        (inflate, err) = inflateString(ctx._desc);
+        if (err == Inflate.ErrorCode.ERR_NONE) {
+            ctx._desc = inflate;
+        }
 
         ctx._baseURI = string(abi.encodePacked(ctx._baseURI, "/",
             StringsUpgradeable.toHexString(_generativeProjectAddr), "/",
@@ -163,12 +176,21 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
 
         string memory scripts = "";
+        string memory inflate;
+        Inflate.ErrorCode err;
         for (uint256 i; i < projectDetail._scripts.length; i++) {
-            scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
+            if (bytes(projectDetail._scripts[i]).length > 0) {
+                (inflate, err) = this.inflateScript(projectDetail._scripts[i]);
+                if (err != Inflate.ErrorCode.ERR_NONE) {
+                    scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
+                } else {
+                    scripts = string(abi.encodePacked(scripts, '<script>', inflate, '</script>'));
+                }
+            }
         }
 
         string memory scriptType = "";
-        string memory randomFuncScript = '<script id="snippet-random-code" type="text/javascript">const urlSeed=new URLSearchParams(window.location.search).get("seed");urlSeed&&urlSeed.length>0&&(tokenData.seed=urlSeed);const tokenId=tokenData.tokenId,ONE_MIL=1e6,projectNumber=Math.floor(parseInt(tokenData.tokenId)/1e6),tokenMintNumber=parseInt(tokenData.tokenId)%1e6,seed=tokenData.seed;function cyrb128($){let _=1779033703,e=3144134277,t=1013904242,n=2773480762;for(let r=0,u;r<$.length;r++)_=e^Math.imul(_^(u=$.charCodeAt(r)),597399067),e=t^Math.imul(e^u,2869860233),t=n^Math.imul(t^u,951274213),n=_^Math.imul(n^u,2716044179);return _=Math.imul(t^_>>>18,597399067),e=Math.imul(n^e>>>22,2869860233),t=Math.imul(_^t>>>17,951274213),n=Math.imul(e^n>>>19,2716044179),[(_^e^t^n)>>>0,(e^_)>>>0,(t^_)>>>0,(n^_)>>>0]}function sfc32($,_,e,t){return function(){e>>>=0,t>>>=0;var n=($>>>=0)+(_>>>=0)|0;return $=_^_>>>9,_=e+(e<<3)|0,e=(e=e<<21|e>>>11)+(n=n+(t=t+1|0)|0)|0,(n>>>0)/4294967296}}let mathRand=sfc32(...cyrb128(seed));</script>';
+        string memory randomFuncScript = '<script id="snippet-random-code">const urlSeed=new URLSearchParams(window.location.search).get("seed");urlSeed&&urlSeed.length>0&&(tokenData.seed=urlSeed);const tokenId=tokenData.tokenId,ONE_MIL=1e6,projectNumber=Math.floor(parseInt(tokenData.tokenId)/1e6),tokenMintNumber=parseInt(tokenData.tokenId)%1e6,seed=tokenData.seed;function cyrb128($){let _=1779033703,e=3144134277,t=1013904242,n=2773480762;for(let r=0,u;r<$.length;r++)_=e^Math.imul(_^(u=$.charCodeAt(r)),597399067),e=t^Math.imul(e^u,2869860233),t=n^Math.imul(t^u,951274213),n=_^Math.imul(n^u,2716044179);return _=Math.imul(t^_>>>18,597399067),e=Math.imul(n^e>>>22,2869860233),t=Math.imul(_^t>>>17,951274213),n=Math.imul(e^n>>>19,2716044179),[(_^e^t^n)>>>0,(e^_)>>>0,(t^_)>>>0,(n^_)>>>0]}function sfc32($,_,e,t){return function(){e>>>=0,t>>>=0;var n=($>>>=0)+(_>>>=0)|0;return $=_^_>>>9,_=e+(e<<3)|0,e=(e=e<<21|e>>>11)+(n=n+(t=t+1|0)|0)|0,(n>>>0)/4294967296}}let mathRand=sfc32(...cyrb128(seed));</script>';
         if (_paramAddr != address(0x0)) {
             IParameterControl param = IParameterControl(_paramAddr);
             for (uint256 i = 0; i < projectDetail._scriptType.length; i++) {
@@ -189,5 +211,39 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 "</body>",
                 "</html>"
             ));
+    }
+
+    function inflateScript(string memory script) public view returns (string memory result, Inflate.ErrorCode err) {
+        return inflateString(StringsUtils.getSlice(9, bytes(script).length - 9, script));
+    }
+
+    function inflateString(string memory data) public view returns (string memory result, Inflate.ErrorCode err) {
+        return inflate(Base64.decode(data));
+    }
+
+    function inflate(bytes memory data) internal view returns (string memory result, Inflate.ErrorCode err) {
+        bytes memory buff;
+        (err, buff) = Inflate.puff(data, data.length * 5);
+        if (err == Inflate.ErrorCode.ERR_NONE) {
+            uint256 breakLen = 0;
+            while (true) {
+                if (buff[breakLen] == 0) {
+                    break;
+                }
+                breakLen++;
+                if (breakLen == buff.length) {
+                    break;
+                }
+            }
+            bytes memory temp = new bytes(breakLen);
+            uint256 i = 0;
+            while (i < breakLen) {
+                temp[i] = buff[i];
+                i++;
+            }
+            result = string(temp);
+        } else {
+            result = "";
+        }
     }
 }

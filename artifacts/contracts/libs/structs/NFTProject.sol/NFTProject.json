@@ -2,9 +2,170 @@
   "_format": "hh-sol-artifact-1",
   "contractName": "NFTProject",
   "sourceName": "contracts/libs/structs/NFTProject.sol",
-  "abi": [],
-  "bytecode": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220ae34c985c7faf26e169ecd629345190e283b89b546d005d48b5c593445a6f67164736f6c634300080c0033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220ae34c985c7faf26e169ecd629345190e283b89b546d005d48b5c593445a6f67164736f6c634300080c0033",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "projectId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "CompleteProject",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "projectId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "bool",
+          "name": "enable",
+          "type": "bool"
+        }
+      ],
+      "name": "SetProjectStatus",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "projectId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "data",
+          "type": "string"
+        }
+      ],
+      "name": "UpdateProjectCreatorName",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "projectId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "data",
+          "type": "string"
+        }
+      ],
+      "name": "UpdateProjectLicense",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "projectId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "data",
+          "type": "string"
+        }
+      ],
+      "name": "UpdateProjectName",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "projectId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "name": "UpdateProjectPrice",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "projectId",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "_web",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "_twitter",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "_discord",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "_medium",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "_instagram",
+              "type": "string"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct NFTProject.ProjectSocial",
+          "name": "data",
+          "type": "tuple"
+        }
+      ],
+      "name": "UpdateProjectSocial",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122061e5fd076fa5025ffdc1a4cc16ebd0861b0880df17a7ea9ce63e1f9cbfd84b7e64736f6c634300080c0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122061e5fd076fa5025ffdc1a4cc16ebd0861b0880df17a7ea9ce63e1f9cbfd84b7e64736f6c634300080c0033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }
