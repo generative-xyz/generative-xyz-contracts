@@ -16,8 +16,11 @@ import {ethers} from "ethers";
         /**
          *  For project
          */
-        let key = 'GENERATIVE_NFT_TEMPLATE'; // template of generative nft
-        let tx = await p.setAddress(contract, key, '0x23Df0DB38fc6AdD998977B717B3d8fEb95040630', 0);
+        let key = "";
+        let tx = null;
+
+        key = 'GENERATIVE_NFT_TEMPLATE'; // template of generative nft
+        tx = await p.setAddress(contract, key, '0x23Df0DB38fc6AdD998977B717B3d8fEb95040630', 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
