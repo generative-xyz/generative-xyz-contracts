@@ -2,7 +2,7 @@ pragma solidity ^0.8.0;
 
 library GenerativeNFTConfigs {
     // percentage royalty for minting 
-    string public constant MINT_NFT_OPERATOR_FEE = "MINT_NFT_OPERATOR_FEE"; // default 500 ~ 5%
+    string public constant MINT_NFT_OPERATOR_FEE = "MINT_NFT_OPERATOR_FEE"; // default 1000 ~ 10%
     string public constant MINT_NFT_OPERATOR_TREASURE_ADDR = "MINT_NFT_OPERATOR_TREASURE_ADDR";
     uint256 public constant PROJECT_PADDING = 1000000;
 
