@@ -1,0 +1,16 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "GenDAOTreasury",
+  "sourceName": "contracts/governance/GenDAOTreasury.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220337433ad08c073c6875ecc714fb78bfac7a6ce1f8ada14c6fde45c15513f240964736f6c634300080c0033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220337433ad08c073c6875ecc714fb78bfac7a6ce1f8ada14c6fde45c15513f240964736f6c634300080c0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
