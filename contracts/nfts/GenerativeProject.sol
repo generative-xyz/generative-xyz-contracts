@@ -54,6 +54,7 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         __ReentrancyGuard_init();
         __ERC721Pausable_init();
         __DefaultOperatorFilterer_init();
+        __Ownable_init();
     }
 
     function changeAdmin(address newAdm) external {
