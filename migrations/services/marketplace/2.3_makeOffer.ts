@@ -23,8 +23,8 @@ import {ERC20} from "../../ERC20";
 
         // approve erc20
         const erc20 = new ERC20(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        const increaseAllowance = await erc20.increaseAllowance(erc20Addr, marketplaceContract, price, 0);
-        console.log("increaseAllowance:", increaseAllowance?.transactionHash, increaseAllowance?.status);
+        const approve = await erc20.approve(erc20Addr, marketplaceContract, '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 0);
+        console.log("increaseAllowance:", approve?.transactionHash, approve?.status);
 
         // make offer
         const tx = await marketplaceService.makeOffer(marketplaceContract,
