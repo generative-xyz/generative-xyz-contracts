@@ -1,11 +1,14 @@
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC20/presets/ERC20PresetMinterPauserUpgradeable.sol";
+/*import "@openzeppelin/contracts-upgradeable/token/ERC20/presets/ERC20PresetMinterPauserUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20VotesCompUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/governance/utils/IVotesUpgradeable.sol";
 
 import "../libs/helpers/Errors.sol";
+import "../interfaces/IGENToken.sol";
 
-contract GENToken is Initializable, ERC20PresetMinterPauserUpgradeable, OwnableUpgradeable {
+contract GENToken is Initializable, ERC20PresetMinterPauserUpgradeable, OwnableUpgradeable, IGENToken, ERC20VotesCompUpgradeable {
     address public _admin;
 
     function initialize(
@@ -36,16 +39,19 @@ contract GENToken is Initializable, ERC20PresetMinterPauserUpgradeable, OwnableU
         return 4;
     }
 
-    /** ControlSupply
-    **/
+    *//** ControlSupply
+    **//*
     function mint(address to, uint256 amount) public whenNotPaused override {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         _mint(to, amount);
+        emit IGENToken.MintToken(to, amount);
     }
 
     function mintByBlock(address to) external whenNotPaused virtual {
         // TODO
         require(1 == 0);
-        _mint(to, 0);
+        uint256 amount = 0;
+        _mint(to, amount);
+        emit IGENToken.MintToken(to, amount);
     }
-}
+}*/

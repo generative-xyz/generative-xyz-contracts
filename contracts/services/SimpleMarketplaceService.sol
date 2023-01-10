@@ -172,7 +172,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             }
         }
 
-        emit Marketplace.PurchaseToken(offerId, _listingTokens[offerId]);
+        emit Marketplace.PurchaseToken(offerId, _listingTokens[offerId], _closeOfferingData._buyer);
     }
 
     function _listToken(Marketplace.ListingTokenData memory listingData) internal virtual returns (bytes32) {
@@ -303,7 +303,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         // transfer erc-721
         erc721.safeTransferFrom(closeData._seller, closeData._buyer, offer._tokenId);
 
-        emit Marketplace.AcceptMakeOffer(offerId, _makeOfferTokens[offerId]);
+        emit Marketplace.AcceptMakeOffer(offerId, _makeOfferTokens[offerId], closeData._buyer);
     }
 
     function makeOffer(Marketplace.MakeOfferData memory data) external virtual nonReentrant returns (bytes32) {
