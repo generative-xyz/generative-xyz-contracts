@@ -31,8 +31,8 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         // init supply
         // 100 mil with decimals = 4 for testnet
         // 0 with decimal = 4 for mainnet
-        uint256 _totalSupplyRove = initSupply;
-        _mint(admin, _totalSupplyRove);
+        uint256 _totalSupply = initSupply;
+        _mint(admin, _totalSupply);
         __ERC20Pausable_init();
         __ERC20_init(name, symbol);
         __Ownable_init();

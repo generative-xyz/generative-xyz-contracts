@@ -32,7 +32,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
 
         _votingToken = votingToken;
         // hold percentage to make propose
-        // ~ 0%
+        // ~ 5%
         _proposalThreshold = 0;
         // hold percentage for cast vote
         // ~ 1%
