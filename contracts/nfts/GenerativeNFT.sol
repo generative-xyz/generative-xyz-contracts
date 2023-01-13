@@ -59,7 +59,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _project._mintingSchedule._initBlockTime = block.timestamp;
         _royalty = project._royalty;
     }
-    
+
     function updatePrice(uint256 price) external {
         require(msg.sender == _admin || msg.sender == _project._projectAddr, Errors.ONLY_ADMIN_ALLOWED);
         _project._mintPrice = price;
@@ -191,6 +191,10 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
         bytes32 seed = _tokenIdToHash(tokenId);
         return projectData.tokenURI(_project._projectId, tokenId, seed);
+    }
+
+    function projectIndex() external view returns (uint24) {
+        return _project._index;
     }
 
     /* @notice: opensea operator filter registry

@@ -9,30 +9,27 @@ import "@openzeppelin/contracts-upgradeable/governance/utils/IVotesUpgradeable.s
 import "../libs/helpers/Errors.sol";
 import "../interfaces/IGENToken.sol";
 import "../interfaces/IGenerativeProject.sol";
+import "../nfts/GenerativeNFT.sol";
 
 contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, IGENToken, ERC20VotesCompUpgradeable {
     address public _admin;
     address public _paramAddr;
-    address public _generativeProjectAddr;
+    mapping(address => mapping(address => uint256)) public _claimed;
+    uint256 public _remainSupply;
 
     function initialize(
         string memory name,
         string memory symbol,
         address admin,
         address paramAddr,
-        address generativeProjectAddr,
         uint256 initSupply
     ) initializer public {
-        require(admin != Errors.ZERO_ADDR && generativeProjectAddr != Errors.ZERO_ADDR && paramAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
+        require(admin != Errors.ZERO_ADDR && paramAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         _admin = admin;
-        _generativeProjectAddr = generativeProjectAddr;
         _paramAddr = paramAddr;
 
-        // init supply
-        // 100 mil with decimals = 4 for testnet
-        // 0 with decimal = 4 for mainnet
-        uint256 _totalSupply = initSupply;
-        _mint(admin, _totalSupply);
+        _remainSupply = 100 * 1e6 * 1e18;
+
         __ERC20Pausable_init();
         __ERC20_init(name, symbol);
         __Ownable_init();
@@ -54,16 +51,8 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         }
     }
 
-    function changeProjectAddress(address newAddr) external {
-        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
-        // change Generative project address
-        if (_generativeProjectAddr != newAddr) {
-            _generativeProjectAddr = newAddr;
-        }
-    }
-
     function decimals() public pure override returns (uint8) {
-        return 4;
+        return 18;
     }
 
     function totalSupply() public view override(ERC20Upgradeable, IERC20Upgradeable) returns (uint256) {
@@ -101,20 +90,31 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
     /*
     * @Minting
     */
-    function calculateAmount(NFTProject.Project memory project) internal returns (uint256) {
-        // TODO
-        return 1 * 1e4;
+    function calculateAmount(address genNFTAddr, uint256 mintPrice) internal returns (uint256) {
+        GenerativeNFT nft = GenerativeNFT(genNFTAddr);
+        try nft.projectIndex() returns (uint24 index) {
+            uint256 revenue = index * mintPrice - _claimed[msg.sender][genNFTAddr];
+            _claimed[msg.sender][genNFTAddr] += revenue;
+            return revenue;
+        } catch {
+
+        }
+        return 0;
     }
 
     /*
     * Project creator call claim function to mint GENToken
     */
-    function claim(uint256 projectId) external whenNotPaused virtual {
-        IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
+    function claim(address generativeProjectAddr, uint256 projectId) external whenNotPaused virtual {
+        IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
         NFTProject.Project memory project = projectContract.projectDetails(projectId);
         require(project._creatorAddr == msg.sender, Errors.INV_ADD);
-        uint256 amount = calculateAmount(project);
+        uint256 amount = calculateAmount(project._genNFTAddr, project._mintPrice);
+        if (amount > _remainSupply) {
+            amount = _remainSupply;
+        }
         _mint(msg.sender, amount);
+        _remainSupply -= amount;
         emit IGENToken.ClaimToken(msg.sender, amount);
     }
 }

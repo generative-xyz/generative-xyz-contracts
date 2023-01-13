@@ -10,4 +10,6 @@ interface IGenerativeNFT is IBaseERC721OwnerSeed {
     function setStatus(bool enable) external;
 
     function updatePrice(uint256 price) external;
+
+    function projectIndex() external view returns (uint24);
 }
