@@ -27,7 +27,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         TimelockControllerUpgradeable timelock
     ) initializer public {
         require(admin != Errors.ZERO_ADDR && paramAddr != Errors.ZERO_ADDR && address(votingToken) != Errors.ZERO_ADDR, Errors.INV_ADD);
-        _admin == admin;
+        _admin = admin;
         _paramAddr = paramAddr;
 
         _votingToken = votingToken;
