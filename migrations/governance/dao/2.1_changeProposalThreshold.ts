@@ -1,6 +1,8 @@
 import * as dotenv from 'dotenv';
 
 import {ethers} from "ethers";
+import * as fs from "fs";
+import {keccak256} from "ethers/lib/utils";
 import {GenDAO} from "./gendao";
 
 (async () => {
@@ -9,15 +11,11 @@ import {GenDAO} from "./gendao";
             console.log("wrong network");
             return;
         }
-        const args = process.argv.slice(2);
-        const contract = args[0];
         const dao = new GenDAO(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        let a: any = {};
-        a.quorumVotes = await dao.quorumVotes(contract);
-        a._admin = await dao._admin(contract);
-        a._votingToken = await dao._votingToken(contract);
-        a._paramAddr = await dao._paramAddr(contract);
-        console.log({a});
+        const args = process.argv.slice(2)
+        console.log(args);
+        const tx = await dao.changeProposalThreshold(args[0], args[1], 0);
+        console.log("tx:", tx?.transactionHash, tx?.status);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
