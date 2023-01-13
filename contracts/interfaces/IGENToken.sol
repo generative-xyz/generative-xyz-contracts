@@ -1,5 +1,8 @@
 pragma solidity ^0.8.0;
 
-interface IGENToken {
+import "@openzeppelin/contracts-upgradeable/governance/utils/IVotesUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
+
+interface IGENToken is IVotesUpgradeable, IERC20Upgradeable {
     event ClaimToken(address to, uint256 amount);
 }
