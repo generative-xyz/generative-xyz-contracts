@@ -99,7 +99,7 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
     */
     function calculateAmount(NFTProject.Project memory project) internal returns (uint256) {
         // TODO
-        return 1 * (1 ** 4);
+        return 1 * 1e4;
     }
 
     /*
