@@ -32,10 +32,10 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
 
         _votingToken = votingToken;
         // hold percentage to make propose
-        // ~ 5%
-        _proposalThreshold = 0;
+        // at least 5%
+        _proposalThreshold = 500;
         // hold percentage for cast vote
-        // ~ 1%
+        // at least 1%
         _quorumVote = 100;
 
         // 1 day
@@ -110,11 +110,11 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     }
 
     function proposalThreshold() public view override returns (uint256) {
-        return _proposalThreshold / 10000 * _votingToken.totalSupply();
+        return _proposalThreshold * _votingToken.totalSupply() / 10000;
     }
 
     function quorumVotes() public view override returns (uint256) {
-        return _quorumVote / 10000 * _votingToken.totalSupply();
+        return _quorumVote * _votingToken.totalSupply() / 10000;
     }
 
     /* @notice The functions below are overrides required by Solidity.

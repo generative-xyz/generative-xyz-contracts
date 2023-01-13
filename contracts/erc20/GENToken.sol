@@ -66,6 +66,10 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         return 4;
     }
 
+    function totalSupply() public view override(ERC20Upgradeable, IERC20Upgradeable) returns (uint256) {
+        return super.totalSupply();
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 amount)
     internal
     override(ERC20Upgradeable, ERC20PausableUpgradeable)
