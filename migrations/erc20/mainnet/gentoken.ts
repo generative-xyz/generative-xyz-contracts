@@ -122,6 +122,21 @@ class GENToken {
 
         return await temp?.nftContract.methods.totalSupply().call(tx);
     }
+
+    async proofOfArtAvailable(contractAddress: any, genNFTAddr: any, mintPrice: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        const a = await temp?.nftContract.methods.proofOfArtAvailable(genNFTAddr, ethers.utils.parseEther(mintPrice)).call(tx);
+        return ethers.utils.formatEther(a);
+    }
 }
 
 export {GENToken};

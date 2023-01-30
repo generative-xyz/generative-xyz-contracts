@@ -1,4 +1,4 @@
-import {GENToken} from "../mainnet/gentoken";
+import {GENTokenTestnet} from "./gentokentestnet";
 
 (async () => {
     try {
@@ -8,9 +8,10 @@ import {GENToken} from "../mainnet/gentoken";
         }
         const args = process.argv.slice(2);
         const contract = args[0];
-        const token = new GENToken(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const token = new GENTokenTestnet(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         let a: any = {};
-        a.totalSupply = await token.totalSupply(contract);
+        // a.totalSupply = await token.totalSupply(contract);
+        a.proofOfArtAvailable = await token.proofOfArtAvailable(contract, args[1], args[2]);
         console.log({a});
     } catch (e) {
         // Deal with the fact the chain failed
