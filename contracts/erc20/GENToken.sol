@@ -16,9 +16,11 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
     address public _paramAddr;
     mapping(address => mapping(address => uint256)) public _claimed;
 
-    // 70 % supply for creator
+    // 60% supply for artist
     uint256 public _remainClaimSupply;
 
+    // 30% supply for team
+    uint256 public _remain;
 
     function initialize(
         string memory name,
@@ -32,7 +34,7 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
 
         uint256 totalSupply = 100 * (10 ** 6) * (10 ** decimals());
         // 70% for artist
-        _remainClaimSupply = totalSupply * 70 / 100;
+        _remainClaimSupply = totalSupply * 60 / 100;
         // 20% for team
         uint256 _coreTeam = totalSupply * 20 / 100;
         _mint(_admin, _coreTeam);
@@ -98,7 +100,7 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
     /*
     * @Minting
     */
-    function calculateAmountClaim(address genNFTAddr, uint256 mintPrice) public returns (uint256) {
+    function proofOfArt(address genNFTAddr, uint256 mintPrice) public returns (uint256) {
         IGenerativeNFT nft = IGenerativeNFT(genNFTAddr);
         try nft.projectIndex() returns (uint24 index) {
             return index * mintPrice - _claimed[msg.sender][genNFTAddr];
@@ -118,7 +120,7 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         NFTProject.Project memory project = projectContract.projectDetails(projectId);
         require(project._creatorAddr == msg.sender, Errors.INV_ADD);
 
-        uint256 amount = calculateAmountClaim(project._genNFTAddr, project._mintPrice);
+        uint256 amount = proofOfArt(project._genNFTAddr, project._mintPrice);
         if (amount > _remainClaimSupply) {
             amount = _remainClaimSupply;
         }
