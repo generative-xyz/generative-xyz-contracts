@@ -10,8 +10,8 @@ import {GENTokenTestnet} from "./gentokentestnet";
         }
         const erc20 = new GENTokenTestnet(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const address = await erc20.deployUpgradeable(
-            "GENToken",
-            "GENToken",
+            "GENToken Devnet",
+            "GENToken Devnet",
             process.env.PUBLIC_KEY,
             "0x47B528E9eDD8f7Dd709bCa9f7E45c499C85eccfb",
         );
