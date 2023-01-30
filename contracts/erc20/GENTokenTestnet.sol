@@ -15,6 +15,7 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
     address public _admin;
     address public _paramAddr;
     mapping(address => mapping(address => uint256)) public _claimed;
+    mapping(address => mapping(address => uint256)) public _claimedIndex;
 
     // 60% supply for artist
     uint256 public _remainClaimSupply;
@@ -109,33 +110,39 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
     */
 
     function decay() public view virtual returns (uint8) {
-        uint256 totalSupply = totalSupply();
-        uint256 thresholdDecimal = (10 ** 6) * (10 ** decimals());
-        if (totalSupply < 10 * thresholdDecimal) {
+        uint256 decimal = (10 ** 6) * (10 ** decimals());
+        uint256 totalSupplyPoA = 60 * decimal - _remainClaimSupply;
+        if (totalSupplyPoA < 10 * decimal) {
             return 32;
-        } else if (totalSupply < 20 * thresholdDecimal) {
+        } else if (totalSupplyPoA < 20 * decimal) {
             return 16;
-        } else if (totalSupply < 30 * thresholdDecimal) {
+        } else if (totalSupplyPoA < 30 * decimal) {
             return 8;
-        } else if (totalSupply < 40 * thresholdDecimal) {
+        } else if (totalSupplyPoA < 40 * decimal) {
             return 4;
-        } else if (totalSupply < 50 * thresholdDecimal) {
+        } else if (totalSupplyPoA < 50 * decimal) {
             return 2;
-        } else if (totalSupply < 60 * thresholdDecimal) {
+        } else if (totalSupplyPoA < 60 * decimal) {
             return 1;
         }
         return 0;
     }
 
-    function proofOfArtAvailable(address genNFTAddr, uint256 mintPrice) public returns (uint256) {
-        IGenerativeNFT nft = IGenerativeNFT(genNFTAddr);
+    function proofOfArtAvailable(address generativeProjectAddr, uint256 projectId) public returns (uint256, uint256) {
+        IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
+        NFTProject.Project memory project = projectContract.projectDetails(projectId);
+        require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
+        require(project._mintPrice > 0);
+        
+        IGenerativeNFT nft = IGenerativeNFT(project._genNFTAddr);
         try nft.projectIndex() returns (uint24 index) {
-            uint256 amount = index * mintPrice - _claimed[msg.sender][genNFTAddr];
-            return amount * decay();
+            require(index > 0);
+            uint256 amount = (index - _claimedIndex[project._creatorAddr][project._genNFTAddr]) * project._mintPrice;
+            return (amount * decay(), index);
         } catch {
-            emit NotSupportProjectIndex(genNFTAddr);
+            emit NotSupportProjectIndex(project._genNFTAddr);
         }
-        return 0;
+        return (0, 0);
     }
 
     /*
@@ -147,21 +154,24 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
         NFTProject.Project memory project = projectContract.projectDetails(projectId);
 
-        address receiver = project._creatorAddr;
-
         // only creator of project
         //        require(receiver == msg.sender, Errors.INV_ADD);
 
         // PoA only in ETH
         require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
-        uint256 amount = proofOfArtAvailable(project._genNFTAddr, project._mintPrice);
+        require(project._mintPrice > 0);
+
+        // calculate amount
+        (uint256 amount, uint256 currentIndex) = proofOfArtAvailable(generativeProjectAddr, projectId);
         if (amount > _remainClaimSupply) {
             amount = _remainClaimSupply;
         }
-        _claimed[receiver][project._genNFTAddr] += amount;
-        _mint(receiver, amount);
+        // store and mint
+        _claimedIndex[project._creatorAddr][project._genNFTAddr] = currentIndex;
+        _claimed[project._creatorAddr][project._genNFTAddr] += amount;
+        _mint(project._creatorAddr, amount);
         _remainClaimSupply -= amount;
 
-        emit IGENToken.ClaimToken(receiver, amount);
+        emit IGENToken.ClaimToken(project._creatorAddr, amount);
     }
 }
