@@ -9,26 +9,34 @@ import "@openzeppelin/contracts-upgradeable/governance/utils/IVotesUpgradeable.s
 import "../libs/helpers/Errors.sol";
 import "../interfaces/IGENToken.sol";
 import "../interfaces/IGenerativeProject.sol";
-import "../nfts/GenerativeNFT.sol";
+import "../interfaces/IGenerativeNFT.sol";
 
 contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, IGENToken, ERC20VotesCompUpgradeable {
     address public _admin;
     address public _paramAddr;
     mapping(address => mapping(address => uint256)) public _claimed;
-    uint256 public _remainSupply;
+
+    // 70 % supply for creator
+    uint256 public _remainClaimSupply;
+
 
     function initialize(
         string memory name,
         string memory symbol,
         address admin,
-        address paramAddr,
-        uint256 initSupply
+        address paramAddr
     ) initializer public {
         require(admin != Errors.ZERO_ADDR && paramAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         _admin = admin;
         _paramAddr = paramAddr;
 
-        _remainSupply = 100 * 1e6 * 1e18;
+        uint256 totalSupply = 100 * (10 ** 6) * (10 ** decimals());
+        // 70% for artist
+        _remainClaimSupply = totalSupply * 70 / 100;
+        // 20% for team
+        uint256 _coreTeam = totalSupply * 20 / 100;
+        _mint(_admin, _coreTeam);
+        // 10% for testnet
 
         __ERC20Pausable_init();
         __ERC20_init(name, symbol);
@@ -90,14 +98,12 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
     /*
     * @Minting
     */
-    function calculateAmount(address genNFTAddr, uint256 mintPrice) internal returns (uint256) {
-        GenerativeNFT nft = GenerativeNFT(genNFTAddr);
+    function calculateAmountClaim(address genNFTAddr, uint256 mintPrice) public returns (uint256) {
+        IGenerativeNFT nft = IGenerativeNFT(genNFTAddr);
         try nft.projectIndex() returns (uint24 index) {
-            uint256 revenue = index * mintPrice - _claimed[msg.sender][genNFTAddr];
-            _claimed[msg.sender][genNFTAddr] += revenue;
-            return revenue;
+            return index * mintPrice - _claimed[msg.sender][genNFTAddr];
         } catch {
-
+            emit NotSupportProjectIndex(genNFTAddr);
         }
         return 0;
     }
@@ -106,15 +112,20 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
     * Project creator call claim function to mint GENToken
     */
     function claim(address generativeProjectAddr, uint256 projectId) external whenNotPaused virtual {
+        require(_remainClaimSupply > 0, Errors.REACH_MAX);
+
         IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
         NFTProject.Project memory project = projectContract.projectDetails(projectId);
         require(project._creatorAddr == msg.sender, Errors.INV_ADD);
-        uint256 amount = calculateAmount(project._genNFTAddr, project._mintPrice);
-        if (amount > _remainSupply) {
-            amount = _remainSupply;
+
+        uint256 amount = calculateAmountClaim(project._genNFTAddr, project._mintPrice);
+        if (amount > _remainClaimSupply) {
+            amount = _remainClaimSupply;
         }
+        _claimed[msg.sender][project._genNFTAddr] += amount;
         _mint(msg.sender, amount);
-        _remainSupply -= amount;
+        _remainClaimSupply -= amount;
+
         emit IGENToken.ClaimToken(msg.sender, amount);
     }
 }
