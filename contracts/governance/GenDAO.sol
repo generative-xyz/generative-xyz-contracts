@@ -10,6 +10,8 @@ import "../libs/helpers/Errors.sol";
 import "../interfaces/IGENToken.sol";
 
 contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, GovernorVotesUpgradeable, GovernorVotesQuorumFractionUpgradeable, GovernorTimelockControlUpgradeable {
+    event PaymentReceived(address sender, uint256 amount);
+
     address public _admin;
     address public _paramAddr;
     IGENToken public _votingToken;
@@ -161,6 +163,10 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         return super._executor();
     }
 
+    receive() external payable override {
+        emit PaymentReceived(msg.sender, msg.value);
+    }
+
     function supportsInterface(bytes4 interfaceId)
     public
     view
@@ -188,5 +194,4 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     ) public pure override(GovernorTimelockControlUpgradeable, IGovernorTimelockUpgradeable) returns (uint256) {
         return 0;
     }
-
 }
