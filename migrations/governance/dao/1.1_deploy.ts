@@ -10,13 +10,13 @@ import {GenDAO} from "./gendao";
         }
         const genDAO = new GenDAO(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const address = await genDAO.deployUpgradeable(
-            "Generative.XYZ-DAO",
+            "Generative.XYZ-DAO Devnet",
             process.env.PUBLIC_KEY,
             "0x47B528E9eDD8f7Dd709bCa9f7E45c499C85eccfb",
-            "0x4fB7B3039C630bF191C2A3933Bb4ba221a93C45B",
+            "0xf3627926495E0C8Edb9Ca05e700e0f7C90F74b71",
             "0x0000000000000000000000000000000000000000"
         );
-        console.log("%s GENToken address: %s", process.env.NETWORK, address);
+        console.log("%s GENT Dao address: %s", process.env.NETWORK, address);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);

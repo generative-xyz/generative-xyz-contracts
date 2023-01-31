@@ -96,6 +96,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         // change admin
         if (_votingToken != _new) {
             _votingToken = _new;
+            token = _new;
         }
     }
 
