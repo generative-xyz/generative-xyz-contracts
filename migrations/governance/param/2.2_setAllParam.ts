@@ -120,6 +120,12 @@ import {ethers} from "ethers";
         tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdn.generative.xyz/ajax/libs/p5.grain/0.6.1/p5.grain.min.js"></script>`, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        // GEN Token
+        key = "GEN_TOKEN";
+        tx = await p.setAddress(contract, key, `0xf3627926495E0C8Edb9Ca05e700e0f7C90F74b71`, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
