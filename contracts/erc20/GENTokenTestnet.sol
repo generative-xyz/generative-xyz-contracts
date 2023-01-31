@@ -6,10 +6,13 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20VotesCom
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/governance/utils/IVotesUpgradeable.sol";
 
+import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../interfaces/IGENToken.sol";
 import "../interfaces/IGenerativeProject.sol";
 import "../interfaces/IGenerativeNFT.sol";
+import "../libs/structs/Marketplace.sol";
+import "../nfts/GenerativeNFT.sol";
 
 contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, IGENToken, ERC20VotesCompUpgradeable {
     address public _admin;
@@ -25,6 +28,10 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
 
     // 10% supply for DAO
     uint256 public _remainDAO;
+
+    // Proof of Art base on second sale(marketplace)
+    mapping(address => mapping(address => uint256)) public _PoASecondSale;
+    mapping(address => bool) public _proxyPoASecondSales;
 
     function initialize(
         string memory name,
@@ -67,6 +74,13 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         if (_paramAddr != newAddr) {
             _admin = newAddr;
         }
+    }
+
+    function setProxyPoASecondSale(address addr, bool approve) external {
+        require(msg.sender == _admin && addr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+
+        // set approve
+        _proxyPoASecondSales[addr] = approve;
     }
 
     function decimals() public pure override returns (uint8) {
@@ -128,21 +142,46 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         return 0;
     }
 
-    function proofOfArtAvailable(address generativeProjectAddr, uint256 projectId) public returns (uint256, uint256) {
+    function setPoASecondSale(address genNFTAddr, uint256 tokenId, address erc20Addr, uint256 amount) external {
+        if (_admin == msg.sender || _proxyPoASecondSales[msg.sender]) {
+            // PoA only in ETH
+            if (erc20Addr == Errors.ZERO_ADDR) {
+                IGenerativeNFT nft = IGenerativeNFT(genNFTAddr);
+                // try access project minting info of genNFTAddr
+                try nft.projectAddress() returns (address generativeProjectAddr) {
+                    // get project id from tokenId
+                    uint256 projectId = tokenId / GenerativeNFTConfigs.PROJECT_PADDING;
+                    IGenerativeProject project = IGenerativeProject(generativeProjectAddr);
+                    // get current owner of project
+                    address receiver = project.ownerOf(projectId);
+                    if (receiver != Errors.ZERO_ADDR) {// only apply for generative project
+                        // set for current owner of project
+                        NFTProject.Project memory d = project.projectDetails(projectId);
+                        _PoASecondSale[receiver][d._genNFTAddr] += amount;
+                    }
+                } catch {
+                    emit NotSupportProjectAddress(genNFTAddr);
+                }
+            }
+        }
+    }
+
+    function proofOfArtAvailable(address generativeProjectAddr, uint256 projectId) public returns (uint256, uint256, uint256) {
         IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
         NFTProject.Project memory project = projectContract.projectDetails(projectId);
         require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
         require(project._mintPrice > 0);
-        
+
         IGenerativeNFT nft = IGenerativeNFT(project._genNFTAddr);
         try nft.projectIndex() returns (uint24 index) {
             require(index > 0);
-            uint256 amount = (index - _claimedIndex[project._creatorAddr][project._genNFTAddr]) * project._mintPrice;
-            return (amount * decay(), index);
+            uint256 PoAPrimarySale = (index - _claimedIndex[projectContract.ownerOf(projectId)][project._genNFTAddr]) * project._mintPrice;
+            uint256 PoASecondSale = _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr];
+            return (PoAPrimarySale * decay(), index, PoASecondSale * decay());
         } catch {
             emit NotSupportProjectIndex(project._genNFTAddr);
         }
-        return (0, 0);
+        return (0, 0, 0);
     }
 
     /*
@@ -155,23 +194,25 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         NFTProject.Project memory project = projectContract.projectDetails(projectId);
 
         // only creator of project
-        //        require(receiver == msg.sender, Errors.INV_ADD);
+        //        require(project.ownerOf(projectId) == msg.sender, Errors.INV_ADD);
 
         // PoA only in ETH
         require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
         require(project._mintPrice > 0);
 
         // calculate amount
-        (uint256 amount, uint256 currentIndex) = proofOfArtAvailable(generativeProjectAddr, projectId);
+        (uint256 primarySale, uint256 currentIndex, uint256 secondSale) = proofOfArtAvailable(generativeProjectAddr, projectId);
+        uint256 amount = primarySale + secondSale;
         if (amount > _remainClaimSupply) {
             amount = _remainClaimSupply;
         }
         // store and mint
         _claimedIndex[project._creatorAddr][project._genNFTAddr] = currentIndex;
         _claimed[project._creatorAddr][project._genNFTAddr] += amount;
+        _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] -= secondSale;
         _mint(project._creatorAddr, amount);
         _remainClaimSupply -= amount;
 
-        emit IGENToken.ClaimToken(project._creatorAddr, amount);
+        emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
     }
 }

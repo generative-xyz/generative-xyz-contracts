@@ -14,6 +14,7 @@ import "../libs/structs/Marketplace.sol";
 import "../libs/configs/MarketplaceServiceConfigs.sol";
 import "../interfaces/IRoyaltyFinanceSecondSale.sol";
 import "../libs/structs/Royalty.sol";
+import "../interfaces/IGENToken.sol";
 
 contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, IMarketplaceService {
     uint256 private _counting;
@@ -72,9 +73,25 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
     /* @Royalty: process royalty second sale in case RoyaltyFinanceSecondSale
     */
     function setRoyaltySecondSale(address royaltyReceiver, uint256 tokenId, address erc20Addr, uint256 amount) internal {
-        IRoyaltyFinanceSecondSale royaltyFinance = IRoyaltyFinanceSecondSale(royaltyReceiver);
-        if (royaltyFinance.supportsInterface(type(IRoyaltyFinanceSecondSale).interfaceId)) {
-            royaltyFinance.setRoyaltySecondSale(tokenId, erc20Addr, amount);
+        if (royaltyReceiver != Errors.ZERO_ADDR) {
+            IRoyaltyFinanceSecondSale royaltyFinance = IRoyaltyFinanceSecondSale(royaltyReceiver);
+            if (royaltyFinance.supportsInterface(type(IRoyaltyFinanceSecondSale).interfaceId)) {
+                royaltyFinance.setRoyaltySecondSale(tokenId, erc20Addr, amount);
+            }
+        }
+    }
+
+    /* @PoA: process PoA mining
+        Try to access GENToken and set PoA value from amount of trading
+    */
+    function setPoASecondSale(address genTokenAddr, address collectionAddr, uint256 tokenId, address erc20Addr, uint256 amount) internal {
+        if (genTokenAddr != Errors.ZERO_ADDR) {
+            IGENToken genToken = IGENToken(genTokenAddr);
+            try genToken.setPoASecondSale(collectionAddr, tokenId, erc20Addr, amount) {
+                emit Marketplace.SetPoA(genTokenAddr, collectionAddr, tokenId, erc20Addr, amount);
+            } catch {
+                emit Marketplace.SetPoAFail(genTokenAddr, collectionAddr, tokenId, erc20Addr, amount);
+            }
         }
     }
 
@@ -170,6 +187,8 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
                 require(success, Errors.TRANSFER_FAIL);
                 setRoyaltySecondSale(_benefit._royaltyReceiver, listing._tokenId, listing._erc20Token, _benefit._royalty);
             }
+
+            setPoASecondSale(parameterController.getAddress(MarketplaceServiceConfigs.MARKETPLACE_GEN_TOKEN), listing._collectionContract, listing._tokenId, listing._erc20Token, listing._price);
         }
 
         emit Marketplace.PurchaseToken(offerId, _listingTokens[offerId], _closeOfferingData._buyer);
