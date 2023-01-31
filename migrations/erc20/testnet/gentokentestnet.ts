@@ -133,7 +133,7 @@ class GENTokenTestnet {
         }
 
         const a = await temp?.nftContract.methods.proofOfArtAvailable(projectAddr, projectId).call(tx);
-        return [ethers.utils.formatEther(a[0]), a[1]];
+        return [ethers.utils.formatEther(a[0]), a[1], ethers.utils.formatEther(a[2])];
     }
 }
 

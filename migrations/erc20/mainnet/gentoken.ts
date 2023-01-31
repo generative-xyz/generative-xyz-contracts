@@ -135,7 +135,7 @@ class GENToken {
         }
 
         const a = await temp?.nftContract.methods.proofOfArtAvailable(genNFTAddr, ethers.utils.parseEther(mintPrice)).call(tx);
-        return ethers.utils.formatEther(a);
+        return [ethers.utils.formatEther(a[0]), a[1], ethers.utils.formatEther(a[2])];
     }
 }
 
