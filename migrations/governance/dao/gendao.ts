@@ -21,7 +21,6 @@ class GenDAO {
                             adminAddress: any,
                             paramAdd: any,
                             votingToken: any,
-                            timelock: any
     ) {
         if (this.network == "local") {
             console.log("not run local");
@@ -30,8 +29,8 @@ class GenDAO {
 
         const contract = await ethers.getContractFactory("GenDAO");
         console.log("GenDAO.deploying ...")
-        const proxy = await upgrades.deployProxy(contract, [name, adminAddress, paramAdd, votingToken, timelock], {
-            initializer: 'initialize(string, address, address, address, address)',
+        const proxy = await upgrades.deployProxy(contract, [name, adminAddress, paramAdd, votingToken], {
+            initializer: 'initialize(string, address, address, address)',
         });
         await proxy.deployed();
         console.log("GenDAO deployed at proxy:", proxy.address);

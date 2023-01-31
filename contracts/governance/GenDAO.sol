@@ -9,7 +9,7 @@ import "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorTimelo
 import "../libs/helpers/Errors.sol";
 import "../interfaces/IGENToken.sol";
 
-contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, GovernorVotesUpgradeable, GovernorVotesQuorumFractionUpgradeable, GovernorTimelockControlUpgradeable {
+contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, GovernorVotesUpgradeable, GovernorVotesQuorumFractionUpgradeable {
     event PaymentReceived(address sender, uint256 amount);
 
     address public _admin;
@@ -25,8 +25,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     function initialize(string memory name,
         address admin,
         address paramAddr,
-        IGENToken votingToken,
-        TimelockControllerUpgradeable timelock
+        IGENToken votingToken
     ) initializer public {
         require(admin != Errors.ZERO_ADDR && paramAddr != Errors.ZERO_ADDR && address(votingToken) != Errors.ZERO_ADDR, Errors.INV_ADD);
         _admin = admin;
@@ -49,7 +48,6 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         __GovernorCompatibilityBravo_init();
         __GovernorVotes_init(votingToken);
         __GovernorVotesQuorumFraction_init(50);
-        __GovernorTimelockControl_init(timelock);
     }
 
     //
@@ -125,7 +123,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     function state(uint256 proposalId)
     public
     view
-    override(GovernorUpgradeable, IGovernorUpgradeable, GovernorTimelockControlUpgradeable)
+    override(GovernorUpgradeable, IGovernorUpgradeable)
     returns (ProposalState)
     {
         return super.state(proposalId);
@@ -133,7 +131,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
 
     function propose(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, string memory description)
     public
-    override(GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, IGovernorUpgradeable)
+    override(GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable)
     returns (uint256)
     {
         return super.propose(targets, values, calldatas, description);
@@ -141,14 +139,14 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
 
     function _execute(uint256 proposalId, address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
     internal
-    override(GovernorUpgradeable, GovernorTimelockControlUpgradeable)
+    override(GovernorUpgradeable)
     {
         super._execute(proposalId, targets, values, calldatas, descriptionHash);
     }
 
     function _cancel(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
     internal
-    override(GovernorUpgradeable, GovernorTimelockControlUpgradeable)
+    override(GovernorUpgradeable)
     returns (uint256)
     {
         return super._cancel(targets, values, calldatas, descriptionHash);
@@ -157,7 +155,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     function _executor()
     internal
     view
-    override(GovernorUpgradeable, GovernorTimelockControlUpgradeable)
+    override(GovernorUpgradeable)
     returns (address)
     {
         return super._executor();
@@ -170,7 +168,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     function supportsInterface(bytes4 interfaceId)
     public
     view
-    override(GovernorUpgradeable, IERC165Upgradeable, GovernorTimelockControlUpgradeable)
+    override(GovernorUpgradeable, IERC165Upgradeable)
     returns (bool)
     {
         return super.supportsInterface(interfaceId);
@@ -178,11 +176,11 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
 
     /* @OverrideUnusedFunctions
     */
-    function proposalEta(uint256) public pure override(GovernorTimelockControlUpgradeable, IGovernorTimelockUpgradeable) returns (uint256) {
+    function proposalEta(uint256) public pure override returns (uint256) {
         return 0;
     }
 
-    function timelock() public pure override(GovernorTimelockControlUpgradeable, IGovernorTimelockUpgradeable) returns (address) {
+    function timelock() public pure override returns (address) {
         return address(0x0);
     }
 
@@ -191,7 +189,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         uint256[] memory,
         bytes[] memory,
         bytes32
-    ) public pure override(GovernorTimelockControlUpgradeable, IGovernorTimelockUpgradeable) returns (uint256) {
+    ) public pure override returns (uint256) {
         return 0;
     }
 }
