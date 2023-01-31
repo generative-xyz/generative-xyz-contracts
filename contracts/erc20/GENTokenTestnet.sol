@@ -177,7 +177,8 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
             require(index > 0);
             uint256 PoAPrimarySale = (index - _claimedIndex[projectContract.ownerOf(projectId)][project._genNFTAddr]) * project._mintPrice;
             uint256 PoASecondSale = _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr];
-            return (PoAPrimarySale * decay(), index, PoASecondSale * decay());
+            // x 1000 for testnet
+            return (PoAPrimarySale * decay() * 1000, index, PoASecondSale * decay() * 1000);
         } catch {
             emit NotSupportProjectIndex(project._genNFTAddr);
         }
