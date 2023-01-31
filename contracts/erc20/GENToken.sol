@@ -47,14 +47,18 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         uint256 totalSupply = 100 * (10 ** 6) * (10 ** decimals());
         // 60% for artist
         _remainClaimSupply = totalSupply * 60 / 100;
+
         // 30% for team
         _remainCoreTeam = totalSupply * 30 / 100;
-        _mint(_admin, _remainCoreTeam);
-        _remainCoreTeam = 0;
+        // TODO: vesting 4 years
+        /*_mint(_admin, _remainCoreTeam);
+        _remainCoreTeam = 0;*/
+
         // 10% for DAO
         _remainDAO = totalSupply * 10 / 100;
-        _mint(_admin, _remainDAO);
-        _remainDAO = 0;
+        // TODO: vesting 4 years
+        /*_mint(_admin, _remainDAO);
+        _remainDAO = 0;*/
 
         __ERC20Pausable_init();
         __ERC20_init(name, symbol);
@@ -178,8 +182,7 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         try nft.projectIndex() returns (uint24 index) {
             require(index > 0);
             uint256 PoAPrimarySale = (index - _claimedIndex[projectContract.ownerOf(projectId)][project._genNFTAddr]) * project._mintPrice;
-            // x 1000 for testnet
-            return (PoAPrimarySale * decay() * 1000, index, _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] * decay() * 1000);
+            return (PoAPrimarySale * decay(), index, _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] * decay());
         } catch {
             emit NotSupportProjectIndex(project._genNFTAddr);
         }
