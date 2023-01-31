@@ -176,9 +176,8 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         try nft.projectIndex() returns (uint24 index) {
             require(index > 0);
             uint256 PoAPrimarySale = (index - _claimedIndex[projectContract.ownerOf(projectId)][project._genNFTAddr]) * project._mintPrice;
-            uint256 PoASecondSale = _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr];
             // x 1000 for testnet
-            return (PoAPrimarySale * decay() * 1000, index, PoASecondSale * decay() * 1000);
+            return (PoAPrimarySale * decay() * 1000, index, _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] * decay() * 1000);
         } catch {
             emit NotSupportProjectIndex(project._genNFTAddr);
         }
@@ -210,7 +209,7 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         // store and mint
         _claimedIndex[project._creatorAddr][project._genNFTAddr] = currentIndex;
         _claimed[project._creatorAddr][project._genNFTAddr] += amount;
-        _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] -= secondSale;
+        _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] = 0;
         _mint(project._creatorAddr, amount);
         _remainClaimSupply -= amount;
 
