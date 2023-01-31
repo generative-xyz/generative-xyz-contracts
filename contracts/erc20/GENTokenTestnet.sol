@@ -171,13 +171,13 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         NFTProject.Project memory project = projectContract.projectDetails(projectId);
         require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
         require(project._mintPrice > 0);
-
+        
         IGenerativeNFT nft = IGenerativeNFT(project._genNFTAddr);
         try nft.projectIndex() returns (uint24 index) {
             require(index > 0);
             uint256 PoAPrimarySale = (index - _claimedIndex[projectContract.ownerOf(projectId)][project._genNFTAddr]) * project._mintPrice;
             // x 1000 for testnet
-            return (PoAPrimarySale * decay() * 1000, index, _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] * decay() * 1000);
+            return (PoAPrimarySale * decay() * 100, index, _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] * decay() * 100);
         } catch {
             emit NotSupportProjectIndex(project._genNFTAddr);
         }
