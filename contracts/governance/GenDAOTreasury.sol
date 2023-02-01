@@ -11,6 +11,8 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "../libs/helpers/Errors.sol";
 
 contract GenDAOTreasury is OwnableUpgradeable, ReentrancyGuardUpgradeable, IERC721ReceiverUpgradeable, IERC1155ReceiverUpgradeable {
+    event PaymentReceived(address sender, uint256 amount);
+
     address public _admin;
     address public _paramAddr;
     address public _dao;
@@ -25,7 +27,7 @@ contract GenDAOTreasury is OwnableUpgradeable, ReentrancyGuardUpgradeable, IERC7
 
         __Ownable_init();
         __ReentrancyGuard_init();
-        
+
     }
 
     function changeAdmin(address newAdm) external {
@@ -107,6 +109,7 @@ contract GenDAOTreasury is OwnableUpgradeable, ReentrancyGuardUpgradeable, IERC7
      * @dev Function to receive ETH that will be handled by the governor (disabled if executor is a third party contract)
      */
     receive() external payable virtual {
+        emit PaymentReceived(msg.sender, msg.value);
     }
 
     /**
