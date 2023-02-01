@@ -55,9 +55,9 @@ class GenDAO {
 
     async upgradeContract(proxyAddress: any) {
         const contractUpdated = await ethers.getContractFactory("GenDAO");
-        console.log('Upgrading GENToken... by proxy ' + proxyAddress);
+        console.log('Upgrading GenDAO... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
-        console.log('GENToken upgraded on tx address ' + tx.address);
+        console.log('GenDAO upgraded on tx address ' + tx.address);
         return tx;
     }
 
