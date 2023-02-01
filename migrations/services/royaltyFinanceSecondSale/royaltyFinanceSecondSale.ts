@@ -156,7 +156,8 @@ class RoyaltyFinanceSecondSale {
             nonce: nonce,
         }
 
-        return await temp?.nftContract.methods._royaltySecondSale(projectId, creator, erc20).call(tx);
+        const value = await temp?.nftContract.methods._royaltySecondSale(projectId, creator, erc20).call(tx);
+        return [ethers.utils.formatEther(value)];
     }
 
     async royaltySecondSaleAdmin(contractAddress: any, erc20: any = '0x0000000000000000000000000000000000000000') {
