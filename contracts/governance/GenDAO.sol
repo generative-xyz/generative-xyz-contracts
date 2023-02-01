@@ -108,17 +108,17 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         }
     }
 
-    function withdraw(address receiver, address erc20Addr, uint256 amount) external virtual {
+    function withdraw(address erc20Addr, uint256 amount) external virtual {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         bool success;
         if (erc20Addr == address(0x0)) {
             require(address(this).balance >= amount);
-            (success,) = receiver.call{value : amount}("");
+            (success,) = msg.sender.call{value : amount}("");
             require(success);
         } else {
             IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
             // transfer erc-20 token
-            require(tokenERC20.transfer(receiver, amount));
+            require(tokenERC20.transfer(msg.sender, amount));
         }
     }
 
