@@ -48,7 +48,7 @@ import {ethers} from "ethers";
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
         key = "MINT_NFT_OPERATOR_FEE"; // operator fee when collector mint generative nft from project
-        tx = await p.setUInt256(contract, key, 1000, 0);
+        tx = await p.setUInt256(contract, key, 500, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
