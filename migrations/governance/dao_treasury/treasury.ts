@@ -85,6 +85,69 @@ class Treasury {
         }
         return null;
     }
+
+    async withdraw(contract: any, erc20: any, amount: any, gas: number) {
+        let temp = this.getContract(contract);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.withdraw(erc20, ethers.utils.parseEther(amount));
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contract,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async withdrawERC721(contract: any, erc721: any, tokenId: any, gas: number) {
+        let temp = this.getContract(contract);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.withdrawERC721(erc721, parseInt(tokenId));
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contract,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async withdrawERC1155(contract: any, erc1155: any, tokenId: any, amount: any, gas: number) {
+        let temp = this.getContract(contract);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.withdrawERC1155(erc1155, parseInt(tokenId), amount);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contract,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
 }
 
 export {Treasury};
