@@ -111,6 +111,11 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
     function withdraw(address erc20Addr) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         require(_royaltySecondSaleAdmin[erc20Addr] > 0);
+        transferTreasury(erc20Addr);
+        emit Royalty.Withdraw(_admin, erc20Addr);
+    }
+
+    function transferTreasury(address erc20Addr) internal {
         address operatorTreasureAddress = msg.sender;
         IParameterControl _p = IParameterControl(_paramsAddress);
         address operatorTreasureConfig = _p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
@@ -129,7 +134,6 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
         }
         _royaltySecondSaleAdminWithdrawn[erc20Addr] += _royaltySecondSaleAdmin[erc20Addr];
         _royaltySecondSaleAdmin[erc20Addr] = 0;
-        emit Royalty.Withdraw(_admin, erc20Addr);
     }
 
     function setRoyaltySecondSale(uint256 tokenId, address erc20Addr, uint256 amount) external nonReentrant {
@@ -149,10 +153,13 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
                         ownerRoyaltySecondSale = projectOwnerRoyalty;
                     }
                 }
-                // set for project's owner
+                // set for project's owner -> lazy withdraw
                 _royaltySecondSale[projectId][receiver][erc20Addr] += ownerRoyaltySecondSale * amount / Royalty.MINT_PERCENT_ROYALTY;
+
                 // set for _admin
                 _royaltySecondSaleAdmin[erc20Addr] += amount - (ownerRoyaltySecondSale * amount / Royalty.MINT_PERCENT_ROYALTY);
+                // and transfer to treasury immediately
+                transferTreasury(erc20Addr);
                 emit Royalty.SetRoyaltySecondSale(msg.sender, tokenId, erc20Addr, amount);
             } else {
                 emit Royalty.SetRoyaltySecondSaleFail(msg.sender, tokenId, erc20Addr, amount);
