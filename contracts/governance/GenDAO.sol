@@ -59,6 +59,14 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         }
     }
 
+    function changeParamAddress(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        // change param address
+        if (_paramAddr != newAddr) {
+            _paramAddr = newAddr;
+        }
+    }
+
     function changeQuorumVotes(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         // change admin
