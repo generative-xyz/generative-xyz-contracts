@@ -15,6 +15,7 @@ import "../interfaces/IGenerativeProjectData.sol";
 
 import "../libs/configs/GenerativeProjectConfigs.sol";
 import "../libs/configs/GenerativeNFTConfigs.sol";
+import "../libs/configs/GENDaoConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
 
@@ -94,6 +95,26 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         }
     }
 
+    /*function withdraw(address erc20Addr, uint256 amount) external nonReentrant {
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        address operatorTreasureAddress = msg.sender;
+        IParameterControl _p = IParameterControl(_paramsAddress);
+        address operatorTreasureConfig = _p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        if (operatorTreasureConfig != Errors.ZERO_ADDR) {
+            operatorTreasureAddress = operatorTreasureConfig;
+        }
+        bool success;
+        if (erc20Addr == address(0x0)) {
+            require(address(this).balance >= amount);
+            (success,) = operatorTreasureAddress.call{value : amount}("");
+            require(success);
+        } else {
+            IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
+            // transfer erc-20 token
+            require(tokenERC20.transfer(operatorTreasureAddress, amount));
+        }
+    }*/
+
     function withdraw(address receiver, address erc20Addr, uint256 amount) external nonReentrant {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         bool success;
@@ -118,16 +139,23 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
             uint256 operationFee = _p.getUInt256(GenerativeProjectConfigs.CREATE_PROJECT_FEE);
             if (operationFee > 0) {
                 address operationFeeToken = _p.getAddress(GenerativeProjectConfigs.FEE_TOKEN);
+                address operatorTreasureAddress = address(this);
+                address operatorTreasureConfig = _p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+                if (operatorTreasureConfig != Errors.ZERO_ADDR) {
+                    operatorTreasureAddress = operatorTreasureConfig;
+                }
                 if (!(operationFeeToken == Errors.ZERO_ADDR)) {
                     IERC20Upgradeable tokenERC20 = IERC20Upgradeable(operationFeeToken);
                     // transfer erc-20 token to this contract
                     require(tokenERC20.transferFrom(
                             msg.sender,
-                            address(this),
+                            operatorTreasureAddress,
                             operationFee
                         ));
                 } else {
                     require(msg.value >= operationFee);
+                    (bool success,) = operatorTreasureAddress.call{value : msg.value}("");
+                    require(success);
                 }
             }
         }
