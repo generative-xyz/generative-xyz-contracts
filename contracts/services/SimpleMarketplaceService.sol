@@ -57,17 +57,23 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         }
     }
 
-    function withdraw(address receiver, address erc20Addr, uint256 amount) external virtual nonReentrant {
+    function withdraw(address erc20Addr, uint256 amount) external nonReentrant {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        address operatorTreasureAddress = msg.sender;
+        IParameterControl _p = IParameterControl(_parameterAddr);
+        address operatorTreasureConfig = _p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        if (operatorTreasureConfig != Errors.ZERO_ADDR) {
+            operatorTreasureAddress = operatorTreasureConfig;
+        }
         bool success;
         if (erc20Addr == address(0x0)) {
             require(address(this).balance >= amount);
-            (success,) = receiver.call{value : amount}("");
+            (success,) = operatorTreasureAddress.call{value : amount}("");
             require(success);
         } else {
             IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
             // transfer erc-20 token
-            require(tokenERC20.transfer(receiver, amount));
+            require(tokenERC20.transfer(operatorTreasureAddress, amount));
         }
     }
 
