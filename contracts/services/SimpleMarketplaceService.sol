@@ -12,6 +12,7 @@ import "../interfaces/IMarketplaceService.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Marketplace.sol";
 import "../libs/configs/MarketplaceServiceConfigs.sol";
+import "../libs/configs/GENDaoConfigs.sol";
 import "../interfaces/IRoyaltyFinanceSecondSale.sol";
 import "../libs/structs/Royalty.sol";
 import "../interfaces/IGENToken.sol";
@@ -166,9 +167,20 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             _closeOfferingData._price -= _benefit._royalty;
         }
 
+        address treasury = address(this);
+        address treasuryConfig = parameterController.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        if (treasuryConfig != Errors.ZERO_ADDR) {
+            treasury = treasuryConfig;
+        }
         if (isERC20) {
+            // transfer all to this contract
             require(erc20.transferFrom(_closeOfferingData._buyer, address(this), _closeOfferingData._originPrice), Errors.TRANSFER_FAIL);
+            // transfer for seller
             require(erc20.transfer(listing._seller, _closeOfferingData._price), Errors.TRANSFER_FAIL);
+            if (treasury != address(this)) {
+                // transfer to treasury
+                require(erc20.transfer(treasury, _benefit._benefitOperator), Errors.TRANSFER_FAIL);
+            }
 
             // pay royalty second sale
             if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
@@ -178,8 +190,14 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         } else {
             require(address(this).balance > 0, Errors.VALUE_INVALID);
             bool success;
+            // transfer to seller
             (success,) = listing._seller.call{value : _closeOfferingData._price}("");
             require(success, Errors.TRANSFER_FAIL);
+            if (treasury != address(this)) {
+                // transfer to treasury
+                (success,) = treasury.call{value : _closeOfferingData._price}("");
+                require(success, Errors.TRANSFER_FAIL);
+            }
 
             // pay royalty second sale
             if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
@@ -188,7 +206,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
                 setRoyaltySecondSale(_benefit._royaltyReceiver, listing._tokenId, listing._erc20Token, _benefit._royalty);
             }
 
-            setPoASecondSale(parameterController.getAddress(MarketplaceServiceConfigs.MARKETPLACE_GEN_TOKEN), listing._collectionContract, listing._tokenId, listing._erc20Token, listing._price);
+            setPoASecondSale(parameterController.getAddress(GENDaoConfigs.GEN_TOKEN), listing._collectionContract, listing._tokenId, listing._erc20Token, listing._price);
         }
 
         emit Marketplace.PurchaseToken(offerId, _listingTokens[offerId], _closeOfferingData._buyer);
