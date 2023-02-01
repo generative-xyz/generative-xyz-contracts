@@ -15,6 +15,9 @@ library Marketplace {
     event UpdateListingPrice(bytes32 indexed offeringId, uint256 indexed price);
     event UpdateMakeOfferPrice(bytes32 indexed offeringId, uint256 indexed price);
 
+    event SetPoA(address genToken, address collectionAddr, uint256 tokenId, address erc20Addr, uint256 amount);
+    event SetPoAFail(address genToken, address collectionAddr, uint256 tokenId, address erc20Addr, uint256 amount);
+
     struct Benefit {
         address _royaltyReceiver;// contract/address get royalty second sale
         uint256 _royalty;// royalty second sale

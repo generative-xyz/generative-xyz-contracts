@@ -13,6 +13,7 @@ import "../libs/operator-filter-registry/DefaultOperatorFilterer.sol";
 
 // libs
 import "../libs/configs/GenerativeNFTConfigs.sol";
+import "../libs/configs/GENDaoConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
 import "../libs/structs/NFTProject.sol";
@@ -46,7 +47,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _admin = admin;
         _randomizer = randomizer;
         _projectDataContextAddr = projectDataContextAddr;
-        _nameCol = string(abi.encodePacked(project._name, " by ", project._creator));
+        _nameCol = project._name;
         for (uint256 i;
             i < project._reserves.length;
             i++) {
@@ -92,7 +93,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         address operatorTreasureAddress = _admin;
         if (_paramsAddress != address(0)) {
             operationFee = _p.getUInt256(GenerativeNFTConfigs.MINT_NFT_OPERATOR_FEE);
-            address operatorTreasureConfig = _p.getAddress(GenerativeNFTConfigs.MINT_NFT_OPERATOR_TREASURE_ADDR);
+            address operatorTreasureConfig = _p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
             if (operatorTreasureConfig != Errors.ZERO_ADDR) {
                 operatorTreasureAddress = operatorTreasureConfig;
             }
@@ -195,6 +196,10 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
 
     function projectIndex() external view returns (uint24) {
         return _project._index;
+    }
+
+    function projectAddress() external view returns (address) {
+        return _project._projectAddr;
     }
 
     /* @notice: opensea operator filter registry

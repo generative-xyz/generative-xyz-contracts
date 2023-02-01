@@ -12,8 +12,10 @@ import "../interfaces/IMarketplaceService.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Marketplace.sol";
 import "../libs/configs/MarketplaceServiceConfigs.sol";
+import "../libs/configs/GENDaoConfigs.sol";
 import "../interfaces/IRoyaltyFinanceSecondSale.sol";
 import "../libs/structs/Royalty.sol";
+import "../interfaces/IGENToken.sol";
 
 contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, IMarketplaceService {
     uint256 private _counting;
@@ -55,26 +57,48 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         }
     }
 
-    function withdraw(address receiver, address erc20Addr, uint256 amount) external virtual nonReentrant {
+    function withdraw(address erc20Addr, uint256 amount) external nonReentrant {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        address operatorTreasureAddress = msg.sender;
+        IParameterControl _p = IParameterControl(_parameterAddr);
+        address operatorTreasureConfig = _p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        if (operatorTreasureConfig != Errors.ZERO_ADDR) {
+            operatorTreasureAddress = operatorTreasureConfig;
+        }
         bool success;
         if (erc20Addr == address(0x0)) {
             require(address(this).balance >= amount);
-            (success,) = receiver.call{value : amount}("");
+            (success,) = operatorTreasureAddress.call{value : amount}("");
             require(success);
         } else {
             IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
             // transfer erc-20 token
-            require(tokenERC20.transfer(receiver, amount));
+            require(tokenERC20.transfer(operatorTreasureAddress, amount));
         }
     }
 
     /* @Royalty: process royalty second sale in case RoyaltyFinanceSecondSale
     */
     function setRoyaltySecondSale(address royaltyReceiver, uint256 tokenId, address erc20Addr, uint256 amount) internal {
-        IRoyaltyFinanceSecondSale royaltyFinance = IRoyaltyFinanceSecondSale(royaltyReceiver);
-        if (royaltyFinance.supportsInterface(type(IRoyaltyFinanceSecondSale).interfaceId)) {
-            royaltyFinance.setRoyaltySecondSale(tokenId, erc20Addr, amount);
+        if (royaltyReceiver != Errors.ZERO_ADDR) {
+            IRoyaltyFinanceSecondSale royaltyFinance = IRoyaltyFinanceSecondSale(royaltyReceiver);
+            if (royaltyFinance.supportsInterface(type(IRoyaltyFinanceSecondSale).interfaceId)) {
+                royaltyFinance.setRoyaltySecondSale(tokenId, erc20Addr, amount);
+            }
+        }
+    }
+
+    /* @PoA: process PoA mining
+        Try to access GENToken and set PoA value from amount of trading
+    */
+    function setPoASecondSale(address genTokenAddr, address collectionAddr, uint256 tokenId, address erc20Addr, uint256 amount) internal {
+        if (genTokenAddr != Errors.ZERO_ADDR) {
+            IGENToken genToken = IGENToken(genTokenAddr);
+            try genToken.setPoASecondSale(collectionAddr, tokenId, erc20Addr, amount) {
+                emit Marketplace.SetPoA(genTokenAddr, collectionAddr, tokenId, erc20Addr, amount);
+            } catch {
+                emit Marketplace.SetPoAFail(genTokenAddr, collectionAddr, tokenId, erc20Addr, amount);
+            }
         }
     }
 
@@ -149,9 +173,20 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             _closeOfferingData._price -= _benefit._royalty;
         }
 
+        address treasury = address(this);
+        address treasuryConfig = parameterController.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        if (treasuryConfig != Errors.ZERO_ADDR) {
+            treasury = treasuryConfig;
+        }
         if (isERC20) {
+            // transfer all to this contract
             require(erc20.transferFrom(_closeOfferingData._buyer, address(this), _closeOfferingData._originPrice), Errors.TRANSFER_FAIL);
+            // transfer for seller
             require(erc20.transfer(listing._seller, _closeOfferingData._price), Errors.TRANSFER_FAIL);
+            if (treasury != address(this)) {
+                // transfer to treasury
+                require(erc20.transfer(treasury, _benefit._benefitOperator), Errors.TRANSFER_FAIL);
+            }
 
             // pay royalty second sale
             if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
@@ -161,8 +196,14 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
         } else {
             require(address(this).balance > 0, Errors.VALUE_INVALID);
             bool success;
+            // transfer to seller
             (success,) = listing._seller.call{value : _closeOfferingData._price}("");
             require(success, Errors.TRANSFER_FAIL);
+            if (treasury != address(this)) {
+                // transfer to treasury
+                (success,) = treasury.call{value : _benefit._benefitOperator}("");
+                require(success, Errors.TRANSFER_FAIL);
+            }
 
             // pay royalty second sale
             if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
@@ -170,6 +211,8 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
                 require(success, Errors.TRANSFER_FAIL);
                 setRoyaltySecondSale(_benefit._royaltyReceiver, listing._tokenId, listing._erc20Token, _benefit._royalty);
             }
+
+            setPoASecondSale(parameterController.getAddress(GENDaoConfigs.GEN_TOKEN), listing._collectionContract, listing._tokenId, listing._erc20Token, listing._price);
         }
 
         emit Marketplace.PurchaseToken(offerId, _listingTokens[offerId], _closeOfferingData._buyer);
@@ -290,9 +333,19 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             closeData._price -= _benefit._royalty;
         }
 
+        address treasury = address(this);
+        address treasuryConfig = parameterController.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        if (treasuryConfig != Errors.ZERO_ADDR) {
+            treasury = treasuryConfig;
+        }
         // transfer erc-20
         require(erc20.transferFrom(closeData._buyer, address(this), closeData._originPrice), Errors.TRANSFER_FAIL);
+        // transfer to seller
         require(erc20.transfer(closeData._seller, closeData._price), Errors.TRANSFER_FAIL);
+        // transfer to treasury
+        if (treasury != address(this)) {
+            require(erc20.transfer(treasury, _benefit._benefitOperator), Errors.TRANSFER_FAIL);
+        }
 
         // pay royalty second sale
         if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {

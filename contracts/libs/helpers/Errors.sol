@@ -10,7 +10,7 @@ library Errors {
     string public constant SUCCESS = "0";
 
     address public constant ZERO_ADDR = address(0x0);
-    
+
     // common errors
     string public constant INV_ADD = "100";
     string public constant ONLY_ADMIN_ALLOWED = "101";
@@ -40,4 +40,7 @@ library Errors {
     string public constant ERC_20_NOT_ALLOW = "307";
     string public constant ZERO_PRICE = "308";
     string public constant ZERO_DURATION = "309";
+
+    // GEN Token
+    string public constant POA_INVALID_TOKEN = "400";
 }

@@ -135,6 +135,19 @@
     },
     {
       "inputs": [],
+      "name": "projectAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "projectIndex",
       "outputs": [
         {

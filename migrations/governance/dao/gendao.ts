@@ -21,7 +21,6 @@ class GenDAO {
                             adminAddress: any,
                             paramAdd: any,
                             votingToken: any,
-                            timelock: any
     ) {
         if (this.network == "local") {
             console.log("not run local");
@@ -30,8 +29,8 @@ class GenDAO {
 
         const contract = await ethers.getContractFactory("GenDAO");
         console.log("GenDAO.deploying ...")
-        const proxy = await upgrades.deployProxy(contract, [name, adminAddress, paramAdd, votingToken, timelock], {
-            initializer: 'initialize(string, address, address, address, address)',
+        const proxy = await upgrades.deployProxy(contract, [name, adminAddress, paramAdd, votingToken], {
+            initializer: 'initialize(string, address, address, address)',
         });
         await proxy.deployed();
         console.log("GenDAO deployed at proxy:", proxy.address);
@@ -56,9 +55,9 @@ class GenDAO {
 
     async upgradeContract(proxyAddress: any) {
         const contractUpdated = await ethers.getContractFactory("GenDAO");
-        console.log('Upgrading GENToken... by proxy ' + proxyAddress);
+        console.log('Upgrading GenDAO... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
-        console.log('GENToken upgraded on tx address ' + tx.address);
+        console.log('GenDAO upgraded on tx address ' + tx.address);
         return tx;
     }
 
@@ -239,6 +238,90 @@ class GenDAO {
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
         const fun = temp?.nftContract.methods.changeVoteDelay(time);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contract,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async changeVotePeriod(contract: any, time: any, gas: number) {
+        let temp = this.getContract(contract);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.changeVotePeriod(time);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contract,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async changeQuorumVotes(contract: any, percent: any, gas: number) {
+        let temp = this.getContract(contract);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.changeQuorumVotes(percent);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contract,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async changeVotingToken(contract: any, tokenAddr: any, gas: number) {
+        let temp = this.getContract(contract);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.changeVotingToken(tokenAddr);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contract,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async withdraw(contract: any, erc20: any, amount: any, gas: number) {
+        let temp = this.getContract(contract);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.withdraw(erc20, ethers.utils.parseEther(amount));
         //the transaction
         const tx = {
             from: this.senderPublicKey,

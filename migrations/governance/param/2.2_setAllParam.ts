@@ -48,14 +48,14 @@ import {ethers} from "ethers";
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
         key = "MINT_NFT_OPERATOR_FEE"; // operator fee when collector mint generative nft from project
-        tx = await p.setUInt256(contract, key, 1000, 0);
+        tx = await p.setUInt256(contract, key, 500, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
         key = "MINT_NFT_OPERATOR_TREASURE_ADDR";// hold operator fee when minting generative nft of project - default is admin
-        // tx = await p.setAddress(contract, key, "", 0);
-        // console.log("set ", key);
-        // console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+        tx = await p.setAddress(contract, key, "0x833667aa22F6048993dD9047CdE98beB88C2876E", 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
         /**
          * For Project Data
          */
@@ -118,6 +118,12 @@ import {ethers} from "ethers";
 
         key = "p5.grain.js@0.6.1"
         tx = await p.set(contract, key, `<script type="text/javascript" src="https://cdn.generative.xyz/ajax/libs/p5.grain/0.6.1/p5.grain.min.js"></script>`, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        // GEN Token
+        key = "GEN_TOKEN";
+        tx = await p.setAddress(contract, key, `0xf3627926495E0C8Edb9Ca05e700e0f7C90F74b71`, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
     } catch (e) {

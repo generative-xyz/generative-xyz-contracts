@@ -43,7 +43,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
 
         // change param address
         if (_paramAddr != newAddr) {
-            _admin = newAddr;
+            _paramAddr = newAddr;
         }
     }
 
