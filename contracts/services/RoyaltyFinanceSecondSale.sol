@@ -90,7 +90,7 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
     */
 
     /*
-        trigger withdraw to `account`
+        trigger withdraw to `msg.sender`
     */
     function withdrawRoyalty(uint256 projectId, address erc20Addr) external {
         require(_royaltySecondSale[projectId][msg.sender][erc20Addr] > 0);
