@@ -208,16 +208,17 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         // calculate amount
         (uint256 primarySale, uint256 currentIndex, uint256 secondSale) = proofOfArtAvailable(generativeProjectAddr, projectId);
         uint256 amount = primarySale + secondSale;
-        if (amount > _remainClaimSupply) {
-            amount = _remainClaimSupply;
+        if (amount > 0) {
+            if (amount > _remainClaimSupply) {
+                amount = _remainClaimSupply;
+            }
+            // store and mint
+            _claimedIndex[project._creatorAddr][project._genNFTAddr] = currentIndex;
+            _claimed[project._creatorAddr][project._genNFTAddr] += amount;
+            _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] = 0;
+            _mint(project._creatorAddr, amount);
+            _remainClaimSupply -= amount;
+            emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
         }
-        // store and mint
-        _claimedIndex[project._creatorAddr][project._genNFTAddr] = currentIndex;
-        _claimed[project._creatorAddr][project._genNFTAddr] += amount;
-        _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] = 0;
-        _mint(project._creatorAddr, amount);
-        _remainClaimSupply -= amount;
-
-        emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
     }
 }
