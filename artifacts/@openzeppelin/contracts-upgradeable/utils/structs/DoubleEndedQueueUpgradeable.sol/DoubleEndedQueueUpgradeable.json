@@ -1,0 +1,21 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "DoubleEndedQueueUpgradeable",
+  "sourceName": "@openzeppelin/contracts-upgradeable/utils/structs/DoubleEndedQueueUpgradeable.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "Empty",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "OutOfBounds",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220d3d365d1e9cebd62de7b1beb9f573da79046dfa21ec3f2dcaed3b236ed1d9c4264736f6c634300080c0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220d3d365d1e9cebd62de7b1beb9f573da79046dfa21ec3f2dcaed3b236ed1d9c4264736f6c634300080c0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

@@ -1,57 +1,223 @@
 pragma solidity ^0.8.0;
 
-/*import "@openzeppelin/contracts-upgradeable/token/ERC20/presets/ERC20PresetMinterPauserUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/presets/ERC20PresetMinterPauserUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20VotesCompUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/governance/utils/IVotesUpgradeable.sol";
 
+import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../interfaces/IGENToken.sol";
+import "../interfaces/IGenerativeProject.sol";
+import "../interfaces/IGenerativeNFT.sol";
+import "../libs/structs/Marketplace.sol";
+import "../nfts/GenerativeNFT.sol";
 
-contract GENToken is Initializable, ERC20PresetMinterPauserUpgradeable, OwnableUpgradeable, IGENToken, ERC20VotesCompUpgradeable {
+contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, IGENToken, ERC20VotesCompUpgradeable, ReentrancyGuardUpgradeable {
     address public _admin;
+    address public _paramAddr;
+    mapping(address => mapping(address => uint256)) public _claimed;
+    mapping(address => mapping(address => uint256)) public _claimedIndex;
+
+    // 60% supply for artist
+    uint256 public _remainClaimSupply;
+
+    // 30% supply for team
+    uint256 public _remainCoreTeam;
+
+    // 10% supply for DAO
+    uint256 public _remainDAO;
+
+    // Proof of Art base on second sale(marketplace)
+    mapping(address => mapping(address => uint256)) public _PoASecondSale;
+    mapping(address => bool) public _proxyPoASecondSales;
 
     function initialize(
         string memory name,
         string memory symbol,
         address admin,
-        uint256 initSupply
+        address paramAddr
     ) initializer public {
-        require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
+        require(admin != Errors.ZERO_ADDR && paramAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         _admin = admin;
+        _paramAddr = paramAddr;
 
-        // init supply
-        // 100 mil with decimals = 4 for testnet
-        // 0 with decimal = 4 for mainnet
-        uint256 _totalSupplyRove = initSupply;
-        mint(admin, _totalSupplyRove);
+        uint256 totalSupply = 100 * (10 ** 6) * (10 ** decimals());
+        // 60% for artist
+        _remainClaimSupply = totalSupply * 60 / 100;
 
-        __ERC20PresetMinterPauser_init(name, symbol);
+        // 30% for team
+        _remainCoreTeam = totalSupply * 30 / 100;
+        // TODO: vesting 4 years
+        /*_mint(_admin, _remainCoreTeam);
+        _remainCoreTeam = 0;*/
+
+        // 10% for DAO
+        _remainDAO = totalSupply * 10 / 100;
+        // TODO: vesting 4 years
+        /*_mint(_admin, _remainDAO);
+        _remainDAO = 0;*/
+
+        __ERC20Pausable_init();
+        __ERC20_init(name, symbol);
         __Ownable_init();
+        __ReentrancyGuard_init();
     }
 
-    function changeAdmin(address _newAdmin) external {
-        require(_newAdmin != Errors.ZERO_ADDR && _newAdmin != _admin, Errors.INV_ADD);
-        _admin = _newAdmin;
+    function changeAdmin(address newAdm) external {
+        require(msg.sender == _admin && newAdm != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        // change admin
+        if (_admin != newAdm) {
+            _admin = newAdm;
+        }
+    }
+
+    function changeParamAddress(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+        // change param address
+        if (_paramAddr != newAddr) {
+            _paramAddr = newAddr;
+        }
+    }
+
+    function setProxyPoASecondSale(address addr, bool approve) external {
+        require(msg.sender == _admin && addr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+
+        // set approve
+        _proxyPoASecondSales[addr] = approve;
     }
 
     function decimals() public pure override returns (uint8) {
-        return 4;
+        return 18;
     }
 
-    *//** ControlSupply
-    **//*
-    function mint(address to, uint256 amount) public whenNotPaused override {
-        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        _mint(to, amount);
-        emit IGENToken.MintToken(to, amount);
+    function totalSupply() public view override(ERC20Upgradeable, IERC20Upgradeable) returns (uint256) {
+        return super.totalSupply();
     }
 
-    function mintByBlock(address to) external whenNotPaused virtual {
-        // TODO
-        require(1 == 0);
-        uint256 amount = 0;
-        _mint(to, amount);
-        emit IGENToken.MintToken(to, amount);
+    function _beforeTokenTransfer(address from, address to, uint256 amount)
+    internal
+    override(ERC20Upgradeable, ERC20PausableUpgradeable)
+    {
+        super._beforeTokenTransfer(from, to, amount);
     }
-}*/
+
+    function _afterTokenTransfer(address from, address to, uint256 amount)
+    internal
+    override(ERC20Upgradeable, ERC20VotesUpgradeable)
+    {
+        super._afterTokenTransfer(from, to, amount);
+    }
+
+    function _mint(address to, uint256 amount)
+    internal
+    override(ERC20Upgradeable, ERC20VotesUpgradeable)
+    {
+        super._mint(to, amount);
+    }
+
+    function _burn(address account, uint256 amount)
+    internal
+    override(ERC20Upgradeable, ERC20VotesUpgradeable)
+    {
+        super._burn(account, amount);
+    }
+
+    /*
+    * @Minting
+    */
+
+    function decay() public view virtual returns (uint8) {
+        uint256 decimal = (10 ** 6) * (10 ** decimals());
+        uint256 totalSupplyPoA = 60 * decimal - _remainClaimSupply;
+        if (totalSupplyPoA < 10 * decimal) {
+            return 32;
+        } else if (totalSupplyPoA < 20 * decimal) {
+            return 16;
+        } else if (totalSupplyPoA < 30 * decimal) {
+            return 8;
+        } else if (totalSupplyPoA < 40 * decimal) {
+            return 4;
+        } else if (totalSupplyPoA < 50 * decimal) {
+            return 2;
+        } else if (totalSupplyPoA < 60 * decimal) {
+            return 1;
+        }
+        return 0;
+    }
+
+    function setPoASecondSale(address genNFTAddr, uint256 tokenId, address erc20Addr, uint256 amount) external nonReentrant {
+        if (_admin == msg.sender || _proxyPoASecondSales[msg.sender]) {
+            // PoA only in ETH
+            if (erc20Addr == Errors.ZERO_ADDR) {
+                IGenerativeNFT nft = IGenerativeNFT(genNFTAddr);
+                // try access project minting info of genNFTAddr
+                try nft.projectAddress() returns (address generativeProjectAddr) {
+                    // get project id from tokenId
+                    uint256 projectId = tokenId / GenerativeNFTConfigs.PROJECT_PADDING;
+                    IGenerativeProject project = IGenerativeProject(generativeProjectAddr);
+                    // get current owner of project
+                    address receiver = project.ownerOf(projectId);
+                    if (receiver != Errors.ZERO_ADDR) {// only apply for generative project
+                        // set for current owner of project
+                        NFTProject.Project memory d = project.projectDetails(projectId);
+                        _PoASecondSale[receiver][d._genNFTAddr] += amount;
+                    }
+                } catch {
+                    emit NotSupportProjectAddress(genNFTAddr);
+                }
+            }
+        }
+    }
+
+    function proofOfArtAvailable(address generativeProjectAddr, uint256 projectId) public returns (uint256, uint256, uint256) {
+        IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
+        NFTProject.Project memory project = projectContract.projectDetails(projectId);
+        require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
+        require(project._mintPrice > 0);
+
+        IGenerativeNFT nft = IGenerativeNFT(project._genNFTAddr);
+        try nft.projectIndex() returns (uint24 index) {
+            require(index > 0);
+            uint256 PoAPrimarySale = (index - _claimedIndex[projectContract.ownerOf(projectId)][project._genNFTAddr]) * project._mintPrice;
+            return (PoAPrimarySale * decay(), index, _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] * decay());
+        } catch {
+            emit NotSupportProjectIndex(project._genNFTAddr);
+        }
+        return (0, 0, 0);
+    }
+
+    /*
+    * Project creator call miningPoA function to mint GENToken
+    */
+    function miningPoA(address generativeProjectAddr, uint256 projectId) external whenNotPaused virtual nonReentrant {
+        require(_remainClaimSupply > 0, Errors.REACH_MAX);
+
+        IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
+        NFTProject.Project memory project = projectContract.projectDetails(projectId);
+
+        // only creator of project
+        //        require(project.ownerOf(projectId) == msg.sender, Errors.INV_ADD);
+
+        // PoA only in ETH
+        require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
+        require(project._mintPrice > 0);
+
+        // calculate amount
+        (uint256 primarySale, uint256 currentIndex, uint256 secondSale) = proofOfArtAvailable(generativeProjectAddr, projectId);
+        uint256 amount = primarySale + secondSale;
+        if (amount > _remainClaimSupply) {
+            amount = _remainClaimSupply;
+        }
+        // store and mint
+        _claimedIndex[project._creatorAddr][project._genNFTAddr] = currentIndex;
+        _claimed[project._creatorAddr][project._genNFTAddr] += amount;
+        _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] = 0;
+        _mint(project._creatorAddr, amount);
+        _remainClaimSupply -= amount;
+
+        emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
+    }
+}
