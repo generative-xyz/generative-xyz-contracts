@@ -12,14 +12,14 @@ import "../libs/helpers/Errors.sol";
 
 contract GenDAOTreasury is OwnableUpgradeable, ReentrancyGuardUpgradeable, IERC721ReceiverUpgradeable, IERC1155ReceiverUpgradeable {
     address public _admin;
-    address public _param;
+    address public _paramAddr;
     address public _dao;
 
     function initialize(
         address admin, address paramAddr, address dao
     ) initializer public {
         _admin = admin;
-        _param = paramAddr;
+        _paramAddr = paramAddr;
         _dao = dao;
     }
 

@@ -72,7 +72,7 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
         // change param address
         if (_paramAddr != newAddr) {
-            _admin = newAddr;
+            _paramAddr = newAddr;
         }
     }
 
