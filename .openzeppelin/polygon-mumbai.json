@@ -35197,6 +35197,366 @@
           }
         }
       }
+    },
+    "c74b2aa8153b2efcee9ff16faf21ae9f3ae959fc0cc5d176d27c8282cce3c2af": {
+      "address": "0xB2d1Cd9bB864fe5a98D35E68Bd01a0C39534C5bc",
+      "txHash": "0xa77761f4113812137eef6e69f9442418e818d769a3c6acea9cdb29f66a6a3320",
+      "layout": {
+        "solcVersion": "0.8.12",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "_status",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_uint256",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:80"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC165Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:41"
+          },
+          {
+            "label": "_admin",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_address",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:25"
+          },
+          {
+            "label": "_paramsAddress",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_address",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:27"
+          },
+          {
+            "label": "_generativeProjectAddr",
+            "offset": 0,
+            "slot": "203",
+            "type": "t_address",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:28"
+          },
+          {
+            "label": "_proxyRoyaltySecondSales",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:29"
+          },
+          {
+            "label": "_royaltySecondSaleAdmin",
+            "offset": 0,
+            "slot": "205",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:32"
+          },
+          {
+            "label": "_royaltySecondSale",
+            "offset": 0,
+            "slot": "206",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_mapping(t_address,t_uint256)))",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:33"
+          },
+          {
+            "label": "_royaltySecondSaleAdminWithdrawn",
+            "offset": 0,
+            "slot": "207",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:36"
+          },
+          {
+            "label": "_royaltySecondSaleWithdrawn",
+            "offset": 0,
+            "slot": "208",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_mapping(t_address,t_uint256)))",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:37"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(address => mapping(address => uint256))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_mapping(t_address,t_uint256)))": {
+            "label": "mapping(uint256 => mapping(address => mapping(address => uint256)))",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    },
+    "622ac4a67be145480dd88a0c48c0d6f19c679789b0f71d0204f7342d4c980d49": {
+      "address": "0x0D4C84AdEBdEc3355AbD317b22FA3CA93e5d8a9B",
+      "txHash": "0x110a46fc26c74b2a99d423732303e4ee5cce264d85bf877f01831290d8688b68",
+      "layout": {
+        "solcVersion": "0.8.12",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "_status",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_uint256",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:80"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC165Upgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:41"
+          },
+          {
+            "label": "_admin",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_address",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:25"
+          },
+          {
+            "label": "_paramsAddress",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_address",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:27"
+          },
+          {
+            "label": "_generativeProjectAddr",
+            "offset": 0,
+            "slot": "203",
+            "type": "t_address",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:28"
+          },
+          {
+            "label": "_proxyRoyaltySecondSales",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:29"
+          },
+          {
+            "label": "_royaltySecondSaleAdmin",
+            "offset": 0,
+            "slot": "205",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:32"
+          },
+          {
+            "label": "_royaltySecondSale",
+            "offset": 0,
+            "slot": "206",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_mapping(t_address,t_uint256)))",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:33"
+          },
+          {
+            "label": "_royaltySecondSaleAdminWithdrawn",
+            "offset": 0,
+            "slot": "207",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:36"
+          },
+          {
+            "label": "_royaltySecondSaleWithdrawn",
+            "offset": 0,
+            "slot": "208",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_mapping(t_address,t_uint256)))",
+            "contract": "RoyaltyFinanceSecondSale",
+            "src": "contracts/services/RoyaltyFinanceSecondSale.sol:37"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(address => mapping(address => uint256))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_mapping(t_address,t_uint256)))": {
+            "label": "mapping(uint256 => mapping(address => mapping(address => uint256)))",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
     }
   }
 }
