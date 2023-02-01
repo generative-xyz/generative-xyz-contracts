@@ -195,7 +195,7 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             require(success, Errors.TRANSFER_FAIL);
             if (treasury != address(this)) {
                 // transfer to treasury
-                (success,) = treasury.call{value : _closeOfferingData._price}("");
+                (success,) = treasury.call{value : _benefit._benefitOperator}("");
                 require(success, Errors.TRANSFER_FAIL);
             }
 
@@ -327,9 +327,19 @@ contract SimpleMarketplaceService is Initializable, ReentrancyGuardUpgradeable, 
             closeData._price -= _benefit._royalty;
         }
 
+        address treasury = address(this);
+        address treasuryConfig = parameterController.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        if (treasuryConfig != Errors.ZERO_ADDR) {
+            treasury = treasuryConfig;
+        }
         // transfer erc-20
         require(erc20.transferFrom(closeData._buyer, address(this), closeData._originPrice), Errors.TRANSFER_FAIL);
+        // transfer to seller
         require(erc20.transfer(closeData._seller, closeData._price), Errors.TRANSFER_FAIL);
+        // transfer to treasury
+        if (treasury != address(this)) {
+            require(erc20.transfer(treasury, _benefit._benefitOperator), Errors.TRANSFER_FAIL);
+        }
 
         // pay royalty second sale
         if (_benefit._royaltyReceiver != Errors.ZERO_ADDR && _benefit._royalty > 0) {
