@@ -33,7 +33,7 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         // hold percentage to make propose
         // at least 5%
         _proposalThreshold = 500;
-        // hold percentage for cast vote
+        // quorum percentage
         // at least 1%
         _quorumVote = 100;
 
