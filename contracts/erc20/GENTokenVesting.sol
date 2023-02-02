@@ -12,7 +12,7 @@ contract GENTokenVesting is Initializable, OwnableUpgradeable, ICollaboration, P
     uint256 public _releaseTime;
     address public _genToken;
 
-    // init a payment split for [payees, shares] from 20% GENToken core-team
+    // init a payment split for [payees, shares] from 30% GENToken core-team
     // deploy 4 contract vesting and split 5% GENTOken for each
     // init release time after each year
     // and 4 year for release all GENToken
