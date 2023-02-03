@@ -11,6 +11,7 @@ import "../interfaces/IParameterControl.sol";
 
 import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/configs/RoyaltyFinanceSecondSaleConfigs.sol";
+import "../libs/configs/GENDaoConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
 
@@ -89,36 +90,50 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
     */
 
     /*
-        trigger withdraw to `account`
+        trigger withdraw to `msg.sender`
     */
-    function withdrawRoyalty(address account, uint256 projectId, address erc20Addr) external {
-        require(_royaltySecondSale[projectId][account][erc20Addr] > 0);
+    function withdrawRoyalty(uint256 projectId, address erc20Addr) external {
+        require(_royaltySecondSale[projectId][msg.sender][erc20Addr] > 0);
         bool success;
         if (erc20Addr == address(0x0)) {
-            (success,) = msg.sender.call{value : _royaltySecondSale[projectId][account][erc20Addr]}("");
+            (success,) = msg.sender.call{value : _royaltySecondSale[projectId][msg.sender][erc20Addr]}("");
             require(success);
         } else {
             IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
             // transfer erc-20 token
-            require(tokenERC20.transfer(msg.sender, _royaltySecondSale[projectId][account][erc20Addr]));
+            require(tokenERC20.transfer(msg.sender, _royaltySecondSale[projectId][msg.sender][erc20Addr]));
         }
-        _royaltySecondSaleWithdrawn[projectId][account][erc20Addr] += _royaltySecondSale[projectId][account][erc20Addr];
-        emit Royalty.WithdrawRoyalty(account, projectId, erc20Addr);
+        _royaltySecondSaleWithdrawn[projectId][msg.sender][erc20Addr] += _royaltySecondSale[projectId][msg.sender][erc20Addr];
+        _royaltySecondSale[projectId][msg.sender][erc20Addr] = 0;
+        emit Royalty.WithdrawRoyalty(msg.sender, projectId, erc20Addr);
     }
 
     function withdraw(address erc20Addr) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        require(_royaltySecondSaleAdmin[erc20Addr] > 0);
+        transferTreasury(erc20Addr);
+        emit Royalty.Withdraw(_admin, erc20Addr);
+    }
+
+    function transferTreasury(address erc20Addr) internal {
+        address operatorTreasureAddress = msg.sender;
+        IParameterControl _p = IParameterControl(_paramsAddress);
+        address operatorTreasureConfig = _p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        if (operatorTreasureConfig != Errors.ZERO_ADDR) {
+            operatorTreasureAddress = operatorTreasureConfig;
+        }
+
         bool success;
         if (erc20Addr == address(0x0)) {
-            (success,) = msg.sender.call{value : _royaltySecondSaleAdmin[erc20Addr]}("");
+            (success,) = operatorTreasureAddress.call{value : _royaltySecondSaleAdmin[erc20Addr]}("");
             require(success);
         } else {
             IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
             // transfer erc-20 token
-            require(tokenERC20.transfer(msg.sender, _royaltySecondSaleAdmin[erc20Addr]));
+            require(tokenERC20.transfer(operatorTreasureAddress, _royaltySecondSaleAdmin[erc20Addr]));
         }
         _royaltySecondSaleAdminWithdrawn[erc20Addr] += _royaltySecondSaleAdmin[erc20Addr];
-        emit Royalty.Withdraw(_admin, erc20Addr);
+        _royaltySecondSaleAdmin[erc20Addr] = 0;
     }
 
     function setRoyaltySecondSale(uint256 tokenId, address erc20Addr, uint256 amount) external nonReentrant {
@@ -138,10 +153,13 @@ contract RoyaltyFinanceSecondSale is OwnableUpgradeable, ReentrancyGuardUpgradea
                         ownerRoyaltySecondSale = projectOwnerRoyalty;
                     }
                 }
-                // set for project's owner
+                // set for project's owner -> lazy withdraw
                 _royaltySecondSale[projectId][receiver][erc20Addr] += ownerRoyaltySecondSale * amount / Royalty.MINT_PERCENT_ROYALTY;
+
                 // set for _admin
-                _royaltySecondSaleAdmin[erc20Addr] = amount - (ownerRoyaltySecondSale * amount / Royalty.MINT_PERCENT_ROYALTY);
+                _royaltySecondSaleAdmin[erc20Addr] += amount - (ownerRoyaltySecondSale * amount / Royalty.MINT_PERCENT_ROYALTY);
+                // and transfer to treasury immediately
+                transferTreasury(erc20Addr);
                 emit Royalty.SetRoyaltySecondSale(msg.sender, tokenId, erc20Addr, amount);
             } else {
                 emit Royalty.SetRoyaltySecondSaleFail(msg.sender, tokenId, erc20Addr, amount);

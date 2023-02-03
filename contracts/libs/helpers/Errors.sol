@@ -43,4 +43,8 @@ library Errors {
 
     // GEN Token
     string public constant POA_INVALID_TOKEN = "400";
+    string public constant TEAM_VESTING_ERROR_ADDR = "401";
+    string public constant DAO_VESTING_ERROR_ADDR = "402";
+    string public constant VESTING_TIME_LOCK = "403";
+    string public constant VESTING_REMAIN = "404";
 }
