@@ -34,6 +34,10 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
     mapping(address => mapping(address => uint256)) public _PoASecondSale;
     mapping(address => bool) public _proxyPoASecondSales;
 
+    // vesting time
+    uint256 public _teamVesting;
+    uint256 public _daoVesting;
+
     function initialize(
         string memory name,
         string memory symbol,
@@ -50,15 +54,9 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
 
         // 30% for team
         _remainCoreTeam = totalSupply * 30 / 100;
-        // TODO: vesting 4 years
-        /*_mint(_admin, _remainCoreTeam);
-        _remainCoreTeam = 0;*/
 
         // 10% for DAO
         _remainDAO = totalSupply * 10 / 100;
-        // TODO: vesting 4 years
-        /*_mint(_admin, _remainDAO);
-        _remainDAO = 0;*/
 
         __ERC20Pausable_init();
         __ERC20_init(name, symbol);
@@ -220,5 +218,33 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
             _remainClaimSupply -= amount;
             emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
         }
+    }
+
+    function miningTeam() external whenNotPaused virtual nonReentrant {
+        require(_remainCoreTeam > 0, Errors.VESTING_REMAIN);
+        require(block.number - _teamVesting > GENDaoConfigs.oneYearBlocks, Errors.VESTING_TIME_LOCK);
+
+        IParameterControl p = IParameterControl(_paramAddr);
+        address team = p.getAddress(GENDaoConfigs.TEAM_VESTING);
+        require(team != Errors.ZERO_ADDR, Errors.TEAM_VESTING_ERROR_ADDR);
+
+        uint256 available = _remainCoreTeam / 100 * 25;
+        _mint(team, available);
+        _remainCoreTeam -= available;
+        _teamVesting = block.number;
+    }
+
+    function miningDAOTreasury() external whenNotPaused virtual nonReentrant {
+        require(_remainDAO > 0, Errors.VESTING_REMAIN);
+        require(block.number - _daoVesting > GENDaoConfigs.oneYearBlocks, Errors.VESTING_TIME_LOCK);
+
+        IParameterControl p = IParameterControl(_paramAddr);
+        address daoTreasury = p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        require(daoTreasury != Errors.ZERO_ADDR, Errors.DAO_VESTING_ERROR_ADDR);
+
+        uint256 available = _remainDAO / 100 * 25;
+        _mint(daoTreasury, available);
+        _remainDAO -= available;
+        _daoVesting = block.number;
     }
 }

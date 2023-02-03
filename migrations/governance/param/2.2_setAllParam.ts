@@ -5,7 +5,7 @@ import {ethers} from "ethers";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "goerli") {
+        if (process.env.NETWORK != "mumbai") {
             console.log("wrong network");
             return;
         }
@@ -124,6 +124,11 @@ import {ethers} from "ethers";
         // GEN Token
         key = "GEN_TOKEN";
         tx = await p.setAddress(contract, key, `0xf3627926495E0C8Edb9Ca05e700e0f7C90F74b71`, 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "TEAM_VESTING"; // address hold core team's GENToken as a vesting contract
+        tx = await p.setAddress(contract, key, `0xBBE8C699018176576Dd10176fCfedAB0a5386a29`, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
     } catch (e) {

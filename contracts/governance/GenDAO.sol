@@ -14,11 +14,11 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     address public _paramAddr;
     IGENToken public _votingToken;
 
-    uint256 public _proposalThreshold; // percent
-    uint256 public _quorumVote; // percent
+    uint256 public _proposalThresholdPercent; // percent
+    uint256 public _quorumVotePercent; // percent
 
-    uint256 public _votingPeriod;
-    uint256 public _votingDelay;
+    uint256 public _votingPeriods;
+    uint256 public _votingDelays;
 
     function initialize(string memory name,
         address admin,
@@ -32,15 +32,15 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         _votingToken = votingToken;
         // hold percentage to make propose
         // at least 5%
-        _proposalThreshold = 500;
-        // hold percentage for cast vote
+        _proposalThresholdPercent = 500;
+        // quorum percentage
         // at least 1%
-        _quorumVote = 100;
+        _quorumVotePercent = 100;
 
         // 1 day
-        _votingDelay = 6575;
+        _votingDelays = 6575;
         // 7 days
-        _votingPeriod = 46027;
+        _votingPeriods = 46027;
 
         __Governor_init(name);
         __GovernorCompatibilityBravo_init();
@@ -68,32 +68,32 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     function changeQuorumVotes(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         // change admin
-        if (_quorumVote != _new) {
-            _quorumVote = _new;
+        if (_quorumVotePercent != _new) {
+            _quorumVotePercent = _new;
         }
     }
 
     function changeProposalThreshold(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         // change admin
-        if (_proposalThreshold != _new) {
-            _proposalThreshold = _new;
+        if (_proposalThresholdPercent != _new) {
+            _proposalThresholdPercent = _new;
         }
     }
 
     function changeVoteDelay(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         // change admin
-        if (_votingDelay != _new) {
-            _votingDelay = _new;
+        if (_votingDelays != _new) {
+            _votingDelays = _new;
         }
     }
 
     function changeVotePeriod(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         // change admin
-        if (_votingPeriod != _new) {
-            _votingPeriod = _new;
+        if (_votingPeriods != _new) {
+            _votingPeriods = _new;
         }
     }
 
@@ -123,19 +123,19 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     /* @DefineVoting
     */
     function votingDelay() public view override returns (uint256) {
-        return _votingDelay;
+        return _votingDelays;
     }
 
     function votingPeriod() public view override returns (uint256) {
-        return _votingPeriod;
+        return _votingPeriods;
     }
 
     function proposalThreshold() public view override returns (uint256) {
-        return _proposalThreshold * _votingToken.totalSupply() / 10000;
+        return _proposalThresholdPercent * _votingToken.totalSupply() / 10000;
     }
 
     function quorumVotes() public view override returns (uint256) {
-        return _quorumVote * _votingToken.totalSupply() / 10000;
+        return _quorumVotePercent * _votingToken.totalSupply() / 10000;
     }
 
     /* @notice The functions below are overrides required by Solidity.
