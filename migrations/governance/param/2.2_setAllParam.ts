@@ -127,7 +127,7 @@ import {ethers} from "ethers";
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
-        key = "TEAM_VESTING";
+        key = "TEAM_VESTING"; // address hold core team's GENToken as a vesting contract
         tx = await p.setAddress(contract, key, `0xBBE8C699018176576Dd10176fCfedAB0a5386a29`, 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
