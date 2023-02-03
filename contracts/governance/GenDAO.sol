@@ -17,8 +17,8 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     uint256 public _proposalThresholdPercent; // percent
     uint256 public _quorumVotePercent; // percent
 
-    uint256 public _votingPeriod;
-    uint256 public _votingDelay;
+    uint256 public _votingPeriods;
+    uint256 public _votingDelays;
 
     function initialize(string memory name,
         address admin,
@@ -38,9 +38,9 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         _quorumVotePercent = 100;
 
         // 1 day
-        _votingDelay = 6575;
+        _votingDelays = 6575;
         // 7 days
-        _votingPeriod = 46027;
+        _votingPeriods = 46027;
 
         __Governor_init(name);
         __GovernorCompatibilityBravo_init();
@@ -84,16 +84,16 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     function changeVoteDelay(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         // change admin
-        if (_votingDelay != _new) {
-            _votingDelay = _new;
+        if (_votingDelays != _new) {
+            _votingDelays = _new;
         }
     }
 
     function changeVotePeriod(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         // change admin
-        if (_votingPeriod != _new) {
-            _votingPeriod = _new;
+        if (_votingPeriods != _new) {
+            _votingPeriods = _new;
         }
     }
 
@@ -123,11 +123,11 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     /* @DefineVoting
     */
     function votingDelay() public view override returns (uint256) {
-        return _votingDelay;
+        return _votingDelays;
     }
 
     function votingPeriod() public view override returns (uint256) {
-        return _votingPeriod;
+        return _votingPeriods;
     }
 
     function proposalThreshold() public view override returns (uint256) {
