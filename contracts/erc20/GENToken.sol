@@ -228,7 +228,7 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         address team = p.getAddress(GENDaoConfigs.TEAM_VESTING);
         require(team != Errors.ZERO_ADDR, Errors.TEAM_VESTING_ERROR_ADDR);
 
-        uint256 available = _remainClaimSupply / 100 * 25;
+        uint256 available = _remainCoreTeam / 100 * 25;
         _mint(team, available);
         _remainCoreTeam -= available;
         _teamVesting = block.number;
