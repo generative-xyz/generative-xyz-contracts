@@ -14,8 +14,8 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     address public _paramAddr;
     IGENToken public _votingToken;
 
-    uint256 public _proposalThreshold; // percent
-    uint256 public _quorumVote; // percent
+    uint256 public _proposalThresholdPercent; // percent
+    uint256 public _quorumVotePercent; // percent
 
     uint256 public _votingPeriod;
     uint256 public _votingDelay;
@@ -32,10 +32,10 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
         _votingToken = votingToken;
         // hold percentage to make propose
         // at least 5%
-        _proposalThreshold = 500;
+        _proposalThresholdPercent = 500;
         // quorum percentage
         // at least 1%
-        _quorumVote = 100;
+        _quorumVotePercent = 100;
 
         // 1 day
         _votingDelay = 6575;
@@ -68,16 +68,16 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     function changeQuorumVotes(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         // change admin
-        if (_quorumVote != _new) {
-            _quorumVote = _new;
+        if (_quorumVotePercent != _new) {
+            _quorumVotePercent = _new;
         }
     }
 
     function changeProposalThreshold(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         // change admin
-        if (_proposalThreshold != _new) {
-            _proposalThreshold = _new;
+        if (_proposalThresholdPercent != _new) {
+            _proposalThresholdPercent = _new;
         }
     }
 
@@ -131,11 +131,11 @@ contract GenDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, G
     }
 
     function proposalThreshold() public view override returns (uint256) {
-        return _proposalThreshold * _votingToken.totalSupply() / 10000;
+        return _proposalThresholdPercent * _votingToken.totalSupply() / 10000;
     }
 
     function quorumVotes() public view override returns (uint256) {
-        return _quorumVote * _votingToken.totalSupply() / 10000;
+        return _quorumVotePercent * _votingToken.totalSupply() / 10000;
     }
 
     /* @notice The functions below are overrides required by Solidity.
