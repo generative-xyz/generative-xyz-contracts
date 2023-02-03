@@ -33,6 +33,11 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
     mapping(address => mapping(address => uint256)) public _PoASecondSale;
     mapping(address => bool) public _proxyPoASecondSales;
 
+
+    // vesting time
+    uint256 public _teamVesting;
+    uint256 public _daoVesting;
+
     function initialize(
         string memory name,
         string memory symbol,
@@ -171,7 +176,7 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         NFTProject.Project memory project = projectContract.projectDetails(projectId);
         require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
         require(project._mintPrice > 0);
-        
+
         IGenerativeNFT nft = IGenerativeNFT(project._genNFTAddr);
         try nft.projectIndex() returns (uint24 index) {
             require(index > 0);
@@ -203,16 +208,50 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         // calculate amount
         (uint256 primarySale, uint256 currentIndex, uint256 secondSale) = proofOfArtAvailable(generativeProjectAddr, projectId);
         uint256 amount = primarySale + secondSale;
-        if (amount > _remainClaimSupply) {
-            amount = _remainClaimSupply;
-        }
-        // store and mint
-        _claimedIndex[project._creatorAddr][project._genNFTAddr] = currentIndex;
-        _claimed[project._creatorAddr][project._genNFTAddr] += amount;
-        _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] = 0;
-        _mint(project._creatorAddr, amount);
-        _remainClaimSupply -= amount;
+        if (amount > 0) {
+            if (amount > _remainClaimSupply) {
+                amount = _remainClaimSupply;
+            }
+            // store and mint
+            _claimedIndex[project._creatorAddr][project._genNFTAddr] = currentIndex;
+            _claimed[project._creatorAddr][project._genNFTAddr] += amount;
+            _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] = 0;
+            _mint(project._creatorAddr, amount);
+            _remainClaimSupply -= amount;
 
-        emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
+            emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
+        }
+    }
+
+    function miningTeam() external whenNotPaused virtual {
+        //        require(_remainCoreTeam > 0, Errors.VESTING_REMAIN);
+        _burn(msg.sender, 10);
+        _remainCoreTeam = 10;
+        require(block.number - _teamVesting > 100, Errors.VESTING_TIME_LOCK);
+
+        IParameterControl p = IParameterControl(_paramAddr);
+        address team = p.getAddress(GENDaoConfigs.TEAM_VESTING);
+        require(team != Errors.ZERO_ADDR, Errors.TEAM_VESTING_ERROR_ADDR);
+
+        uint256 available = _remainCoreTeam;
+        _mint(team, available);
+        _remainCoreTeam -= available;
+        _teamVesting = block.number;
+    }
+
+    function miningDAOTreasury() external whenNotPaused virtual {
+        //        require(_remainDAO > 0, Errors.VESTING_REMAIN);
+        _burn(msg.sender, 10);
+        _remainDAO = 10;
+        require(block.number - _daoVesting > 100, Errors.VESTING_TIME_LOCK);
+
+        IParameterControl p = IParameterControl(_paramAddr);
+        address daoTreasury = p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        require(daoTreasury != Errors.ZERO_ADDR, Errors.DAO_VESTING_ERROR_ADDR);
+
+        uint256 available = _remainDAO;
+        _mint(daoTreasury, available);
+        _remainDAO -= available;
+        _daoVesting = block.number;
     }
 }
