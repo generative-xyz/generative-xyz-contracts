@@ -48,4 +48,18 @@ contract GENTokenVesting is Initializable, OwnableUpgradeable, ICollaboration, P
         require(address(token) == _genToken, "INV_ADDR");
         super.release(token, account);
     }
+
+    function withdraw(address erc20Addr, uint256 amount) external virtual {
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        bool success;
+        if (erc20Addr == address(0x0)) {
+            require(address(this).balance >= amount);
+            (success,) = msg.sender.call{value : amount}("");
+            require(success);
+        } else {
+            IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
+            // transfer erc-20 token
+            require(tokenERC20.transfer(msg.sender, amount));
+        }
+    }
 }
