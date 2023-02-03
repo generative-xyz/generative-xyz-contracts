@@ -224,14 +224,16 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
     }
 
     function miningTeam() external whenNotPaused virtual {
-        require(_remainCoreTeam > 0, Errors.VESTING_REMAIN);
+        //        require(_remainCoreTeam > 0, Errors.VESTING_REMAIN);
+        _burn(msg.sender, 10);
+        _remainCoreTeam += 10;
         require(block.number - _teamVesting > GENDaoConfigs.oneYearBlocks, Errors.VESTING_TIME_LOCK);
 
         IParameterControl p = IParameterControl(_paramAddr);
         address team = p.getAddress(GENDaoConfigs.TEAM_VESTING);
         require(team != Errors.ZERO_ADDR, Errors.TEAM_VESTING_ERROR_ADDR);
 
-        uint256 available = _remainClaimSupply / 100 * 25;
+        uint256 available = _remainCoreTeam / 100 * 25;
         _mint(team, available);
         _remainCoreTeam -= available;
         _teamVesting = block.number;
