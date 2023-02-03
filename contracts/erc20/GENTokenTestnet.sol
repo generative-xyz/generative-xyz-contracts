@@ -33,6 +33,11 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
     mapping(address => mapping(address => uint256)) public _PoASecondSale;
     mapping(address => bool) public _proxyPoASecondSales;
 
+
+    // vesting time
+    uint256 public _teamVesting;
+    uint256 public _daoVesting;
+
     function initialize(
         string memory name,
         string memory symbol,
@@ -216,5 +221,33 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
 
             emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
         }
+    }
+
+    function miningTeam() external whenNotPaused virtual {
+        require(_remainCoreTeam > 0, Errors.VESTING_REMAIN);
+        require(block.number - _teamVesting > GENDaoConfigs.oneYearBlocks, Errors.VESTING_TIME_LOCK);
+
+        IParameterControl p = IParameterControl(_paramAddr);
+        address team = p.getAddress(GENDaoConfigs.TEAM_VESTING);
+        require(team != Errors.ZERO_ADDR, Errors.TEAM_VESTING_ERROR_ADDR);
+
+        uint256 available = _remainClaimSupply / 100 * 25;
+        _mint(team, available);
+        _remainCoreTeam -= available;
+        _teamVesting = block.number;
+    }
+
+    function miningDAOTreasury() external whenNotPaused virtual {
+        require(_remainDAO > 0, Errors.VESTING_REMAIN);
+        require(block.number - _daoVesting > GENDaoConfigs.oneYearBlocks, Errors.VESTING_TIME_LOCK);
+
+        IParameterControl p = IParameterControl(_paramAddr);
+        address daoTreasury = p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
+        require(daoTreasury != Errors.ZERO_ADDR, Errors.DAO_VESTING_ERROR_ADDR);
+
+        uint256 available = _remainDAO / 100 * 25;
+        _mint(daoTreasury, available);
+        _remainDAO -= available;
+        _daoVesting = block.number;
     }
 }
