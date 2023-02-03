@@ -54,15 +54,9 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
 
         // 30% for team
         _remainCoreTeam = totalSupply * 30 / 100;
-        // TODO: vesting 4 years
-        /*_mint(_admin, _remainCoreTeam);
-        _remainCoreTeam = 0;*/
 
         // 10% for DAO
         _remainDAO = totalSupply * 10 / 100;
-        // TODO: vesting 4 years
-        /*_mint(_admin, _remainDAO);
-        _remainDAO = 0;*/
 
         __ERC20Pausable_init();
         __ERC20_init(name, symbol);

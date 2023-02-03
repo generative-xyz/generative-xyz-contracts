@@ -9,31 +9,42 @@ import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
 
 contract GENTokenVesting is Initializable, OwnableUpgradeable, ICollaboration, PaymentSplitterUpgradeable {
-    uint256 public _releaseTime;
     address public _genToken;
+    address public _admin;
 
     // init a payment split for [payees, shares] from 30% GENToken core-team
-    // deploy 4 contract vesting and split 5% GENTOken for each
-    // init release time after each year
-    // and 4 year for release all GENToken
-    function initialize(address[] memory payees, uint256[] memory shares, address genToken, uint256 releaseTime) initializer public {
-        require(_releaseTime > block.timestamp, "INV_TIME");
+    function initialize(address admin, address[] memory payees, uint256[] memory shares, address genToken) initializer public {
         _genToken = genToken;
-        _releaseTime = releaseTime;
         __PaymentSplitter_init(payees, shares);
         __Ownable_init();
+    }
+
+    function changeAdmin(address newAdm) external {
+        require(msg.sender == _admin && newAdm != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+
+        // change admin
+        if (_admin != newAdm) {
+            _admin = newAdm;
+        }
+    }
+
+    function changeGENToken(address newAddr) external {
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
+
+        // change admin
+        if (_genToken != newAddr) {
+            _genToken = newAddr;
+        }
     }
 
     /* @Release only base on time
     * not release ETH, only release GENToken
     */
     function release(address payable account) public override {
-        require(block.timestamp >= _releaseTime, "INV_TIME");
         return;
     }
 
     function release(IERC20Upgradeable token, address account) public override {
-        require(block.timestamp >= _releaseTime, "INV_TIME");
         require(address(token) == _genToken, "INV_ADDR");
         super.release(token, account);
     }
