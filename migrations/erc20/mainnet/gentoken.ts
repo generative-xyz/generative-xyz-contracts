@@ -88,15 +88,78 @@ class GENToken {
         return null;
     }
 
-    async claim(contractAddress: any, project: any, gas: any) {
+    async miningPoA(contractAddress: any, projectAddr: any, projectId: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.claim(project)
+        const fun = temp?.nftContract.methods.miningPoA(projectAddr, projectId);
         //the transaction
         const tx = {
             from: this.senderPublicKey,
             to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async miningTeam(contractAddress: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.miningTeam();
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async miningDAOTreasury(contractAddress: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.miningDAOTreasury();
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async setProxyPoASecondSale(contractAddr: any, proxyPoA: any, approve: boolean, gas: any) {
+        let temp = this.getContract(contractAddr);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.setProxyPoASecondSale(proxyPoA, approve);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddr,
             nonce: nonce,
             gas: gas,
             data: fun.encodeABI(),
