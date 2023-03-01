@@ -5,13 +5,13 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol"
 
 import "../libs/helpers/Errors.sol";
 
-contract Authentic is Initializable, OwnableUpgradeable {
+contract Ordinals is Initializable, OwnableUpgradeable {
 
     address public _admin; // is a mutil sig address when deploy
     address public _parameterAddr;
 
     mapping(address => bool) public _caller;
-    mapping(address => mapping(uint256 => string)) public _authentic;
+    mapping(address => mapping(uint256 => string)) public _inscription;
 
     function initialize(address admin, address parameterControl) initializer virtual public {
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
@@ -43,10 +43,10 @@ contract Authentic is Initializable, OwnableUpgradeable {
         _caller[caller] = approved;
     }
 
-    function setAuthentic(address coll, uint256 tokenId, string memory inscriptionId) external {
-        require(bytes(_authentic[coll][tokenId]).length == 0, "DOUBLE");
+    function setInscription(address coll, uint256 tokenId, string memory inscriptionId) external {
+        require(bytes(_inscription[coll][tokenId]).length == 0, "DOUBLE");
         IERC721Upgradeable tokenERC721 = IERC721Upgradeable(coll);
         require(tokenERC721.ownerOf(tokenId) == msg.sender || _caller[msg.sender] || msg.sender == _admin, "INV_CALLER");
-        _authentic[coll][tokenId] = inscriptionId;
+        _inscription[coll][tokenId] = inscriptionId;
     }
 }
