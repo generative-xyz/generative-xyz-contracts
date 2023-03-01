@@ -15,7 +15,7 @@ contract Authentic is Initializable, OwnableUpgradeable {
 
     function initialize(address admin, address parameterControl) initializer virtual public {
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
-        require(parameterControl != Errors.ZERO_ADDR, Errors.INV_ADD);
+        //        require(parameterControl != Errors.ZERO_ADDR, Errors.INV_ADD);
 
         _admin = admin;
         _parameterAddr = parameterControl;
@@ -30,12 +30,21 @@ contract Authentic is Initializable, OwnableUpgradeable {
         }
     }
 
+    function changeParam(address newAdm) external {
+        require(msg.sender == _admin && newAdm != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+
+        if (_parameterAddr != newAdm) {
+            _parameterAddr = newAdm;
+        }
+    }
+
     function setCaller(address caller, bool approved) external {
         require(msg.sender == _admin, "INV_CALLER");
         _caller[caller] = approved;
     }
 
     function setAuthentic(address coll, uint256 tokenId, string memory inscriptionId) external {
+        require(bytes(_authentic[coll][tokenId]).length == 0, "DOUBLE");
         IERC721Upgradeable tokenERC721 = IERC721Upgradeable(coll);
         require(tokenERC721.ownerOf(tokenId) == msg.sender || _caller[msg.sender] || msg.sender == _admin, "INV_CALLER");
         _authentic[coll][tokenId] = inscriptionId;
