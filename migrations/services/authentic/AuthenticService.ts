@@ -103,6 +103,41 @@ class AuthenticService {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
+    async setInscription(contractAddress: any, collec: any, tokenId: any, insc: string, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        let fun = temp?.nftContract.methods.setInscription(collec, tokenId, insc);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async inscription(contractAddress: any, coll: any, token: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._inscription(coll, token).call(tx);
+    }
+
 }
 
 export {AuthenticService};
