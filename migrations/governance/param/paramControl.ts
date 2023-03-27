@@ -81,7 +81,7 @@ class ParamControl {
             nonce: nonce,
         }
 
-        const adminAddress: any = await temp?.nftContract.methods.admin().call(tx);
+        const adminAddress: any = await temp?.nftContract.methods._admin().call(tx);
         return {adminAddress};
     }
 
