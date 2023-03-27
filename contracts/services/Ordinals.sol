@@ -45,8 +45,12 @@ contract Ordinals is Initializable, OwnableUpgradeable {
 
     function setInscription(address coll, uint256 tokenId, string memory inscriptionId) external {
         require(bytes(_inscription[coll][tokenId]).length == 0, "DOUBLE");
-        IERC721Upgradeable tokenERC721 = IERC721Upgradeable(coll);
-        require(tokenERC721.ownerOf(tokenId) == msg.sender || _caller[msg.sender] || msg.sender == _admin, "INV_CALLER");
+        if (coll != address(0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB)) {
+            IERC721Upgradeable tokenERC721 = IERC721Upgradeable(coll);
+            require(tokenERC721.ownerOf(tokenId) == msg.sender || _caller[msg.sender] || msg.sender == _admin, "INV_CALLER");
+        } else {
+            require(_caller[msg.sender] || msg.sender == _admin, "INV_CALLER");
+        }
         _inscription[coll][tokenId] = inscriptionId;
     }
 }

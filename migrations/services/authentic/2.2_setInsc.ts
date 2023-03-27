@@ -8,7 +8,7 @@ import {AuthenticService} from "./AuthenticService";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "mumbai") {
+        if (process.env.NETWORK != "mainnet") {
             console.log("wrong network");
             return;
         }
