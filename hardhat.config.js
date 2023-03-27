@@ -96,6 +96,14 @@ module.exports = {
         bsc_testnet: {
             url: process.env.BSC_TESTNET_API_URL,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
+        },
+        tc_testnet: {
+            url: process.env.TC_TESTNET_API_URL,
+            accounts: [`0x${process.env.PRIVATE_KEY}`],
+        },
+        tc_mainnet: {
+            url: process.env.TC_TESTNET_API_URL,
+            accounts: [`0x${process.env.PRIVATE_KEY}`],
         }
     },
     mocha: {
