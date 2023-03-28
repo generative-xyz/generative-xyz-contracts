@@ -198,7 +198,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
         require(_exists(tokenId), Errors.INV_TOKEN);
         IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
-        bytes32 seed = _tokenIdToHash(tokenId);
+        bytes32 seed = this.tokenIdToHash(tokenId);
         /*return projectData.tokenBaseURI(_project._projectId, tokenId, seed);*/
         return projectData.tokenURI(_project._projectId, tokenId, seed);
     }

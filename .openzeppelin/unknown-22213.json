@@ -59,6 +59,16 @@
       "address": "0x262A2fe9449aF12c994338204664f6fee6ECcdd4",
       "txHash": "0xe97f837977dba22b324ceb7e789a987c7375f5cf7795a64b257def3ba3734391",
       "kind": "transparent"
+    },
+    {
+      "address": "0x1a97249412e939B59f81cEc116EC4F154Eb3D69D",
+      "txHash": "0x619c6ac76c4762f2575dc05d2befc0cffcae555cb4f772f487be97fed45f7199",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x7eA81139dB3D6000a204d0ca74b2c3d428A7c9B3",
+      "txHash": "0xd7a836bacedfac1b581d00b9ef44e92cbd4b0f2a7f6b16a288295fd8b4585281",
+      "kind": "transparent"
     }
   ],
   "impls": {
@@ -1228,6 +1238,106 @@
             "type": "t_address",
             "contract": "GenerativeProjectData",
             "src": "contracts/data/GenerativeProjectData.sol:23"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    },
+    "c6f9046df8d249b5f281ba55c04d697653102f64e129978935f4511158ab7009": {
+      "address": "0x62eeD9590D997f9D935A5080Bb9817697730f51e",
+      "txHash": "0x92b6a186f79e8de3ce02092bf79a96327594097cdc598fc164976249ea185ea6",
+      "layout": {
+        "solcVersion": "0.8.12",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "_admin",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_address",
+            "contract": "GenerativeProjectData",
+            "src": "contracts/data/GenerativeProjectData.sol:22"
+          },
+          {
+            "label": "_paramAddr",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_address",
+            "contract": "GenerativeProjectData",
+            "src": "contracts/data/GenerativeProjectData.sol:23"
+          },
+          {
+            "label": "_generativeProjectAddr",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_address",
+            "contract": "GenerativeProjectData",
+            "src": "contracts/data/GenerativeProjectData.sol:24"
           }
         ],
         "types": {
