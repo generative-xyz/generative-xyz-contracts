@@ -8,4 +8,7 @@ library GenerativeNFTConfigs {
     // royalty for second sale
     string public constant ROYALTY_FIN_ADDRESS = "ROYALTY_FIN_ADDRESS"; // [contract address] receive royalty of second sale[default: DEFAULT_ROYALTY_FIN_PERCENT] and split to project's owner
     string public constant DEFAULT_ROYALTY_FIN_PERCENT = "DEFAULT_ROYALTY_FIN_PERCENT";// default 500 ~ 5%
+
+    // BFS
+    string public constant BFS_ADDRESS = "BFS_ADDRESS";
 }

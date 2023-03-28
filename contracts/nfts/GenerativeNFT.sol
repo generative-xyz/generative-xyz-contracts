@@ -150,8 +150,11 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _setTokenSeed(tokenId, seed);
 
         // BFS
-        BFS bfs = BFS(address(0));
-        bfs.store(StringsUtils.toHex(seed), 0, chunks[0]);
+        IParameterControl param = IParameterControl(_paramsAddress);
+        BFS bfs = BFS(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS));
+        for (uint256 i = 0; i < chunks.length; i++) {
+            bfs.store(StringsUtils.toHex(seed), i, chunks[i]);
+        }
 
         // pay
         _paymentMintNFT();
