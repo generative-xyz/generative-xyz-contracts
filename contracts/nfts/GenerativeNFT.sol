@@ -160,7 +160,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _paymentMintNFT();
     }
 
-    function reserveMint() external payable nonReentrant returns (uint256 tokenId) {
+    function reserveMint(bytes[] memory chunks) external payable nonReentrant returns (uint256 tokenId) {
         _project._indexReserve ++;
         require(_project._indexReserve + _project._limit <= _project._maxSupply);
         if (_project._index + _project._indexReserve == _project._maxSupply) {
@@ -182,6 +182,13 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         bytes32 seed = random.generateTokenHash(tokenId);
         _setTokenSeed(tokenId, seed);
 
+        // BFS
+        IParameterControl param = IParameterControl(_paramsAddress);
+        BFS bfs = BFS(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS));
+        for (uint256 i = 0; i < chunks.length; i++) {
+            bfs.store(StringsUtils.toHex(seed), i, chunks[i]);
+        }
+
         // no paymentMintNFT
     }
 
@@ -192,15 +199,16 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         require(_exists(tokenId), Errors.INV_TOKEN);
         IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
         bytes32 seed = _tokenIdToHash(tokenId);
-        return projectData.tokenBaseURI(_project._projectId, tokenId, seed);
+        /*return projectData.tokenBaseURI(_project._projectId, tokenId, seed);*/
+        return projectData.tokenURI(_project._projectId, tokenId, seed);
     }
 
-    function tokenGenerativeURI(uint256 tokenId) public view returns (string memory) {
+    /*function tokenGenerativeURI(uint256 tokenId) public view returns (string memory) {
         require(_exists(tokenId), Errors.INV_TOKEN);
         IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
         bytes32 seed = _tokenIdToHash(tokenId);
         return projectData.tokenURI(_project._projectId, tokenId, seed);
-    }
+    }*/
 
     function projectIndex() external view returns (uint24) {
         return _project._index;

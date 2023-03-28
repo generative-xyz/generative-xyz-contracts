@@ -16,6 +16,7 @@ import "../libs/structs/NFTProject.sol";
 import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/configs/GenerativeProjectDataConfigs.sol";
 import "../libs/structs/NFTProjectData.sol";
+import "../services/BFS.sol";
 
 contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     address public _admin;
@@ -109,19 +110,23 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     /* @GenerativeTokenDATA
     */
     function tokenURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
-        NFTProjectData.TokenURIContext memory ctx;
-        // get base uri
         IParameterControl param = IParameterControl(_paramAddr);
-        ctx._baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
+
         // get project info
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
         string memory html = this.tokenHTML(projectId, tokenId, seed);
         if (bytes(html).length > 0) {
             html = string(abi.encodePacked('data:text/html;base64,', Base64.encode(abi.encodePacked(html))));
+        } else {
+            return string(abi.encodePacked('bfs://', param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS), "/", StringsUpgradeable.toHexString(msg.sender), StringsUtils.toHex(seed)));
         }
+
+        NFTProjectData.TokenURIContext memory ctx;
         ctx._animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
 
+        // get base uri
+        ctx._baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
         ctx._name = string(abi.encodePacked(projectDetail._name, " #", StringsUpgradeable.toString(tokenId)));
         ctx._desc = projectDetail._desc;
         if (bytes(projectDetail._itemDesc).length > 0) {
@@ -153,13 +158,11 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         );
     }
 
-    function tokenBaseURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
-        // get base uri
+    /*function tokenBaseURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         IParameterControl param = IParameterControl(_paramAddr);
+
+        // get base uri
         string memory _baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI);
-        // get project info
-        IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
-        NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
 
         result = string(
             abi.encodePacked(
@@ -169,7 +172,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 StringsUtils.toHex(seed)
             )
         );
-    }
+    }*/
 
     function tokenHTML(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
