@@ -56,6 +56,11 @@ import {ethers} from "ethers";
         tx = await p.setAddress(contract, key, "0x833667aa22F6048993dD9047CdE98beB88C2876E", 0);
         console.log("set ", key);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
+
+        key = "BFS_ADDRESS"
+        tx = await p.setAddress(contract, key, "0xf75cc7c8ff32fe64a3af00ad45b8eca3a690a605", 0);
+        console.log("set ", key);
+        console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
         /**
          * For Project Data
          */
