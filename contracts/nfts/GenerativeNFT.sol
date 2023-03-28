@@ -129,7 +129,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         }
     }
 
-    function mint(bytes[] memory chunks) external payable nonReentrant returns (uint256 tokenId) {
+    function mint(address to, bytes[] memory chunks) external payable nonReentrant returns (uint256 tokenId) {
         // check time
         if (_project._mintingSchedule._openingTime > 0) {
             require(_project._mintingSchedule._openingTime < block.timestamp, Errors.OPENING_SCHEDULE);
@@ -142,7 +142,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
             p.completeProject(_project._projectId);
         }
         tokenId = (_project._projectId * GenerativeNFTConfigs.PROJECT_PADDING) + _project._index;
-        _safeMint(msg.sender, tokenId);
+        _safeMint(to, tokenId);
 
         // random seed
         IRandomizer random = IRandomizer(_randomizer);
@@ -160,7 +160,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _paymentMintNFT();
     }
 
-    function reserveMint(bytes[] memory chunks) external payable nonReentrant returns (uint256 tokenId) {
+    function reserveMint(address to, bytes[] memory chunks) external payable nonReentrant returns (uint256 tokenId) {
         _project._indexReserve ++;
         require(_project._indexReserve + _project._limit <= _project._maxSupply);
         if (_project._index + _project._indexReserve == _project._maxSupply) {
@@ -175,7 +175,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
             require(_project._mintingSchedule._openingTime < block.timestamp, Errors.OPENING_SCHEDULE);
         }
         tokenId = (_project._projectId * GenerativeNFTConfigs.PROJECT_PADDING) + (_project._indexReserve + _project._limit);
-        _safeMint(msg.sender, tokenId);
+        _safeMint(to, tokenId);
 
         // random seed
         IRandomizer random = IRandomizer(_randomizer);
