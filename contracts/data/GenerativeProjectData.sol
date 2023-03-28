@@ -63,11 +63,11 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         IGenerativeProject p = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory d = p.projectDetails(projectId);
         uint256 tokenID = projectId * GenerativeNFTConfigs.PROJECT_PADDING;
-        string memory animationURI = string(abi.encodePacked(
-                ', "animation_url":"data:text/html;base64,',
-                Base64.encode(abi.encodePacked(this.tokenHTML(projectId, tokenID, keccak256(abi.encodePacked(tokenID))))),
-                '"'
-            ));
+        string memory html = this.tokenHTML(projectId, tokenID, keccak256(abi.encodePacked(tokenID)));
+        if (bytes(html).length > 0) {
+            html = string(abi.encodePacked('data:text/html;base64,', Base64.encode(abi.encodePacked(html))));
+        }
+        string memory animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
 
         ctx._name = string(abi.encodePacked(d._name, " #", StringsUpgradeable.toString(projectId)));
         ctx._desc = d._desc;
@@ -116,11 +116,11 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         // get project info
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
-        ctx._animationURI = string(abi.encodePacked(
-                ', "animation_url":"data:text/html;base64,',
-                Base64.encode(abi.encodePacked(this.tokenHTML(projectId, tokenId, seed))),
-                '"'
-            ));
+        string memory html = this.tokenHTML(projectId, tokenId, seed);
+        if (bytes(html).length > 0) {
+            html = string(abi.encodePacked('data:text/html;base64,', Base64.encode(abi.encodePacked(html))));
+        }
+        ctx._animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
 
         ctx._name = string(abi.encodePacked(projectDetail._name, " #", StringsUpgradeable.toString(tokenId)));
         ctx._desc = projectDetail._desc;
@@ -184,12 +184,13 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 if (err != Inflate.ErrorCode.ERR_NONE) {
                     scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
                 } else {
-                    scripts = string(abi.encodePacked(scripts, '<script>', inflate, '</script>'));
+                    /*scripts = string(abi.encodePacked(scripts, '<script>', inflate, '</script>'));*/
+                    scripts = string(abi.encodePacked(scripts, inflate));
                 }
             }
         }
 
-        string memory scriptType = "";
+        /*string memory scriptType = "";
         string memory randomFuncScript = '<script id="snippet-random-code">let seed=window.location.href.split("/").find(e=>e.includes("i0"));if(null==seed){let e="0123456789abcdefghijklmnopqrstuvwsyz";seed=new URLSearchParams(window.location.search).get("seed")||Array(64).fill(0).map($=>e[Math.random()*e.length|0]).join("")+"i0"}else{let $="seed=";for(let l=0;l<seed.length-$.length;++l)if(seed.substring(l,l+$.length)==$){seed=seed.substring(l+$.length);break}}function cyrb128(e){let $=1779033703,l=3144134277,t=1013904242,n=2773480762;for(let i=0,_;i<e.length;i++)$=l^Math.imul($^(_=e.charCodeAt(i)),597399067),l=t^Math.imul(l^_,2869860233),t=n^Math.imul(t^_,951274213),n=$^Math.imul(n^_,2716044179);return $=Math.imul(t^$>>>18,597399067),l=Math.imul(n^l>>>22,2869860233),t=Math.imul($^t>>>17,951274213),n=Math.imul(l^n>>>19,2716044179),[($^l^t^n)>>>0,(l^$)>>>0,(t^$)>>>0,(n^$)>>>0]}function sfc32(e,$,l,t){return function(){l>>>=0,t>>>=0;var n=(e>>>=0)+($>>>=0)|0;return e=$^$>>>9,$=l+(l<<3)|0,l=(l=l<<21|l>>>11)+(n=n+(t=t+1|0)|0)|0,(n>>>0)/4294967296}}let mathRand=sfc32(...cyrb128(seed));</script>';
         if (_paramAddr != address(0x0)) {
             IParameterControl param = IParameterControl(_paramAddr);
@@ -210,7 +211,8 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 scripts,
                 "</body>",
                 "</html>"
-            ));
+            ));*/
+        result = scripts;
     }
 
     function inflateScript(string memory script) public view returns (string memory result, Inflate.ErrorCode err) {
