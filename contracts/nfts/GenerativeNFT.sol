@@ -20,6 +20,7 @@ import "../libs/structs/NFTProject.sol";
 
 // services
 import "../services/Randomizer.sol";
+import "../services/BFS.sol";
 
 
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFilterer {
@@ -128,7 +129,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         }
     }
 
-    function mint() external payable nonReentrant returns (uint256 tokenId) {
+    function mint(bytes[] memory chunks) external payable nonReentrant returns (uint256 tokenId) {
         // check time
         if (_project._mintingSchedule._openingTime > 0) {
             require(_project._mintingSchedule._openingTime < block.timestamp, Errors.OPENING_SCHEDULE);
@@ -147,6 +148,10 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         IRandomizer random = IRandomizer(_randomizer);
         bytes32 seed = random.generateTokenHash(tokenId);
         _setTokenSeed(tokenId, seed);
+
+        // BFS
+        BFS bfs = BFS(address(0));
+        bfs.store(StringsUtils.toHex(seed), 0, chunks[0]);
 
         // pay
         _paymentMintNFT();
