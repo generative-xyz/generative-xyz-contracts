@@ -183,7 +183,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         Inflate.ErrorCode err;
         for (uint256 i; i < projectDetail._scripts.length; i++) {
             if (bytes(projectDetail._scripts[i]).length > 0) {
-                (inflate, err) = this.inflateScript(projectDetail._scripts[i]);
+                (inflate, err) = this.inflateString(projectDetail._scripts[i]);
                 if (err != Inflate.ErrorCode.ERR_NONE) {
                     scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
                 } else {
