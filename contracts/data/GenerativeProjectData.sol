@@ -119,7 +119,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         if (bytes(html).length > 0) {
             html = string(abi.encodePacked('data:text/html;base64,', Base64.encode(abi.encodePacked(html))));
         } else {
-            return string(abi.encodePacked('bfs://', param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS), "/", StringsUpgradeable.toHexString(msg.sender), '/', StringsUtils.toHex(seed)));
+            return string(abi.encodePacked('bfs://', this.getChainID(), '/', param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS), "/", StringsUpgradeable.toHexString(msg.sender), '/', StringsUtils.toHex(seed)));
         }
 
         NFTProjectData.TokenURIContext memory ctx;
@@ -250,5 +250,13 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         } else {
             result = "";
         }
+    }
+
+    function getChainID() external view returns (uint256) {
+        uint256 id;
+        assembly {
+            id := chainid()
+        }
+        return id;
     }
 }
