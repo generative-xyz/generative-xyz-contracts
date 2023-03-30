@@ -18,8 +18,8 @@ import {GenerativeProject} from "../generativeProject/generativeProject";
 
         const nft = new GenerativeNFT(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         a.project = await nft.getProject(a.parent._genNFTAddr);
-        for (let i = 0; i < 100; i++) {
-            const tx = await nft.mint(a.parent._genNFTAddr, a.project._mintPrice, 0);
+        for (let i = 0; i < 1; i++) {
+            const tx = await nft.mint(a.parent._genNFTAddr, a.project._mintPrice, process.env.PUBLIC_KEY, [], 0);
             console.log("tx: ", tx?.transactionHash, tx?.status);
         }
     } catch (e) {
