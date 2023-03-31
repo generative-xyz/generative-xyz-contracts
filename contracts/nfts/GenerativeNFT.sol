@@ -27,6 +27,8 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
     NFTProject.ProjectMinting public _project;
     mapping(address => bool) private _reserves;
 
+    //    mapping(uint256 => string) public fileNames;
+
     constructor (string memory name, string memory symbol)
     BaseERC721OwnerSeed(name, symbol) DefaultOperatorFilterer() {}
 
@@ -153,7 +155,9 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         IParameterControl param = IParameterControl(_paramsAddress);
         BFS bfs = BFS(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS));
         for (uint256 i = 0; i < chunks.length; i++) {
-            bfs.store(StringsUtils.toHex(this.tokenIdToHash(tokenId)), i, chunks[i]);
+            string memory fileName = StringsUtils.toHex(this.tokenIdToHash(tokenId));
+            //            fileNames[tokenId] = fileName;
+            bfs.store(fileName, i, chunks[i]);
         }
 
         // pay
@@ -186,7 +190,9 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         IParameterControl param = IParameterControl(_paramsAddress);
         BFS bfs = BFS(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS));
         for (uint256 i = 0; i < chunks.length; i++) {
-            bfs.store(StringsUtils.toHex(this.tokenIdToHash(tokenId)), i, chunks[i]);
+            string memory fileName = StringsUtils.toHex(this.tokenIdToHash(tokenId));
+            //            fileNames[tokenId] = fileName;
+            bfs.store(fileName, i, chunks[i]);
         }
 
         // no paymentMintNFT
