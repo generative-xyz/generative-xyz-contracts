@@ -118,44 +118,43 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         string memory html = this.tokenHTML(projectId, tokenId, seed);
         if (bytes(html).length > 0) {
             html = string(abi.encodePacked('data:text/html;base64,', Base64.encode(abi.encodePacked(html))));
+            NFTProjectData.TokenURIContext memory ctx;
+            ctx._animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
+
+            // get base uri
+            ctx._baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
+            ctx._name = string(abi.encodePacked(projectDetail._name, " #", StringsUpgradeable.toString(tokenId)));
+            ctx._desc = projectDetail._desc;
+            if (bytes(projectDetail._itemDesc).length > 0) {
+                ctx._desc = projectDetail._itemDesc;
+            }
+            string memory inflate;
+            Inflate.ErrorCode err;
+            (inflate, err) = inflateString(ctx._desc);
+            if (err == Inflate.ErrorCode.ERR_NONE) {
+                ctx._desc = inflate;
+            }
+
+            ctx._baseURI = string(abi.encodePacked(ctx._baseURI, "/",
+                StringsUpgradeable.toHexString(_generativeProjectAddr), "/",
+                StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed)));
+
+            result = string(
+                abi.encodePacked(
+                    'data:application/json;base64,',
+                    Base64.encode(abi.encodePacked(
+                        '{"name":"', ctx._name,
+                        '","description": "', ctx._desc, '"',
+                        ', "image": "', ctx._baseURI, '&capture=5000"',
+                        ctx._animationURI,
+                        ', "attributes": "', ctx._baseURI, '&capture=0"',
+                        '}'
+                    ))
+                )
+            );
         } else {
-            return string(abi.encodePacked('bfs://', this.getChainID(), '/', param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS), "/", StringsUpgradeable.toHexString(msg.sender), '/', StringsUtils.toHex(seed)));
+            result = string(abi.encodePacked('bfs://', StringsUpgradeable.toString(this.getChainID()), '/', StringsUpgradeable.toHexString(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS)), "/", StringsUpgradeable.toHexString(msg.sender), '/', StringsUtils.toHex(seed)));
         }
-
-        NFTProjectData.TokenURIContext memory ctx;
-        ctx._animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
-
-        // get base uri
-        ctx._baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
-        ctx._name = string(abi.encodePacked(projectDetail._name, " #", StringsUpgradeable.toString(tokenId)));
-        ctx._desc = projectDetail._desc;
-        if (bytes(projectDetail._itemDesc).length > 0) {
-            ctx._desc = projectDetail._itemDesc;
-        }
-        string memory inflate;
-        Inflate.ErrorCode err;
-        (inflate, err) = inflateString(ctx._desc);
-        if (err == Inflate.ErrorCode.ERR_NONE) {
-            ctx._desc = inflate;
-        }
-
-        ctx._baseURI = string(abi.encodePacked(ctx._baseURI, "/",
-            StringsUpgradeable.toHexString(_generativeProjectAddr), "/",
-            StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed)));
-
-        result = string(
-            abi.encodePacked(
-                'data:application/json;base64,',
-                Base64.encode(abi.encodePacked(
-                    '{"name":"', ctx._name,
-                    '","description": "', ctx._desc, '"',
-                    ', "image": "', ctx._baseURI, '&capture=5000"',
-                    ctx._animationURI,
-                    ', "attributes": "', ctx._baseURI, '&capture=0"',
-                    '}'
-                ))
-            )
-        );
     }
 
     /*function tokenBaseURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
