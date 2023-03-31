@@ -8,7 +8,7 @@ import dayjs = require("dayjs");
 
 (async () => {
     try {
-        if (process.env.NETWORK != "mumbai") {
+        if (process.env.NETWORK != "tc_testnet") {
             console.log("wrong network");
             return;
         }
@@ -21,10 +21,10 @@ import dayjs = require("dayjs");
                 contract,
                 JSON.parse(JSON.stringify({
                     _maxSupply: 100,
-                    _limit: 95,
-                    _mintPrice: ethers.utils.parseEther("0.002"),
+                    _limit: 100,
+                    _mintPrice: ethers.utils.parseEther("0.0"),
                     _mintPriceAddr: "0x0000000000000000000000000000000000000000",
-                    _name: "Test",
+                    _name: "Test image",
                     _creator: "Dev team",
                     _creatorAddr: process.env.PUBLIC_KEY,
                     _license: "MIT",
@@ -37,8 +37,8 @@ import dayjs = require("dayjs");
                         _medium: "",
                         _instagram: "",
                     })),
-                    _scriptType: JSON.parse(JSON.stringify(["p5js@1.5.0", "tonejs@14.8.49"])),
-                    _scripts: [`<script>const rand=mathRand();function T1(n){return n>.5}window.$generativeTraits={T1:T1(rand)},console.log(window.$generativeTraits);const container=document.createElement("div");container.innerHTML="<span>tokenId: "+tokenId+"</span><br><span>tokenMintNumber: "+tokenMintNumber+"</span><br><span>project: "+projectNumber+"</span><br><span>seed: "+seed+"</span><br>",document.body.prepend(container);</script>`],
+                    _scriptType: JSON.parse(JSON.stringify([])),
+                    _scripts: [],
                     _styles: "body {}div#container-el {}",
                     _completeTime: 0,
                     _genNFTAddr: '0x0000000000000000000000000000000000000000',
