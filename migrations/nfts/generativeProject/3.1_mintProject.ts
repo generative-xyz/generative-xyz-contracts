@@ -39,7 +39,7 @@ import dayjs = require("dayjs");
                     })),
                     _scriptType: JSON.parse(JSON.stringify([])),
                     _scripts: [],
-                    _styles: "body {}div#container-el {}",
+                    _styles: "",
                     _completeTime: 0,
                     _genNFTAddr: '0x0000000000000000000000000000000000000000',
                     _itemDesc: "[Item] Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
