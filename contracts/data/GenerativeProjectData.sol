@@ -153,7 +153,11 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 )
             );
         } else {
-            result = string(abi.encodePacked('bfs://', StringsUpgradeable.toString(this.getChainID()), '/', StringsUpgradeable.toHexString(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS)), "/", StringsUpgradeable.toHexString(msg.sender), '/', StringsUtils.toHex(seed)));
+            result = string(abi.encodePacked('bfs://',
+                StringsUpgradeable.toString(this.getChainID()), '/',
+                StringsUpgradeable.toHexString(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS)), "/",
+                StringsUpgradeable.toHexString(msg.sender), '/',
+                StringsUtils.toHex(seed)));
         }
     }
 
