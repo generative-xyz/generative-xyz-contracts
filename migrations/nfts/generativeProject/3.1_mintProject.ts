@@ -47,7 +47,7 @@ import dayjs = require("dayjs");
                     _royalty: 2300,
                 })),
                 false,
-                dayjs().add(3, "minute").unix(),
+                dayjs().add(0, "minute").unix(),
                 "0.001",
                 0
             )

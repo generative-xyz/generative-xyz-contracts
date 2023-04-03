@@ -5,7 +5,7 @@ import {ethers} from "ethers";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "mumbai") {
+        if (process.env.NETWORK != "tc_testnet") {
             console.log("wrong network");
             return;
         }
@@ -17,7 +17,7 @@ import {ethers} from "ethers";
         const val: any = await nft.getAddress(contract, key);
         console.log("val", val);
 
-        let tx = await nft.setAddress(contract, key, "0x31e624e302110d1217e31Bf507A7FEc7a0d8eb0E", 0);
+        let tx = await nft.setAddress(contract, key, "0x507c776029c6E59933bba35fF63224df2A38c599", 0);
         console.log("%s tx: %s", process.env.NETWORK, tx?.transactionHash, tx?.status);
 
 

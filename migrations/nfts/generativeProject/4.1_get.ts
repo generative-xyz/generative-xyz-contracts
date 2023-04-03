@@ -5,7 +5,7 @@ import {GenerativeProject} from "./generativeProject";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "mumbai") {
+        if (process.env.NETWORK != "tc_testnet") {
             console.log("wrong network");
             return;
         }
@@ -17,7 +17,7 @@ import {GenerativeProject} from "./generativeProject";
         a.project = await nft.projectDetails(contract, args[1]);
         // a.projectStatus = await nft.projectStatus(contract, args[1]);
         // a.randomizer = await nft.randomizerAddr(contract);
-        console.log(a.project._scripts);
+        console.log(a.project);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
