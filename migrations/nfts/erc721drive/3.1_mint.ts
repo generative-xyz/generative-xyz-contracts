@@ -17,10 +17,10 @@ import {Erc721Drive} from "./erc721Drive";
         const args = process.argv.slice(2)
 
         const contract = args[0];
-        const tx = await nft.mintUri(
+        const tx = await nft.mintChunks(
                 contract,
-                args[1],
-                "abc123",
+                process.env.PUBLIC_KEY,
+                ["0x1"],
                 0
             )
         ;

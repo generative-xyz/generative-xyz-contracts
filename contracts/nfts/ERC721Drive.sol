@@ -46,7 +46,7 @@ contract ERC721Drive is Initializable, ERC721Upgradeable, ERC721URIStorageUpgrad
         }
     }
 
-    function mint(address to, string memory uri) public {
+    function mintUri(address to, string memory uri) public {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
@@ -54,7 +54,7 @@ contract ERC721Drive is Initializable, ERC721Upgradeable, ERC721URIStorageUpgrad
 
     }
 
-    function mint(address to, bytes memory chunks) public {
+    function mintChunk(address to, bytes memory chunks) public {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
@@ -66,7 +66,7 @@ contract ERC721Drive is Initializable, ERC721Upgradeable, ERC721URIStorageUpgrad
         _setTokenURI(tokenId, buildUri(tokenId));
     }
 
-    function mint(address to, bytes[] memory chunks) public {
+    function mintChunks(address to, bytes[] memory chunks) public {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);

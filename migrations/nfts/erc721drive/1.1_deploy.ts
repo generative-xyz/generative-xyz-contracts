@@ -12,7 +12,7 @@ import {Erc721Drive} from "./erc721Drive";
         const address = await nft.deployUpgradeable(
             "TC-file",
             "TC-file",
-            "0xF75Cc7C8ff32Fe64a3AF00Ad45B8eca3A690a605"
+            "0xfBA205366B7221A447FAd4D63AE04Ab6fD45d0bd"
         );
         console.log("%s GenerativeProject address: %s", process.env.NETWORK, address);
     } catch (e) {

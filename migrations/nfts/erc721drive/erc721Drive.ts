@@ -152,7 +152,7 @@ class Erc721Drive {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.mintUri(to, chunk)
+        const fun = temp?.nftContract.methods.mintChunk(to, chunk)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
@@ -174,7 +174,7 @@ class Erc721Drive {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.mintUri(to, chunks)
+        const fun = temp?.nftContract.methods.mintChunks(to, chunks)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
