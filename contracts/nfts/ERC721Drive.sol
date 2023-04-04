@@ -1,29 +1,48 @@
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/interfaces/IERC2981.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/interfaces/IERC2981Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "../services/BFS.sol";
 
-contract ERC721Drive is ERC721, ERC721URIStorage, IERC2981, Ownable {
-    using Counters for Counters.Counter;
+contract ERC721Drive is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeable, IERC2981Upgradeable, OwnableUpgradeable {
+    using CountersUpgradeable for CountersUpgradeable.Counter;
 
-    Counters.Counter private _tokenIdCounter;
+    CountersUpgradeable.Counter private _tokenIdCounter;
     address public _bfsAddr;
+    address public _admin;
 
-    constructor(string memory name, string memory symbol, address bfsAddr) ERC721(name, symbol) {
+    function initialize(
+        string memory name,
+        string memory symbol,
+        address bfsAddr
+    ) initializer public {
+        _admin = msg.sender;
         _bfsAddr = bfsAddr;
+        __ERC721_init(name, symbol);
+        __ERC721URIStorage_init();
+        __Ownable_init();
     }
 
+
     function changeBFS(address newAddr) external {
-        require(msg.sender == this.owner() && newAddr != address(0), "INV_OWNER");
+        require(msg.sender == _admin && newAddr != address(0), "INV_OWNER");
 
         // change admin
         if (_bfsAddr != newAddr) {
             _bfsAddr = newAddr;
+        }
+    }
+
+    function changeAdmin(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), "INV_OWNER");
+
+        // change admin
+        if (_admin != newAddr) {
+            _admin = newAddr;
         }
     }
 
@@ -41,7 +60,7 @@ contract ERC721Drive is ERC721, ERC721URIStorage, IERC2981, Ownable {
         _safeMint(to, tokenId);
 
         BFS bfs = BFS(_bfsAddr);
-        string memory fileName = Strings.toString(tokenId);
+        string memory fileName = StringsUpgradeable.toString(tokenId);
         bfs.store(fileName, 0, chunks);
 
         _setTokenURI(tokenId, buildUri(tokenId));
@@ -54,7 +73,7 @@ contract ERC721Drive is ERC721, ERC721URIStorage, IERC2981, Ownable {
 
         BFS bfs = BFS(_bfsAddr);
         for (uint256 i = 0; i < chunks.length; i++) {
-            string memory fileName = Strings.toString(tokenId);
+            string memory fileName = StringsUpgradeable.toString(tokenId);
             bfs.store(fileName, i, chunks[i]);
         }
 
@@ -63,10 +82,10 @@ contract ERC721Drive is ERC721, ERC721URIStorage, IERC2981, Ownable {
 
     function buildUri(uint256 tokenId) internal returns (string memory) {
         string memory uri = string(abi.encodePacked('bfs://',
-            Strings.toString(this.getChainID()), '/',
-            Strings.toHexString(_bfsAddr), "/",
-            Strings.toHexString(address(this)), '/',
-            Strings.toString(tokenId)));
+            StringsUpgradeable.toString(this.getChainID()), '/',
+            StringsUpgradeable.toHexString(_bfsAddr), "/",
+            StringsUpgradeable.toHexString(address(this)), '/',
+            StringsUpgradeable.toString(tokenId)));
         return uri;
     }
 
@@ -79,14 +98,14 @@ contract ERC721Drive is ERC721, ERC721URIStorage, IERC2981, Ownable {
     }
 
     // The following functions are overrides required by Solidity.
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    function _burn(uint256 tokenId) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable) {
         super._burn(tokenId);
     }
 
     function tokenURI(uint256 tokenId)
     public
     view
-    override(ERC721, ERC721URIStorage)
+    override(ERC721Upgradeable, ERC721URIStorageUpgradeable)
     returns (string memory)
     {
         return super.tokenURI(tokenId);
