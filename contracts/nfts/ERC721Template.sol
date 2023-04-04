@@ -16,7 +16,7 @@ contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
         _bfsAddr = bfsAddr;
     }
 
-    function changeBFS(address newAddr) external {
+    function changeBFS(address newAddr) external onlyOwner {
         require(msg.sender == this.owner() && newAddr != address(0), "INV_OWNER");
 
         // change admin
