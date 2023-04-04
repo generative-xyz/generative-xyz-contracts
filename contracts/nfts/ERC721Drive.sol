@@ -11,9 +11,9 @@ import "../services/BFS.sol";
 contract ERC721Drive is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeable, IERC2981Upgradeable, OwnableUpgradeable {
     using CountersUpgradeable for CountersUpgradeable.Counter;
 
-    CountersUpgradeable.Counter private _tokenIdCounter;
     address public _bfsAddr;
     address public _admin;
+    uint256 public _index;
 
     function initialize(
         string memory name,
@@ -47,37 +47,23 @@ contract ERC721Drive is Initializable, ERC721Upgradeable, ERC721URIStorageUpgrad
     }
 
     function mintUri(address to, string memory uri) public {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
+        _index++;
+        _safeMint(to, _index);
+        _setTokenURI(_index, uri);
 
-    }
-
-    function mintChunk(address to, bytes memory chunks) public {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-
-        BFS bfs = BFS(_bfsAddr);
-        string memory fileName = StringsUpgradeable.toString(tokenId);
-        bfs.store(fileName, 0, chunks);
-
-        _setTokenURI(tokenId, buildUri(tokenId));
     }
 
     function mintChunks(address to, bytes[] memory chunks) public {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
+        _index++;
+        _safeMint(to, _index);
 
         BFS bfs = BFS(_bfsAddr);
         for (uint256 i = 0; i < chunks.length; i++) {
-            string memory fileName = StringsUpgradeable.toString(tokenId);
+            string memory fileName = StringsUpgradeable.toString(_index);
             bfs.store(fileName, i, chunks[i]);
         }
 
-        _setTokenURI(tokenId, buildUri(tokenId));
+        _setTokenURI(_index, buildUri(_index));
     }
 
     function buildUri(uint256 tokenId) internal returns (string memory) {
