@@ -1,5 +1,6 @@
 pragma solidity ^0.8.0;
 
+/*
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol";
 
@@ -37,9 +38,11 @@ contract GENTokenVesting is Initializable, OwnableUpgradeable, ICollaboration, P
         }
     }
 
-    /* @Release only base on time
-    * not release ETH, only release GENToken
     */
+/* @Release only base on time
+    * not release ETH, only release GENToken
+    *//*
+
     function release(address payable account) public override {
         return;
     }
@@ -62,4 +65,4 @@ contract GENTokenVesting is Initializable, OwnableUpgradeable, ICollaboration, P
             require(tokenERC20.transfer(msg.sender, amount));
         }
     }
-}
+}*/

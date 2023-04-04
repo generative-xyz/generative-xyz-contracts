@@ -1,9 +1,9 @@
 pragma solidity ^0.8.0;
 
-/*
-import "@openzeppelin/contracts-upgradeable/token/ERC20/presets/ERC20PresetMinterPauserUpgradeable.sol";
+/*import "@openzeppelin/contracts-upgradeable/token/ERC20/presets/ERC20PresetMinterPauserUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20VotesCompUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/governance/utils/IVotesUpgradeable.sol";
 
@@ -15,7 +15,7 @@ import "../interfaces/IGenerativeNFT.sol";
 import "../libs/structs/Marketplace.sol";
 import "../nfts/GenerativeNFT.sol";
 
-contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, IGENToken, ERC20VotesCompUpgradeable {
+contract GENTokenForVesting is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, IGENToken, ERC20VotesCompUpgradeable, ReentrancyGuardUpgradeable {
     address public _admin;
     address public _paramAddr;
     mapping(address => mapping(address => uint256)) public _claimed;
@@ -34,7 +34,6 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
     mapping(address => mapping(address => uint256)) public _PoASecondSale;
     mapping(address => bool) public _proxyPoASecondSales;
 
-
     // vesting time
     uint256 public _teamVesting;
     uint256 public _daoVesting;
@@ -52,18 +51,17 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         uint256 totalSupply = 100 * (10 ** 6) * (10 ** decimals());
         // 60% for artist
         _remainClaimSupply = totalSupply * 60 / 100;
+
         // 30% for team
         _remainCoreTeam = totalSupply * 30 / 100;
-        _mint(_admin, _remainCoreTeam);
-        _remainCoreTeam = 0;
+
         // 10% for DAO
         _remainDAO = totalSupply * 10 / 100;
-        _mint(_admin, _remainDAO);
-        _remainDAO = 0;
 
         __ERC20Pausable_init();
         __ERC20_init(name, symbol);
         __Ownable_init();
+        __ReentrancyGuard_init();
     }
 
     function changeAdmin(address newAdm) external {
@@ -125,11 +123,9 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         super._burn(account, amount);
     }
 
-    */
-/*
+    *//*
     * @Minting
     *//*
-
 
     function decay() public view virtual returns (uint8) {
         uint256 decimal = (10 ** 6) * (10 ** decimals());
@@ -150,7 +146,7 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         return 0;
     }
 
-    function setPoASecondSale(address genNFTAddr, uint256 tokenId, address erc20Addr, uint256 amount) external {
+    function setPoASecondSale(address genNFTAddr, uint256 tokenId, address erc20Addr, uint256 amount) external nonReentrant {
         if (_admin == msg.sender || _proxyPoASecondSales[msg.sender]) {
             // PoA only in ETH
             if (erc20Addr == Errors.ZERO_ADDR) {
@@ -184,20 +180,17 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
         try nft.projectIndex() returns (uint24 index) {
             require(index > 0);
             uint256 PoAPrimarySale = (index - _claimedIndex[projectContract.ownerOf(projectId)][project._genNFTAddr]) * project._mintPrice;
-            // x 1000 for testnet
-            return (PoAPrimarySale * decay() * 100, index, _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] * decay() * 100);
+            return (PoAPrimarySale * decay(), index, _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] * decay());
         } catch {
             emit NotSupportProjectIndex(project._genNFTAddr);
         }
         return (0, 0, 0);
     }
 
-    */
-/*
+    *//*
     * Project creator call miningPoA function to mint GENToken
     *//*
-
-    function miningPoA(address generativeProjectAddr, uint256 projectId) external whenNotPaused virtual {
+    function miningPoA(address generativeProjectAddr, uint256 projectId) external whenNotPaused virtual nonReentrant {
         require(_remainClaimSupply > 0, Errors.REACH_MAX);
 
         IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
@@ -223,41 +216,35 @@ contract GENTokenTestnet is Initializable, ERC20PausableUpgradeable, ERC20Burnab
             _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] = 0;
             _mint(project._creatorAddr, amount);
             _remainClaimSupply -= amount;
-
             emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
         }
     }
 
-    function miningTeam() external whenNotPaused virtual {
-        //        require(_remainCoreTeam > 0, Errors.VESTING_REMAIN);
-        _burn(msg.sender, 10);
-        _remainCoreTeam = 10;
-        require(block.number - _teamVesting > 100, Errors.VESTING_TIME_LOCK);
+    function miningTeam() external whenNotPaused virtual nonReentrant {
+        require(_remainCoreTeam > 0, Errors.VESTING_REMAIN);
+        require(block.number - _teamVesting > GENDaoConfigs.oneYearBlocks, Errors.VESTING_TIME_LOCK);
 
         IParameterControl p = IParameterControl(_paramAddr);
         address team = p.getAddress(GENDaoConfigs.TEAM_VESTING);
         require(team != Errors.ZERO_ADDR, Errors.TEAM_VESTING_ERROR_ADDR);
 
-        uint256 available = _remainCoreTeam;
+        uint256 available = _remainCoreTeam / 100 * 25;
         _mint(team, available);
         _remainCoreTeam -= available;
         _teamVesting = block.number;
     }
 
-    function miningDAOTreasury() external whenNotPaused virtual {
-        //        require(_remainDAO > 0, Errors.VESTING_REMAIN);
-        _burn(msg.sender, 10);
-        _remainDAO = 10;
-        require(block.number - _daoVesting > 100, Errors.VESTING_TIME_LOCK);
+    function miningDAOTreasury() external whenNotPaused virtual nonReentrant {
+        require(_remainDAO > 0, Errors.VESTING_REMAIN);
+        require(block.number - _daoVesting > GENDaoConfigs.oneYearBlocks, Errors.VESTING_TIME_LOCK);
 
         IParameterControl p = IParameterControl(_paramAddr);
         address daoTreasury = p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
         require(daoTreasury != Errors.ZERO_ADDR, Errors.DAO_VESTING_ERROR_ADDR);
 
-        uint256 available = _remainDAO;
+        uint256 available = _remainDAO / 100 * 25;
         _mint(daoTreasury, available);
         _remainDAO -= available;
         _daoVesting = block.number;
     }
-}
-*/
+}*/

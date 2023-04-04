@@ -18,25 +18,6 @@ import "../nfts/GenerativeNFT.sol";
 contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, IGENToken, ERC20VotesCompUpgradeable, ReentrancyGuardUpgradeable {
     address public _admin;
     address public _paramAddr;
-    mapping(address => mapping(address => uint256)) public _claimed;
-    mapping(address => mapping(address => uint256)) public _claimedIndex;
-
-    // 60% supply for artist
-    uint256 public _remainClaimSupply;
-
-    // 30% supply for team
-    uint256 public _remainCoreTeam;
-
-    // 10% supply for DAO
-    uint256 public _remainDAO;
-
-    // Proof of Art base on second sale(marketplace)
-    mapping(address => mapping(address => uint256)) public _PoASecondSale;
-    mapping(address => bool) public _proxyPoASecondSales;
-
-    // vesting time
-    uint256 public _teamVesting;
-    uint256 public _daoVesting;
 
     function initialize(
         string memory name,
@@ -49,14 +30,9 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         _paramAddr = paramAddr;
 
         uint256 totalSupply = 100 * (10 ** 6) * (10 ** decimals());
-        // 60% for artist
-        _remainClaimSupply = totalSupply * 60 / 100;
 
-        // 30% for team
-        _remainCoreTeam = totalSupply * 30 / 100;
-
-        // 10% for DAO
-        _remainDAO = totalSupply * 10 / 100;
+        // init totalSupply
+        _mint(_admin, totalSupply);
 
         __ERC20Pausable_init();
         __ERC20_init(name, symbol);
@@ -78,13 +54,6 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         if (_paramAddr != newAddr) {
             _paramAddr = newAddr;
         }
-    }
-
-    function setProxyPoASecondSale(address addr, bool approve) external {
-        require(msg.sender == _admin && addr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
-
-        // set approve
-        _proxyPoASecondSales[addr] = approve;
     }
 
     function decimals() public pure override returns (uint8) {
@@ -123,128 +92,7 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         super._burn(account, amount);
     }
 
-    /*
-    * @Minting
-    */
-
-    function decay() public view virtual returns (uint8) {
-        uint256 decimal = (10 ** 6) * (10 ** decimals());
-        uint256 totalSupplyPoA = 60 * decimal - _remainClaimSupply;
-        if (totalSupplyPoA < 10 * decimal) {
-            return 32;
-        } else if (totalSupplyPoA < 20 * decimal) {
-            return 16;
-        } else if (totalSupplyPoA < 30 * decimal) {
-            return 8;
-        } else if (totalSupplyPoA < 40 * decimal) {
-            return 4;
-        } else if (totalSupplyPoA < 50 * decimal) {
-            return 2;
-        } else if (totalSupplyPoA < 60 * decimal) {
-            return 1;
-        }
-        return 0;
-    }
-
     function setPoASecondSale(address genNFTAddr, uint256 tokenId, address erc20Addr, uint256 amount) external nonReentrant {
-        if (_admin == msg.sender || _proxyPoASecondSales[msg.sender]) {
-            // PoA only in ETH
-            if (erc20Addr == Errors.ZERO_ADDR) {
-                IGenerativeNFT nft = IGenerativeNFT(genNFTAddr);
-                // try access project minting info of genNFTAddr
-                try nft.projectAddress() returns (address generativeProjectAddr) {
-                    // get project id from tokenId
-                    uint256 projectId = tokenId / GenerativeNFTConfigs.PROJECT_PADDING;
-                    IGenerativeProject project = IGenerativeProject(generativeProjectAddr);
-                    // get current owner of project
-                    address receiver = project.ownerOf(projectId);
-                    if (receiver != Errors.ZERO_ADDR) {// only apply for generative project
-                        // set for current owner of project
-                        NFTProject.Project memory d = project.projectDetails(projectId);
-                        _PoASecondSale[receiver][d._genNFTAddr] += amount;
-                    }
-                } catch {
-                    emit NotSupportProjectAddress(genNFTAddr);
-                }
-            }
-        }
-    }
-
-    function proofOfArtAvailable(address generativeProjectAddr, uint256 projectId) public returns (uint256, uint256, uint256) {
-        IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
-        NFTProject.Project memory project = projectContract.projectDetails(projectId);
-        require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
-        require(project._mintPrice > 0);
-
-        IGenerativeNFT nft = IGenerativeNFT(project._genNFTAddr);
-        try nft.projectIndex() returns (uint24 index) {
-            require(index > 0);
-            uint256 PoAPrimarySale = (index - _claimedIndex[projectContract.ownerOf(projectId)][project._genNFTAddr]) * project._mintPrice;
-            return (PoAPrimarySale * decay(), index, _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] * decay());
-        } catch {
-            emit NotSupportProjectIndex(project._genNFTAddr);
-        }
-        return (0, 0, 0);
-    }
-
-    /*
-    * Project creator call miningPoA function to mint GENToken
-    */
-    function miningPoA(address generativeProjectAddr, uint256 projectId) external whenNotPaused virtual nonReentrant {
-        require(_remainClaimSupply > 0, Errors.REACH_MAX);
-
-        IGenerativeProject projectContract = IGenerativeProject(generativeProjectAddr);
-        NFTProject.Project memory project = projectContract.projectDetails(projectId);
-
-        // only creator of project
-        //        require(project.ownerOf(projectId) == msg.sender, Errors.INV_ADD);
-
-        // PoA only in ETH
-        require(project._mintPriceAddr == Errors.ZERO_ADDR, Errors.POA_INVALID_TOKEN);
-        require(project._mintPrice > 0);
-
-        // calculate amount
-        (uint256 primarySale, uint256 currentIndex, uint256 secondSale) = proofOfArtAvailable(generativeProjectAddr, projectId);
-        uint256 amount = primarySale + secondSale;
-        if (amount > 0) {
-            if (amount > _remainClaimSupply) {
-                amount = _remainClaimSupply;
-            }
-            // store and mint
-            _claimedIndex[project._creatorAddr][project._genNFTAddr] = currentIndex;
-            _claimed[project._creatorAddr][project._genNFTAddr] += amount;
-            _PoASecondSale[projectContract.ownerOf(projectId)][project._genNFTAddr] = 0;
-            _mint(project._creatorAddr, amount);
-            _remainClaimSupply -= amount;
-            emit IGENToken.ClaimToken(project._creatorAddr, amount, primarySale, currentIndex, secondSale);
-        }
-    }
-
-    function miningTeam() external whenNotPaused virtual nonReentrant {
-        require(_remainCoreTeam > 0, Errors.VESTING_REMAIN);
-        require(block.number - _teamVesting > GENDaoConfigs.oneYearBlocks, Errors.VESTING_TIME_LOCK);
-
-        IParameterControl p = IParameterControl(_paramAddr);
-        address team = p.getAddress(GENDaoConfigs.TEAM_VESTING);
-        require(team != Errors.ZERO_ADDR, Errors.TEAM_VESTING_ERROR_ADDR);
-
-        uint256 available = _remainCoreTeam / 100 * 25;
-        _mint(team, available);
-        _remainCoreTeam -= available;
-        _teamVesting = block.number;
-    }
-
-    function miningDAOTreasury() external whenNotPaused virtual nonReentrant {
-        require(_remainDAO > 0, Errors.VESTING_REMAIN);
-        require(block.number - _daoVesting > GENDaoConfigs.oneYearBlocks, Errors.VESTING_TIME_LOCK);
-
-        IParameterControl p = IParameterControl(_paramAddr);
-        address daoTreasury = p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
-        require(daoTreasury != Errors.ZERO_ADDR, Errors.DAO_VESTING_ERROR_ADDR);
-
-        uint256 available = _remainDAO / 100 * 25;
-        _mint(daoTreasury, available);
-        _remainDAO -= available;
-        _daoVesting = block.number;
+        
     }
 }
