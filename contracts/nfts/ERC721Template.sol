@@ -9,10 +9,9 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "../services/BFS.sol";
 
 contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
-    using Counters for Counters.Counter;
-
     Counters.Counter private _tokenIdCounter;
     address public _bfsAddr;
+    uint256 public _index;
 
     constructor(string memory name, string memory symbol, address bfsAddr) ERC721(name, symbol) {
         _bfsAddr = bfsAddr;
@@ -27,38 +26,24 @@ contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
         }
     }
 
-    function mint(address to, string memory uri) public onlyOwner {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
+    function mintUri(address to, string memory uri) public onlyOwner {
+        _index++;
+        _safeMint(to, _index);
+        _setTokenURI(_index, uri);
 
     }
 
-    function mint(address to, bytes memory chunks) public onlyOwner {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-
-        BFS bfs = BFS(_bfsAddr);
-        string memory fileName = Strings.toString(tokenId);
-        bfs.store(fileName, 0, chunks);
-
-        _setTokenURI(tokenId, buildUri(tokenId));
-    }
-
-    function mint(address to, bytes[] memory chunks) public onlyOwner {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
+    function mintChunks(address to, bytes[] memory chunks) public onlyOwner {
+        _index++;
+        _safeMint(to, _index);
 
         BFS bfs = BFS(_bfsAddr);
         for (uint256 i = 0; i < chunks.length; i++) {
-            string memory fileName = Strings.toString(tokenId);
+            string memory fileName = Strings.toString(_index);
             bfs.store(fileName, i, chunks[i]);
         }
 
-        _setTokenURI(tokenId, buildUri(tokenId));
+        _setTokenURI(_index, buildUri(_index));
     }
 
     function buildUri(uint256 tokenId) internal returns (string memory) {
