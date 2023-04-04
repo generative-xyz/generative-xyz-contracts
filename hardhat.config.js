@@ -102,11 +102,12 @@ module.exports = {
             accounts: [`0x${process.env.PRIVATE_KEY}`],
         },
         tc_mainnet: {
-            url: process.env.TC_TESTNET_API_URL,
+            url: process.env.TC_MAINNET_API_URL,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
+            timeout: 100_000,
         }
     },
     mocha: {
-        timeout: 4000000,
+        timeout: 40000000,
     },
 };
