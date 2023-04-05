@@ -4,18 +4,16 @@ import {GENToken} from "./gentoken";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "mumbai") {
+        if (process.env.NETWORK != "tc_mainnet") {
             console.log("wrong network");
             return;
         }
         const erc20 = new GENToken(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const address = await erc20.deployUpgradeable(
-            "GENToken",
-            "GENToken",
+            "GEN",
+            "GEN",
             process.env.PUBLIC_KEY,
-            "0x47B528E9eDD8f7Dd709bCa9f7E45c499C85eccfb",
-            "0x12E258A3307DeDDb26478D274a3C9343cf9107D6",
-            100 * 1e6 * 1e4
+            "0x984eEd0C15353bA88d8f35FD929e260bf70d03BD",
         );
         console.log("%s GENToken address: %s", process.env.NETWORK, address);
     } catch (e) {

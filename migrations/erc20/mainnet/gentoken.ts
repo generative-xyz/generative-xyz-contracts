@@ -4,7 +4,7 @@ import {Bytes32Ty} from "hardhat/internal/hardhat-network/stack-traces/logger";
 import {ethers as eth1} from "ethers";
 
 const {ethers, upgrades} = require("hardhat");
-const hardhatConfig = require("../../hardhat.config");
+const hardhatConfig = require("../../../hardhat.config.js");
 
 class GENToken {
     network: string;
@@ -21,8 +21,6 @@ class GENToken {
                             symbol: string,
                             adminAddress: any,
                             paramAdd: any,
-                            projectAdd: any,
-                            initSupply: number
     ) {
         if (this.network == "local") {
             console.log("not run local");
@@ -31,8 +29,8 @@ class GENToken {
 
         const contract = await ethers.getContractFactory("GENToken");
         console.log("GENToken.deploying ...")
-        const proxy = await upgrades.deployProxy(contract, [name, symbol, adminAddress, paramAdd, projectAdd, initSupply], {
-            initializer: 'initialize(string, string, address, address, address, uint256)',
+        const proxy = await upgrades.deployProxy(contract, [name, symbol, adminAddress, paramAdd], {
+            initializer: 'initialize(string, string, address, address)',
         });
         await proxy.deployed();
         console.log("GENToken deployed at proxy:", proxy.address);
