@@ -6,7 +6,7 @@ import {ethers as eth1} from "ethers";
 const {ethers, upgrades} = require("hardhat");
 const hardhatConfig = require("../../../hardhat.config.js");
 
-class ERC20Template {
+class ERC721Template {
     network: string;
     senderPublicKey: string;
     senderPrivateKey: string;
@@ -23,14 +23,14 @@ class ERC20Template {
         //     console.log("not run local");
         //     return;
         // }
-        const nft = await ethers.getContractFactory("ERC20Template");
+        const nft = await ethers.getContractFactory("ERC721Template");
         const nftDeployed = await nft.deploy(name, symbol);
 
-        console.log("ERC20Template template contract deployed:", nftDeployed.address);
+        console.log("ERC721Template template contract deployed:", nftDeployed.address);
         return nftDeployed.address;
     }
 
-    getContract(contractAddress: any, contractName: any = "./artifacts/contracts/erc20/ERC20Template.sol/ERC20Template.json") {
+    getContract(contractAddress: any, contractName: any = "./artifacts/contracts/nfts/ERC721Template.sol/ERC721Template.json") {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
         if (this.network == "local") {
             console.log("not run local");
@@ -70,21 +70,6 @@ class ERC20Template {
         }
         return null;
     }
-
-    async totalSupply(contractAddress: any) {
-        let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-
-        //the transaction
-        const tx = {
-            from: this.senderPublicKey,
-            to: contractAddress,
-            nonce: nonce,
-        }
-
-        return await temp?.nftContract.methods.totalSupply().call(tx);
-    }
-
 }
 
-export {ERC20Template};
+export {ERC721Template};
