@@ -4,7 +4,7 @@ import {GENToken} from "./gentoken";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "tc_mainnet") {
+        if (process.env.NETWORK != "tc_testnet") {
             console.log("wrong network");
             return;
         }
@@ -13,7 +13,7 @@ import {GENToken} from "./gentoken";
             "GEN",
             "GEN",
             process.env.PUBLIC_KEY,
-            "0x984eEd0C15353bA88d8f35FD929e260bf70d03BD",
+            "0x979aC806367604e13A921c72b95023dA1889a6Fd",
         );
         console.log("%s GENToken address: %s", process.env.NETWORK, address);
     } catch (e) {
