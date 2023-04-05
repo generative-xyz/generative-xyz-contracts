@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "../services/BFS.sol";
 
-contract ERC721Drive is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeable, IERC2981Upgradeable, OwnableUpgradeable {
+contract Artifacts is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeable, IERC2981Upgradeable, OwnableUpgradeable {
     using CountersUpgradeable for CountersUpgradeable.Counter;
 
     address public _bfsAddr;
@@ -46,14 +46,14 @@ contract ERC721Drive is Initializable, ERC721Upgradeable, ERC721URIStorageUpgrad
         }
     }
 
-    function mintUri(address to, string memory uri) public {
+    function preserveUri(address to, string memory uri) public {
         _index++;
         _safeMint(to, _index);
         _setTokenURI(_index, uri);
 
     }
 
-    function mintChunks(address to, bytes[] memory chunks) public {
+    function preserveChunks(address to, bytes[] memory chunks) public {
         _index++;
         _safeMint(to, _index);
 
@@ -95,6 +95,11 @@ contract ERC721Drive is Initializable, ERC721Upgradeable, ERC721URIStorageUpgrad
     returns (string memory)
     {
         return super.tokenURI(tokenId);
+    }
+
+    function retrieve(uint256 tokenId) public view returns (bytes memory data, int256 nextChunk)  {
+        BFS bfs = BFS(_bfsAddr);
+        (data, nextChunk) = bfs.load(address(this), StringsUpgradeable.toString(tokenId), 0);
     }
 
     /* @dev EIP2981 royalties implementation. 
