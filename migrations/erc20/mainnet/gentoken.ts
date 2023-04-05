@@ -183,7 +183,7 @@ class GENToken {
 
         return await temp?.nftContract.methods.totalSupply().call(tx);
     }
-    
+
     async balanceOf(contractAddress: any, account: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
@@ -196,6 +196,20 @@ class GENToken {
         }
 
         return await temp?.nftContract.methods.balanceOf(account).call(tx);
+    }
+
+    async name(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.name().call(tx);
     }
 
 }

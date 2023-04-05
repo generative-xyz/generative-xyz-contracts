@@ -15,6 +15,7 @@ import {GENToken} from "./gentoken";
         let a: any = {};
         a.totalSupply = await token.totalSupply(contract);
         a.balanceOf = await token.balanceOf(contract, args[1]);
+        a.name = await token.name(contract);
         console.log({a});
     } catch (e) {
         // Deal with the fact the chain failed

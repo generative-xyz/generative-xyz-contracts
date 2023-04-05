@@ -85,6 +85,19 @@ class ERC20Template {
         return await temp?.nftContract.methods.totalSupply().call(tx);
     }
 
+    async name(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.name().call(tx);
+    }
 }
 
 export {ERC20Template};
