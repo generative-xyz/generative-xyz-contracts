@@ -17,20 +17,20 @@ class ERC20Template {
         this.senderPublicKey = senderPublicKey;
     }
 
-    async deploy(name: any, symbol: any) {
+    async deploy(name: any, symbol: any, totalSupply: any) {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
         // if (this.network == "local") {
         //     console.log("not run local");
         //     return;
         // }
-        const nft = await ethers.getContractFactory("ERC20Template");
-        const nftDeployed = await nft.deploy(name, symbol);
+        const nft = await ethers.getContractFactory("ERC20Token");
+        const nftDeployed = await nft.deploy(name, symbol, totalSupply);
 
         console.log("ERC20Template template contract deployed:", nftDeployed.address);
         return nftDeployed.address;
     }
 
-    getContract(contractAddress: any, contractName: any = "./artifacts/contracts/erc20/ERC20Template.sol/ERC20Template.json") {
+    getContract(contractAddress: any, contractName: any = "./artifacts/contracts/erc20/ERC20Token.sol/ERC20Token.json") {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
         if (this.network == "local") {
             console.log("not run local");
