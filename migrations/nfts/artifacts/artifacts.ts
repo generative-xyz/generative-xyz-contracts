@@ -6,7 +6,7 @@ import {ethers as eth1} from "ethers";
 const {ethers, upgrades} = require("hardhat");
 const hardhatConfig = require("../../../hardhat.config");
 
-class Erc721Drive {
+class Artifacts {
     network: string;
     senderPublicKey: string;
     senderPrivateKey: string;
@@ -25,17 +25,17 @@ class Erc721Drive {
         //     return;
         // }
 
-        const contract = await ethers.getContractFactory("ERC721Drive");
-        console.log("ERC721Drive.deploying ...")
+        const contract = await ethers.getContractFactory("Artifacts");
+        console.log("Artifacts.deploying ...")
         const proxy = await upgrades.deployProxy(contract, [name, symbol, bfsAddr], {
             initializer: 'initialize(string, string, address)',
         });
         await proxy.deployed();
-        console.log("ERC721Drive deployed at proxy:", proxy.address);
+        console.log("Artifacts deployed at proxy:", proxy.address);
         return proxy.address;
     }
 
-    getContract(contractAddress: any, contractName: any = "./artifacts/contracts/nfts/ERC721Drive.sol/ERC721Drive.json") {
+    getContract(contractAddress: any, contractName: any = "./artifacts/contracts/nfts/Artifacts.sol/Artifacts.json") {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
         // if (this.network == "local") {
         //     console.log("not run local");
@@ -52,10 +52,10 @@ class Erc721Drive {
     }
 
     async upgradeContract(proxyAddress: any) {
-        const contractUpdated = await ethers.getContractFactory("ERC721Drive");
-        console.log('Upgrading Erc721Drive... by proxy ' + proxyAddress);
+        const contractUpdated = await ethers.getContractFactory("Artifacts");
+        console.log('Upgrading Artifacts... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
-        console.log('Erc721Drive upgraded on tx address ' + tx.address);
+        console.log('Artifacts upgraded on tx address ' + tx.address);
         return tx;
     }
 
@@ -185,4 +185,4 @@ class Erc721Drive {
     }
 }
 
-export {Erc721Drive}
+export {Artifacts}

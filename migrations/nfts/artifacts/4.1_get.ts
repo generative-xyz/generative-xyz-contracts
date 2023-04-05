@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 
 import {ethers} from "ethers";
-import {Erc721Drive} from "./erc721Drive";
+import {Artifacts} from "./artifacts";
 
 (async () => {
     try {
@@ -11,7 +11,7 @@ import {Erc721Drive} from "./erc721Drive";
         }
         const args = process.argv.slice(2);
         const contract = args[0];
-        const nft = new Erc721Drive(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const nft = new Artifacts(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         let a: any = {};
         a.getTokenURI = await nft.tokenURI(contract, args[1]);
         console.log(a.getTokenURI);

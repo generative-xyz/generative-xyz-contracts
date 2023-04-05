@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 import {ethers} from "ethers";
 import * as fs from "fs";
 import {keccak256} from "ethers/lib/utils";
-import {Erc721Drive} from "./erc721Drive";
+import {Artifacts} from "./artifacts";
 
 (async () => {
     try {
@@ -11,7 +11,7 @@ import {Erc721Drive} from "./erc721Drive";
             console.log("wrong network");
             return;
         }
-        const nft = new Erc721Drive(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const nft = new Artifacts(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const args = process.argv.slice(2)
         console.log(args);
         const tx = await nft.changeBFS(args[0], args[1], 0);

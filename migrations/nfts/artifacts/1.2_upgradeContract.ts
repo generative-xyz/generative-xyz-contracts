@@ -1,4 +1,4 @@
-import {Erc721Drive} from "./erc721Drive";
+import {Artifacts} from "./artifacts";
 
 (async () => {
     try {
@@ -7,7 +7,7 @@ import {Erc721Drive} from "./erc721Drive";
             return;
         }
         const args = process.argv.slice(2);
-        const nft = new Erc721Drive(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const nft = new Artifacts(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const address = await nft.upgradeContract(args[0]);
         console.log({address});
     } catch (e) {

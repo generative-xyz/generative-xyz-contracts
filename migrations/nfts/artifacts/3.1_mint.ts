@@ -4,7 +4,7 @@ import {ethers} from "ethers";
 import * as fs from "fs";
 import {createAlchemyWeb3} from "@alch/alchemy-web3";
 import dayjs = require("dayjs");
-import {Erc721Drive} from "./erc721Drive";
+import {Artifacts} from "./artifacts";
 
 (async () => {
     try {
@@ -13,7 +13,7 @@ import {Erc721Drive} from "./erc721Drive";
             return;
         }
 
-        const nft = new Erc721Drive(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const nft = new Artifacts(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const args = process.argv.slice(2)
 
         const contract = args[0];
