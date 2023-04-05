@@ -56,6 +56,10 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
         }
     }
 
+    function name() public view virtual override returns (string memory) {
+        return "Generative";
+    }
+
     function decimals() public pure override returns (uint8) {
         return 18;
     }
@@ -93,6 +97,6 @@ contract GENToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgra
     }
 
     function setPoASecondSale(address genNFTAddr, uint256 tokenId, address erc20Addr, uint256 amount) external nonReentrant {
-        
+
     }
 }
