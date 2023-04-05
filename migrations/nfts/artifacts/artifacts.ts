@@ -126,11 +126,11 @@ class Artifacts {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async mintUri(contractAddress: any, to: any, uri: any, gas: any) {
+    async preserveUri(contractAddress: any, to: any, uri: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.mintUri(to, uri)
+        const fun = temp?.nftContract.methods.preserveUri(to, uri)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
@@ -148,11 +148,11 @@ class Artifacts {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async mintChunks(contractAddress: any, to: any, chunks: any, gas: any) {
+    async preserveChunks(contractAddress: any, to: any, chunks: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.mintChunks(to, chunks)
+        const fun = temp?.nftContract.methods.preserveChunks(to, chunks)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
