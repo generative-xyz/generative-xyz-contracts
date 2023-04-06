@@ -26,12 +26,18 @@ function hex2a(hexx: string) {
 
         const namesLen = await data.namesLen(args[0])
         console.log({namesLen});
+        let results: any[] = [];
         if (namesLen > 0) {
             const names = await data.getAllNames(args[0])
             for (let i = 0; i < names.length; i++) {
-                // console.log({names});
-                let name = hex2a(names[i]);
-                console.log(name);
+                const tokenId = await data.registry(args[0], names[i]);
+                const resolver = await data.resolver(args[0], tokenId);
+                results.push({
+                    'name': hex2a(names[i]).replace('\x00', ''),
+                    'tokenId': tokenId,
+                    'owner': resolver
+                });
+                console.log(results);
             }
         }
 
