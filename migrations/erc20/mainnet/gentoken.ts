@@ -212,6 +212,20 @@ class GENToken {
         return await temp?.nftContract.methods.name().call(tx);
     }
 
+    async symbol(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.symbol().call(tx);
+    }
+
 }
 
 export {GENToken};
