@@ -16,14 +16,17 @@ import {Bns} from "./bfs";
         const data = new Bns(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const args = process.argv.slice(2)
 
-        const registered = await data.registered(args[0], Buffer.from(args[1], "utf-8"));
+        const names = await data.names(args[0])
+        console.log({names});
+
+        /*const registered = await data.registered(args[0], Buffer.from(args[1], "utf-8"));
         if (registered) {
             const tokenId = await data.registry(args[0], Buffer.from(args[1], "utf-8"));
             const resolver = await data.resolver(args[0], tokenId);
             console.log({tokenId}, {resolver});
         } else {
             return registered
-        }
+        }*/
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
