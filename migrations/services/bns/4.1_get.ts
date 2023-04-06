@@ -16,8 +16,12 @@ import {Bns} from "./bfs";
         const data = new Bns(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const args = process.argv.slice(2)
 
-        const names = await data.names(args[0])
-        console.log({names});
+        const namesLen = await data.namesLen(args[0])
+        console.log({namesLen});
+        if (namesLen > 0) {
+            const names = await data.getAllNames(args[0])
+            console.log({names});
+        }
 
         /*const registered = await data.registered(args[0], Buffer.from(args[1], "utf-8"));
         if (registered) {
