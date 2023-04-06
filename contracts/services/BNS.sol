@@ -18,13 +18,23 @@ contract BNS is ERC721Upgradeable, OwnableUpgradeable {
     mapping(uint256 => address) public resolver;
     uint256 public minRegistrationFee = 0 ether;
 
-    event NameRegistered(bytes name, uint256 indexed id);
+    bytes[] public names;
 
+    event NameRegistered(bytes name, uint256 indexed id);
 
     function initialize() public initializer {
         __ERC721_init("Bitcoin Name System", "BNS");
         __Ownable_init();
     }
+
+    function afterUpgrade(bytes[] memory _names) public {
+        for (uint256 i = 0; i < _names.length; i++) {
+            if (registered[_names[i]]) {
+                names.push(_names[i]);
+            }
+        }
+    }
+
 
     function register(address owner, bytes memory name)
     public payable
@@ -38,18 +48,19 @@ contract BNS is ERC721Upgradeable, OwnableUpgradeable {
         registry[name] = id;
         registered[name] = true;
         resolver[id] = owner;
+        names.push(name);
         emit NameRegistered(name, id);
 
         _tokenIds.increment();
         return id;
     }
 
-    function registerBatch(address owner, bytes[] memory names)
+    function registerBatch(address owner, bytes[] memory _names)
     public
     {
         // will revert if any of the names are already registered
-        for (uint256 i = 0; i < names.length; i++) {
-            register(owner, names[i]);
+        for (uint256 i = 0; i < _names.length; i++) {
+            register(owner, _names[i]);
         }
     }
 
@@ -63,4 +74,15 @@ contract BNS is ERC721Upgradeable, OwnableUpgradeable {
         minRegistrationFee = fee;
     }
 
+    function getAllNames() public view returns (bytes[] memory) {
+        return names;
+    }
+
+    function namesLen() public view returns (uint256) {
+        return names.length;
+    }
+
+    function currentId() public view returns (uint256) {
+        return _tokenIds.current();
+    }
 }
