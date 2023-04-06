@@ -7,6 +7,14 @@ import Web3 from "web3";
 import {createAlchemyWeb3} from "@alch/alchemy-web3";
 import {Bns} from "./bfs";
 
+function hex2a(hexx: string) {
+    var hex = hexx.toString();//force conversion
+    var str = '';
+    for (var i = 0; i < hex.length; i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+    return str;
+}
+
 (async () => {
     try {
         if (process.env.NETWORK != "tc_testnet") {
@@ -20,7 +28,11 @@ import {Bns} from "./bfs";
         console.log({namesLen});
         if (namesLen > 0) {
             const names = await data.getAllNames(args[0])
-            console.log({names});
+            for (let i = 0; i < names.length; i++) {
+                // console.log({names});
+                let name = hex2a(names[i]);
+                console.log(name);
+            }
         }
 
         /*const registered = await data.registered(args[0], Buffer.from(args[1], "utf-8"));
