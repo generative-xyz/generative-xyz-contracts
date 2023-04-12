@@ -45,6 +45,21 @@ contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
         _setTokenURI(_index, buildUri(_index));
     }
 
+    function mintBatchChunks(address to, bytes[][] memory chunks) public onlyOwner {
+        for (uint256 f = 0; f < chunks.length; f++) {
+            _index++;
+            _safeMint(to, _index);
+
+            BFS bfs = BFS(_bfsAddr);
+            for (uint256 i = 0; i < chunks[f].length; i++) {
+                string memory fileName = Strings.toString(_index);
+                bfs.store(fileName, i, chunks[f][i]);
+            }
+
+            _setTokenURI(_index, buildUri(_index));
+        }
+    }
+
     function buildUri(uint256 tokenId) internal returns (string memory) {
         string memory uri = string(abi.encodePacked('bfs://',
             Strings.toString(this.getChainID()), '/',
