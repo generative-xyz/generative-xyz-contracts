@@ -144,7 +144,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                     'data:application/json;base64,',
                     Base64.encode(abi.encodePacked(
                         '{"name":"', ctx._name,
-                        '","description": "', ctx._desc, '"',
+                        '","description": "', Base64.encode(abi.encodePacked(ctx._desc)), '"',
                         ', "image": "', ctx._baseURI, '&capture=60000"',
                         ctx._animationURI,
                         ', "attributes": "', ctx._baseURI, '&capture=0"',
