@@ -78,28 +78,32 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
         }
     }
 
-    function getLink(address owner, uint256 photoIndex) public view returns (string memory) {
-        return buildUri(buildFileName(owner, photoIndex));
+    function linkPhoto(uint256 photoIndex) public view returns (string memory) {
+        if (msg.sender == ownerOf(photoIndex)) {
+            return buildUri(buildFileName(msg.sender, photoIndex));
+        } else {
+            return "";
+        }
     }
 
-    function getListPhotos(address owner) public view returns (uint256[] memory) {
-        return ownedPhotos[owner];
+    function listPhotos() public view returns (uint256[] memory) {
+        return ownedPhotos[msg.sender];
     }
 
-    function countPhoto(address owner) public view returns (uint256) {
-        return ownedPhotos[owner].length;
+    function countPhotos() public view returns (uint256) {
+        return ownedPhotos[msg.sender].length;
     }
 
     // @NOTE:download
-    function downloadPartial(address owner, uint256 photoIndex, uint256 chunkIndex) public view returns (bytes memory data, int256 nextChunk)  {
+    function downloadPartial(uint256 photoIndex, uint256 chunkIndex) public view returns (bytes memory data, int256 nextChunk)  {
         BFS bfs = BFS(_bfsAddr);
-        string memory fileName = buildFileName(owner, photoIndex);
+        string memory fileName = buildFileName(msg.sender, photoIndex);
         (data, nextChunk) = bfs.load(address(this), fileName, chunkIndex);
     }
 
-    function download(address owner, uint256 photoIndex) public view returns (bytes[] memory data) {
+    function download(uint256 photoIndex) public view returns (bytes[] memory data) {
         BFS bfs = BFS(_bfsAddr);
-        string memory fileName = buildFileName(owner, photoIndex);
+        string memory fileName = buildFileName(msg.sender, photoIndex);
         uint256 count = bfs.count(address(this), fileName);
         count += 1;
         bytes[] memory result = new bytes[](count);
@@ -171,6 +175,10 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
     }
 
     function tokenURI(uint256 tokenId) public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory){
-        return super.tokenURI(tokenId);
+        if (msg.sender == ownerOf(tokenId)) {
+            return super.tokenURI(tokenId);
+        } else {
+            return "";
+        }
     }
 }
