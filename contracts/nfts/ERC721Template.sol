@@ -51,8 +51,8 @@ contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
             _safeMint(to, _index);
 
             BFS bfs = BFS(_bfsAddr);
+            string memory fileName = Strings.toString(_index);
             for (uint256 i = 0; i < chunks[f].length; i++) {
-                string memory fileName = Strings.toString(_index);
                 bfs.store(fileName, i, chunks[f][i]);
             }
 
