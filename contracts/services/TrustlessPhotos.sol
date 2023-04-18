@@ -116,12 +116,18 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
 
     // @NOTE:download
     function downloadPartial(uint256 photoIndex, uint256 chunkIndex) public view returns (bytes memory data, int256 nextChunk)  {
+        if (msg.sender != ownerOf(photoIndex)) {
+            return (data, - 1);
+        }
         BFS bfs = BFS(_bfsAddr);
         string memory fileName = buildFileName(msg.sender, photoIndex);
         (data, nextChunk) = bfs.load(address(this), fileName, chunkIndex);
     }
 
     function download(uint256 photoIndex) public view returns (bytes[] memory data) {
+        if (msg.sender != ownerOf(photoIndex)) {
+            return data;
+        }
         BFS bfs = BFS(_bfsAddr);
         string memory fileName = buildFileName(msg.sender, photoIndex);
         uint256 count = bfs.count(address(this), fileName);
