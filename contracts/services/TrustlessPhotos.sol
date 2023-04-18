@@ -16,6 +16,8 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
     address public _bfsAddr;
     uint256 public _index;
     mapping(address => uint256[]) public ownedPhotos;
+    mapping(address => mapping(string => uint256[])) public albumPhotos;
+    mapping(address => string[]) public ownedAlbums;
 
     function initialize(address admin, address parameterControl, address bfsAddr) initializer virtual public {
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
@@ -52,7 +54,7 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
     }
 
     // @NOTE:upload
-    function upload(bytes[][] memory photos) public {
+    function upload(bytes[][] memory photos, string memory album) public {
         for (uint256 f = 0; f < photos.length; f++) {
             _index++;
             bytes32 tokenHash = keccak256(
@@ -75,6 +77,8 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
             // set uri
             _setTokenURI(photoIndex, buildUri(fileName));
             ownedPhotos[msg.sender].push(photoIndex);
+            ownedAlbums[msg.sender].push(album);
+            albumPhotos[msg.sender][album].push(photoIndex);
         }
     }
 
@@ -90,8 +94,24 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
         return ownedPhotos[msg.sender];
     }
 
+    function listAlbums() public view returns (string[] memory) {
+        return ownedAlbums[msg.sender];
+    }
+
+    function listAlbumPhotos(string memory album) public view returns (uint256[] memory) {
+        return albumPhotos[msg.sender][album];
+    }
+
     function countPhotos() public view returns (uint256) {
         return ownedPhotos[msg.sender].length;
+    }
+
+    function countAlbums() public view returns (uint256) {
+        return ownedAlbums[msg.sender].length;
+    }
+
+    function countAlbumPhotos(string memory album) public view returns (uint256) {
+        return albumPhotos[msg.sender][album].length;
     }
 
     // @NOTE:download
