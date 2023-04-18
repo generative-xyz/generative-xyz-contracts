@@ -15,6 +15,7 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
     address public _parameterAddr;
     address public _bfsAddr;
     uint256 public _index;
+    mapping(address => uint256[]) public ownedPhotos;
 
     function initialize(address admin, address parameterControl, address bfsAddr) initializer virtual public {
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
@@ -50,7 +51,7 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
         }
     }
 
-    // @NOTE:mint
+    // @NOTE:upload
     function upload(bytes[][] memory photos) public {
         for (uint256 f = 0; f < photos.length; f++) {
             _index++;
@@ -62,34 +63,45 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
                     block.timestamp
                 )
             );
-            uint256 tokenId = uint256(tokenHash) & 0xfff;
+            uint256 photoIndex = uint256(tokenHash) & 0xfff;
             // mint
-            _safeMint(msg.sender, tokenId);
+            _safeMint(msg.sender, photoIndex);
             // store bfs
             BFS bfs = BFS(_bfsAddr);
-            string memory fileName = string(abi.encodePacked(
-                    StringsUpgradeable.toHexString(msg.sender),
-                    "/",
-                    StringsUpgradeable.toString(tokenId))
-            );
+            string memory fileName = buildFileName(msg.sender, photoIndex);
             for (uint256 i = 0; i < photos[f].length; i++) {
                 bfs.store(fileName, i, photos[f][i]);
             }
             // set uri
-            _setTokenURI(tokenId, buildUri(fileName));
+            _setTokenURI(photoIndex, buildUri(fileName));
+            ownedPhotos[msg.sender].push(photoIndex);
         }
     }
 
-    function downloadPartial(address owner, uint256 tokenId, uint256 chunkIndex) public view returns (bytes memory data, int256 nextChunk)  {
+    function getLink(address owner, uint256 photoIndex) public view returns (string memory) {
+        return buildUri(buildFileName(owner, photoIndex));
+    }
+
+    function getListPhotos(address owner) public view returns (uint256[] memory) {
+        return ownedPhotos[owner];
+    }
+
+    function countPhoto(address owner) public view returns (uint256) {
+        return ownedPhotos[owner].length;
+    }
+
+    // @NOTE:download
+    function downloadPartial(address owner, uint256 photoIndex, uint256 chunkIndex) public view returns (bytes memory data, int256 nextChunk)  {
         BFS bfs = BFS(_bfsAddr);
-        string memory fileName = buildFileName(owner, tokenId);
+        string memory fileName = buildFileName(owner, photoIndex);
         (data, nextChunk) = bfs.load(address(this), fileName, chunkIndex);
     }
 
-    function download(address owner, uint256 tokenId) public view returns (bytes[] memory data) {
+    function download(address owner, uint256 photoIndex) public view returns (bytes[] memory data) {
         BFS bfs = BFS(_bfsAddr);
-        string memory fileName = buildFileName(owner, tokenId);
+        string memory fileName = buildFileName(owner, photoIndex);
         uint256 count = bfs.count(address(this), fileName);
+        count += 1;
         bytes[] memory result = new bytes[](count);
         for (uint256 i = 0; i < count; i++) {
             (bytes memory data, int256 nextChunk) = bfs.load(address(this), fileName, i);
