@@ -255,7 +255,7 @@ class TrustlessPhotos {
             nonce: nonce,
         }
 
-        return await temp?.nftContract.methods.countAlbumPhotos().call(tx);
+        return await temp?.nftContract.methods.countAlbumPhotos(album).call(tx);
     }
 
     async download(contractAddress: any, photoIndex: any) {

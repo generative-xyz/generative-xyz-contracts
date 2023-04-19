@@ -77,7 +77,9 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
             // set uri
             _setTokenURI(photoIndex, buildUri(fileName));
             ownedPhotos[msg.sender].push(photoIndex);
-            ownedAlbums[msg.sender].push(album);
+            if (albumPhotos[msg.sender][album].length == 0) {
+                ownedAlbums[msg.sender].push(album);
+            }
             albumPhotos[msg.sender][album].push(photoIndex);
         }
     }
