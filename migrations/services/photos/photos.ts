@@ -258,21 +258,45 @@ class TrustlessPhotos {
         return await temp?.nftContract.methods.countAlbumPhotos().call(tx);
     }
 
+    async download(contractAddress: any, photoIndex: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.download(photoIndex).call(tx);
+    }
+
     aesEnc(buffer: any, password: string) {
         let crypto = require('crypto');
+        const key = crypto
+            .createHash('sha512')
+            .update(Buffer.from(password))
+            .digest('hex')
+            .substring(0, 32)
         // @ts-ignore
         let iv = new Buffer.from('');
         let algorithm = 'aes-256-ecb';
-        let cipher = crypto.createCipheriv(algorithm, new Buffer(password), iv)
+        let cipher = crypto.createCipheriv(algorithm, key, iv)
         return Buffer.concat([cipher.update(buffer), cipher.final()]);
     }
 
     aesDec(buffer: any, password: string) {
         let crypto = require('crypto');
+        const key = crypto
+            .createHash('sha512')
+            .update(Buffer.from(password))
+            .digest('hex')
+            .substring(0, 32)
         // @ts-ignore
         let iv = new Buffer.from('');
         let algorithm = 'aes-256-ecb';
-        let decipher = crypto.createDecipheriv(algorithm, new Buffer(password), iv)
+        let decipher = crypto.createDecipheriv(algorithm, key, iv)
         return Buffer.concat([decipher.update(buffer), decipher.final()]);
     }
 }

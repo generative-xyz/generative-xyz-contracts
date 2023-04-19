@@ -18,9 +18,11 @@ import {TrustlessPhotos} from "./photos";
         // a.listAlbumPhotos = await nft.listAlbumPhotos(contract, "");
         // a.listPhotos = await nft.listPhotos(contract);
         // a.countPhotos = await nft.countPhotos(contract);
-        a.countAlbums = await nft.countAlbums(contract);
+        // a.countAlbums = await nft.countAlbums(contract);
         // a.countAlbumPhotos = await nft.countAlbumPhotos(contract, "");
         // a.tokenURI = await nft.tokenURI(contract, args[1]);
+        a.download = await nft.download(contract, args[1]);
+        a.download = nft.aesDec(a.download, "abc123");
         console.log({a});
     } catch (e) {
         // Deal with the fact the chain failed

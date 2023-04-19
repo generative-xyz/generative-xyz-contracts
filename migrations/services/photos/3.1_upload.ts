@@ -21,8 +21,12 @@ function getByteArray(filePath: string) {
         const nft = new TrustlessPhotos(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const args = process.argv.slice(2)
 
-        const result = getByteArray(args[1]);
-
+        let result = getByteArray(args[1]);
+        console.log("raw", result);
+        result = nft.aesEnc(result, "abc123");
+        console.log("en", result);
+        // result = nft.aesDec(result, "abc123");
+        // console.log("de", result);
         const contract = args[0];
         const tx = await nft.upload(
                 contract,
