@@ -82,6 +82,7 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
         }
     }
 
+    // @NOTE:getting
     function linkPhoto(uint256 photoIndex) public view returns (string memory) {
         if (msg.sender == ownerOf(photoIndex)) {
             return buildUri(buildFileName(msg.sender, photoIndex));

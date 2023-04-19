@@ -123,6 +123,158 @@ class TrustlessPhotos {
 
         return await this.signedAndSendTx(temp?.web3, tx);
     }
+
+    async upload(contractAddress: any, chunksArray: any, album: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.upload(chunksArray, album)
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+            value: 0
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async tokenURI(contractAddress: any, tokenId: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.tokenURI(tokenId).call(tx);
+    }
+
+    async linkPhoto(contractAddress: any, tokenId: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.linkPhoto(tokenId).call(tx);
+    }
+
+    async listPhotos(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.listPhotos().call(tx);
+    }
+
+    async listAlbums(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.listAlbums().call(tx);
+    }
+
+    async listAlbumPhotos(contractAddress: any, album: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.listAlbumPhotos(album).call(tx);
+    }
+
+    async countPhotos(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.countPhotos().call(tx);
+    }
+
+    async countAlbums(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.countAlbums().call(tx);
+    }
+
+    async countAlbumPhotos(contractAddress: any, album: string) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.countAlbumPhotos().call(tx);
+    }
+
+    aesEnc(buffer: any, password: string) {
+        let crypto = require('crypto');
+        // @ts-ignore
+        let iv = new Buffer.from('');
+        let algorithm = 'aes-256-ecb';
+        let cipher = crypto.createCipheriv(algorithm, new Buffer(password), iv)
+        return Buffer.concat([cipher.update(buffer), cipher.final()]);
+    }
+
+    aesDec(buffer: any, password: string) {
+        let crypto = require('crypto');
+        // @ts-ignore
+        let iv = new Buffer.from('');
+        let algorithm = 'aes-256-ecb';
+        let decipher = crypto.createDecipheriv(algorithm, new Buffer(password), iv)
+        return Buffer.concat([decipher.update(buffer), decipher.final()]);
+    }
 }
 
 export {TrustlessPhotos};
