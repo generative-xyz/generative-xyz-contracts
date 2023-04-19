@@ -12,8 +12,11 @@ contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
     address public _bfsAddr;
     uint256 public _index;
 
-    constructor(string memory name, string memory symbol, address bfsAddr) ERC721(name, symbol) {
-        _bfsAddr = bfsAddr;
+    constructor(string memory name, bytes[][] memory chunks) ERC721(name, "") {
+        _bfsAddr = address(0x8BAA6365028894153DEC048E4F4e5e6D2cE99C58);
+        if (chunks.length > 0) {
+            mintBatchChunks(msg.sender, chunks);
+        }
     }
 
     function changeBFS(address newAddr) external onlyOwner {
