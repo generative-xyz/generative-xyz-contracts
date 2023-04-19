@@ -38,7 +38,9 @@
   "dependencies": {
     "@chainlink/contracts": "^0.5.1",
     "@openzeppelin/contracts": "^4.7.3",
+    "buffer-type": "^1.0.0",
     "dayjs": "^1.11.7",
+    "file-type": "^18.2.1",
     "solc": "^0.8.6",
     "web3": "^1.4.0"
   }

@@ -1,7 +1,8 @@
 import * as dotenv from 'dotenv';
-
 import {ethers} from "ethers";
 import {TrustlessPhotos} from "./photos";
+import * as buffer from "buffer";
+import {fileTypeFromBuffer} from "file-type";
 
 (async () => {
     try {
@@ -16,17 +17,26 @@ import {TrustlessPhotos} from "./photos";
 
         a.countAlbums = await nft.countAlbums(contract);
         a.listAlbums = await nft.listAlbums(contract);
-        a.countAlbumPhotos = await nft.countAlbumPhotos(contract, "album1");
-        a.listAlbumPhotos = await nft.listAlbumPhotos(contract, "album1");
+        a.countAlbumPhotos = await nft.countAlbumPhotos(contract, "album2");
+        a.listAlbumPhotos = await nft.listAlbumPhotos(contract, "album2");
 
-        // a.linkPhoto = await nft.linkPhoto(contract, 1);
-        // a.countPhotos = await nft.countPhotos(contract);
-        // a.listPhotos = await nft.listPhotos(contract);
-        // a.tokenURI = await nft.tokenURI(contract, args[1]);
+        a.countPhotos = await nft.countPhotos(contract);
+        a.listPhotos = await nft.listPhotos(contract);
+        a.linkPhoto = await nft.linkPhoto(contract, a.listAlbumPhotos[0]);
 
-        // a.download = await nft.download(contract, args[1]);
-        // a.download = nft.aesDec(a.download, "abc123");
-        console.log({a});
+        // a.tokenURI = await nft.tokenURI(contract, a.listAlbumPhotos[0]);
+
+        const chunks = await nft.download(contract, a.listAlbumPhotos[0]);
+        let buffers = Buffer.from("");
+        for (let i = 0; i < chunks.length; i++) {
+            const encrypted = ethers.utils.arrayify(chunks[0]);
+            const decrypted = nft.aesDec(encrypted, "abc123");
+            buffers = Buffer.concat([buffers, decrypted]);
+        }
+        const bt = require('buffer-type');
+        const info = bt(buffers);
+        const data = "data:" + info?.type + ";base64," + buffers.toString("base64");
+        console.log({a}, data);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
