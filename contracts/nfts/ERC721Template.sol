@@ -58,7 +58,7 @@ contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
 
     function buildUri(uint256 tokenId) internal returns (string memory) {
         string memory uri = string(abi.encodePacked('bfs://',
-            Strings.toString(getChainID()),
+            Strings.toString(getChainID()), "/",
             Strings.toHexString(_bfsAddr), "/",
             Strings.toHexString(address(this)), '/',
             Strings.toString(tokenId)));
