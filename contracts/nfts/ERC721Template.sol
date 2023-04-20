@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "../services/BFS.sol";
 
 contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
-    address constant public _bfsAddr = 0xfBA205366B7221A447FAd4D63AE04Ab6fD45d0bd;
+    address constant public _bfsAddr = 0x8BAA6365028894153DEC048E4F4e5e6D2cE99C58;
     uint256 public _index;
 
     constructor(string memory name, bytes[][] memory chunks) ERC721(name, "") {
