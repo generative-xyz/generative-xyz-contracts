@@ -17,14 +17,14 @@ class ERC721Template {
         this.senderPublicKey = senderPublicKey;
     }
 
-    async deploy(name: any, symbol: any) {
+    async deploy(name: any, chunks: any) {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
         // if (this.network == "local") {
         //     console.log("not run local");
         //     return;
         // }
         const nft = await ethers.getContractFactory("ERC721Template");
-        const nftDeployed = await nft.deploy(name, symbol);
+        const nftDeployed = await nft.deploy(name, chunks);
 
         console.log("ERC721Template template contract deployed:", nftDeployed.address);
         return nftDeployed.address;
