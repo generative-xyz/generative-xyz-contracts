@@ -8,23 +8,12 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "../services/BFS.sol";
 
 contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
-    Counters.Counter private _tokenIdCounter;
-    address public _bfsAddr;
+    address constant public _bfsAddr = 0xfBA205366B7221A447FAd4D63AE04Ab6fD45d0bd;
     uint256 public _index;
 
     constructor(string memory name, bytes[][] memory chunks) ERC721(name, "") {
-        _bfsAddr = address(0x8BAA6365028894153DEC048E4F4e5e6D2cE99C58);
         if (chunks.length > 0) {
             mintBatchChunks(msg.sender, chunks);
-        }
-    }
-
-    function changeBFS(address newAddr) external onlyOwner {
-        require(msg.sender == this.owner() && newAddr != address(0), "INV_OWNER");
-
-        // change admin
-        if (_bfsAddr != newAddr) {
-            _bfsAddr = newAddr;
         }
     }
 
@@ -36,43 +25,47 @@ contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
     }
 
     function mintChunks(address to, bytes[] memory chunks) public onlyOwner {
-        _index++;
-        _safeMint(to, _index);
-
-        BFS bfs = BFS(_bfsAddr);
-        for (uint256 i = 0; i < chunks.length; i++) {
-            string memory fileName = Strings.toString(_index);
-            bfs.store(fileName, i, chunks[i]);
-        }
-
-        _setTokenURI(_index, buildUri(_index));
-    }
-
-    function mintBatchChunks(address to, bytes[][] memory chunks) public onlyOwner {
-        for (uint256 f = 0; f < chunks.length; f++) {
+        if (chunks.length > 0) {
             _index++;
             _safeMint(to, _index);
 
             BFS bfs = BFS(_bfsAddr);
-            string memory fileName = Strings.toString(_index);
-            for (uint256 i = 0; i < chunks[f].length; i++) {
-                bfs.store(fileName, i, chunks[f][i]);
+            for (uint256 i = 0; i < chunks.length; i++) {
+                string memory fileName = Strings.toString(_index);
+                bfs.store(fileName, i, chunks[i]);
             }
 
             _setTokenURI(_index, buildUri(_index));
         }
     }
 
+    function mintBatchChunks(address to, bytes[][] memory chunks) public onlyOwner {
+        for (uint256 f = 0; f < chunks.length; f++) {
+            if (chunks[f].length > 0) {
+                _index++;
+                _safeMint(to, _index);
+
+                BFS bfs = BFS(_bfsAddr);
+                string memory fileName = Strings.toString(_index);
+                for (uint256 i = 0; i < chunks[f].length; i++) {
+                    bfs.store(fileName, i, chunks[f][i]);
+                }
+
+                _setTokenURI(_index, buildUri(_index));
+            }
+        }
+    }
+
     function buildUri(uint256 tokenId) internal returns (string memory) {
         string memory uri = string(abi.encodePacked('bfs://',
-            Strings.toString(this.getChainID()), '/',
+            Strings.toString(getChainID()),
             Strings.toHexString(_bfsAddr), "/",
             Strings.toHexString(address(this)), '/',
             Strings.toString(tokenId)));
         return uri;
     }
 
-    function getChainID() external view returns (uint256) {
+    function getChainID() internal view returns (uint256) {
         uint256 id;
         assembly {
             id := chainid()
