@@ -136,7 +136,7 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         GenerativeProjectData projectDataContext = GenerativeProjectData(_projectDataContextAddr);
         string memory html = projectDataContext.tokenHTML(_project._projectId, tokenId, this.tokenIdToHash(tokenId));
         // this store function is only for files project
-        require(bytes(html).length > 0, Errors.ONLY_GENERATIVE_PROJECT);
+        require(bytes(html).length == 0, Errors.ONLY_GENERATIVE_PROJECT);
 
         // build filename from token seed
         IParameterControl param = IParameterControl(_paramsAddress);
