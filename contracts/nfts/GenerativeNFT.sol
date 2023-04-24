@@ -26,7 +26,7 @@ import "../data/GenerativeProjectData.sol";
 
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFilterer {
     NFTProject.ProjectMinting public _project;
-    mapping(address => bool) private _reserves;
+    mapping(address => bool) public _reserves;
 
     //    mapping(uint256 => string) public fileNames;
 
