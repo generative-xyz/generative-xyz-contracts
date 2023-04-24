@@ -131,6 +131,13 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         }
     }
 
+    function store(uint256 tokenId, uint256 chunkIndex, bytes memory _data) external {
+        IParameterControl param = IParameterControl(_paramsAddress);
+        BFS bfs = BFS(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS));
+        string memory fileName = StringsUtils.toHex(this.tokenIdToHash(tokenId));
+        bfs.store(fileName, chunkIndex, _data);
+    }
+
     function mint(address to, bytes[] memory chunks) external payable nonReentrant returns (uint256 tokenId) {
         // check time
         if (_project._mintingSchedule._openingTime > 0) {
@@ -156,7 +163,6 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         BFS bfs = BFS(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS));
         for (uint256 i = 0; i < chunks.length; i++) {
             string memory fileName = StringsUtils.toHex(this.tokenIdToHash(tokenId));
-            //            fileNames[tokenId] = fileName;
             bfs.store(fileName, i, chunks[i]);
         }
 
@@ -191,7 +197,6 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         BFS bfs = BFS(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS));
         for (uint256 i = 0; i < chunks.length; i++) {
             string memory fileName = StringsUtils.toHex(this.tokenIdToHash(tokenId));
-            //            fileNames[tokenId] = fileName;
             bfs.store(fileName, i, chunks[i]);
         }
 
