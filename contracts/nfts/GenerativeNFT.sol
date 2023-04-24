@@ -21,6 +21,7 @@ import "../libs/structs/NFTProject.sol";
 // services
 import "../services/Randomizer.sol";
 import "../services/BFS.sol";
+import "../data/GenerativeProjectData.sol";
 
 
 contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFilterer {
@@ -132,6 +133,12 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
     }
 
     function store(uint256 tokenId, uint256 chunkIndex, bytes memory _data) external {
+        GenerativeProjectData projectDataContext = GenerativeProjectData(_projectDataContextAddr);
+        string memory html = projectDataContext.tokenHTML(_project._projectId, tokenId, this.tokenIdToHash(tokenId));
+        // this store function is only for files project
+        require(bytes(html).length > 0, Errors.ONLY_GENERATIVE_PROJECT);
+
+        // build filename from token seed
         IParameterControl param = IParameterControl(_paramsAddress);
         BFS bfs = BFS(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS));
         string memory fileName = StringsUtils.toHex(this.tokenIdToHash(tokenId));
