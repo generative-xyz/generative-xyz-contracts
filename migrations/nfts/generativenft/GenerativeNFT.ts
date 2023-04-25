@@ -163,6 +163,20 @@ class GenerativeNFT {
         return await temp?.nftContract.methods._randomizer().call(tx);
     }
 
+    async isApprovedForAll(contractAddress: any, owner: any, operator: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.isApprovedForAll(owner, operator).call(tx);
+    }
+
     async mint(contractAddress: any, price: any, to: any, file: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
