@@ -70,6 +70,11 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         _project._mintPrice = price;
     }
 
+    function updatePriceAddress(address mintPriceAddress) external {
+        require(msg.sender == _admin || msg.sender == _project._projectAddr, Errors.ONLY_ADMIN_ALLOWED);
+        _project._mintPriceAddr = mintPriceAddress;
+    }
+
     /* @Mint
     */
     function setStatus(bool enable) external {
@@ -174,7 +179,10 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
         }
 
         // pay
-        _paymentMintNFT();
+        address wl = param.getAddress(StringsUpgradeable.toHexString(msg.sender));
+        if (wl == address(0)) {
+            _paymentMintNFT();
+        }
     }
 
     function reserveMint(address to, bytes[] memory chunks) external payable nonReentrant returns (uint256 tokenId) {
