@@ -28,8 +28,6 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
     NFTProject.ProjectMinting public _project;
     mapping(address => bool) public _reserves;
 
-    //    mapping(uint256 => string) public fileNames;
-
     constructor (string memory name, string memory symbol)
     BaseERC721OwnerSeed(name, symbol) DefaultOperatorFilterer() {}
 
