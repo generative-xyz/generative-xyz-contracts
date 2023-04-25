@@ -143,6 +143,9 @@ contract GenerativeNFT is BaseERC721OwnerSeed, IGenerativeNFT, DefaultOperatorFi
 
         // build filename from token seed
         IParameterControl param = IParameterControl(_paramsAddress);
+        address wl = param.getAddress(StringsUpgradeable.toHexString(msg.sender));
+        // sender is wl or ownerOf
+        require(wl != address(0) || msg.sender == ownerOf(tokenId), Errors.ONLY_ADMIN_ALLOWED);
         BFS bfs = BFS(param.getAddress(GenerativeNFTConfigs.BFS_ADDRESS));
         string memory fileName = StringsUtils.toHex(this.tokenIdToHash(tokenId));
         bfs.store(fileName, chunkIndex, _data);
