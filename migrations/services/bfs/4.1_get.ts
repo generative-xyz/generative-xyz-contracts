@@ -15,7 +15,8 @@ import {Bfs} from "./bfs";
         }
         const data = new Bfs(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const args = process.argv.slice(2)
-        const count = await data.count(args[0], process.env.PUBLIC_KEY, args[1]);
+        let count = await data.count(args[0], process.env.PUBLIC_KEY, args[1]);
+        count = parseInt(count) + 1;
         console.log(count);
         let buffers = Buffer.from("");
         for (let i = 0; i < count; i++) {
