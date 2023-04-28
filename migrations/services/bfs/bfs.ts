@@ -88,17 +88,17 @@ class Bfs {
         return val;
     }
 
-    async store(contractAddress: any, filename: any, chunkIndex: any, chunk: any) {
+    async store(contractAddress: any, filename: any, chunkIndex: any, chunk: any, gas: any) {
         let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "pending") //get latest nonce
+        console.log({nonce});
         const fun = temp?.nftContract.methods.store(filename, chunkIndex, chunk)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
             to: contractAddress,
             nonce: nonce,
-            gas: 0,
+            gas: gas,
             data: fun.encodeABI(),
         }
 

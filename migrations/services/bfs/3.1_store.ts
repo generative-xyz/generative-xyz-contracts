@@ -1,6 +1,13 @@
 import * as fs from "fs";
 import {Bfs} from "./bfs";
 
+
+function sleep(ms: number) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
+
 function getByteArray(filePath: string) {
     return fs.readFileSync(filePath);
 }
@@ -22,12 +29,12 @@ function getByteArray(filePath: string) {
         for (let i = 0; i < rawdata.length; i += chunksize) {
             chunks.push(rawdata.slice(i, i + chunksize));
         }
-
         for (let i = 0; i < chunks.length; i++) {
             try {
                 console.log('inscribe chunk', i, 'of file', fileName, 'with', chunks[i].length, 'bytes');
-                const tx = await data.store(args[0], fileName, i, chunks[i]);
-                console.log("tx:", tx?.transactionHash, tx?.status);
+                const tx = data.store(args[0], fileName, i, chunks[i], 230000000);
+                // console.log("tx:", tx?.transactionHash, tx?.status);
+                await sleep(3000);
             } catch (e) {
                 console.log("Error: ", e);
             }
