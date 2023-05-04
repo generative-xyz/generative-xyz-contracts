@@ -21,6 +21,16 @@ module.exports = {
     defaultNetwork: process.env.NETWORK,
     etherscan: {
         apiKey: process.env.ETHSCAN_API_KEY,
+        customChains: [
+            {
+                network: "tc-mainnet",
+                chainId: 22213,
+                urls: {
+                    apiURL: "https://explorer.trustless.computer/api",
+                    browserURL: "https://explorer.trustless.computer/api"
+                }
+            }
+        ]
     },
     networks: {
         hardhat: {
