@@ -37,11 +37,11 @@ contract TrustlessPhotos is Initializable, ERC721Upgradeable, ERC721URIStorageUp
         }
     }
 
-    function changeParam(address newAdm) external {
-        require(msg.sender == _admin && newAdm != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+    function changeParam(address newAddr) external {
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
-        if (_parameterAddr != newAdm) {
-            _parameterAddr = newAdm;
+        if (_parameterAddr != newAddr) {
+            _parameterAddr = newAddr;
         }
     }
 
