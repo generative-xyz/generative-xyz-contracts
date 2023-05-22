@@ -66,6 +66,17 @@ contract Artifacts is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradea
         _setTokenURI(_index, buildUri(_index));
     }
 
+    function store(uint256 tokenId, uint256 chunkIndex, bytes memory _data) external {
+        //        IParameterControl param = IParameterControl(_paramsAddress);
+        //        address wl = param.getAddress(StringsUpgradeable.toHexString(msg.sender));
+        // sender is wl or ownerOf
+        address wl = address(0);
+        require(wl != address(0) || msg.sender == ownerOf(tokenId), "INV_OWNER");
+        BFS bfs = BFS(_bfsAddr);
+        string memory fileName = StringsUpgradeable.toString(tokenId);
+        bfs.store(fileName, chunkIndex, _data);
+    }
+
     function buildUri(uint256 tokenId) internal returns (string memory) {
         string memory uri = string(abi.encodePacked('bfs://',
             StringsUpgradeable.toString(this.getChainID()), '/',
