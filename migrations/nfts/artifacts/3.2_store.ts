@@ -21,8 +21,8 @@ function getByteArray(filePath: string) {
         const rawdata = getByteArray(args[2]);
 
         // partition rawdata into chunks
-        // const chunksize = 350_000;
-        const chunksize = 1_000;
+        const chunksize = 350_000;
+        // const chunksize = 1_000;
         let chunks = [];
         for (let i = 0; i < rawdata.length; i += chunksize) {
             const temp = rawdata.slice(i, i + chunksize);
