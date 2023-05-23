@@ -170,6 +170,29 @@ class Artifacts {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
+    async store(contractAddress: any, tokenId: any, chunkIndex: any, chunk: any, gas: any, nonce: any) {
+        let temp = this.getContract(contractAddress);
+        const nonceEst = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.store(tokenId, chunkIndex, chunk)
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonceEst,
+            gas: gas,
+            data: fun.encodeABI(),
+            value: 0
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+        tx.nonce = nonce;
+        
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
     async tokenURI(contractAddress: any, tokenId: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
