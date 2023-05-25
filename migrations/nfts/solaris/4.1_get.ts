@@ -17,6 +17,7 @@ import {Solaris} from "./Solaris";
         const nft = new Solaris(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         let a: any = {};
         a.getTokenURI = await nft.getTokenURI(contract, tokenId);
+        a._reservations = await nft._reservations(contract, tokenId, process.env.PUBLIC_KEY);
         console.log({a});
     } catch (e) {
         // Deal with the fact the chain failed
