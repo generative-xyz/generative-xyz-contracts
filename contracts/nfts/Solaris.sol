@@ -100,7 +100,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         return keccak256(abi.encode(_ownersAndHashSeeds[tokenId]._seed));
     }
 
-    function mint(address to) external payable nonReentrant returns (uint256 tokenId) {
+    function mint(address to) public payable nonReentrant returns (uint256 tokenId) {
         require(_currentId < _maxSupply, Errors.REACH_MAX);
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         _currentId++;
@@ -115,7 +115,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     function batchMint(address to, uint256 n) external payable returns (uint256[] memory) {
         uint256[] memory tokenIds = new uint256[](n);
         for (uint256 i = 0; i < n; i++) {
-            uint256 tokenId = this.mint(to);
+            uint256 tokenId = mint(to);
             tokenIds[i] = tokenId;
             if (gasleft() < 200000) {break;}
         }
