@@ -112,7 +112,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         _setTokenSeed(tokenId, seed);
     }
 
-    function batchMint(address to, uint256 n) external payable nonReentrant returns (uint256[] memory) {
+    function batchMint(address to, uint256 n) external payable returns (uint256[] memory) {
         uint256[] memory tokenIds = new uint256[](n);
         for (uint256 i = 0; i < n; i++) {
             uint256 tokenId = this.mint(to);
