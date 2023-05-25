@@ -139,7 +139,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     }
 
     function reserve(uint256 tokenId) external payable nonReentrant {
-        require(this.claimable(tokenId), "N_C0");
+        require(claimable(tokenId), "N_C0");
 
         uint256 blockReserve = _getBlockReserve();
         uint256 reservation = _reservations[tokenId][msg.sender];
@@ -149,7 +149,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     }
 
     function claim(uint256 tokenId) external payable nonReentrant {
-        require(this.claimable(tokenId), "N_C1");
+        require(claimable(tokenId), "N_C1");
 
         uint256 blockReserve = _getBlockReserve();
         uint256 reservation = _reservations[tokenId][msg.sender];
@@ -170,12 +170,12 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         IParameterControl param = IParameterControl(_paramsAddress);
         uint256 threshold = param.getUInt256("GM_THRESHOLD");
         if (threshold == 0) {
-            threshold = 1e18;
+            threshold = 1 * 10 ** 18;
         }
         return threshold;
     }
 
-    function claimable(uint256 tokenId) external view virtual returns (bool) {
+    function claimable(uint256 tokenId) public view virtual returns (bool) {
         // check gm balance
         address owner = ownerOf(tokenId);
         uint256 balanceOwner = _getBalanceToken(owner);
@@ -238,7 +238,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
             if (isContract(msg.sender)) {
                 require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
             } else {
-                require(this.claimable(tokenId), "N_C2");
+                require(claimable(tokenId), "N_C2");
             }
         }
         _transfer(from, to, tokenId);
@@ -255,7 +255,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
             if (isContract(msg.sender)) {
                 require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
             } else {
-                require(this.claimable(tokenId), "N_C2");
+                require(claimable(tokenId), "N_C2");
             }
         }
         _safeTransfer(from, to, tokenId, data);
