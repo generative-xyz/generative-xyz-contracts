@@ -25,6 +25,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     uint256 private _currentId;
     string public _script;
     address public _brc20Token;
+    uint256 public _maxSupply;
 
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
 
@@ -42,6 +43,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         _admin = admin;
         _randomizerAddr = randomizerAddr;
         _brc20Token = gmToken;
+        _maxSupply = 1000;
 
         __ERC721_init(name, symbol);
         __ReentrancyGuard_init();
@@ -98,6 +100,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     }
 
     function mint(address to) external payable nonReentrant returns (uint256 tokenId) {
+        require(_currentId < _maxSupply, Errors.REACH_MAX);
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         _currentId++;
         tokenId = _currentId;
