@@ -97,11 +97,8 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         return keccak256(abi.encode(_ownersAndHashSeeds[tokenId]._seed));
     }
 
-    function ownerOf(uint256 tokenId) public view virtual override returns (address) {
-        return _ownersAndHashSeeds[tokenId]._owner;
-    }
-
     function mint(address to) external payable nonReentrant returns (uint256 tokenId) {
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         _currentId++;
         tokenId = _currentId;
         _safeMint(to, tokenId);
@@ -115,6 +112,53 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         require(_ownersAndHashSeeds[tokenId]._seed == bytes12(0), Errors.TOKEN_HAS_SEED);
         require(seed != bytes12(0), Errors.ZERO_SEED);
         _ownersAndHashSeeds[tokenId]._seed = bytes12(seed);
+    }
+
+    function claim(uint256 tokenId) external payable nonReentrant {
+        require(this.claimable(tokenId), "N_C1");
+
+        address owner = ownerOf(tokenId);
+        _transfer(owner, msg.sender, tokenId);
+    }
+
+    function _getBalanceToken(address owner) private view returns (uint256) {
+        IERC20Upgradeable brc20TokenGM = IERC20Upgradeable(_brc20Token);
+        return brc20TokenGM.balanceOf(owner);
+    }
+
+    function _getTokenThreshold() private view returns (uint256) {
+        IParameterControl param = IParameterControl(_paramsAddress);
+        uint256 threshold = param.getUInt256("GM_THRESHOLD");
+        if (threshold == 0) {
+            threshold = 1e18;
+        }
+        return threshold;
+    }
+
+    function claimable(uint256 tokenId) external view virtual returns (bool) {
+        // check gm balance
+        address owner = ownerOf(tokenId);
+        uint256 balanceOwner = _getBalanceToken(owner);
+        uint256 balanceClaimer = _getBalanceToken(msg.sender);
+
+        // by threshold on config
+        uint256 threshold = _getTokenThreshold();
+        if (balanceOwner < threshold && balanceClaimer >= threshold) {
+            return true;
+        }
+        return false;
+    }
+
+    function isContract(address _addr) private returns (bool isContract){
+        uint32 size;
+        assembly {
+            size := extcodesize(_addr)
+        }
+        return (size > 0);
+    }
+
+    function ownerOf(uint256 tokenId) public view virtual override returns (address) {
+        return _ownersAndHashSeeds[tokenId]._owner;
     }
 
     function _exists(uint256 tokenId) internal view virtual override returns (bool) {
@@ -132,7 +176,49 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     }
 
     function _isApprovedOrOwner(address spender, uint256 tokenId) internal view virtual override returns (bool) {
-       return super._isApprovedOrOwner(spender, tokenId);
+        address owner = ownerOf(tokenId);
+        if (spender != owner) {// case approved
+            uint256 balance = _getBalanceToken(owner);
+            uint256 threshold = _getTokenThreshold();
+            if (balance < threshold) {
+                return false;
+            }
+        }
+        return super._isApprovedOrOwner(spender, tokenId);
+    }
+
+    function transferFrom(address from, address to, uint256 tokenId) public virtual override {
+        if (msg.sender == from) {
+            // is current owner
+            uint256 balance = _getBalanceToken(msg.sender);
+            uint256 threshold = _getTokenThreshold();
+            require(balance >= threshold, "T");
+        } else {
+            // marketplace(contract) or claimer
+            if (isContract(msg.sender)) {
+                require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
+            } else {
+                require(this.claimable(tokenId), "N_C2");
+            }
+        }
+        _transfer(from, to, tokenId);
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public virtual override {
+        if (msg.sender == from) {
+            // is current owner
+            uint256 balance = _getBalanceToken(msg.sender);
+            uint256 threshold = _getTokenThreshold();
+            require(balance >= threshold, "T");
+        } else {
+            // marketplace(contract) or claimer
+            if (isContract(msg.sender)) {
+                require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
+            } else {
+                require(this.claimable(tokenId), "N_C2");
+            }
+        }
+        _safeTransfer(from, to, tokenId, data);
     }
 
     function _transfer(address from, address to, uint256 tokenId) internal virtual override {
