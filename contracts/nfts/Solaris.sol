@@ -26,6 +26,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     string public _script;
     address public _brc20Token;
     uint256 public _maxSupply;
+    mapping(uint256 => mapping(address => uint256)) public _reservations;
 
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
 
@@ -127,11 +128,37 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         _ownersAndHashSeeds[tokenId]._seed = bytes12(seed);
     }
 
+    function _getBlockReserve() internal returns (uint256) {
+        IParameterControl param = IParameterControl(_paramsAddress);
+        uint256 blockReserve = param.getUInt256("GM_RESERVE");
+        if (blockReserve == 0) {
+            // ~block in 7 day, 1 block 10 minute
+            blockReserve = 60 * 24 * 7 / 10;
+        }
+        return blockReserve;
+    }
+
+    function reserve(uint256 tokenId) external payable nonReentrant {
+        require(this.claimable(tokenId), "N_C0");
+
+        uint256 blockReserve = _getBlockReserve();
+        uint256 reservation = _reservations[tokenId][msg.sender];
+        require(reservation == 0 || block.number - reservation >= blockReserve, "N_C0_1");
+
+        _reservations[tokenId][msg.sender] = block.number;
+    }
+
     function claim(uint256 tokenId) external payable nonReentrant {
         require(this.claimable(tokenId), "N_C1");
 
+        uint256 blockReserve = _getBlockReserve();
+        uint256 reservation = _reservations[tokenId][msg.sender];
+        require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");
+
         address owner = ownerOf(tokenId);
         _transfer(owner, msg.sender, tokenId);
+
+        delete _reservations[tokenId][msg.sender];
     }
 
     function _getBalanceToken(address owner) private view returns (uint256) {
