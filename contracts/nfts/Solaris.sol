@@ -15,6 +15,7 @@ import "../interfaces/IParameterControl.sol";
 import "../libs/helpers/Base64.sol";
 import "../libs/helpers/StringsUtils.sol";
 import "../libs/configs/GenerativeProjectDataConfigs.sol";
+import "../interfaces/IRandomizer.sol";
 
 contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable {
 
@@ -100,6 +101,22 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         return _ownersAndHashSeeds[tokenId]._owner;
     }
 
+    function mint(address to) external payable nonReentrant returns (uint256 tokenId) {
+        _currentId++;
+        tokenId = _currentId;
+        _safeMint(to, tokenId);
+
+        IRandomizer random = IRandomizer(_randomizerAddr);
+        bytes32 seed = random.generateTokenHash(tokenId);
+        _setTokenSeed(tokenId, seed);
+    }
+
+    function _setTokenSeed(uint256 tokenId, bytes32 seed) internal {
+        require(_ownersAndHashSeeds[tokenId]._seed == bytes12(0), Errors.TOKEN_HAS_SEED);
+        require(seed != bytes12(0), Errors.ZERO_SEED);
+        _ownersAndHashSeeds[tokenId]._seed = bytes12(seed);
+    }
+
     function _exists(uint256 tokenId) internal view virtual override returns (bool) {
         return _ownersAndHashSeeds[tokenId]._owner != Errors.ZERO_ADDR;
     }
@@ -112,6 +129,10 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     function _burn(uint256 tokenId) internal virtual override {
         super._burn(tokenId);
         delete _ownersAndHashSeeds[tokenId]._owner;
+    }
+
+    function _isApprovedOrOwner(address spender, uint256 tokenId) internal view virtual override returns (bool) {
+       return super._isApprovedOrOwner(spender, tokenId);
     }
 
     function _transfer(address from, address to, uint256 tokenId) internal virtual override {
