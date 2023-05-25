@@ -2,7 +2,7 @@ import {ERC20Template} from "./ERC20Template";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "goerli") {
+        if (process.env.NETWORK != "tc_testnet") {
             console.log("wrong network");
             return;
         }

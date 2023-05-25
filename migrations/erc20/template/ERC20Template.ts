@@ -103,7 +103,7 @@ class ERC20Template {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.transfer(to, amount);
+        const fun = temp?.nftContract.methods.transfer(to, ethers.utils.parseEther(amount));
         //the transaction
         const tx = {
             from: this.senderPublicKey,
