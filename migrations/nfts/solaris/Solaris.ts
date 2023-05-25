@@ -177,6 +177,20 @@ class Solaris {
         return await temp?.nftContract.methods.royaltyInfo(token, ethers.utils.parseEther(salePrice)).call(tx);
     }
 
+    async _reservations(contractAddress: any, tokenId: any, reserver: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._reservations(tokenId, reserver).call(tx);
+    }
+
     async mint(contractAddress: any, to: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
@@ -224,6 +238,27 @@ class Solaris {
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
         const fun = temp?.nftContract.methods.reserve(tokenId);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async claim(contractAddress: any, tokenId: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.claim(tokenId);
         //the transaction
         const tx = {
             from: this.senderPublicKey,
