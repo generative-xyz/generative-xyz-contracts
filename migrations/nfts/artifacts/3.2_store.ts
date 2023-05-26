@@ -32,7 +32,7 @@ function getByteArray(filePath: string) {
         for (let i = 19; i < chunks.length; i++) {
             try {
                 console.log('inscribe chunk', i, 'with', chunks[i].length, 'bytes');
-                // 177000000
+                // 250000000
                 nft.store(contract, tokenId, i, chunks[i], 0);
                 break;
             } catch (e) {

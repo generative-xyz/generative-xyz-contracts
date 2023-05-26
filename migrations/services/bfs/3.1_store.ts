@@ -27,13 +27,16 @@ function getByteArray(filePath: string) {
         const chunksize = 350_000;
         let chunks = [];
         for (let i = 0; i < rawdata.length; i += chunksize) {
-            chunks.push(rawdata.slice(i, i + chunksize));
+            const temp = rawdata.slice(i, i + chunksize)
+            chunks.push(temp);
+            console.log("chunk - ", temp)
         }
+        console.log("Split to ", chunks.length);
         for (let i = 0; i < chunks.length; i++) {
             try {
                 console.log('inscribe chunk', i, 'of file', fileName, 'with', chunks[i].length, 'bytes');
-                const tx = data.store(args[0], fileName, i, chunks[i], 230000000);
-                // console.log("tx:", tx?.transactionHash, tx?.status);
+                const tx = await data.store(args[0], fileName, i, chunks[i], 250000000);
+                console.log("tx:", tx?.transactionHash, tx?.status);
                 await sleep(3000);
             } catch (e) {
                 console.log("Error: ", e);
