@@ -342,7 +342,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
             (bytes memory data, int256 nextChunk) = bfs.load(_admin, fileName, i);
             result = string(abi.encodePacked(result, string(data)));
         }
-        result = string(abi.encodePacked(result, "<script>"));
+        result = string(abi.encodePacked(result, "</script>"));
         return result;
     }
 
@@ -359,7 +359,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
             (bytes memory data, int256 nextChunk) = bfs.load(_admin, fileName, i);
             result = string(abi.encodePacked(result, string(data)));
         }
-        result = string(abi.encodePacked(result, "<script>"));
+        result = string(abi.encodePacked(result, "</script>"));
         return result;
     }
 
