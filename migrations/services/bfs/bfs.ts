@@ -90,7 +90,7 @@ class Bfs {
 
     async store(contractAddress: any, filename: any, chunkIndex: any, chunk: any, gas: any) {
         let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "pending") //get latest nonce
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
         console.log({nonce});
         const fun = temp?.nftContract.methods.store(filename, chunkIndex, chunk)
         //the transaction
@@ -105,6 +105,7 @@ class Bfs {
         if (tx.gas == 0) {
             tx.gas = await fun.estimateGas(tx);
         }
+        console.log("gas", tx.gas)
 
         return await this.signedAndSendTx(temp?.web3, tx);
     }
