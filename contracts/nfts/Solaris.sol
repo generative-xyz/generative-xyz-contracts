@@ -95,6 +95,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         }
     }
 
+    /* @Mint */
     function tokenIdToHash(uint256 tokenId) external view returns (bytes32) {
         require(_exists(tokenId), Errors.INV_TOKEN);
         if (_ownersAndHashSeeds[tokenId]._seed == 0) {
@@ -131,6 +132,8 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         _ownersAndHashSeeds[tokenId]._seed = bytes12(seed);
     }
 
+
+    /* @Claim */
     function _getBlockReserve() internal returns (uint256) {
         IParameterControl param = IParameterControl(_paramsAddress);
         uint256 blockReserve = param.getUInt256("GM_RESERVE");
@@ -164,7 +167,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         _transfer(owner, msg.sender, tokenId);
 
         delete _reservations[tokenId][msg.sender];
-        
+
         emit Claim(msg.sender, tokenId, ownerOf(tokenId), block.number);
     }
 
@@ -204,6 +207,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         return (size > 0);
     }
 
+    /* @Override on ERC-721*/
     function ownerOf(uint256 tokenId) public view virtual override returns (address) {
         return _ownersAndHashSeeds[tokenId]._owner;
     }
