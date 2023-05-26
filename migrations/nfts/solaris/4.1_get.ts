@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 
 import {ethers} from "ethers";
 import {GenerativeProject} from "../generativeProject/generativeProject";
+import * as fs from "fs";
 import {Solaris} from "./Solaris";
 
 (async () => {
@@ -21,7 +22,14 @@ import {Solaris} from "./Solaris";
         // a.p5jsScript = await nft.p5jsScript(contract);
         // a.web3Script = await nft.web3Script(contract);
         a.tokenHTML = await nft.tokenHTML(contract, Buffer.from(""));
-        console.log(a.tokenHTML);
+        if (a.tokenHTML) {
+            try {
+                fs.writeFileSync('./index.html', a.tokenHTML);
+                // file written successfully
+            } catch (err) {
+                console.error(err);
+            }
+        }
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
