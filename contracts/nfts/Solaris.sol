@@ -237,6 +237,10 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
             // marketplace(contract) or claimer
             if (isContract(msg.sender)) {
                 require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
+                // check balance GM of current owner
+                uint256 balance = _getBalanceToken(from);
+                uint256 threshold = _getTokenThreshold();
+                require(balance >= threshold, "T_1");
             } else {
                 require(claimable(tokenId), "N_C2");
                 uint256 blockReserve = _getBlockReserve();
@@ -257,6 +261,10 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
             // marketplace(contract) or claimer
             if (isContract(msg.sender)) {
                 require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
+                // check balance GM of current owner
+                uint256 balance = _getBalanceToken(from);
+                uint256 threshold = _getTokenThreshold();
+                require(balance >= threshold, "T_1");
             } else {
                 require(claimable(tokenId), "N_C2");
                 uint256 blockReserve = _getBlockReserve();
