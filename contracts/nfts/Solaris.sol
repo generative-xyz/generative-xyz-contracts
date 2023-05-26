@@ -16,6 +16,7 @@ import "../libs/helpers/Base64.sol";
 import "../libs/helpers/StringsUtils.sol";
 import "../libs/configs/GenerativeProjectDataConfigs.sol";
 import "../interfaces/IRandomizer.sol";
+import "../services/BFS.sol";
 
 contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable {
 
@@ -32,6 +33,8 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     mapping(uint256 => mapping(address => uint256)) public _reservations;
 
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
+
+    address public _bfs;
 
     function initialize(
         string memory name,
@@ -92,6 +95,14 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
 
         if (_brc20Token != newBrc20) {
             _brc20Token = newBrc20;
+        }
+    }
+
+    function changeBfs(address newBfs) external {
+        require(msg.sender == _admin && newBfs != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+
+        if (_bfs != newBfs) {
+            _bfs = newBfs;
         }
     }
 
@@ -318,8 +329,45 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         );
     }
 
+    function p5jsScript() public view returns (string memory) {
+        string memory result = "<script sandbox='allow-scripts' type='text/javascript'>";
+
+        BFS bfs = BFS(_bfs);
+        string memory fileName = "p5js@1.5.0.js";
+        // count file
+        uint256 count = bfs.count(_admin, fileName);
+        count += 1;
+        // load and concat string
+        for (uint256 i = 0; i < count; i++) {
+            (bytes memory data, int256 nextChunk) = bfs.load(_admin, fileName, i);
+            result = string(abi.encodePacked(result, string(data)));
+        }
+        result = string(abi.encodePacked(result, "<script>"));
+        return result;
+    }
+
+    function web3Script() public view returns (string memory) {
+        string memory result = "<script sandbox='allow-scripts' type='text/javascript'>";
+
+        BFS bfs = BFS(_bfs);
+        string memory fileName = "web3@1.2.7.js";
+        // count file
+        uint256 count = bfs.count(_admin, fileName);
+        count += 1;
+        // load and concat string
+        for (uint256 i = 0; i < count; i++) {
+            (bytes memory data, int256 nextChunk) = bfs.load(_admin, fileName, i);
+            result = string(abi.encodePacked(result, string(data)));
+        }
+        result = string(abi.encodePacked(result, "<script>"));
+        return result;
+    }
+
     function tokenHTML(bytes32 seed) external view returns (string memory result) {
-        result = _script;
+        result = "<html><head>";
+        result = string(abi.encodePacked(result, p5jsScript()));
+        result = string(abi.encodePacked(result, web3Script()));
+        result = string(abi.encodePacked(result, _script));
     }
 
     /** @dev EIP2981 royalties implementation. */
