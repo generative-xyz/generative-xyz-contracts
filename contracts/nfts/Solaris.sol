@@ -19,6 +19,9 @@ import "../interfaces/IRandomizer.sol";
 
 contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable {
 
+    event Reserve(address indexed reserver, uint256 indexed tokenId, address indexed owner, uint256 blockNumber);
+    event Claim(address indexed reserver, uint256 indexed tokenId, address indexed owner, uint256 blockNumber);
+
     address public _admin;
     address public _paramsAddress;
     address public _randomizerAddr;
@@ -146,6 +149,8 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         require(reservation == 0 || block.number - reservation >= blockReserve, "N_C0_1");
 
         _reservations[tokenId][msg.sender] = block.number;
+
+        emit Reserve(msg.sender, tokenId, ownerOf(tokenId), block.number);
     }
 
     function claim(uint256 tokenId) external payable nonReentrant {
@@ -159,6 +164,8 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         _transfer(owner, msg.sender, tokenId);
 
         delete _reservations[tokenId][msg.sender];
+        
+        emit Claim(msg.sender, tokenId, ownerOf(tokenId), block.number);
     }
 
     function _getBalanceToken(address owner) private view returns (uint256) {
