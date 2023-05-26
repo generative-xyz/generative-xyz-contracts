@@ -18,10 +18,10 @@ import {Solaris} from "./Solaris";
         let a: any = {};
         // a.getTokenURI = await nft.getTokenURI(contract, tokenId);
         // a._reservations = await nft._reservations(contract, tokenId, process.env.PUBLIC_KEY);
-        a.p5jsScript = await nft.p5jsScript(contract);
-        a.web3Script = await nft.web3Script(contract);
-        a.tokenHTML = await nft.tokenHTML(contract, "");
-        console.log({a});
+        // a.p5jsScript = await nft.p5jsScript(contract);
+        // a.web3Script = await nft.web3Script(contract);
+        a.tokenHTML = await nft.tokenHTML(contract, Buffer.from(""));
+        console.log(a.tokenHTML);
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
