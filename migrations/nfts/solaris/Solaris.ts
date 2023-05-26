@@ -191,6 +191,48 @@ class Solaris {
         return await temp?.nftContract.methods._reservations(tokenId, reserver).call(tx);
     }
 
+    async p5jsScript(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.p5jsScript().call(tx);
+    }
+
+    async web3Script(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.web3Script().call(tx);
+    }
+
+    async tokenHTML(contractAddress: any, seed: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.tokenHTML(seed).call(tx);
+    }
+
     async mint(contractAddress: any, to: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
@@ -280,6 +322,27 @@ class Solaris {
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
         const fun = temp?.nftContract.methods.changeRandomizerAddr(newAddr)
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async changeBfs(contractAddress: any, newAddr: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.changeBfs(newAddr)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
