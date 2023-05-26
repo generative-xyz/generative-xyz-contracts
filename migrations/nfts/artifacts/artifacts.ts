@@ -170,16 +170,17 @@ class Artifacts {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async store(contractAddress: any, tokenId: any, chunkIndex: any, chunk: any, gas: any, nonce: any) {
+    async store(contractAddress: any, tokenId: any, chunkIndex: any, chunk: any, gas: any) {
         let temp = this.getContract(contractAddress);
-        const nonceEst = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+        // console.log("nonceEst", nonceEst)
         const fun = temp?.nftContract.methods.store(tokenId, chunkIndex, chunk)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
             to: contractAddress,
-            nonce: nonceEst,
+            nonce: nonce,
+            gasPrice: ethers.utils.parseUnits("20", "gwei"),
             gas: gas,
             data: fun.encodeABI(),
             value: 0
@@ -188,8 +189,8 @@ class Artifacts {
         if (tx.gas == 0) {
             tx.gas = await fun.estimateGas(tx);
         }
-        tx.nonce = nonce;
-        
+        console.log("gas", tx.gas)
+
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 

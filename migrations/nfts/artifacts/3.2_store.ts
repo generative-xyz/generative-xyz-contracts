@@ -22,7 +22,6 @@ function getByteArray(filePath: string) {
 
         // partition rawdata into chunks
         const chunksize = 350_000;
-        // const chunksize = 1_000;
         let chunks = [];
         for (let i = 0; i < rawdata.length; i += chunksize) {
             const temp = rawdata.slice(i, i + chunksize);
@@ -30,12 +29,12 @@ function getByteArray(filePath: string) {
             console.log("chunk - ", temp)
         }
         console.log("Split to ", chunks.length);
-        let nonce = 558
-        for (let i = 0; i < chunks.length; i++) {
+        for (let i = 19; i < chunks.length; i++) {
             try {
                 console.log('inscribe chunk', i, 'with', chunks[i].length, 'bytes');
-                nft.store(contract, tokenId, i, chunks[i], 0, nonce);
-                nonce++;
+                // 177000000
+                nft.store(contract, tokenId, i, chunks[i], 0);
+                break;
             } catch (e) {
                 console.log("Error: ", e);
             }
