@@ -239,6 +239,9 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
                 require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
             } else {
                 require(claimable(tokenId), "N_C2");
+                uint256 blockReserve = _getBlockReserve();
+                uint256 reservation = _reservations[tokenId][msg.sender];
+                require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");
             }
         }
         _transfer(from, to, tokenId);
@@ -256,6 +259,9 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
                 require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
             } else {
                 require(claimable(tokenId), "N_C2");
+                uint256 blockReserve = _getBlockReserve();
+                uint256 reservation = _reservations[tokenId][msg.sender];
+                require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");
             }
         }
         _safeTransfer(from, to, tokenId, data);
