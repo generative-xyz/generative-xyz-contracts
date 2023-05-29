@@ -21,6 +21,8 @@ import {Solaris} from "./Solaris";
         // a._reservations = await nft._reservations(contract, tokenId, process.env.PUBLIC_KEY);
         // a.p5jsScript = await nft.p5jsScript(contract);
         // a.web3Script = await nft.web3Script(contract);
+        // a._script = await nft._script(contract);
+        // console.log(a._script);
         a.tokenHTML = await nft.tokenHTML(contract, Buffer.from(""));
         if (a.tokenHTML) {
             try {
