@@ -32,12 +32,13 @@ function getByteArray(filePath: string) {
             console.log("chunk - ", temp)
         }
         console.log("Split to ", chunks.length);
-        for (let i = 0; i < chunks.length; i++) {
+        for (let i = 2; i < chunks.length; i++) {
             try {
                 console.log('inscribe chunk', i, 'of file', fileName, 'with', chunks[i].length, 'bytes');
                 const tx = await data.store(args[0], fileName, i, chunks[i], 250000000);
                 console.log("tx:", tx?.transactionHash, tx?.status);
                 await sleep(3000);
+                break;
             } catch (e) {
                 console.log("Error: ", e);
             }
