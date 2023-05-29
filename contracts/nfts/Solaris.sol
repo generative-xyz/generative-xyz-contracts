@@ -350,7 +350,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         string memory result = "<script sandbox='allow-scripts' type='text/javascript'>";
 
         BFS bfs = BFS(_bfs);
-        string memory fileName = "web3@1.2.7.js";
+        string memory fileName = "web3js@1.2.7.js";
         // count file
         uint256 count = bfs.count(_admin, fileName);
         count += 1;
