@@ -335,7 +335,9 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         BFS bfs = BFS(_bfs);
         string memory fileName = "p5js@1.5.0.js";
         // count file
-        uint256 count = bfs.count(_admin, fileName);
+        IParameterControl param = IParameterControl(_paramsAddress);
+        address scriptProvider = param.getAddress("SCRIPT_PROVIDER");
+        uint256 count = bfs.count(scriptProvider, fileName);
         count += 1;
         // load and concat string
         for (uint256 i = 0; i < count; i++) {
@@ -352,7 +354,9 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         BFS bfs = BFS(_bfs);
         string memory fileName = "web3js@1.2.7.js";
         // count file
-        uint256 count = bfs.count(_admin, fileName);
+        IParameterControl param = IParameterControl(_paramsAddress);
+        address scriptProvider = param.getAddress("SCRIPT_PROVIDER");
+        uint256 count = bfs.count(scriptProvider, fileName);
         count += 1;
         // load and concat string
         for (uint256 i = 0; i < count; i++) {
