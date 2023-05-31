@@ -307,7 +307,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         bytes32 seed = this.tokenIdToHash(tokenId);
 
         IParameterControl param = IParameterControl(_paramsAddress);
-        string memory html = this.tokenHTML(seed);
+        string memory html = this.tokenHTML(seed, tokenId);
         NFTProjectData.TokenURIContext memory ctx;
         ctx._animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
         ctx._baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
@@ -329,8 +329,8 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         );
     }
 
-    function p5jsScript() public view returns (string memory) {
-        string memory result = "<script sandbox='allow-scripts' type='text/javascript'>";
+    function p5jsScript() public view returns (string memory result) {
+        result = "<script sandbox='allow-scripts' type='text/javascript'>";
 
         BFS bfs = BFS(_bfs);
         string memory fileName = "p5js@1.5.0.js";
@@ -348,8 +348,8 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         return result;
     }
 
-    function web3Script() public view returns (string memory) {
-        string memory result = "<script sandbox='allow-scripts' type='text/javascript'>";
+    function web3Script() public view returns (string memory result) {
+        result = "<script sandbox='allow-scripts' type='text/javascript'>";
 
         BFS bfs = BFS(_bfs);
         string memory fileName = "web3js@1.2.7.js";
@@ -367,7 +367,18 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         return result;
     }
 
-    function tokenHTML(bytes32 seed) external view returns (string memory result) {
+    function variableScript(bytes32 seed, uint256 tokenId) public view returns (string memory result) {
+        result = "<script id='vars'>";
+        result = string(abi.encodePacked(result, "let seed=", StringsUtils.toHex(seed), ";"));
+        result = string(abi.encodePacked(result, "let GM_CONTRACT_ADDRESS=", StringsUpgradeable.toHexString(_brc20Token), ";"));
+        IParameterControl param = IParameterControl(_paramsAddress);
+        address SWAP_POOL_GM_ETH_CONTRACT_ADDRESS = param.getAddress("SWAP_POOL_GM_ETH_CONTRACT_ADDRESS");
+        result = string(abi.encodePacked(result, "let SWAP_POOL_GM_ETH_CONTRACT_ADDRESS=", StringsUpgradeable.toHexString(SWAP_POOL_GM_ETH_CONTRACT_ADDRESS), ";"));
+        result = string(abi.encodePacked(result, "let solarisNftContractAddress=", StringsUpgradeable.toHexString(address(this)), ";"));
+        result = string(abi.encodePacked(result, "</script>"));
+    }
+
+    function tokenHTML(bytes32 seed, uint256 tokenId) external view returns (string memory result) {
         result = "<html><head>";
         result = string(abi.encodePacked(result, p5jsScript()));
         result = string(abi.encodePacked(result, web3Script()));
