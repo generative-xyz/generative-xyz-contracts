@@ -382,6 +382,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         result = "<html><head>";
         result = string(abi.encodePacked(result, p5jsScript()));
         result = string(abi.encodePacked(result, web3Script()));
+        result = string(abi.encodePacked(result, variableScript(seed, tokenId)));
         result = string(abi.encodePacked(result, _script));
     }
 
