@@ -219,7 +219,7 @@ class Solaris {
         return await temp?.nftContract.methods.web3Script().call(tx);
     }
 
-    async tokenHTML(contractAddress: any, seed: any) {
+    async tokenHTML(contractAddress: any, seed: any, tokenId: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
@@ -230,7 +230,7 @@ class Solaris {
             nonce: nonce,
         }
 
-        return await temp?.nftContract.methods.tokenHTML(seed).call(tx);
+        return await temp?.nftContract.methods.tokenHTML(seed, tokenId).call(tx);
     }
 
     async _script(contractAddress: any) {

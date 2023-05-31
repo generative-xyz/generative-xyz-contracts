@@ -23,7 +23,8 @@ import {Solaris} from "./Solaris";
         // a.web3Script = await nft.web3Script(contract);
         // a._script = await nft._script(contract);
         // console.log(a._script);
-        a.tokenHTML = await nft.tokenHTML(contract, Buffer.from(""));
+        a.tokenIdToHash = await nft.tokenIdToHash(contract, tokenId)
+        a.tokenHTML = await nft.tokenHTML(contract, a.tokenIdToHash, tokenId);
         if (a.tokenHTML) {
             try {
                 fs.writeFileSync('./index.html', a.tokenHTML);
