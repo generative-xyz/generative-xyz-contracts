@@ -308,6 +308,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
 
         IParameterControl param = IParameterControl(_paramsAddress);
         string memory html = this.tokenHTML(seed, tokenId);
+        html = string(abi.encodePacked('data:text/html;base64,', Base64.encode(abi.encodePacked(html))));
         NFTProjectData.TokenURIContext memory ctx;
         ctx._animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
         ctx._baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
@@ -385,6 +386,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         result = string(abi.encodePacked(result, web3Script()));
         result = string(abi.encodePacked(result, variableScript(seed, tokenId)));
         result = string(abi.encodePacked(result, _script));
+        
     }
 
     /** @dev EIP2981 royalties implementation. */
