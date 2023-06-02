@@ -383,6 +383,7 @@ class Solaris {
             from: this.senderPublicKey,
             to: contractAddress,
             nonce: nonce,
+            gasPrice: ethers.utils.parseUnits("10", "gwei"),
             gas: gas,
             data: fun.encodeABI(),
         }
