@@ -369,13 +369,13 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
 
     function variableScript(bytes32 seed, uint256 tokenId) public view returns (string memory result) {
         result = "<script id='vars'>";
-        result = string(abi.encodePacked(result, "let seed=", StringsUtils.toHex(seed), ";"));
-        result = string(abi.encodePacked(result, "let GM_CONTRACT_ADDRESS=", StringsUpgradeable.toHexString(_brc20Token), ";"));
+        result = string(abi.encodePacked(result, "let seed='", StringsUtils.toHex(seed), "';"));
+        result = string(abi.encodePacked(result, "let GM_CONTRACT_ADDRESS='", StringsUpgradeable.toHexString(_brc20Token), "';"));
         IParameterControl param = IParameterControl(_paramsAddress);
         address SWAP_POOL_GM_ETH_CONTRACT_ADDRESS = param.getAddress("SWAP_POOL_GM_ETH_CONTRACT_ADDRESS");
-        result = string(abi.encodePacked(result, "let SWAP_POOL_GM_ETH_CONTRACT_ADDRESS=", StringsUpgradeable.toHexString(SWAP_POOL_GM_ETH_CONTRACT_ADDRESS), ";"));
-        result = string(abi.encodePacked(result, "let solarisNftContractAddress=", StringsUpgradeable.toHexString(address(this)), ";"));
-        result = string(abi.encodePacked(result, "let TOKEN_ID=", StringsUpgradeable.toString(tokenId), ";"));
+        result = string(abi.encodePacked(result, "let SWAP_POOL_GM_ETH_CONTRACT_ADDRESS='", StringsUpgradeable.toHexString(SWAP_POOL_GM_ETH_CONTRACT_ADDRESS), "';"));
+        result = string(abi.encodePacked(result, "let solarisNftContractAddress='", StringsUpgradeable.toHexString(address(this)), "';"));
+        result = string(abi.encodePacked(result, "let TOKEN_ID='", StringsUpgradeable.toString(tokenId), "';"));
         result = string(abi.encodePacked(result, "</script>"));
     }
 
