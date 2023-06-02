@@ -309,23 +309,19 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         IParameterControl param = IParameterControl(_paramsAddress);
         string memory html = this.tokenHTML(seed, tokenId);
         html = string(abi.encodePacked('data:text/html;base64,', Base64.encode(abi.encodePacked(html))));
-        NFTProjectData.TokenURIContext memory ctx;
-        ctx._animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
-        ctx._baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
-        ctx._baseURI = string(abi.encodePacked(ctx._baseURI, "/",
+
+        string memory _animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
+        string memory _baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
+        _baseURI = string(abi.encodePacked(_baseURI, "/",
             StringsUpgradeable.toHexString(address(this)), "/",
             StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed)));
         result = string(
             abi.encodePacked(
-                'data:application/json;base64,',
-                Base64.encode(abi.encodePacked(
-                    '{"name":"', ctx._name,
-                    '","description": "', Base64.encode(abi.encodePacked(ctx._desc)), '"',
-                    ', "image": "', ctx._baseURI, '&capture=60000"',
-                    ctx._animationURI,
-                    ', "attributes": "', ctx._baseURI, '&capture=0"',
-                    '}'
-                ))
+                '{"name":"","description": ""',
+                ', "image": "', _baseURI, '&capture=60000"',
+                _animationURI,
+                ', "attributes": "', _baseURI, '&capture=0"',
+                '}'
             )
         );
     }
@@ -386,7 +382,7 @@ contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         result = string(abi.encodePacked(result, web3Script()));
         result = string(abi.encodePacked(result, variableScript(seed, tokenId)));
         result = string(abi.encodePacked(result, _script));
-        
+
     }
 
     /** @dev EIP2981 royalties implementation. */
