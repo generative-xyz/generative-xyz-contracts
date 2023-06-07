@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "./interfaces/IBNS.sol";
-import "./interfaces/IStorage.sol";
+import "../interfaces/IBNS.sol";
+import "../interfaces/IBFS.sol";
 
     error InsufficientRegistrationFee();
     error NameAlreadyRegistered();
