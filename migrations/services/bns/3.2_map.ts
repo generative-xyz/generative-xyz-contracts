@@ -17,10 +17,13 @@ import {Bns} from "./bns";
         const args = process.argv.slice(2)
 
         const contract = args[0];
-        const tx = await nft.register(
+        const tokenId = args[1];
+        const to = args[2];
+
+        const tx = await nft.map(
                 contract,
-                args[1],
-                Buffer.from(args[2], "utf-8"),
+                tokenId,
+                to
             )
         ;
         console.log("tx:", tx?.transactionHash, tx?.status);

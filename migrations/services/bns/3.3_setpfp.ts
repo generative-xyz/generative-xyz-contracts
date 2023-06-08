@@ -6,6 +6,11 @@ import {createAlchemyWeb3} from "@alch/alchemy-web3";
 import dayjs = require("dayjs");
 import {Bns} from "./bns";
 
+function getByteArray(filePath: string) {
+    let fileData = fs.readFileSync(filePath);
+    return fileData;
+}
+
 (async () => {
     try {
         if (process.env.NETWORK != "tc_testnet") {
@@ -17,10 +22,15 @@ import {Bns} from "./bns";
         const args = process.argv.slice(2)
 
         const contract = args[0];
-        const tx = await nft.register(
+        const tokenId = args[1];
+        const bytes = getByteArray(args[2]);
+        const fileName = args[3];
+
+        const tx = await nft.setPfp(
                 contract,
-                args[1],
-                Buffer.from(args[2], "utf-8"),
+                tokenId,
+                bytes,
+                fileName,
             )
         ;
         console.log("tx:", tx?.transactionHash, tx?.status);
