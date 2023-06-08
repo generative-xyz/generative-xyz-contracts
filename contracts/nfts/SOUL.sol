@@ -252,17 +252,19 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function transferFrom(address from, address to, uint256 tokenId) public virtual override {
         if (msg.sender == from) {
             // is current owner
-            uint256 balance = _getBalanceToken(msg.sender);
+            /*uint256 balance = _getBalanceToken(msg.sender);
             uint256 threshold = _getTokenThreshold();
-            require(balance >= threshold, "T");
+            require(balance >= threshold, "T");*/
+            require(1 == 0, "T");
         } else {
             // marketplace(contract) or claimer
             if (isContract(msg.sender)) {
-                require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
+                /*require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
                 // check balance GM of current owner
                 uint256 balance = _getBalanceToken(from);
                 uint256 threshold = _getTokenThreshold();
-                require(balance >= threshold, "T_1");
+                require(balance >= threshold, "T_1");*/
+                require(1 == 0, "T_1");
             } else {
                 require(claimable(tokenId), "N_C2");
                 uint256 blockReserve = _getBlockReserve();
@@ -276,17 +278,19 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public virtual override {
         if (msg.sender == from) {
             // is current owner
-            uint256 balance = _getBalanceToken(msg.sender);
+            /*uint256 balance = _getBalanceToken(msg.sender);
             uint256 threshold = _getTokenThreshold();
-            require(balance >= threshold, "T");
+            require(balance >= threshold, "T");*/
+            require(1 == 0, "T");
         } else {
             // marketplace(contract) or claimer
             if (isContract(msg.sender)) {
-                require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
+                /*require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
                 // check balance GM of current owner
                 uint256 balance = _getBalanceToken(from);
                 uint256 threshold = _getTokenThreshold();
-                require(balance >= threshold, "T_1");
+                require(balance >= threshold, "T_1");*/
+                require(1 == 0, "T_1");
             } else {
                 require(claimable(tokenId), "N_C2");
                 uint256 blockReserve = _getBlockReserve();
