@@ -237,12 +237,12 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _burn(uint256 tokenId) internal virtual override {
-        super._burn(tokenId);
-        delete _ownersAndHashSeeds[tokenId]._owner;
+        /*super._burn(tokenId);
+        delete _ownersAndHashSeeds[tokenId]._owner;*/
     }
 
     function _isApprovedOrOwner(address spender, uint256 tokenId) internal view virtual override returns (bool) {
-        address owner = ownerOf(tokenId);
+        /*address owner = ownerOf(tokenId);
         if (spender != owner) {// case approved
             uint256 balance = _getBalanceToken(owner);
             uint256 threshold = _getTokenThreshold();
@@ -250,7 +250,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
                 return false;
             }
         }
-        return super._isApprovedOrOwner(spender, tokenId);
+        return super._isApprovedOrOwner(spender, tokenId);*/
+        return false;
     }
 
     function transferFrom(address from, address to, uint256 tokenId) public virtual override {
