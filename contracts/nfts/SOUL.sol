@@ -157,6 +157,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     function reserve(uint256 tokenId) external payable nonReentrant {
         require(claimable(tokenId), "N_C0");
+        // 1 wallet 1 token
+        require(balanceOf(msg.sender) == 0, "N_C0_2");
 
         uint256 blockReserve = _getBlockReserve();
         uint256 reservation = _reservations[tokenId][msg.sender];
@@ -169,6 +171,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     function claim(uint256 tokenId) external payable nonReentrant {
         require(claimable(tokenId), "N_C1");
+        // 1 wallet 1 token
+        require(balanceOf(msg.sender) == 0, "N_C1_2");
 
         uint256 blockReserve = _getBlockReserve();
         uint256 reservation = _reservations[tokenId][msg.sender];
