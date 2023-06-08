@@ -18,7 +18,7 @@ import "../libs/configs/GenerativeProjectDataConfigs.sol";
 import "../interfaces/IRandomizer.sol";
 import "../services/BFS.sol";
 
-contract Solaris is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable {
+contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable {
 
     event Reserve(address indexed reserver, uint256 indexed tokenId, address indexed owner, uint256 blockNumber);
     event Claim(address indexed reserver, uint256 indexed tokenId, address indexed owner, uint256 blockNumber);
