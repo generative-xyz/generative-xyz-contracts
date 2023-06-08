@@ -3,8 +3,8 @@ import * as dotenv from 'dotenv';
 import {ethers} from "ethers";
 import {GenerativeProject} from "../generativeProject/generativeProject";
 import * as fs from "fs";
-import {Solaris} from "./Solaris";
 import {base64} from "ethers/lib.esm/utils";
+import {Soul} from "./soul";
 
 (async () => {
     try {
@@ -16,7 +16,7 @@ import {base64} from "ethers/lib.esm/utils";
         const contract = args[0];
         const tokenId = args[1];
 
-        const nft = new Solaris(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const nft = new Soul(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         let a: any = {};
         a.getTokenURI = await nft.getTokenURI(contract, tokenId);
         // a._reservations = await nft._reservations(contract, tokenId, process.env.PUBLIC_KEY);

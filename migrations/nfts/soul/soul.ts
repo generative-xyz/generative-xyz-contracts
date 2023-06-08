@@ -4,7 +4,7 @@ import * as path from "path";
 const {ethers, upgrades} = require("hardhat");
 const hardhatConfig = require("../../../hardhat.config");
 
-class Solaris {
+class Soul {
     network: string;
     senderPublicKey: string;
     senderPrivateKey: string;
@@ -26,21 +26,21 @@ class Solaris {
             return;
         }
 
-        const contract = await ethers.getContractFactory("Solaris");
-        console.log("Solaris.deploying ...")
+        const contract = await ethers.getContractFactory("SOUL");
+        console.log("SOUL.deploying ...")
         const proxy = await upgrades.deployProxy(contract, [name, symbol, adminAddress, paramAdd, randomizer, gmAddr], {
             initializer: 'initialize(string, string, address, address, address, address)',
         });
         await proxy.deployed();
-        console.log("Solaris deployed at proxy:", proxy.address);
+        console.log("SOUL deployed at proxy:", proxy.address);
         return proxy.address;
     }
 
     async upgradeContract(proxyAddress: any) {
-        const contractUpdated = await ethers.getContractFactory("Solaris");
-        console.log('Upgrading Solaris... by proxy ' + proxyAddress);
+        const contractUpdated = await ethers.getContractFactory("SOUL");
+        console.log('Upgrading SOUL... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
-        console.log('Solaris upgraded on tx address ' + tx.address);
+        console.log('SOUL upgraded on tx address ' + tx.address);
         return tx;
     }
 
@@ -54,7 +54,7 @@ class Solaris {
         API_URL = hardhatConfig.networks[hardhatConfig.defaultNetwork].url;
 
         // load contract
-        let contract = require(path.resolve("./artifacts/contracts/nfts/Solaris.sol/Solaris.json"));
+        let contract = require(path.resolve("./artifacts/contracts/nfts/SOUL.sol/SOUL.json"));
         const web3 = createAlchemyWeb3(API_URL)
         const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
         return {web3, nftContract};
@@ -442,4 +442,4 @@ class Solaris {
     }
 }
 
-export {Solaris};
+export {Soul};

@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import {Solaris} from "./Solaris";
+import {Soul} from "./soul";
 
 
 (async () => {
@@ -8,7 +8,7 @@ import {Solaris} from "./Solaris";
             console.log("wrong network");
             return;
         }
-        const nft = new Solaris(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const nft = new Soul(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const address = await nft.deployUpgradeable("Solaris", "SOL",
             process.env.PUBLIC_KEY,
             "0xdc913D967D6bD734Cc435cDf139E60a6828030EC",

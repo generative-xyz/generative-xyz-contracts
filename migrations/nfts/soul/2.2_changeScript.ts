@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 import {ethers} from "ethers";
 import * as fs from "fs";
 import {keccak256} from "ethers/lib/utils";
-import {Solaris} from "./Solaris";
+import {Soul} from "./soul";
 
 function getByteArray(filePath: string) {
     return fs.readFileSync(filePath);
@@ -15,7 +15,7 @@ function getByteArray(filePath: string) {
             console.log("wrong network");
             return;
         }
-        const nft = new Solaris(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const nft = new Soul(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const args = process.argv.slice(2)
         const contract = args[0];
         const file = getByteArray(args[1]);
