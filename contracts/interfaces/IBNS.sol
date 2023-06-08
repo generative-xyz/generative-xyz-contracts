@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 // interface for BNS contract 
 interface IBNS {
     event NameRegistered(bytes name, uint256 indexed id);
+    event ResolverUpdated(uint256 indexed id, address indexed addr);
 
     function register(address owner, bytes memory name) external payable returns (uint256);
 

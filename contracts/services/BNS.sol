@@ -34,17 +34,17 @@ contract BNS is IBNS, ERC721Upgradeable, OwnableUpgradeable {
     uint256 constant MAX_PFP_SIZE = 380_000;
 
     // event NameRegistered(bytes name, uint256 indexed id);
+    // event ResolverUpdated(uint256 indexed id, address indexed addr);
+    event PfpUpdated(uint256 indexed id, string filename);
 
     function initialize() public initializer {
         __ERC721_init("Bitcoin Name System", "BNS");
         __Ownable_init();
     }
 
-    function afterUpgrade(uint256 _minPfpFee, address _pfpStorage) public {
-        if (_version == 2) {
-            _version = 3;
-            minPfpFee = _minPfpFee;
-            pfpStorage = IBFS(_pfpStorage);
+    function afterUpgrade() public {
+        if (_version == 4) {
+            _version = 5;
         } else {
             revert AlreadyUpgraded();
         }
@@ -77,7 +77,9 @@ contract BNS is IBNS, ERC721Upgradeable, OwnableUpgradeable {
         registered[name] = true;
         resolver[id] = owner;
         names.push(name);
+
         emit NameRegistered(name, id);
+        emit ResolverUpdated(id, owner);
 
         _tokenIds.increment();
         return id;
@@ -96,6 +98,7 @@ contract BNS is IBNS, ERC721Upgradeable, OwnableUpgradeable {
     function map(uint256 tokenId, address to) public {
         require(msg.sender == ownerOf(tokenId));
         resolver[tokenId] = to;
+        emit ResolverUpdated(tokenId, to);
     }
 
     function setMinRegistrationFee(uint256 fee) public onlyOwner {
@@ -126,13 +129,13 @@ contract BNS is IBNS, ERC721Upgradeable, OwnableUpgradeable {
         if (msg.value < minPfpFee) revert InsufficientRegistrationFee();
 
         string memory filename;
-        // token URI from token ID, appended with filename
         if (bytes(_filename).length > 0) {
             filename = string(abi.encodePacked(tokenURI(tokenId), "/", _filename));
         } else {
             filename = tokenURI(tokenId);
         }
         pfps[tokenId] = filename;
+        emit PfpUpdated(tokenId, filename);
         pfpStorage.store(filename, 0, b);
     }
 
