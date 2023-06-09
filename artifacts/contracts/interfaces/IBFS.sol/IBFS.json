@@ -70,14 +70,19 @@
           "internalType": "address",
           "name": "addr",
           "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "i",
+          "type": "uint256"
         }
       ],
       "name": "filenames",
       "outputs": [
         {
-          "internalType": "string[]",
+          "internalType": "string",
           "name": "",
-          "type": "string[]"
+          "type": "string"
         }
       ],
       "stateMutability": "view",
@@ -158,6 +163,35 @@
         }
       ],
       "name": "load",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        },
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "uri",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "chunkIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "loadWithUri",
       "outputs": [
         {
           "internalType": "bytes",
