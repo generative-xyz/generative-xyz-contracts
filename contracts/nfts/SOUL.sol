@@ -163,8 +163,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _getBlockReserve() internal returns (uint256) {
-        IParameterControl param = IParameterControl(_paramsAddress);
-        uint256 blockReserve = param.getUInt256("GM_RESERVE");
+        uint256 blockReserve = IParameterControl(_paramsAddress).getUInt256("GM_RESERVE");
         if (blockReserve == 0) {
             // ~block in 7 day, 1 block 10 minute
             blockReserve = 60 * 24 * 7 / 10;
@@ -173,13 +172,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _getBalanceToken(address owner) private view returns (uint256) {
-        IERC20Upgradeable brc20TokenGM = IERC20Upgradeable(_brc20Token);
-        return brc20TokenGM.balanceOf(owner);
+        return IERC20Upgradeable(_brc20Token).balanceOf(owner);
     }
 
     function _getTokenThreshold() private view returns (uint256) {
-        IParameterControl param = IParameterControl(_paramsAddress);
-        uint256 threshold = param.getUInt256("GM_THRESHOLD");
+        uint256 threshold = IParameterControl(_paramsAddress).getUInt256("GM_THRESHOLD");
         if (threshold == 0) {
             threshold = 1 * 10 ** 18;
         }
@@ -227,35 +224,53 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     // New solution -> Auction
     function settleAuction(uint256 tokenId) external override nonReentrant {
-        _settleAuction(tokenId);
+        if (msg.sender == ownerOf(tokenId)) {
+            uint256 balance = _getBalanceToken(msg.sender);
+            uint256 threshold = _getTokenThreshold();
+            require(balance >= threshold, "balance GM < threshold");
+        }
+        _settleAuction(tokenId, msg.sender == ownerOf(tokenId));
     }
 
-    function _settleAuction(uint256 tokenId) internal {
+    function _settleAuction(uint256 tokenId, bool tokenOwner) internal {
         AuctionHouse.Auction memory _auction = _auctions[tokenId];
 
         require(_auction.startTime != 0, "Auction hasn't begun");
         require(!_auction.settled, 'Auction has already been settled');
-        require(block.timestamp >= _auction.endTime, "Auction hasn't completed");
+        if (!tokenOwner) {
+            require(block.timestamp >= _auction.endTime, "Auction hasn't completed");
+            _auctions[tokenId].settled = true;
+            _auction.startTime = 0;
 
-        _auctions[tokenId].settled = true;
+            // transfer token for winner
+            if (_auction.bidder != address(0)) {
+                transferFrom(ownerOf(tokenId), _auction.bidder, _auction.tokenId);
+            }
 
-        // transfer token for winner
-        if (_auction.bidder != address(0)) {
-            transferFrom(ownerOf(tokenId), _auction.bidder, _auction.tokenId);
+            // transfer amount to treasury
+            if (_auction.amount > 0) {
+                address GMDAOTreasury = IParameterControl(_paramsAddress).getAddress("SOUL_AUCTION_GM_DAO_Treasury");
+                require(GMDAOTreasury != address(0));
+                IERC20Upgradeable(_auction.erc20Token).transfer(GMDAOTreasury, _auction.amount);
+            }
+
+            emit AuctionSettled(_auction.tokenId, _auction.bidder, _auction.amount);
+        } else {
+            require(block.timestamp < _auction.endTime, "Auction hasn't completed");
+            _auctions[tokenId].settled = true;
+            _auction.startTime = 0;
+
+            // transfer token for last bidder
+            if (_auction.bidder != address(0)) {
+                transferFrom(ownerOf(tokenId), _auction.bidder, _auction.tokenId);
+            }
+            emit AuctionClosed(_auction.tokenId);
         }
-
-        // transfer amount to treasury
-        if (_auction.amount > 0) {
-            address GMDAOTreasury = IParameterControl(_paramsAddress).getAddress("SOUL_AUCTION_GM_DAO_Treasury");
-            require(GMDAOTreasury != address(0));
-            IERC20Upgradeable(_auction.erc20Token).transfer(GMDAOTreasury, _auction.amount);
-        }
-
-        emit AuctionSettled(_auction.tokenId, _auction.bidder, _auction.amount);
     }
 
     function _createAuction(uint256 tokenId) internal {
         require(_exists(tokenId));
+        require(_auctions[tokenId].settled || _auctions[tokenId].tokenId == 0, "Auction has already been settled or 1st Auction of token");
         uint256 startTime = block.timestamp;
         uint256 endTime = startTime + _getBlockReserve();
 
@@ -285,6 +300,10 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function createBid(uint256 tokenId, uint256 amount) external payable override nonReentrant {
+        require(claimable(tokenId), "N_C0");
+        // 1 wallet 1 token
+        require(balanceOf(msg.sender) == 0, "N_C0_2");
+
         AuctionHouse.Auction memory _auction = _auctions[tokenId];
         IERC20Upgradeable erc20 = IERC20Upgradeable(_auction.erc20Token);
 

@@ -9,6 +9,8 @@ interface IAuction {
 
     event AuctionSettled(uint256 indexed nounId, address winner, uint256 amount);
 
+    event AuctionClosed(uint256 indexed nounId);
+
     event AuctionTimeBufferUpdated(uint256 timeBuffer);
 
     event AuctionReservePriceUpdated(uint256 reservePrice);
