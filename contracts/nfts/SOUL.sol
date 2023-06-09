@@ -260,10 +260,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             _auctions[tokenId].settled = true;
             _auction.startTime = 0;
 
-            // transfer token for last bidder
-            if (_auction.bidder != address(0)) {
-                transferFrom(ownerOf(tokenId), _auction.bidder, _auction.tokenId);
+            // transfer amount to last bidder
+            if (_auction.amount > 0) {
+                IERC20Upgradeable(_auction.erc20Token).transfer(_auction.bidder, _auction.amount);
             }
+
             emit AuctionClosed(_auction.tokenId);
         }
     }
@@ -390,10 +391,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
                 require(balance >= threshold, "T_1");*/
                 require(1 == 0, "T_1");
             } else {
-                require(claimable(tokenId), "N_C2");
+                /*require(claimable(tokenId), "N_C2");
                 uint256 blockReserve = _getBlockReserve();
                 uint256 reservation = _reservations[tokenId][msg.sender];
-                require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");
+                require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");*/
+                require(1 == 0, "T_2");
             }
         }
         _transfer(from, to, tokenId);
@@ -416,10 +418,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
                 require(balance >= threshold, "T_1");*/
                 require(1 == 0, "T_1");
             } else {
-                require(claimable(tokenId), "N_C2");
+                /*require(claimable(tokenId), "N_C2");
                 uint256 blockReserve = _getBlockReserve();
                 uint256 reservation = _reservations[tokenId][msg.sender];
-                require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");
+                require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");*/
+                require(1 == 0, "T_2");
             }
         }
         _safeTransfer(from, to, tokenId, data);
