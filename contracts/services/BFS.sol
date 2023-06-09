@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "../interfaces/IBFS.sol";
 
     error FileExists();
     error InvalidURI();
@@ -13,7 +14,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 
 
-contract BFS is Initializable {
+contract BFS is IBFS, Initializable {
     using Counters for Counters.Counter;
     using EnumerableSet for EnumerableSet.AddressSet;
 
@@ -25,7 +26,7 @@ contract BFS is Initializable {
     mapping(address => string[]) public filenames;
     EnumerableSet.AddressSet addresses;
 
-    event FileStored(address indexed addr, string filename, uint256 chunkIndex, uint256 indexed bfsId, string uri);
+    // event FileStored(address indexed addr, string filename, uint256 chunkIndex, uint256 indexed bfsId, string uri);
 
     function initialize() public initializer {
         idCounter.increment();
@@ -105,6 +106,63 @@ contract BFS is Initializable {
         return (data, nextChunk);
     }
 
+    function loadFile(address addr, string memory filename) public view returns (bytes memory) {
+        bytes memory data;
+        bytes memory fullData = new bytes(0);
+
+        uint256 maxInd = chunks[addr][filename];
+        for (uint256 i = 0; i <= maxInd; i++) {
+            data = dataStorage[addr][filename][i];
+            fullData = abi.encodePacked(fullData, data);
+        }
+        return fullData;
+    }
+
+
+    function loadFileWithUri(string memory uri) public view returns (bytes memory) {
+        bytes memory uriBytes = bytes(uri);
+        bytes memory expectedPrefix = bytes(string.concat("bfs://", Strings.toString(block.chainid), "/"));
+        uint256 prefixLen = expectedPrefix.length;
+        if (uriBytes.length < prefixLen + 86) revert InvalidURI();
+        if (uriBytes[prefixLen + 42] != bytes1('/')) revert InvalidURI();
+        if (uriBytes[prefixLen + 86 - 1] != bytes1('/')) revert InvalidURI();
+        for (uint i = 0; i < prefixLen; i++) {
+            if (uriBytes[i] != expectedPrefix[i]) revert InvalidURI();
+        }
+
+        bytes memory contractAddressBytes = new bytes(42);
+        for (uint i = 0; i < 42; i++) {
+            contractAddressBytes[i] = uriBytes[i + prefixLen];
+        }
+        address contractAddress = addressFromHexString(string(contractAddressBytes));
+
+
+        bytes memory addressBytes = new bytes(42);
+        for (uint i = 0; i < 42; i++) {
+            addressBytes[i] = uriBytes[i + prefixLen + 42 + 1];
+        }
+        address addr = addressFromHexString(string(addressBytes));
+
+        bytes memory filenameBytes = new bytes(uriBytes.length - (prefixLen + 86));
+        for (uint i = 0; i < uriBytes.length - (prefixLen + 86); i++) {
+            filenameBytes[i] = uriBytes[i + (prefixLen + 86)];
+        }
+        string memory filename = string(filenameBytes);
+
+        int256 chunkIndex = 0;
+        bytes memory data;
+        bytes memory fullData = new bytes(0);
+
+        while (chunkIndex >= 0) {
+            bytes memory callData = abi.encodeWithSignature("load(address,string,uint256)", addr, filename, uint256(chunkIndex));
+            (bool success, bytes memory returnData) = contractAddress.staticcall(callData);
+            if (!success) revert InvalidBfsResult();
+
+            (data, chunkIndex) = abi.decode(returnData, (bytes, int256));
+            fullData = abi.encodePacked(fullData, data);
+        }
+        return fullData;
+    }
 
     function count(address addr, string memory filename) public view returns (uint256) {
         return chunks[addr][filename];
