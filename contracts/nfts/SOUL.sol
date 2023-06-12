@@ -6,6 +6,7 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/ClonesUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/interfaces/IERC2981Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol";
 
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
@@ -30,7 +31,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     address public _randomizerAddr;
     uint256 private _currentId;
     string public _script;
-    address public _brc20Token;
+    address public _gmToken;// gm
     uint256 public _maxSupply;
     mapping(uint256 => mapping(address => uint256)) public _reservations;
 
@@ -38,7 +39,10 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     address public _bfs;
 
-    mapping(uint256 => AuctionHouse.Auction) _auctions;
+    mapping(uint256 => AuctionHouse.Auction) public _auctions;
+    mapping(uint256 => mapping(address => uint256)) public _bidders;
+
+    address public _signerMint;
 
     function initialize(
         string memory name,
@@ -53,7 +57,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _paramsAddress = paramsAddress;
         _admin = admin;
         _randomizerAddr = randomizerAddr;
-        _brc20Token = gmToken;
+        _gmToken = gmToken;
         _maxSupply = 1000;
 
         __ERC721_init(name, symbol);
@@ -68,6 +72,14 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         // change admin
         if (_admin != newAdm) {
             _admin = newAdm;
+        }
+    }
+
+    function changeSignerMint(address newAdd) external {
+        require(msg.sender == _admin && newAdd != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+
+        if (_signerMint != newAdd) {
+            _signerMint = newAdd;
         }
     }
 
@@ -97,8 +109,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function changeBrc20Token(address newBrc20) external {
         require(msg.sender == _admin && newBrc20 != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
-        if (_brc20Token != newBrc20) {
-            _brc20Token = newBrc20;
+        if (_gmToken != newBrc20) {
+            _gmToken = newBrc20;
         }
     }
 
@@ -119,9 +131,29 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         return keccak256(abi.encode(_ownersAndHashSeeds[tokenId]._seed));
     }
 
-    function mint(address to) public payable nonReentrant returns (uint256 tokenId) {
+    function getMessageHash(address user, uint256 totalGM) public view returns (bytes32) {
+        uint256 chainId;
+        assembly {
+            chainId := chainid()
+        }
+        return keccak256(abi.encode(address(this), chainId, _signerMint, user, _gmToken, totalGM));
+    }
+
+    function _verifySigner(address user, uint256 totalGM, bytes memory signature) internal view returns (address, bytes32) {
+        bytes32 messageHash = getMessageHash(user, totalGM);
+        address signer = ECDSAUpgradeable.recover(ECDSAUpgradeable.toEthSignedMessageHash(messageHash), signature);
+        // GP_NA: Signer Is Not ADmin
+        require(signer == _signerMint, "GP_NA");
+        return (signer, messageHash);
+    }
+
+    function mint(address to, address user, uint256 totalGM, bytes calldata signature) public payable nonReentrant returns (uint256 tokenId) {
         require(_currentId < _maxSupply, Errors.REACH_MAX);
-        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        if (msg.sender != _admin) {
+            // verify sign if not deployer
+            require(msg.sender == user, "GP_IU");
+            _verifySigner(user, totalGM, signature);
+        }
         _currentId++;
         tokenId = _currentId;
         _safeMint(to, tokenId);
@@ -131,10 +163,12 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _setTokenSeed(tokenId, seed);
     }
 
-    function batchMint(address to, uint256 n) external payable returns (uint256[] memory) {
+    function batchMint(address to, uint256 n, bytes calldata signatures) external payable returns (uint256[] memory) {
         uint256[] memory tokenIds = new uint256[](n);
+        require(msg.sender == _admin);
+        // only deployer
         for (uint256 i = 0; i < n; i++) {
-            uint256 tokenId = mint(to);
+            uint256 tokenId = mint(to, address(0), 0, signatures);
             tokenIds[i] = tokenId;
             if (gasleft() < 200000) {break;}
         }
@@ -172,7 +206,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _getBalanceToken(address owner) private view returns (uint256) {
-        return IERC20Upgradeable(_brc20Token).balanceOf(owner);
+        return IERC20Upgradeable(_gmToken).balanceOf(owner);
     }
 
     function _getTokenThreshold() private view returns (uint256) {
@@ -233,39 +267,39 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _settleAuction(uint256 tokenId, bool tokenOwner) internal {
-        AuctionHouse.Auction memory _auction = _auctions[tokenId];
-
-        require(_auction.startTime != 0, "Auction hasn't begun");
-        require(!_auction.settled, 'Auction has already been settled');
+        require(_auctions[tokenId].startTime != 0, "Auction hasn't begun");
+        require(!_auctions[tokenId].settled, 'Auction has already been settled');
         if (!tokenOwner) {
-            require(block.timestamp >= _auction.endTime, "Auction hasn't completed");
+            require(block.timestamp >= _auctions[tokenId].endTime, "Auction hasn't completed");
             _auctions[tokenId].settled = true;
-            _auction.startTime = 0;
+            _auctions[tokenId].startTime = 0;
 
             // transfer token for winner
-            if (_auction.bidder != address(0)) {
-                transferFrom(ownerOf(tokenId), _auction.bidder, _auction.tokenId);
+            if (_auctions[tokenId].bidder != address(0)) {
+                transferFrom(ownerOf(tokenId), _auctions[tokenId].bidder, _auctions[tokenId].tokenId);
             }
 
             // transfer amount to treasury
-            if (_auction.amount > 0) {
+            if (_auctions[tokenId].amount > 0) {
                 address GMDAOTreasury = IParameterControl(_paramsAddress).getAddress("SOUL_AUCTION_GM_DAO_Treasury");
                 require(GMDAOTreasury != address(0));
-                IERC20Upgradeable(_auction.erc20Token).transfer(GMDAOTreasury, _auction.amount);
+                // transfer 90%
+                IERC20Upgradeable(_auctions[tokenId].erc20Token).transfer(GMDAOTreasury, _auctions[tokenId].amount * 9000 / 10000);
+                _bidders[tokenId][_auctions[tokenId].bidder] = 0;
             }
 
-            emit AuctionSettled(_auction.tokenId, _auction.bidder, _auction.amount);
+            emit AuctionSettled(_auctions[tokenId].tokenId, _auctions[tokenId].bidder, _auctions[tokenId].amount);
         } else {
-            require(block.timestamp < _auction.endTime, "Auction hasn't completed");
+            require(block.timestamp < _auctions[tokenId].endTime, "Auction hasn't completed");
             _auctions[tokenId].settled = true;
-            _auction.startTime = 0;
+            _auctions[tokenId].startTime = 0;
 
             // transfer amount to last bidder
-            if (_auction.amount > 0) {
-                IERC20Upgradeable(_auction.erc20Token).transfer(_auction.bidder, _auction.amount);
+            if (_auctions[tokenId].amount > 0) {
+                IERC20Upgradeable(_auctions[tokenId].erc20Token).transfer(_auctions[tokenId].bidder, _auctions[tokenId].amount);
             }
 
-            emit AuctionClosed(_auction.tokenId);
+            emit AuctionClosed(_auctions[tokenId].tokenId);
         }
     }
 
@@ -276,18 +310,17 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         uint256 endTime = startTime + _getBlockReserve();
 
         IParameterControl p = IParameterControl(_paramsAddress);
-        AuctionHouse.Auction memory auction = AuctionHouse.Auction({
-        tokenId : tokenId,
-        erc20Token : p.getAddress("SOUL_AUCTION_ERC20_TOKEN"),
-        amount : 0,
-        startTime : startTime,
-        endTime : endTime,
-        bidder : payable(0),
-        settled : false,
-        timeBuffer : p.getUInt256("SOUL_AUCTION_TIME_BUFFER"),
-        reservePrice : p.getUInt256("SOUL_AUCTION_RESERVE_PRICE"),
-        minBidIncrementPercentage : p.getUInt256("SOUL_AUCTION_MIN_BID_INCREASE_PERCENT")
-        });
+        AuctionHouse.Auction memory auction;
+        auction.tokenId = tokenId;
+        auction.erc20Token = p.getAddress("SOUL_AUCTION_ERC20_TOKEN");
+        auction.amount = 0;
+        auction.startTime = startTime;
+        auction.endTime = endTime;
+        auction.bidder = payable(msg.sender);
+        auction.settled = false;
+        auction.timeBuffer = p.getUInt256("SOUL_AUCTION_TIME_BUFFER");
+        auction.reservePrice = p.getUInt256("SOUL_AUCTION_RESERVE_PRICE");
+        auction.minBidIncrementPercentage = p.getUInt256("SOUL_AUCTION_MIN_BID_INCREASE_PERCENT");
         _auctions[tokenId] = auction;
 
         emit AuctionCreated(tokenId, startTime, endTime);
@@ -305,41 +338,53 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         // 1 wallet 1 token
         require(balanceOf(msg.sender) == 0, "N_C0_2");
 
-        AuctionHouse.Auction memory _auction = _auctions[tokenId];
-        IERC20Upgradeable erc20 = IERC20Upgradeable(_auction.erc20Token);
+        IERC20Upgradeable erc20 = IERC20Upgradeable(_auctions[tokenId].erc20Token);
 
-        require(_auction.tokenId == tokenId, 'not up for auction');
-        require(block.timestamp < _auction.endTime, 'Auction expired');
+        uint256 currentAmount = _bidders[tokenId][msg.sender];
+        uint256 newAmount = amount + currentAmount;
+        require(_auctions[tokenId].tokenId == tokenId, 'not up for auction');
+        require(block.timestamp < _auctions[tokenId].endTime, 'Auction expired');
         require(erc20.allowance(msg.sender, address(this)) >= amount, "not enough allow erc20 token");
         require(erc20.balanceOf(msg.sender) >= amount, "not enough erc20 token");
-        require(amount >= _auction.reservePrice, 'Must send at least reservePrice');
+        require(newAmount >= _auctions[tokenId].reservePrice, 'Must send at least reservePrice');
         require(
-            amount >= _auction.amount + ((_auction.amount * _auction.minBidIncrementPercentage) / 100),
+            newAmount >= _auctions[tokenId].amount + ((_auctions[tokenId].amount * _auctions[tokenId].minBidIncrementPercentage) / 100),
             'Must send more than last bid by minBidIncrementPercentage amount'
         );
+        // transfer amount to this contract
         require(erc20.transferFrom(msg.sender, address(this), amount), "can not get erc20 from bidder");
 
-        address payable lastBidder = _auction.bidder;
-
-        // Refund the last bidder, if applicable
+        // DEPRECATED - Refund the last bidder, if applicable
+        /*address payable lastBidder = _auction.bidder;
         if (lastBidder != address(0)) {
             erc20.transfer(lastBidder, _auction.amount);
-        }
+        }*/
+        // => store list bidder with new amount
+        _bidders[tokenId][msg.sender] = newAmount;
 
-        _auctions[tokenId].amount = amount;
+        // set new winner(the current highest bid)
+        _auctions[tokenId].amount = newAmount;
         _auctions[tokenId].bidder = payable(msg.sender);
 
         // Extend the auction if the bid was received within `timeBuffer` of the auction end time
-        bool extended = _auction.endTime - block.timestamp < _auction.timeBuffer;
+        bool extended = _auctions[tokenId].endTime - block.timestamp < _auctions[tokenId].timeBuffer;
         if (extended) {
-            _auctions[tokenId].endTime = _auction.endTime = block.timestamp + _auction.timeBuffer;
+            _auctions[tokenId].endTime = _auctions[tokenId].endTime = block.timestamp + _auctions[tokenId].timeBuffer;
         }
 
-        emit AuctionBid(_auction.tokenId, msg.sender, msg.value, extended);
+        emit AuctionBid(_auctions[tokenId].tokenId, msg.sender, msg.value, extended);
 
         if (extended) {
-            emit AuctionExtended(_auction.tokenId, _auction.endTime);
+            emit AuctionExtended(_auctions[tokenId].tokenId, _auctions[tokenId].endTime);
         }
+    }
+
+    function claimBid(uint256 tokenId) external override nonReentrant {
+        require(_auctions[tokenId].settled);
+        require(_auctions[tokenId].bidder != msg.sender);
+        require(_bidders[tokenId][msg.sender] > 0);
+        IERC20Upgradeable(_auctions[tokenId].erc20Token).transfer(msg.sender, _bidders[tokenId][msg.sender]);
+        emit AuctionClaimBid(tokenId, msg.sender, _bidders[tokenId][msg.sender]);
     }
 
     /* @Override on ERC-721*/
@@ -498,7 +543,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function variableScript(bytes32 seed, uint256 tokenId) public view returns (string memory result) {
         result = "<script id='vars'>";
         result = string(abi.encodePacked(result, "let seed='", StringsUtils.toHex(seed), "';"));
-        result = string(abi.encodePacked(result, "let GM_CONTRACT_ADDRESS='", StringsUpgradeable.toHexString(_brc20Token), "';"));
+        result = string(abi.encodePacked(result, "let GM_CONTRACT_ADDRESS='", StringsUpgradeable.toHexString(_gmToken), "';"));
         IParameterControl param = IParameterControl(_paramsAddress);
         address SWAP_POOL_GM_ETH_CONTRACT_ADDRESS = param.getAddress("SWAP_POOL_GM_ETH_CONTRACT_ADDRESS");
         result = string(abi.encodePacked(result, "let SWAP_POOL_GM_ETH_CONTRACT_ADDRESS='", StringsUpgradeable.toHexString(SWAP_POOL_GM_ETH_CONTRACT_ADDRESS), "';"));
