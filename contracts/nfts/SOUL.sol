@@ -303,6 +303,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         require(claimable(tokenId), "N_C0");
         // 1 wallet 1 token
         require(balanceOf(msg.sender) == 0, "N_C0_2");
+        require(block.number - _mintAt[tokenId] > _getBlockReserve(), "N_C0_3");
         _createAuction(tokenId);
     }
 
