@@ -11,9 +11,11 @@ import {Soul} from "./soul";
         const nft = new Soul(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const address = await nft.deployUpgradeable("Solaris", "SOL",
             process.env.PUBLIC_KEY,
-            "0xdc913D967D6bD734Cc435cDf139E60a6828030EC",
-            "0xaA320251332e77620317080C9464df9F33291E81",
-            "0xACd7aeAe6B4e8B7EF7fc87f0d0F0824DBa9f9927");
+            "0x979aC806367604e13A921c72b95023dA1889a6Fd",
+            "0x039489F7465DdCfd54bE18907790873269Dc7c55",
+            "0x9Aaf0539d2261bB0788Ed22CEE50C8a0219E99e4",
+            "0xF75Cc7C8ff32Fe64a3AF00Ad45B8eca3A690a605",
+            process.env.PUBLIC_KEY);
         console.log("%s Solaris address: %s", process.env.NETWORK, address);
     } catch (e) {
         // Deal with the fact the chain failed

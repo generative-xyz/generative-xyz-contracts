@@ -51,7 +51,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         address paramsAddress,
         address randomizerAddr,
         address gmToken,
-        address bfs
+        address bfs,
+        address signerMint
     ) initializer public {
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(paramsAddress != Errors.ZERO_ADDR, Errors.INV_ADD);
@@ -61,6 +62,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _gmToken = gmToken;
         _maxSupply = 1000;
         _bfs = bfs;
+        _signerMint = signerMint;
 
         __ERC721_init(name, symbol);
         __ReentrancyGuard_init();

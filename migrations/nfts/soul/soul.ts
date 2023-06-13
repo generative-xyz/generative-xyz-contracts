@@ -19,7 +19,9 @@ class Soul {
                             adminAddress: any,
                             paramAdd: any,
                             randomizer: any,
-                            gmAddr: any
+                            gmAddr: any,
+                            bfs: any,
+                            signerMint: any,
     ) {
         if (this.network == "local") {
             console.log("not run local");
@@ -28,8 +30,8 @@ class Soul {
 
         const contract = await ethers.getContractFactory("SOUL");
         console.log("SOUL.deploying ...")
-        const proxy = await upgrades.deployProxy(contract, [name, symbol, adminAddress, paramAdd, randomizer, gmAddr], {
-            initializer: 'initialize(string, string, address, address, address, address)',
+        const proxy = await upgrades.deployProxy(contract, [name, symbol, adminAddress, paramAdd, randomizer, gmAddr, bfs, signerMint], {
+            initializer: 'initialize(string, string, address, address, address, address, address, address)',
         });
         await proxy.deployed();
         console.log("SOUL deployed at proxy:", proxy.address);
