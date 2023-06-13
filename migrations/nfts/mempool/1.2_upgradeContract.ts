@@ -1,4 +1,4 @@
-import {Soul} from "./soul";
+import {Mempool} from "./mempool";
 
 (async () => {
     try {
@@ -7,7 +7,7 @@ import {Soul} from "./soul";
             return;
         }
         const args = process.argv.slice(2);
-        const nft = new Soul(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
+        const nft = new Mempool(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         const address = await nft.upgradeContract(args[0]);
         console.log({address});
     } catch (e) {

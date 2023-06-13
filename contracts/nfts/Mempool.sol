@@ -149,9 +149,17 @@ contract Mempool is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         );
     }
 
+    function variableScript(bytes32 seed, uint256 tokenId) public view returns (string memory result) {
+        result = "<script id='vars'>";
+        result = string(abi.encodePacked(result, "let seed='", StringsUtils.toHex(seed), "';"));
+        result = string(abi.encodePacked(result, "let TOKEN_ID='", StringsUpgradeable.toString(tokenId), "';"));
+        result = string(abi.encodePacked(result, "</script>"));
+    }
+
     function tokenHTML(bytes32 seed, uint256 tokenId) external view returns (string memory result) {
         result = "<html><head>";
         result = string(abi.encodePacked(result, p5jsScript()));
+        result = string(abi.encodePacked(result, variableScript(seed, tokenId)));
         result = string(abi.encodePacked(result, _script));
     }
 
