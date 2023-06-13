@@ -46,7 +46,7 @@ contract Mempool is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         _paramsAddress = paramsAddress;
         _admin = admin;
         _randomizerAddr = randomizerAddr;
-        _maxSupply = 10;
+        _maxSupply = 69;
         _bfs = bfs;
 
         __ERC721_init(name, symbol);
@@ -106,7 +106,7 @@ contract Mempool is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
 
     function mint(address to) public payable nonReentrant returns (uint256 tokenId) {
         require(_currentId < _maxSupply, Errors.REACH_MAX);
-        require(msg.sender == _admin);
+        //        require(msg.sender == _admin);
         _currentId++;
         tokenId = _currentId;
         _safeMint(to, tokenId);
