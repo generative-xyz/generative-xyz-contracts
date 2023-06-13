@@ -18,13 +18,14 @@ import {Soul} from "./soul";
 
         const nft = new Soul(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         let a: any = {};
-        a.getTokenURI = await nft.getTokenURI(contract, tokenId);
+        // a.getTokenURI = await nft.getTokenURI(contract, tokenId);
+        // fs.writeFileSync('./index.json', a.getTokenURI);
         // a._reservations = await nft._reservations(contract, tokenId, process.env.PUBLIC_KEY);
         // a.p5jsScript = await nft.p5jsScript(contract);
         // a.web3Script = await nft.web3Script(contract);
         // a._script = await nft._script(contract);
-        fs.writeFileSync('./index.json', a.getTokenURI);
-        /*a.tokenIdToHash = await nft.tokenIdToHash(contract, tokenId)
+
+        a.tokenIdToHash = await nft.tokenIdToHash(contract, tokenId)
         a.tokenHTML = await nft.tokenHTML(contract, a.tokenIdToHash, tokenId);
         if (a.tokenHTML) {
             try {
@@ -33,7 +34,7 @@ import {Soul} from "./soul";
             } catch (err) {
                 console.error(err);
             }
-        }*/
+        }
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
