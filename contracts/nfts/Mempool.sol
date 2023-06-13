@@ -141,9 +141,9 @@ contract Mempool is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         result = string(
             abi.encodePacked(
                 '{"name":"","description": ""',
-                ', "image": "', _baseURI, '&capture=60000"',
+                ', "image": ""',
                 _animationURI,
-                ', "attributes": "', _baseURI, '&capture=0"',
+                ', "attributes": ""',
                 '}'
             )
         );
