@@ -31,9 +31,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     address public _randomizerAddr;
     uint256 private _currentId;
     string public _script;
-    address public _gmToken;// gm
+    address public _gmToken;
     uint256 public _maxSupply;
-    mapping(uint256 => mapping(address => uint256)) public _reservations;
 
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
     mapping(uint256 => uint256) public _mintAt;
@@ -230,37 +229,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         return (size > 0);
     }
 
-    // Old solution for orphan tokenid: reserve and claim
-    /*function reserve(uint256 tokenId) external payable nonReentrant {
-        require(claimable(tokenId), "N_C0");
-        // 1 wallet 1 token
-        require(balanceOf(msg.sender) == 0, "N_C0_2");
-
-        uint256 blockReserve = _getBlockReserve();
-        uint256 reservation = _reservations[tokenId][msg.sender];
-        require(reservation == 0 || block.number - reservation >= blockReserve, "N_C0_1");
-
-        _reservations[tokenId][msg.sender] = block.number;
-
-        emit Reserve(msg.sender, tokenId, ownerOf(tokenId), block.number);
-    }*/
-    /*function claim(uint256 tokenId) external payable nonReentrant {
-        require(claimable(tokenId), "N_C1");
-        // 1 wallet 1 token
-        require(balanceOf(msg.sender) == 0, "N_C1_2");
-
-        uint256 blockReserve = _getBlockReserve();
-        uint256 reservation = _reservations[tokenId][msg.sender];
-        require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");
-
-        address owner = ownerOf(tokenId);
-        _transfer(owner, msg.sender, tokenId);
-
-        delete _reservations[tokenId][msg.sender];
-
-        emit Claim(msg.sender, tokenId, ownerOf(tokenId), block.number);
-    }*/
-
     // New solution -> Auction
     function settleAuction(uint256 tokenId) external override nonReentrant {
         if (msg.sender == ownerOf(tokenId)) {
@@ -427,25 +395,15 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function transferFrom(address from, address to, uint256 tokenId) public virtual override {
         if (msg.sender == from) {
             // is current owner
-            /*uint256 balance = _getBalanceToken(msg.sender);
-            uint256 threshold = _getTokenThreshold();
-            require(balance >= threshold, "T");*/
             require(1 == 0, "T");
         } else {
             // marketplace(contract) or claimer
             if (_isContract(msg.sender)) {
-                /*require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
-                // check balance GM of current owner
-                uint256 balance = _getBalanceToken(from);
-                uint256 threshold = _getTokenThreshold();
-                require(balance >= threshold, "T_1");*/
                 require(1 == 0, "T_1");
             } else {
-                /*require(claimable(tokenId), "N_C2");
-                uint256 blockReserve = _getBlockReserve();
-                uint256 reservation = _reservations[tokenId][msg.sender];
-                require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");*/
-                require(1 == 0, "T_2");
+                // require(1 == 0, "T_2");
+                require(_auctions[tokenId].settled);
+                require(_auctions[tokenId].bidder == to);
             }
         }
         _transfer(from, to, tokenId);
@@ -454,25 +412,15 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public virtual override {
         if (msg.sender == from) {
             // is current owner
-            /*uint256 balance = _getBalanceToken(msg.sender);
-            uint256 threshold = _getTokenThreshold();
-            require(balance >= threshold, "T");*/
             require(1 == 0, "T");
         } else {
             // marketplace(contract) or claimer
             if (_isContract(msg.sender)) {
-                /*require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner or approved");
-                // check balance GM of current owner
-                uint256 balance = _getBalanceToken(from);
-                uint256 threshold = _getTokenThreshold();
-                require(balance >= threshold, "T_1");*/
                 require(1 == 0, "T_1");
             } else {
-                /*require(claimable(tokenId), "N_C2");
-                uint256 blockReserve = _getBlockReserve();
-                uint256 reservation = _reservations[tokenId][msg.sender];
-                require(reservation > 0 && block.number - reservation >= blockReserve, "N_C1_1");*/
-                require(1 == 0, "T_2");
+                //require(1 == 0, "T_2");
+                require(_auctions[tokenId].settled);
+                require(_auctions[tokenId].bidder == to);
             }
         }
         _safeTransfer(from, to, tokenId, data);
