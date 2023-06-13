@@ -354,6 +354,27 @@ class Soul {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
+    async changeParamAddr(contractAddress: any, newAddr: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.changeParamAddr(newAddr)
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
     async changeBfs(contractAddress: any, newAddr: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
