@@ -104,7 +104,7 @@ contract Mempool is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
         return keccak256(abi.encode(_ownersAndHashSeeds[tokenId]._seed));
     }
 
-    function mint(address to, address user, uint256 totalGM, bytes calldata signature) public payable nonReentrant returns (uint256 tokenId) {
+    function mint(address to) public payable nonReentrant returns (uint256 tokenId) {
         require(_currentId < _maxSupply, Errors.REACH_MAX);
         require(msg.sender == _admin);
         _currentId++;
