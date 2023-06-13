@@ -173,7 +173,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         for (uint256 i = 0; i < n; i++) {
             uint256 tokenId = mint(to, address(0), 0, signatures);
             tokenIds[i] = tokenId;
-            _mintAt[tokenId] = block.number;
             if (gasleft() < 200000) {break;}
         }
         return tokenIds;
