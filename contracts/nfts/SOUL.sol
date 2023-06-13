@@ -36,6 +36,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     mapping(uint256 => mapping(address => uint256)) public _reservations;
 
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
+    mapping(uint256 => uint256) public _mintAt;
 
     address public _bfs;
 
@@ -50,7 +51,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         address admin,
         address paramsAddress,
         address randomizerAddr,
-        address gmToken
+        address gmToken,
+        address bfs
     ) initializer public {
         require(admin != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(paramsAddress != Errors.ZERO_ADDR, Errors.INV_ADD);
@@ -59,6 +61,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _randomizerAddr = randomizerAddr;
         _gmToken = gmToken;
         _maxSupply = 1000;
+        _bfs = bfs;
 
         __ERC721_init(name, symbol);
         __ReentrancyGuard_init();
@@ -161,6 +164,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         IRandomizer random = IRandomizer(_randomizerAddr);
         bytes32 seed = random.generateTokenHash(tokenId);
         _setTokenSeed(tokenId, seed);
+        _mintAt[tokenId] = block.number;
     }
 
     function batchMint(address to, uint256 n, bytes calldata signatures) external payable returns (uint256[] memory) {
@@ -170,6 +174,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         for (uint256 i = 0; i < n; i++) {
             uint256 tokenId = mint(to, address(0), 0, signatures);
             tokenIds[i] = tokenId;
+            _mintAt[tokenId] = block.number;
             if (gasleft() < 200000) {break;}
         }
         return tokenIds;
