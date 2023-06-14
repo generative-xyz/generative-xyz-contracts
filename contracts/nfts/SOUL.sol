@@ -300,6 +300,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         AuctionHouse.Auction memory auction;
         auction.tokenId = tokenId;
         auction.erc20Token = p.getAddress("SOUL_AUCTION_ERC20_TOKEN");
+        if (auction.erc20Token == address(0)) {
+            auction.erc20Token = _gmToken;
+        }
         auction.amount = 0;
         auction.startTime = startTime;
         auction.endTime = endTime;
