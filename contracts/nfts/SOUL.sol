@@ -201,8 +201,15 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         if (block.number - _mintAt[tokenId] <= _getBlockReserve()) {
             return false;
         }
-        if (ownerOf(tokenId) == _admin || ownerOf(tokenId) == address(this)) {
+        if (ownerOf(tokenId) == _admin) {
             return false;
+        }
+        if (ownerOf(tokenId) == address(this)) {
+            // orphan token
+            if (_auctions[tokenId].settled) {
+                // auction is settled
+                return true;
+            }
         }
         // check gm balance
         // by threshold on config
