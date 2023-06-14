@@ -347,7 +347,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             _auctions[tokenId].endTime = _auctions[tokenId].endTime = block.timestamp + _auctions[tokenId].timeBuffer;
         }
 
-        emit AuctionBid(_auctions[tokenId].tokenId, msg.sender, msg.value, extended);
+        emit AuctionBid(_auctions[tokenId].tokenId, msg.sender, amount, extended);
 
         if (extended) {
             emit AuctionExtended(_auctions[tokenId].tokenId, _auctions[tokenId].endTime);
