@@ -294,7 +294,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         auction.amount = 0;
         auction.startTime = startTime;
         auction.endTime = endTime;
-        auction.bidder = payable(msg.sender);
+        auction.bidder = payable(address(0));
         auction.settled = false;
         auction.timeBuffer = p.getUInt256("SOUL_AUCTION_TIME_BUFFER");
         auction.reservePrice = p.getUInt256("SOUL_AUCTION_RESERVE_PRICE");
@@ -302,7 +302,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _auctions[tokenId] = auction;
 
         // transfer token to this contract as orphan token
-        _transfer(ownerOf(tokenId), address(this), tokenId);
+        if (ownerOf(tokenId) != address(this)) {
+            _transfer(ownerOf(tokenId), address(this), tokenId);
+        }
 
         emit AuctionCreated(tokenId, startTime, endTime);
     }
@@ -336,11 +338,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         // transfer amount to this contract
         require(erc20.transferFrom(msg.sender, address(this), amount), "can not get erc20 from bidder");
 
-        // DEPRECATED - Refund the last bidder, if applicable
-        /*address payable lastBidder = _auction.bidder;
-        if (lastBidder != address(0)) {
-            erc20.transfer(lastBidder, _auction.amount);
-        }*/
         // => store list bidder with new amount
         _bidders[tokenId][msg.sender] = newAmount;
 
