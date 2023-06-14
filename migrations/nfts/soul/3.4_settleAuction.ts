@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv';
 
 import {ethers} from "ethers";
-import {GenerativeProject} from "../generativeProject/generativeProject";
 import {Soul} from "./soul";
 
 (async () => {
@@ -15,7 +14,7 @@ import {Soul} from "./soul";
         const tokenId = args[1];
 
         const nft = new Soul(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        const tx = await nft.reserve(contract, tokenId, 0);
+        const tx = await nft.settleAuction(contract, tokenId, 0);
         console.log("tx: ", tx?.transactionHash, tx?.status);
     } catch (e) {
         // Deal with the fact the chain failed

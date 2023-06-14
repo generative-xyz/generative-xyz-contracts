@@ -333,11 +333,11 @@ class Soul {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async reserve(contractAddress: any, tokenId: any, gas: any) {
+    async createAuction(contractAddress: any, tokenId: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.reserve(tokenId);
+        const fun = temp?.nftContract.methods.createAuction(tokenId);
         //the transaction
         const tx = {
             from: this.senderPublicKey,
@@ -354,11 +354,11 @@ class Soul {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async claim(contractAddress: any, tokenId: any, gas: any) {
+    async settleAuction(contractAddress: any, tokenId: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.claim(tokenId);
+        const fun = temp?.nftContract.methods.settleAuction(tokenId);
         //the transaction
         const tx = {
             from: this.senderPublicKey,

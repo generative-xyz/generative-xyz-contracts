@@ -254,49 +254,31 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     // New solution -> Auction
     function settleAuction(uint256 tokenId) external override nonReentrant {
-        if (msg.sender == ownerOf(tokenId)) {
-            uint256 balance = _getBalanceToken(msg.sender);
-            uint256 threshold = _getTokenThreshold();
-            require(balance >= threshold, "balance GM < threshold");
-        }
         _settleAuction(tokenId, msg.sender == ownerOf(tokenId));
     }
 
     function _settleAuction(uint256 tokenId, bool tokenOwner) internal {
         require(_auctions[tokenId].startTime != 0, "Auction hasn't begun");
         require(!_auctions[tokenId].settled, 'Auction has already been settled');
-        if (!tokenOwner) {
-            require(block.timestamp >= _auctions[tokenId].endTime, "Auction hasn't completed");
-            _auctions[tokenId].settled = true;
-            _auctions[tokenId].startTime = 0;
+        require(block.number >= _auctions[tokenId].endTime, "Auction hasn't completed");
+        _auctions[tokenId].settled = true;
+        _auctions[tokenId].startTime = 0;
 
-            // transfer token for winner
-            if (_auctions[tokenId].bidder != address(0)) {
-                _transfer(address(this), _auctions[tokenId].bidder, _auctions[tokenId].tokenId);
-            }
-
-            // transfer amount to treasury
-            if (_auctions[tokenId].amount > 0) {
-                address GMDAOTreasury = IParameterControl(_paramsAddress).getAddress("SOUL_AUCTION_GM_DAO_Treasury");
-                require(GMDAOTreasury != address(0));
-                // transfer 90%
-                IERC20Upgradeable(_auctions[tokenId].erc20Token).transfer(GMDAOTreasury, _auctions[tokenId].amount * 9000 / 10000);
-                _bidders[tokenId][_auctions[tokenId].bidder] = 0;
-            }
-
-            emit AuctionSettled(_auctions[tokenId].tokenId, _auctions[tokenId].bidder, _auctions[tokenId].amount);
-        } else {
-            require(block.timestamp < _auctions[tokenId].endTime, "Auction hasn't completed");
-            _auctions[tokenId].settled = true;
-            _auctions[tokenId].startTime = 0;
-
-            // transfer amount to last bidder
-            if (_auctions[tokenId].amount > 0) {
-                IERC20Upgradeable(_auctions[tokenId].erc20Token).transfer(_auctions[tokenId].bidder, _auctions[tokenId].amount);
-            }
-
-            emit AuctionClosed(_auctions[tokenId].tokenId);
+        // transfer token for winner
+        if (_auctions[tokenId].bidder != address(0)) {
+            _transfer(address(this), _auctions[tokenId].bidder, _auctions[tokenId].tokenId);
         }
+
+        // transfer amount to treasury
+        if (_auctions[tokenId].amount > 0) {
+            address GMDAOTreasury = IParameterControl(_paramsAddress).getAddress("SOUL_AUCTION_GM_DAO_Treasury");
+            require(GMDAOTreasury != address(0));
+            // transfer 90%
+            IERC20Upgradeable(_auctions[tokenId].erc20Token).transfer(GMDAOTreasury, _auctions[tokenId].amount * 9000 / 10000);
+            _bidders[tokenId][_auctions[tokenId].bidder] = 0;
+        }
+
+        emit AuctionSettled(_auctions[tokenId].tokenId, _auctions[tokenId].bidder, _auctions[tokenId].amount);
     }
 
     function _createAuction(uint256 tokenId) internal {
@@ -343,7 +325,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         uint256 currentAmount = _bidders[tokenId][msg.sender];
         uint256 newAmount = amount + currentAmount;
         require(_auctions[tokenId].tokenId == tokenId, 'not up for auction');
-        require(block.timestamp < _auctions[tokenId].endTime, 'Auction expired');
+        require(block.number < _auctions[tokenId].endTime, 'Auction expired');
         require(erc20.allowance(msg.sender, address(this)) >= amount, "not enough allow erc20 token");
         require(erc20.balanceOf(msg.sender) >= amount, "not enough erc20 token");
         require(newAmount >= _auctions[tokenId].reservePrice, 'Must send at least reservePrice');
@@ -367,9 +349,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _auctions[tokenId].bidder = payable(msg.sender);
 
         // Extend the auction if the bid was received within `timeBuffer` of the auction end time
-        bool extended = _auctions[tokenId].endTime - block.timestamp < _auctions[tokenId].timeBuffer;
+        bool extended = _auctions[tokenId].endTime - block.number < _auctions[tokenId].timeBuffer;
         if (extended) {
-            _auctions[tokenId].endTime = _auctions[tokenId].endTime = block.timestamp + _auctions[tokenId].timeBuffer;
+            _auctions[tokenId].endTime = _auctions[tokenId].endTime = block.number + _auctions[tokenId].timeBuffer;
         }
 
         emit AuctionBid(_auctions[tokenId].tokenId, msg.sender, amount, extended);
@@ -421,41 +403,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     function transferFrom(address from, address to, uint256 tokenId) public virtual override {
         require(1 == 0);
-        if (msg.sender == from) {
-            // is current owner
-            if (msg.sender != _admin) {
-                require(1 == 0, "T");
-            }
-        } else {
-            // marketplace(contract) or claimer
-            if (_isContract(msg.sender)) {
-                require(1 == 0, "T_1");
-            } else {
-                require(1 == 0, "T_2");
-                /*require(_auctions[tokenId].settled);
-                require(_auctions[tokenId].bidder == to);*/
-            }
-        }
         _transfer(from, to, tokenId);
     }
 
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public virtual override {
         require(1 == 0);
-        if (msg.sender == from) {
-            // is current owner
-            if (msg.sender != _admin) {
-                require(1 == 0, "T");
-            }
-        } else {
-            // marketplace(contract) or claimer
-            if (_isContract(msg.sender)) {
-                require(1 == 0, "T_1");
-            } else {
-                require(1 == 0, "T_2");
-                /*require(_auctions[tokenId].settled);
-                require(_auctions[tokenId].bidder == to);*/
-            }
-        }
         _safeTransfer(from, to, tokenId, data);
     }
 
