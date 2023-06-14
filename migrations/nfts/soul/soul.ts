@@ -276,6 +276,20 @@ class Soul {
 
         return await temp?.nftContract.methods.available(tokenId).call(tx);
     }
+    
+    async biddable(contractAddress: any, tokenId: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.biddable(tokenId).call(tx);
+    }
 
     async mint(contractAddress: any, to: any, totalGM: any, signature: any, gas: any) {
         let temp = this.getContract(contractAddress);

@@ -302,7 +302,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function _createAuction(uint256 tokenId) internal {
         require(_exists(tokenId));
         require(_auctions[tokenId].settled || _auctions[tokenId].tokenId == 0, "Auction has already been settled or 1st Auction of token");
-        uint256 startTime = block.timestamp;
+        uint256 startTime = block.number;
         uint256 endTime = startTime + _getBlockReserve();
 
         IParameterControl p = IParameterControl(_paramsAddress);
@@ -328,7 +328,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function createAuction(uint256 tokenId) external nonReentrant {
         require(available(tokenId), "N_C0");
         // 1 wallet 1 token
-        require(balanceOf(msg.sender) == 0, "N_C0_2");
+        // require(balanceOf(msg.sender) == 0, "N_C0_2");
         require(block.number - _mintAt[tokenId] > _getBlockReserve(), "N_C0_3");
         _createAuction(tokenId);
     }
@@ -420,6 +420,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function transferFrom(address from, address to, uint256 tokenId) public virtual override {
+        require(1 == 0);
         if (msg.sender == from) {
             // is current owner
             if (msg.sender != _admin) {
@@ -439,6 +440,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public virtual override {
+        require(1 == 0);
         if (msg.sender == from) {
             // is current owner
             if (msg.sender != _admin) {
