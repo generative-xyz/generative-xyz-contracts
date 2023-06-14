@@ -249,6 +249,20 @@ class Soul {
         return await temp?.nftContract.methods._script().call(tx);
     }
 
+    async _signerMint(contractAddress: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._signerMint().call(tx);
+    }
+
     async mint(contractAddress: any, to: any, user: any, totalGM: any, signature: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
@@ -396,6 +410,27 @@ class Soul {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
+    async changeSignerMint(contractAddress: any, newAddr: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.changeSignerMint(newAddr)
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
     async changeScript(contractAddress: any, script: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
@@ -437,6 +472,20 @@ class Soul {
         }
 
         return await this.signedAndSendTx(temp?.web3, tx);
+    }
+    
+    async getMessageHash(contractAddress: any, user: any, totalGM: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods.getMessageHash(user, totalGM).call(tx);
     }
 
     async signedAndSendTx(web3: any, tx: any) {

@@ -24,8 +24,12 @@ import {Soul} from "./soul";
         // a.p5jsScript = await nft.p5jsScript(contract);
         // a.web3Script = await nft.web3Script(contract);
         // a._script = await nft._script(contract);
+        a._signerMint = await nft._signerMint(contract);
+        console.log('_signerMint', a._signerMint);
+        a.getMessageHash = await nft.getMessageHash(contract, "0x229bf0492a6c1b3ccb82bbdc4dc488124ddee8c8", '1149785142767273216');
+        console.log('getMessageHash', a.getMessageHash);
 
-        a.tokenIdToHash = await nft.tokenIdToHash(contract, tokenId)
+        /*a.tokenIdToHash = await nft.tokenIdToHash(contract, tokenId)
         a.tokenHTML = await nft.tokenHTML(contract, a.tokenIdToHash, tokenId);
         if (a.tokenHTML) {
             try {
@@ -34,7 +38,7 @@ import {Soul} from "./soul";
             } catch (err) {
                 console.error(err);
             }
-        }
+        }*/
     } catch (e) {
         // Deal with the fact the chain failed
         console.log(e);
