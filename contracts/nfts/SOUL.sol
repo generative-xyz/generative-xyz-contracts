@@ -36,6 +36,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     mapping(uint256 => NFTCollection.OwnerSeed) internal _ownersAndHashSeeds;
     mapping(uint256 => uint256) public _mintAt;
+    mapping(address => uint256) public _minted;
 
     address public _bfs;
 
@@ -154,13 +155,17 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function mint(address to, uint256 totalGM, bytes calldata signature) public payable nonReentrant returns (uint256 tokenId) {
         require(_currentId < _maxSupply, Errors.REACH_MAX);
         if (msg.sender != _admin) {
-            // verify sign if not deployer
             require(msg.sender == to, "GP_IU");
             require(balanceOf(to) == 0, "1-1");
+            require(_minted[to] == 0, "M");
+            // verify sign if not deployer
             _verifySigner(to, totalGM, signature);
+            _minted[to] = 1;
         } else {
             if (to != _admin) {
                 require(balanceOf(to) == 0, "1-1");
+                require(_minted[to] == 0, "M");
+                _minted[to] = 1;
             }
         }
         _currentId++;
@@ -191,8 +196,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _ownersAndHashSeeds[tokenId]._seed = bytes12(seed);
     }
 
-    /* @ClaimOrAuction to get orphan token id */
-    function claimable(uint256 tokenId) public view virtual returns (bool) {
+    /* @Auction to get orphan token id */
+    function available(uint256 tokenId) public view virtual returns (bool) {
         // check gm balance
         address owner = ownerOf(tokenId);
         uint256 balanceOwner = _getBalanceToken(owner);
@@ -306,7 +311,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function createAuction(uint256 tokenId) external nonReentrant {
-        require(claimable(tokenId), "N_C0");
+        require(available(tokenId), "N_C0");
         // 1 wallet 1 token
         require(balanceOf(msg.sender) == 0, "N_C0_2");
         require(block.number - _mintAt[tokenId] > _getBlockReserve(), "N_C0_3");
@@ -314,7 +319,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function createBid(uint256 tokenId, uint256 amount) external payable override nonReentrant {
-        require(claimable(tokenId), "N_C0");
+        require(available(tokenId), "N_C0");
         // 1 wallet 1 token
         require(balanceOf(msg.sender) == 0, "N_C0_2");
 
