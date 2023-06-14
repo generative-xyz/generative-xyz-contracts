@@ -223,8 +223,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function biddable(uint256 tokenId) public view virtual returns (bool) {
         // check gm balance
         // by threshold on config
-        uint256 threshold = _getTokenThreshold();
-        if (_getBalanceToken(msg.sender) >= threshold) {
+        if (_getBalanceToken(msg.sender) >= _getTokenThreshold()) {
             return true;
         }
         return false;

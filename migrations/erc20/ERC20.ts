@@ -4,7 +4,7 @@ import {Bytes32Ty} from "hardhat/internal/hardhat-network/stack-traces/logger";
 import {ethers as eth1} from "ethers";
 
 const {ethers, upgrades} = require("hardhat");
-const hardhatConfig = require("../hardhat.config");
+const hardhatConfig = require("../../hardhat.config.js");
 
 class ERC20 {
     network: string;
@@ -76,7 +76,7 @@ class ERC20 {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.setApproveForAll(spender, amount)
+        const fun = temp?.nftContract.methods.approve(spender, amount)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
