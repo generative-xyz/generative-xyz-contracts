@@ -266,7 +266,10 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
         // transfer token for winner
         if (_auctions[tokenId].bidder != address(0)) {
-            _transfer(address(this), _auctions[tokenId].bidder, _auctions[tokenId].tokenId);
+            if (balanceOf(_auctions[tokenId].bidder) == 0) {
+                // only transfer when winner balance = 0 -> can not cheat on >= 1 auction
+                _transfer(address(this), _auctions[tokenId].bidder, _auctions[tokenId].tokenId);
+            }
         }
 
         // transfer amount to treasury
