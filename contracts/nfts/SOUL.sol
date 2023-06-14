@@ -151,12 +151,17 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         return (signer, messageHash);
     }
 
-    function mint(address to, address user, uint256 totalGM, bytes calldata signature) public payable nonReentrant returns (uint256 tokenId) {
+    function mint(address to, uint256 totalGM, bytes calldata signature) public payable nonReentrant returns (uint256 tokenId) {
         require(_currentId < _maxSupply, Errors.REACH_MAX);
         if (msg.sender != _admin) {
             // verify sign if not deployer
-            require(msg.sender == user, "GP_IU");
-            _verifySigner(user, totalGM, signature);
+            require(msg.sender == to, "GP_IU");
+            require(balanceOf(to) == 0, "1-1");
+            _verifySigner(to, totalGM, signature);
+        } else {
+            if (to != _admin) {
+                require(balanceOf(to) == 0, "1-1");
+            }
         }
         _currentId++;
         tokenId = _currentId;
@@ -173,7 +178,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         require(msg.sender == _admin);
         // only deployer
         for (uint256 i = 0; i < n; i++) {
-            uint256 tokenId = mint(to, address(0), 0, signatures);
+            uint256 tokenId = mint(to, 0, signatures);
             tokenIds[i] = tokenId;
             if (gasleft() < 200000) {break;}
         }
@@ -397,7 +402,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function transferFrom(address from, address to, uint256 tokenId) public virtual override {
         if (msg.sender == from) {
             // is current owner
-            require(1 == 0, "T");
+            if (msg.sender != _admin) {
+                require(1 == 0, "T");
+            }
         } else {
             // marketplace(contract) or claimer
             if (_isContract(msg.sender)) {
@@ -414,7 +421,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public virtual override {
         if (msg.sender == from) {
             // is current owner
-            require(1 == 0, "T");
+            if (msg.sender != _admin) {
+                require(1 == 0, "T");
+            }
         } else {
             // marketplace(contract) or claimer
             if (_isContract(msg.sender)) {

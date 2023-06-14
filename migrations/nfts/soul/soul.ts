@@ -263,11 +263,11 @@ class Soul {
         return await temp?.nftContract.methods._signerMint().call(tx);
     }
 
-    async mint(contractAddress: any, to: any, user: any, totalGM: any, signature: any, gas: any) {
+    async mint(contractAddress: any, to: any, totalGM: any, signature: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.mint(to, user, totalGM, signature);
+        const fun = temp?.nftContract.methods.mint(to, totalGM, signature);
         //the transaction
         const tx = {
             from: this.senderPublicKey,
