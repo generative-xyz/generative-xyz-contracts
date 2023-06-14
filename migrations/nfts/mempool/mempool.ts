@@ -247,9 +247,9 @@ class Mempool {
         return await temp?.nftContract.methods._script().call(tx);
     }
 
-    async mint(contractAddress: any, to: any, gas: any) {
+    async mint(contractAddress: any, to: any, gas: any, nonce: any) {
         let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+        // const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
         const fun = temp?.nftContract.methods.mint(to);
         //the transaction
