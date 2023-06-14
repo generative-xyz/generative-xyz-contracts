@@ -28,6 +28,8 @@ import {Soul} from "./soul";
         // console.log('_signerMint', a._signerMint);
         // a.getMessageHash = await nft.getMessageHash(contract, "0xF61234046A18b07Bf1486823369B22eFd2C4507F", '0');
         // console.log('getMessageHash', a.getMessageHash);
+        a.available = await nft.available(contract, tokenId);
+        console.log('available', a.available);
 
         /*a.tokenIdToHash = await nft.tokenIdToHash(contract, tokenId)
         a.tokenHTML = await nft.tokenHTML(contract, a.tokenIdToHash, tokenId);

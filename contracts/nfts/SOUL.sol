@@ -198,21 +198,33 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     /* @Auction to get orphan token id */
     function available(uint256 tokenId) public view virtual returns (bool) {
+        if (block.number - _mintAt[tokenId] <= _getBlockReserve()) {
+            return false;
+        }
+        if (ownerOf(tokenId) == _admin || ownerOf(tokenId) == address(this)) {
+            return false;
+        }
         // check gm balance
-        address owner = ownerOf(tokenId);
-        uint256 balanceOwner = _getBalanceToken(owner);
-        uint256 balanceClaimer = _getBalanceToken(msg.sender);
-
         // by threshold on config
         uint256 threshold = _getTokenThreshold();
-        if (balanceOwner < threshold && balanceClaimer >= threshold) {
+        if (_getBalanceToken(ownerOf(tokenId)) < threshold) {
             return true;
         }
         return false;
     }
 
-    function _getBlockReserve() internal returns (uint256) {
-        uint256 blockReserve = IParameterControl(_paramsAddress).getUInt256("GM_RESERVE");
+    function biddable(uint256 tokenId) public view virtual returns (bool) {
+        // check gm balance
+        // by threshold on config
+        uint256 threshold = _getTokenThreshold();
+        if (_getBalanceToken(msg.sender) >= threshold) {
+            return true;
+        }
+        return false;
+    }
+
+    function _getBlockReserve() internal view returns (uint256) {
+        uint256 blockReserve = IParameterControl(_paramsAddress).getUInt256("SOUL_GM_RESERVE");
         if (blockReserve == 0) {
             // ~block in 7 day, 1 block 10 minute
             blockReserve = 60 * 24 * 7 / 10;
@@ -225,7 +237,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _getTokenThreshold() private view returns (uint256) {
-        uint256 threshold = IParameterControl(_paramsAddress).getUInt256("GM_THRESHOLD");
+        uint256 threshold = IParameterControl(_paramsAddress).getUInt256("SOUL_GM_THRESHOLD");
         if (threshold == 0) {
             threshold = 1 * 10 ** 18;
         }
@@ -260,7 +272,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
             // transfer token for winner
             if (_auctions[tokenId].bidder != address(0)) {
-                transferFrom(ownerOf(tokenId), _auctions[tokenId].bidder, _auctions[tokenId].tokenId);
+                _transfer(address(this), _auctions[tokenId].bidder, _auctions[tokenId].tokenId);
             }
 
             // transfer amount to treasury
@@ -307,6 +319,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         auction.minBidIncrementPercentage = p.getUInt256("SOUL_AUCTION_MIN_BID_INCREASE_PERCENT");
         _auctions[tokenId] = auction;
 
+        // transfer token to this contract as orphan token
+        _transfer(ownerOf(tokenId), address(this), tokenId);
+
         emit AuctionCreated(tokenId, startTime, endTime);
     }
 
@@ -319,7 +334,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function createBid(uint256 tokenId, uint256 amount) external payable override nonReentrant {
-        require(available(tokenId), "N_C0");
+        require(biddable(tokenId), "N_C0");
         // 1 wallet 1 token
         require(balanceOf(msg.sender) == 0, "N_C0_2");
 
@@ -415,9 +430,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             if (_isContract(msg.sender)) {
                 require(1 == 0, "T_1");
             } else {
-                // require(1 == 0, "T_2");
-                require(_auctions[tokenId].settled);
-                require(_auctions[tokenId].bidder == to);
+                require(1 == 0, "T_2");
+                /*require(_auctions[tokenId].settled);
+                require(_auctions[tokenId].bidder == to);*/
             }
         }
         _transfer(from, to, tokenId);
@@ -434,9 +449,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             if (_isContract(msg.sender)) {
                 require(1 == 0, "T_1");
             } else {
-                //require(1 == 0, "T_2");
-                require(_auctions[tokenId].settled);
-                require(_auctions[tokenId].bidder == to);
+                require(1 == 0, "T_2");
+                /*require(_auctions[tokenId].settled);
+                require(_auctions[tokenId].bidder == to);*/
             }
         }
         _safeTransfer(from, to, tokenId, data);
