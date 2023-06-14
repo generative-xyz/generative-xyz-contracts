@@ -16,7 +16,8 @@ import {Soul} from "./soul";
         
 
         const nft = new Soul(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        const tx = await nft.mint(contract, to, 0, '0xff8dc63509256679db9fcd5c3b569484705eaebf1ca681a21e6f9152441f6324345c6c8c36cd678ad34a13746579e63dbcc365bcbc65ef49c4e35276805f62131c', 0);
+        // const tx = await nft.mint(contract, to, 0, '0xe34eadc4f4600d9465163d6839d245805f3ea01bc11b41f87725b37ac981f4b333d34eb07c84b2d61b792484adf562252b0bb0075786fb212e01f12df66053aa1c', 0);
+        const tx = await nft.mint(contract, to, 0, '0x617c2be981bac8a372c5abe0ddaf82f431bb08083a7f142e0677d743f66e9cc40957f58774a97b0c3cdabedd6076ec95689d034baa06608c07059b9c49973d311b', 0);
         console.log("tx: ", tx?.transactionHash, tx?.status);
     } catch (e) {
         // Deal with the fact the chain failed
