@@ -276,7 +276,7 @@ class Soul {
 
         return await temp?.nftContract.methods.available(tokenId).call(tx);
     }
-    
+
     async biddable(contractAddress: any, tokenId: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
@@ -374,12 +374,33 @@ class Soul {
 
         return await this.signedAndSendTx(temp?.web3, tx);
     }
-    
+
     async createBid(contractAddress: any, tokenId: any, amount: any, gas: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
         const fun = temp?.nftContract.methods.createBid(tokenId, amount);
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
+    async deposit(contractAddress: any, amount: any, gas: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.deposit(amount);
         //the transaction
         const tx = {
             from: this.senderPublicKey,
@@ -522,7 +543,7 @@ class Soul {
 
         return await this.signedAndSendTx(temp?.web3, tx);
     }
-    
+
     async getMessageHash(contractAddress: any, user: any, totalGM: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
