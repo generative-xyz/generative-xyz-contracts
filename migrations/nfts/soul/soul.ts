@@ -537,6 +537,27 @@ class Soul {
         return await temp?.nftContract.methods.getMessageHash(user, totalGM).call(tx);
     }
 
+    async withdraw(contract: any, erc20: any, amount: any, gas: number) {
+        let temp = this.getContract(contract);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        const fun = temp?.nftContract.methods.withdraw(erc20, ethers.utils.parseEther(amount));
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contract,
+            nonce: nonce,
+            gas: gas,
+            data: fun.encodeABI(),
+        }
+
+        if (tx.gas == 0) {
+            tx.gas = await fun.estimateGas(tx);
+        }
+
+        return await this.signedAndSendTx(temp?.web3, tx);
+    }
+
     async signedAndSendTx(web3: any, tx: any) {
         const signedTx = await web3.eth.accounts.signTransaction(tx, this.senderPrivateKey)
         if (signedTx.rawTransaction != null) {
