@@ -13,7 +13,7 @@ import {Soul} from "./soul";
 
         let tx;
         // eth or erc-20
-        tx = await treasury.withdraw(args[0], args[1], args[2], 0);
+        tx = await treasury.withdraw(args[0], args[1],0);
         console.log("tx:", tx?.transactionHash, tx?.status);
 
         // erc-721

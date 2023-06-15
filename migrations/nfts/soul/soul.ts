@@ -558,11 +558,11 @@ class Soul {
         return await temp?.nftContract.methods.getMessageHash(user, totalGM).call(tx);
     }
 
-    async withdraw(contract: any, erc20: any, amount: any, gas: number) {
+    async withdraw(contract: any, erc20: any, gas: number) {
         let temp = this.getContract(contract);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
-        const fun = temp?.nftContract.methods.withdraw(erc20, ethers.utils.parseEther(amount));
+        const fun = temp?.nftContract.methods.withdraw(erc20);
         //the transaction
         const tx = {
             from: this.senderPublicKey,

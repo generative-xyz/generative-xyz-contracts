@@ -42,7 +42,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     uint256 private _counting;
     // user -> erc20 -> amount
-    mapping(address => mapping(address => uint256)) _biddingBalance;
+    mapping(address => mapping(address => uint256)) public _biddingBalance;
     // tokenId -> current auction
     mapping(uint256 => AuctionHouse.Auction) public _auctions;
     // auctionId -> auction
@@ -144,7 +144,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         } else {
             // user
             require(_biddingBalance[msg.sender][erc20Addr] > 0);
-            require(erc20Token.transferFrom(address(this), msg.sender, _biddingBalance[msg.sender][erc20Addr]), "W2");
+            require(erc20Token.transfer(msg.sender, _biddingBalance[msg.sender][erc20Addr]), "W2");
             _biddingBalance[msg.sender][erc20Addr] = 0;
         }
     }
@@ -328,7 +328,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             IERC20Upgradeable(_auctions[tokenId].erc20Token).transfer(GMDAOTreasury, _auctions[tokenId].amount - coreTeamTreasuryAmount);
             _coreTeamTreasury[_auctions[tokenId].erc20Token] = coreTeamTreasuryAmount;
             // reset to 0 for winner on bidders list
-            _bidderAuctions[tokenId][_auctions[tokenId].auctionId][_auctions[tokenId].erc20Token] = 0;
+            _bidderAuctions[tokenId][_auctions[tokenId].auctionId][_auctions[tokenId].bidder] = 0;
         }
 
         emit AuctionSettled(_auctions[tokenId].tokenId, _auctions[tokenId].bidder, _auctions[tokenId].amount, _auctions[tokenId]);
@@ -390,8 +390,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
         uint256 currentAmount = _bidderAuctions[tokenId][_auctions[tokenId].auctionId][msg.sender];
         uint256 newAmount = amount + currentAmount;
-        require(newAmount >= _auctions[tokenId].reservePrice, 'Must send at least reservePrice');
-        require(newAmount >= _auctions[tokenId].amount + ((_auctions[tokenId].amount * _auctions[tokenId].minBidIncrementPercentage) / 100), 'Must send more than last bid by minBidIncrementPercentage amount');
+        require(newAmount > _auctions[tokenId].reservePrice, 'Must send at least reservePrice');
+        require(newAmount > _auctions[tokenId].amount + ((_auctions[tokenId].amount * _auctions[tokenId].minBidIncrementPercentage) / 100), 'Must send more than last bid by minBidIncrementPercentage amount');
         // get amount from balance
         _biddingBalance[msg.sender][_auctions[tokenId].erc20Token] -= amount;
 
