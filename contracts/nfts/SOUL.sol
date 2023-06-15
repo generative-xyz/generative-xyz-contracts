@@ -381,16 +381,14 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
         IERC20Upgradeable erc20 = IERC20Upgradeable(_auctions[tokenId].erc20Token);
 
-        uint256 currentAmount = _bidderAuctions[tokenId][_auctions[tokenId].auctionId][msg.sender];
-        uint256 newAmount = amount + currentAmount;
         require(_auctions[tokenId].tokenId == tokenId, 'not up for auction');
         require(block.number < _auctions[tokenId].endTime, 'Auction expired');
         require(_biddingBalance[msg.sender][_auctions[tokenId].erc20Token] >= amount, "not enough balance erc20 token");
+
+        uint256 currentAmount = _bidderAuctions[tokenId][_auctions[tokenId].auctionId][msg.sender];
+        uint256 newAmount = amount + currentAmount;
         require(newAmount >= _auctions[tokenId].reservePrice, 'Must send at least reservePrice');
-        require(
-            newAmount >= _auctions[tokenId].amount + ((_auctions[tokenId].amount * _auctions[tokenId].minBidIncrementPercentage) / 100),
-            'Must send more than last bid by minBidIncrementPercentage amount'
-        );
+        require(newAmount >= _auctions[tokenId].amount + ((_auctions[tokenId].amount * _auctions[tokenId].minBidIncrementPercentage) / 100), 'Must send more than last bid by minBidIncrementPercentage amount');
         // get amount from balance
         _biddingBalance[msg.sender][_auctions[tokenId].erc20Token] -= amount;
 
