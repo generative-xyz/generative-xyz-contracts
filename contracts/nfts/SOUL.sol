@@ -127,6 +127,18 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         }
     }
 
+    function withdraw(address erc20Addr, uint256 amount) external virtual nonReentrant {
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        if (erc20Addr == address(0x0)) {
+            require(address(this).balance >= amount);
+            (bool success,) = msg.sender.call{value : amount}("");
+            require(success);
+        } else {
+            // transfer erc-20 token
+            require(IERC20Upgradeable(erc20Addr).transfer(msg.sender, amount));
+        }
+    }
+
     /* @Mint */
     function tokenIdToHash(uint256 tokenId) external view returns (bytes32) {
         require(_exists(tokenId), Errors.INV_TOKEN);
