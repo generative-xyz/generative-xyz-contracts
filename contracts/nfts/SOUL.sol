@@ -51,6 +51,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     mapping(uint256 => mapping(bytes32 => mapping(address => uint256))) public _bidderAuctions;
     // erc20 -> amount
     mapping(address => uint256) public _coreTeamTreasury;
+    // tokenId -> auctionId -> user[] 
+    mapping(uint256 => mapping(bytes32 => address[])) public _bidderAuctionsList;
 
     function initialize(
         string memory name,
@@ -331,6 +333,16 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             _bidderAuctions[tokenId][_auctions[tokenId].auctionId][_auctions[tokenId].bidder] = 0;
         }
 
+        // loop for auto _claimBid
+        if (_bidderAuctionsList[tokenId][_auctions[tokenId].auctionId].length > 0) {
+            for (uint256 i = 0; i < _bidderAuctionsList[tokenId][_auctions[tokenId].auctionId].length; i++) {
+                if (_bidderAuctionsList[tokenId][_auctions[tokenId].auctionId][i] != _auctions[tokenId].bidder) {
+                    _claimBid(_bidderAuctionsList[tokenId][_auctions[tokenId].auctionId][i], tokenId, _auctions[tokenId].auctionId);
+                }
+            }
+        }
+
+
         emit AuctionSettled(_auctions[tokenId].tokenId, _auctions[tokenId].bidder, _auctions[tokenId].amount, _auctions[tokenId]);
     }
 
@@ -382,6 +394,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         // 1 wallet 1 token
         require(balanceOf(msg.sender) == 0, "N_C0_2");
 
+        if (_bidderAuctions[tokenId][_auctions[tokenId].auctionId][msg.sender] == 0) {
+            // new bidder
+            _bidderAuctionsList[tokenId][_auctions[tokenId].auctionId].push(msg.sender);
+        }
+
         IERC20Upgradeable erc20 = IERC20Upgradeable(_auctions[tokenId].erc20Token);
 
         require(_auctions[tokenId].tokenId == tokenId, 'not up for auction');
@@ -416,15 +433,19 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function claimBid(uint256 tokenId, bytes32 auctionId) external override nonReentrant {
+        _claimBid(msg.sender, tokenId, auctionId);
+        emit AuctionClaimBid(tokenId, msg.sender, _bidderAuctions[tokenId][auctionId][msg.sender], auctionId);
+    }
+
+    function _claimBid(address claimer, uint256 tokenId, bytes32 auctionId) internal {
         require(_auctionsList[auctionId].settled);
-        require(_auctionsList[auctionId].bidder != msg.sender);
-        require(_bidderAuctions[tokenId][auctionId][msg.sender] > 0);
+        require(_auctionsList[auctionId].bidder != claimer);
+        require(_bidderAuctions[tokenId][auctionId][claimer] > 0);
 
         // add back to balance 
-        _biddingBalance[msg.sender][_auctionsList[auctionId].erc20Token] += _bidderAuctions[tokenId][auctionId][msg.sender];
+        _biddingBalance[claimer][_auctionsList[auctionId].erc20Token] += _bidderAuctions[tokenId][auctionId][claimer];
         // reset on history
-        _bidderAuctions[tokenId][auctionId][msg.sender] = 0;
-        emit AuctionClaimBid(tokenId, msg.sender, _bidderAuctions[tokenId][auctionId][msg.sender], auctionId);
+        _bidderAuctions[tokenId][auctionId][claimer] = 0;
     }
 
     /* @Override on ERC-721*/
