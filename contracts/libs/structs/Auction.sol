@@ -19,11 +19,11 @@ library AuctionHouse {
 
         // The minimum amount of time left in an auction after a new bid is created
         uint256 timeBuffer;
-
         // The minimum price accepted in an auction
         uint256 reservePrice;
-
         // The minimum percentage difference between the last bid amount and the current bid
         uint256 minBidIncrementPercentage;
+
+        bytes32 auctionId;
     }
 }
