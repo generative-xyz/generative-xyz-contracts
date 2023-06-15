@@ -235,6 +235,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function available(uint256 tokenId) public view virtual returns (bool) {
+        if (!_exists(tokenId)) {
+            return false;
+        }
         if (block.number - _mintAt[tokenId] <= _getBlockReserve()) {
             return false;
         }
