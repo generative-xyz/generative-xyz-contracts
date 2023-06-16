@@ -451,8 +451,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         require(_auctionsList[auctionId].bidder != claimer);
         require(_bidderAuctions[tokenId][auctionId][claimer] > 0);
 
-        emit AuctionClaimBid(tokenId, msg.sender, _bidderAuctions[tokenId][auctionId][claimer], auctionId);
-        
+        emit AuctionClaimBid(tokenId, claimer, _bidderAuctions[tokenId][auctionId][claimer], auctionId);
+
         // add back to balance 
         _biddingBalance[claimer][_auctionsList[auctionId].erc20Token] += _bidderAuctions[tokenId][auctionId][claimer];
         // reset on history
