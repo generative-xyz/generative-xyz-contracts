@@ -318,6 +318,12 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             if (balanceOf(_auctions[tokenId].bidder) == 0) {
                 // only transfer when winner balance = 0 -> can not cheat on >= 1 auction
                 _transfer(address(this), _auctions[tokenId].bidder, _auctions[tokenId].tokenId);
+            } else {
+                // refund bidding amount for winner
+                // add back to balance 
+                _biddingBalance[_auctions[tokenId].bidder][_auctions[tokenId].erc20Token] += _auctions[tokenId].amount;
+                // reset on history
+                _bidderAuctions[tokenId][_auctions[tokenId].auctionId][_auctions[tokenId].bidder] = 0;
             }
         }
 
