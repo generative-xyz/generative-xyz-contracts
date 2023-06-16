@@ -494,16 +494,16 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         html = string(abi.encodePacked('data:text/html;base64,', Base64.encode(abi.encodePacked(html))));
 
         string memory _animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
-        string memory _baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
+        /*string memory _baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
         _baseURI = string(abi.encodePacked(_baseURI, "/",
             StringsUpgradeable.toHexString(address(this)), "/",
-            StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed)));
+            StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed)));*/
         result = string(
             abi.encodePacked(
                 '{"name":"","description": ""',
-                ', "image": "', _baseURI, '&capture=60000"',
+                ', "image": ""',
                 _animationURI,
-                ', "attributes": "', _baseURI, '&capture=0"',
+                ', "attributes": ""',
                 '}'
             )
         );

@@ -18,8 +18,8 @@ import {Soul} from "./soul";
 
         const nft = new Soul(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         let a: any = {};
-        // a.getTokenURI = await nft.getTokenURI(contract, tokenId);
-        // fs.writeFileSync('./index.json', a.getTokenURI);
+        a.getTokenURI = await nft.getTokenURI(contract, tokenId);
+        fs.writeFileSync('./migrations/nfts/soul/1.json', a.getTokenURI);
         // a._reservations = await nft._reservations(contract, tokenId, process.env.PUBLIC_KEY);
         // a.p5jsScript = await nft.p5jsScript(contract);
         // a.web3Script = await nft.web3Script(contract);
@@ -28,8 +28,8 @@ import {Soul} from "./soul";
         // console.log('_signerMint', a._signerMint);
         // a.getMessageHash = await nft.getMessageHash(contract, "0xF61234046A18b07Bf1486823369B22eFd2C4507F", '0');
         // console.log('getMessageHash', a.getMessageHash);
-        a.available = await nft.available(contract, tokenId);
-        console.log('available', a.available);
+        // a.available = await nft.available(contract, tokenId);
+        // console.log('available', a.available);
         // a.biddable = await nft.biddable(contract, tokenId);
         // console.log('biddable', a.biddable);
 
