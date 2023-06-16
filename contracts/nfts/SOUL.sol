@@ -424,6 +424,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         // set new winner(the current highest bid)
         _auctions[tokenId].amount = newAmount;
         _auctions[tokenId].bidder = payable(msg.sender);
+        // copy to history
+        _auctionsList[_auctions[tokenId].auctionId].amount = _auctions[tokenId].amount;
+        _auctionsList[_auctions[tokenId].auctionId].bidder = _auctions[tokenId].bidder;
 
         // Extend the auction if the bid was received within `timeBuffer` of the auction end time
         bool extended = _auctions[tokenId].endTime - block.number < _auctions[tokenId].timeBuffer;
