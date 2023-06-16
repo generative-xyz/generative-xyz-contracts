@@ -27,17 +27,17 @@ class Treasury {
             return;
         }
 
-        const contract = await ethers.getContractFactory("GMDAOTreasury");
-        console.log("GMDAOTreasury.deploying ...")
+        const contract = await ethers.getContractFactory("SOULGMDAOTreasury");
+        console.log("SOULGMDAOTreasury.deploying ...")
         const proxy = await upgrades.deployProxy(contract, [adminAddress, paramAdd, dao], {
             initializer: 'initialize(address, address, address)',
         });
         await proxy.deployed();
-        console.log("GMDAOTreasury deployed at proxy:", proxy.address);
+        console.log("SOULGMDAOTreasury deployed at proxy:", proxy.address);
         return proxy.address;
     }
 
-    getContract(contractAddress: any, contractName: any = "./artifacts/contracts/governance/GMDAOTreasury.sol/GMDAOTreasury.json") {
+    getContract(contractAddress: any, contractName: any = "./artifacts/contracts/governance/SOULGMDAOTreasury.sol/SOULGMDAOTreasury.json") {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
         if (this.network == "local") {
             console.log("not run local");
@@ -54,10 +54,10 @@ class Treasury {
     }
 
     async upgradeContract(proxyAddress: any) {
-        const contractUpdated = await ethers.getContractFactory("GMDAOTreasury");
-        console.log('Upgrading GMDAOTreasury... by proxy ' + proxyAddress);
+        const contractUpdated = await ethers.getContractFactory("SOULGMDAOTreasury");
+        console.log('Upgrading SOULGMDAOTreasury... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
-        console.log('GMDAOTreasury upgraded on tx address ' + tx.address);
+        console.log('SOULGMDAOTreasury upgraded on tx address ' + tx.address);
         return tx;
     }
 
