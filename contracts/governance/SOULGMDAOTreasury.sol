@@ -56,28 +56,24 @@ contract SOULGMDAOTreasury is OwnableUpgradeable, ReentrancyGuardUpgradeable, IE
 
     function withdraw(address erc20Addr, uint256 amount) external virtual nonReentrant {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        bool success;
-        if (erc20Addr == address(0x0)) {
+        if (erc20Addr == address(0)) {
             require(address(this).balance >= amount);
-            (success,) = msg.sender.call{value : amount}("");
+            (bool success,) = msg.sender.call{value : amount}("");
             require(success);
         } else {
-            IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
             // transfer erc-20 token
-            require(tokenERC20.transfer(msg.sender, amount));
+            require(IERC20Upgradeable(erc20Addr).transfer(msg.sender, amount));
         }
     }
 
     function withdrawERC721(address collection, uint256 tokenId) external virtual nonReentrant {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        IERC721Upgradeable tokenERC721 = IERC721Upgradeable(collection);
-        tokenERC721.safeTransferFrom(address(this), msg.sender, tokenId);
+        IERC721Upgradeable(collection).safeTransferFrom(address(this), msg.sender, tokenId);
     }
 
     function withdrawERC1155(address collection, uint256 tokenId, uint256 amount) external virtual nonReentrant {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        IERC1155Upgradeable tokenERC1155 = IERC1155Upgradeable(collection);
-        tokenERC1155.safeTransferFrom(address(this), msg.sender, tokenId, amount, "");
+        IERC1155Upgradeable(collection).safeTransferFrom(address(this), msg.sender, tokenId, amount, "");
     }
 
     function transfer(address to, uint256 amount) external virtual nonReentrant {
@@ -89,20 +85,17 @@ contract SOULGMDAOTreasury is OwnableUpgradeable, ReentrancyGuardUpgradeable, IE
 
     function transferERC20(address to, address erc20Addr, uint256 amount) external virtual nonReentrant {
         require(msg.sender == _dao, Errors.ONLY_ADMIN_ALLOWED);
-        IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
-        require(tokenERC20.transfer(to, amount));
+        require(IERC20Upgradeable(erc20Addr).transfer(to, amount));
     }
 
     function transferERC721(address to, address collection, uint256 tokenId) external virtual nonReentrant {
         require(msg.sender == _dao, Errors.ONLY_ADMIN_ALLOWED);
-        IERC721Upgradeable tokenERC721 = IERC721Upgradeable(collection);
-        tokenERC721.safeTransferFrom(address(this), to, tokenId);
+        IERC721Upgradeable(collection).safeTransferFrom(address(this), to, tokenId);
     }
 
     function transferERC1155(address to, address collection, uint256 tokenId, uint256 amount) external virtual nonReentrant {
         require(msg.sender == _dao, Errors.ONLY_ADMIN_ALLOWED);
-        IERC1155Upgradeable tokenERC1155 = IERC1155Upgradeable(collection);
-        tokenERC1155.safeTransferFrom(address(this), to, tokenId, amount, "");
+        IERC1155Upgradeable(collection).safeTransferFrom(address(this), to, tokenId, amount, "");
     }
 
     /**
