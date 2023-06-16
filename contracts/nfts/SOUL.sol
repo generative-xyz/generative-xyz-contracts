@@ -186,7 +186,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             _verifySigner(to, totalGM, signature);
             _minted[to] = 1;
         } else {
-            if (to != _admin) {
+            require(to != _admin);
+            if (to != address(this)) {
                 require(balanceOf(to) == 0, "1-1");
                 require(_minted[to] == 0, "M");
                 _minted[to] = 1;
