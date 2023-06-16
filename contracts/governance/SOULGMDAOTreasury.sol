@@ -10,7 +10,7 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 
 import "../libs/helpers/Errors.sol";
 
-contract GMDAOTreasury is OwnableUpgradeable, ReentrancyGuardUpgradeable, IERC721ReceiverUpgradeable, IERC1155ReceiverUpgradeable {
+contract SOULGMDAOTreasury is OwnableUpgradeable, ReentrancyGuardUpgradeable, IERC721ReceiverUpgradeable, IERC1155ReceiverUpgradeable {
     event PaymentReceived(address sender, uint256 amount);
 
     address public _admin;
