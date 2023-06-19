@@ -176,7 +176,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         return (signer, messageHash);
     }
 
-    function mint(address to, uint256 totalGM, bytes calldata signature) public payable nonReentrant returns (uint256 tokenId) {
+    function mint(address to, uint256 totalGM, bytes calldata signature) public nonReentrant returns (uint256 tokenId) {
         require(_currentId < _maxSupply, Errors.REACH_MAX);
         if (msg.sender != _admin) {
             require(msg.sender == to, "GP_IU");
@@ -186,7 +186,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             _verifySigner(to, totalGM, signature);
             _minted[to] = 1;
         } else {
-            require(to != _admin);
+            require(to != _admin, "GP_IU");
             if (to != address(this)) {
                 require(balanceOf(to) == 0, "1-1");
                 require(_minted[to] == 0, "M");
@@ -201,18 +201,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         bytes32 seed = random.generateTokenHash(tokenId);
         _setTokenSeed(tokenId, seed);
         _mintAt[tokenId] = block.number;
-    }
-
-    function batchMint(address to, uint256 n, bytes calldata signatures) external payable returns (uint256[] memory) {
-        uint256[] memory tokenIds = new uint256[](n);
-        require(msg.sender == _admin);
-        // only deployer
-        for (uint256 i = 0; i < n; i++) {
-            uint256 tokenId = mint(to, 0, signatures);
-            tokenIds[i] = tokenId;
-            if (gasleft() < 200000) {break;}
-        }
-        return tokenIds;
     }
 
     function _setTokenSeed(uint256 tokenId, bytes32 seed) internal {
@@ -396,7 +384,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _createAuction(tokenId);
     }
 
-    function createBid(uint256 tokenId, uint256 amount) external payable override nonReentrant {
+    function createBid(uint256 tokenId, uint256 amount) external override nonReentrant {
         require(biddable(tokenId), "N_C0");
         // 1 wallet 1 token
         require(balanceOf(msg.sender) == 0, "N_C0_2");
