@@ -251,10 +251,13 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         return false;
     }
 
-    function biddable(uint256 tokenId) public view virtual returns (bool) {
+    function biddable(address walletAddress) public view virtual returns (bool) {
+        if (balanceOf(walletAddress) > 0) {
+            return false;
+        }
         // check gm balance
         // by threshold on config
-        if (_getBalanceToken(msg.sender) >= _getTokenThreshold()) {
+        if (_getBalanceToken(walletAddress) >= _getTokenThreshold()) {
             return true;
         }
         return false;
@@ -387,7 +390,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function createBid(uint256 tokenId, uint256 amount) external override nonReentrant {
-        require(biddable(tokenId), "N_C0");
+        require(biddable(msg.sender), "N_C0");
         // 1 wallet 1 token
         require(balanceOf(msg.sender) == 0, "N_C0_2");
 
