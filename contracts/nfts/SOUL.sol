@@ -7,6 +7,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/ClonesUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/interfaces/IERC2981Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/IERC721ReceiverUpgradeable.sol";
 
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
@@ -21,7 +22,7 @@ import "../services/BFS.sol";
 import "../interfaces/IAuction.sol";
 import "../libs/structs/Auction.sol";
 
-contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IAuction {
+contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IAuction, IERC721ReceiverUpgradeable {
 
     event Reserve(address indexed reserver, uint256 indexed tokenId, address indexed owner, uint256 blockNumber);
     event Claim(address indexed reserver, uint256 indexed tokenId, address indexed owner, uint256 blockNumber);
@@ -586,5 +587,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     returns (address receiver, uint256 royaltyAmount){
         receiver = _admin;
         royaltyAmount = (_salePrice * 500) / Royalty.MINT_PERCENT_ROYALTY;
+    }
+
+    function onERC721Received(address, address, uint256, bytes calldata) external pure returns (bytes4) {
+        return IERC721ReceiverUpgradeable.onERC721Received.selector;
     }
 }
