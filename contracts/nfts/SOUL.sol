@@ -54,6 +54,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     // tokenId -> auctionId -> user[] 
     mapping(uint256 => mapping(bytes32 => address[])) public _bidderAuctionsList;
 
+    mapping(uint256 => string) public _names;
+
     function initialize(
         string memory name,
         string memory symbol,
@@ -70,7 +72,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _admin = admin;
         _randomizerAddr = randomizerAddr;
         _gmToken = gmToken;
-        _maxSupply = 1000;
+        _maxSupply = 1247;
         _bfs = bfs;
         _signerMint = signerMint;
 
@@ -207,6 +209,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         require(_ownersAndHashSeeds[tokenId]._seed == bytes12(0), Errors.TOKEN_HAS_SEED);
         require(seed != bytes12(0), Errors.ZERO_SEED);
         _ownersAndHashSeeds[tokenId]._seed = bytes12(seed);
+    }
+
+    function setName(uint256 tokenId, string memory name) public nonReentrant {
+        require(msg.sender == ownerOf(tokenId));
+        _names[tokenId] = name;
     }
 
     /* @Auction to get orphan token id */
@@ -504,7 +511,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed)));*/
         result = string(
             abi.encodePacked(
-                '{"name":"","description": ""',
+                '{"name":"', _names[tokenId], '","description": ""',
                 ', "image": ""',
                 _animationURI,
                 ', "attributes": ""',
