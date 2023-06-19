@@ -257,7 +257,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         }
         // check gm balance
         // by threshold on config
-        if (_getBalanceToken(walletAddress) >= _getTokenThreshold()) {
+        address erc20Token = IParameterControl(_paramsAddress).getAddress("SOUL_AUCTION_ERC20_TOKEN");
+        if (erc20Token == address(0)) {
+            erc20Token = _gmToken;
+        }
+        if (_getBalanceToken(walletAddress) + _biddingBalance[walletAddress][erc20Token] >= _getTokenThreshold()) {
             return true;
         }
         return false;
