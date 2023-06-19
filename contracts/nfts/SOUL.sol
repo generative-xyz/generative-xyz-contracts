@@ -432,7 +432,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         // Extend the auction if the bid was received within `timeBuffer` of the auction end time
         bool extended = _auctions[tokenId].endTime - block.number < _auctions[tokenId].timeBuffer;
         if (extended) {
-            _auctions[tokenId].endTime = _auctions[tokenId].endTime = block.number + _auctions[tokenId].timeBuffer;
+            _auctions[tokenId].endTime = block.number + _auctions[tokenId].timeBuffer;
         }
 
         emit AuctionBid(_auctions[tokenId].tokenId, msg.sender, amount, extended, _auctions[tokenId]);
@@ -492,6 +492,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _transfer(address from, address to, uint256 tokenId) internal virtual override {
+        require(balanceOf(to) == 0);
         super._transfer(from, to, tokenId);
         _ownersAndHashSeeds[tokenId]._owner = to;
     }
