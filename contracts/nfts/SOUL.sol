@@ -303,6 +303,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _auctionsList[_auctions[tokenId].auctionId].settled = true;
 
         // transfer token for winner
+        bool backWinner = false;
         if (_auctions[tokenId].bidder != address(0)) {
             if (balanceOf(_auctions[tokenId].bidder) == 0) {
                 // only transfer when winner balance = 0 -> can not cheat on >= 1 auction
@@ -313,11 +314,12 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
                 _biddingBalance[_auctions[tokenId].bidder][_auctions[tokenId].erc20Token] += _auctions[tokenId].amount;
                 // reset on history
                 _bidderAuctions[tokenId][_auctions[tokenId].auctionId][_auctions[tokenId].bidder] = 0;
+                backWinner = true;
             }
         }
 
         // transfer amount to treasury
-        if (_auctions[tokenId].amount > 0) {
+        if (_auctions[tokenId].amount > 0 && !backWinner) {
             address GMDAOTreasury = IParameterControl(_paramsAddress).getAddress("SOUL_AUCTION_GM_DAO_Treasury");
             require(GMDAOTreasury != address(0));
             uint256 coreTeamTreasuryAmount = _auctions[tokenId].amount * 1000 / 10000;
