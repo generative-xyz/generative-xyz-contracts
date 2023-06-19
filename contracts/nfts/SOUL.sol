@@ -435,9 +435,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         }
     }
 
-    function claimBid(uint256 tokenId, bytes32 auctionId) external override nonReentrant {
+    /*function claimBid(uint256 tokenId, bytes32 auctionId) external override nonReentrant {
         _claimBid(msg.sender, tokenId, auctionId);
-    }
+    }*/
 
     function _claimBid(address claimer, uint256 tokenId, bytes32 auctionId) internal {
         require(_auctionsList[auctionId].settled);
