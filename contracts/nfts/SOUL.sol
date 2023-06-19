@@ -222,7 +222,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
         // transfer amount to this contract
         require(erc20.transferFrom(msg.sender, address(this), amount), "can not get erc20 from bidder");
-        _biddingBalance[msg.sender][erc20Token] = amount;
+        _biddingBalance[msg.sender][erc20Token] += amount;
     }
 
     function available(uint256 tokenId) public view virtual returns (bool) {
@@ -298,7 +298,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         require(_auctions[tokenId].startTime != 0, "Auction hasn't begun");
         require(!_auctions[tokenId].settled, 'Auction has already been settled');
         require(block.number >= _auctions[tokenId].endTime, "Auction hasn't completed");
-        _auctions[tokenId].startTime = 0;
+        // _auctions[tokenId].startTime = 0;
         _auctions[tokenId].settled = true;
         _auctionsList[_auctions[tokenId].auctionId].settled = true;
 
@@ -323,7 +323,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             uint256 coreTeamTreasuryAmount = _auctions[tokenId].amount * 1000 / 10000;
             // transfer 90% to DAO treasury
             IERC20Upgradeable(_auctions[tokenId].erc20Token).transfer(GMDAOTreasury, _auctions[tokenId].amount - coreTeamTreasuryAmount);
-            _coreTeamTreasury[_auctions[tokenId].erc20Token] = coreTeamTreasuryAmount;
+            _coreTeamTreasury[_auctions[tokenId].erc20Token] += coreTeamTreasuryAmount;
             // reset to 0 for winner on bidders list
             _bidderAuctions[tokenId][_auctions[tokenId].auctionId][_auctions[tokenId].bidder] = 0;
         }
