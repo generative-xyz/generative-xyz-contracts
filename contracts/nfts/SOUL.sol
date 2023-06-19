@@ -353,7 +353,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _createAuction(uint256 tokenId) internal {
-        require(_exists(tokenId));
         require(_auctions[tokenId].settled || _auctions[tokenId].tokenId == 0, "Auction has already been settled or 1st Auction of token");
         uint256 startTime = block.number;
         uint256 endTime = startTime + _getBlockReserve();
@@ -389,9 +388,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     function createAuction(uint256 tokenId) external nonReentrant {
         require(available(tokenId), "N_C0");
-        // 1 wallet 1 token
-        // require(balanceOf(msg.sender) == 0, "N_C0_2");
-        require(block.number - _mintAt[tokenId] > _getBlockReserve(), "N_C0_3");
         _createAuction(tokenId);
     }
 
@@ -404,8 +400,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             // new bidder
             _bidderAuctionsList[tokenId][_auctions[tokenId].auctionId].push(msg.sender);
         }
-
-        IERC20Upgradeable erc20 = IERC20Upgradeable(_auctions[tokenId].erc20Token);
 
         require(_auctions[tokenId].tokenId == tokenId, 'not up for auction');
         require(block.number < _auctions[tokenId].endTime, 'Auction expired');
