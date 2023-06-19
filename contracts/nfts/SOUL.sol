@@ -298,12 +298,14 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _settleAuction(uint256 tokenId, bool tokenOwner) internal {
+        bytes32 auctionId = _auctions[tokenId].auctionId;
+
         require(_auctions[tokenId].startTime != 0, "Auction hasn't begun");
         require(!_auctions[tokenId].settled, 'Auction has already been settled');
         require(block.number >= _auctions[tokenId].endTime, "Auction hasn't completed");
         // _auctions[tokenId].startTime = 0;
         _auctions[tokenId].settled = true;
-        _auctionsList[_auctions[tokenId].auctionId].settled = true;
+        _auctionsList[auctionId].settled = true;
 
         // transfer token for winner
         bool backWinner = false;
@@ -316,7 +318,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
                 // add back to balance 
                 _biddingBalance[_auctions[tokenId].bidder][_auctions[tokenId].erc20Token] += _auctions[tokenId].amount;
                 // reset on history
-                _bidderAuctions[tokenId][_auctions[tokenId].auctionId][_auctions[tokenId].bidder] = 0;
+                _bidderAuctions[tokenId][auctionId][_auctions[tokenId].bidder] = 0;
                 backWinner = true;
             }
         }
@@ -330,14 +332,14 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             IERC20Upgradeable(_auctions[tokenId].erc20Token).transfer(GMDAOTreasury, _auctions[tokenId].amount - coreTeamTreasuryAmount);
             _coreTeamTreasury[_auctions[tokenId].erc20Token] += coreTeamTreasuryAmount;
             // reset to 0 for winner on bidders list
-            _bidderAuctions[tokenId][_auctions[tokenId].auctionId][_auctions[tokenId].bidder] = 0;
+            _bidderAuctions[tokenId][auctionId][_auctions[tokenId].bidder] = 0;
         }
 
         // loop for auto _claimBid
-        if (_bidderAuctionsList[tokenId][_auctions[tokenId].auctionId].length > 0) {
-            for (uint256 i = 0; i < _bidderAuctionsList[tokenId][_auctions[tokenId].auctionId].length; i++) {
-                if (_bidderAuctionsList[tokenId][_auctions[tokenId].auctionId][i] != _auctions[tokenId].bidder) {
-                    _claimBid(_bidderAuctionsList[tokenId][_auctions[tokenId].auctionId][i], tokenId, _auctions[tokenId].auctionId);
+        if (_bidderAuctionsList[tokenId][auctionId].length > 0) {
+            for (uint256 i = 0; i < _bidderAuctionsList[tokenId][auctionId].length; i++) {
+                if (_bidderAuctionsList[tokenId][auctionId][i] != _auctions[tokenId].bidder) {
+                    _claimBid(_bidderAuctionsList[tokenId][auctionId][i], tokenId, auctionId);
                 }
             }
         }
