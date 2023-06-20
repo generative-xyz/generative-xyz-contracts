@@ -7,6 +7,7 @@ require("hardhat-gas-reporter");
 require('hardhat-contract-sizer');
 require("@nomiclabs/hardhat-etherscan");
 require('@openzeppelin/hardhat-upgrades');
+var verify = require("@ericxstone/hardhat-blockscout-verify");
 
 module.exports = {
     solidity: {
@@ -23,11 +24,19 @@ module.exports = {
         apiKey: process.env.ETHSCAN_API_KEY,
         customChains: [
             {
-                network: "tc-mainnet",
+                network: "tc_mainnet",
                 chainId: 22213,
                 urls: {
                     apiURL: "https://explorer.trustless.computer/api",
                     browserURL: "https://explorer.trustless.computer/api"
+                }
+            },
+            {
+                network: "tc_testnet",
+                chainId: 22215,
+                urls: {
+                    apiURL: "https://explorer.regtest.trustless.computer/api",
+                    browserURL: "https://explorer.regtest.trustless.computer/api"
                 }
             }
         ]
@@ -120,4 +129,15 @@ module.exports = {
     mocha: {
         timeout: 40000000,
     },
+    blockscoutVerify: {
+        blockscoutURL: "https://explorer.regtest.trustless.computer/api",
+        contracts: {
+            "SOUL": {
+                compilerVersion: verify.SOLIDITY_VERSION.SOLIDITY_V_8_12,
+                optimization: false,
+                evmVersion: verify.EVM_VERSION.EVM_BERLIN,
+                optimizationRuns: 200,
+            },
+        }
+    }
 };
