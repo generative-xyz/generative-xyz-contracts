@@ -9,6 +9,7 @@
     "hh:test": "npx hardhat test",
     "hh:size": "hardhat size-contracts",
     "hh:verify": "npx hardhat verify",
+    "blockscout:verify": "npx hardhat blockscout-verify",
     "ts:run": "npx ts-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -37,6 +38,7 @@
   },
   "dependencies": {
     "@chainlink/contracts": "^0.5.1",
+    "@ericxstone/hardhat-blockscout-verify": "^1.0.2",
     "@openzeppelin/contracts": "^4.7.3",
     "buffer-type": "^1.0.0",
     "dayjs": "^1.11.7",
