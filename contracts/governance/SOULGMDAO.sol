@@ -14,32 +14,32 @@ import "../nfts/SOUL.sol";
 contract SOULGMDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable, GovernorVotesUpgradeable, GovernorVotesQuorumFractionUpgradeable {
     address public _admin;
     address public _paramAddr;
-    SOULGMVotesCompToken public _votingToken;
-    SOUL public _soul;
-
-    uint256 public _proposalThresholdPercent; // percent
-    uint256 public _quorumVotePercent; // percent
+    address public _votingToken;
+    address public _soul;
+    address public _gmToken;
 
     uint256 public _votingPeriods;
     uint256 public _votingDelays;
+    uint256 public _proposalThresholdSoul;
+    uint256 public _proposalThresholdGM;
+    uint256 public _voteThresholdSoul;
+    uint256 public _voteThresholdGM;
 
     function initialize(string memory name,
         address admin,
         address paramAddr,
-        SOULGMVotesCompToken votingToken,
-        SOUL soul
+        address votingToken,
+        address soul,
+        address gmToken
     ) initializer public {
         require(admin != Errors.ZERO_ADDR && paramAddr != Errors.ZERO_ADDR && address(votingToken) != Errors.ZERO_ADDR, Errors.INV_ADD);
         _admin = admin;
         _paramAddr = paramAddr;
         _soul = soul;
         _votingToken = votingToken;
-        // hold percentage to make propose
-        // at least 5%
-        _proposalThresholdPercent = 500;
-        // quorum percentage
-        // at least 1%
-        _quorumVotePercent = 100;
+        _gmToken = gmToken;
+        _proposalThresholdSoul = _voteThresholdSoul = 1;
+        _proposalThresholdGM = _voteThresholdGM = 1 * 10 ** 18;
 
         // 1 day
         _votingDelays = 60 * 24 * 1 / 10;
@@ -48,7 +48,7 @@ contract SOULGMDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable
 
         __Governor_init(name);
         __GovernorCompatibilityBravo_init();
-        __GovernorVotes_init(votingToken);
+        __GovernorVotes_init(IVotesUpgradeable(votingToken));
         __GovernorVotesQuorumFraction_init(50);
     }
 
@@ -69,25 +69,8 @@ contract SOULGMDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable
         }
     }
 
-    function changeQuorumVotes(uint256 _new) external {
-        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        // change admin
-        if (_quorumVotePercent != _new) {
-            _quorumVotePercent = _new;
-        }
-    }
-
-    function changeProposalThreshold(uint256 _new) external {
-        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        // change admin
-        if (_proposalThresholdPercent != _new) {
-            _proposalThresholdPercent = _new;
-        }
-    }
-
     function changeVoteDelay(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        // change admin
         if (_votingDelays != _new) {
             _votingDelays = _new;
         }
@@ -95,32 +78,58 @@ contract SOULGMDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable
 
     function changeVotePeriod(uint256 _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        // change admin
         if (_votingPeriods != _new) {
             _votingPeriods = _new;
         }
     }
 
-    function changeVotingToken(SOULGMVotesCompToken _new) external {
+    function changeVotingToken(address _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        // change admin
         if (_votingToken != _new) {
             _votingToken = _new;
-            token = _new;
+            token = IVotesUpgradeable(_new);
         }
     }
 
-    function withdraw(address erc20Addr, uint256 amount) external virtual {
+    function changeGMToken(address _new) external {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        bool success;
-        if (erc20Addr == address(0x0)) {
-            require(address(this).balance >= amount);
-            (success,) = msg.sender.call{value : amount}("");
-            require(success);
-        } else {
-            IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
-            // transfer erc-20 token
-            require(tokenERC20.transfer(msg.sender, amount));
+        if (_gmToken != _new) {
+            _gmToken = _new;
+        }
+    }
+
+    function changeSOUL(address _new) external {
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        if (_soul != _new) {
+            _soul = _new;
+        }
+    }
+
+    function changeProposalThresholdSoul(uint256 _new) external {
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        if (_proposalThresholdSoul != _new) {
+            _proposalThresholdSoul = _new;
+        }
+    }
+
+    function changeProposalThresholdGM(uint256 _new) external {
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        if (_proposalThresholdGM != _new) {
+            _proposalThresholdGM = _new;
+        }
+    }
+
+    function changeVoteThresholdSoul(uint256 _new) external {
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        if (_voteThresholdSoul != _new) {
+            _voteThresholdSoul = _new;
+        }
+    }
+
+    function changeVoteThresholdGM(uint256 _new) external {
+        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        if (_voteThresholdGM != _new) {
+            _voteThresholdGM = _new;
         }
     }
 
@@ -135,15 +144,16 @@ contract SOULGMDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable
     }
 
     function proposalThreshold() public view override returns (uint256) {
-        return _proposalThresholdPercent * _votingToken.totalSupply() / 10000;
-    }
-
-    function quorumVotes() public view override returns (uint256) {
-        return _quorumVotePercent * _votingToken.totalSupply() / 10000;
+        return 0;
     }
 
     function castVote(uint256 proposalId, uint8 support) public virtual override(GovernorUpgradeable, IGovernorUpgradeable) returns (uint256) {
-        require(_soul.balanceOf(msg.sender) > 0, "Not owner soul");
+        require(SOUL(_soul).balanceOf(msg.sender) > _voteThresholdSoul, "miss Soul");
+        require(SOUL(_soul)._biddingBalance(msg.sender, _gmToken)// gm in soul deposit
+        // gm balance
+        + IERC20Upgradeable(_gmToken).balanceOf(msg.sender)
+        // gm deposit voting
+        + IERC20Upgradeable(_votingToken).balanceOf(msg.sender) > _voteThresholdGM, "miss GM");
         return super.castVote(proposalId, support);
     }
 
@@ -172,6 +182,13 @@ contract SOULGMDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable
     override(GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable)
     returns (uint256)
     {
+        require(SOUL(_soul).balanceOf(msg.sender) > _proposalThresholdSoul, "miss SOUL");
+        require(SOUL(_soul)._biddingBalance(msg.sender, _gmToken)// gm in soul deposit
+        // gm balance
+        + IERC20Upgradeable(_gmToken).balanceOf(msg.sender)
+        // gm deposit voting
+        + IERC20Upgradeable(_votingToken).balanceOf(msg.sender) > _proposalThresholdGM, "miss GM");
+
         return super.propose(targets, values, calldatas, description);
     }
 
