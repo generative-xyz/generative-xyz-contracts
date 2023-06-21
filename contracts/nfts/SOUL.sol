@@ -493,7 +493,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _transfer(address from, address to, uint256 tokenId) internal virtual override {
-        require(balanceOf(to) == 0);
+        if (to != address(this)) {
+            require(balanceOf(to) == 0);
+        }
         super._transfer(from, to, tokenId);
         _ownersAndHashSeeds[tokenId]._owner = to;
     }
