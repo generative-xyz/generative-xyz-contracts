@@ -5,6 +5,7 @@ import "@openzeppelin/contracts-upgradeable/governance/compatibility/GovernorCom
 import "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorVotesUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorVotesQuorumFractionUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorTimelockControlUpgradeable.sol";
+import "@openzeppelin/contracts/utils/math/Math.sol";
 
 import "../libs/helpers/Errors.sol";
 import "../erc20/SOULGMVotesCompToken.sol";
@@ -144,6 +145,15 @@ contract SOULGMDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable
     function castVote(uint256 proposalId, uint8 support) public virtual override(GovernorUpgradeable, IGovernorUpgradeable) returns (uint256) {
         require(_soul.balanceOf(msg.sender) > 0, "Not owner soul");
         return super.castVote(proposalId, support);
+    }
+
+    function _getVotes(
+        address account,
+        uint256 blockNumber,
+        bytes memory params
+    ) internal view virtual override(GovernorUpgradeable, GovernorVotesUpgradeable) returns (uint256) {
+        uint256 votes = super._getVotes(account, blockNumber, params);
+        return Math.log10(votes);
     }
 
     /* @notice The functions below are overrides required by Solidity.
