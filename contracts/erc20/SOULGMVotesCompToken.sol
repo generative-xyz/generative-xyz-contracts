@@ -7,13 +7,7 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/governance/utils/IVotesUpgradeable.sol";
 
-import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/helpers/Errors.sol";
-import "../interfaces/IGENToken.sol";
-import "../interfaces/IGenerativeProject.sol";
-import "../interfaces/IGenerativeNFT.sol";
-import "../libs/structs/Marketplace.sol";
-import "../nfts/GenerativeNFT.sol";
 
 contract SOULGMVotesCompToken is Initializable, ERC20PausableUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, ERC20VotesCompUpgradeable, ReentrancyGuardUpgradeable {
     address public _admin;
