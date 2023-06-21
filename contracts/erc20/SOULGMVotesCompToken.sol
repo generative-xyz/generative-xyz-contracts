@@ -65,10 +65,14 @@ contract SOULGMVotesCompToken is Initializable, ERC20PausableUpgradeable, ERC20B
         _mint(msg.sender, amount);
     }
 
-    function burn(uint256 amount) public nonReentrant {
+    function burn(uint256 amount) public override nonReentrant {
         require(balanceOf(msg.sender) >= amount);
         require(IERC20Upgradeable(_gmToken).transfer(msg.sender, amount));
         _burn(msg.sender, amount);
+    }
+
+    function burnFrom(address account, uint256 amount) public override nonReentrant {
+        require(1 == 0);
     }
 
     /* @OVERRIDE: 
