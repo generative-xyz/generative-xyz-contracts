@@ -53,8 +53,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     // tokenId -> user -> feature_name -> unlock bool
     mapping(uint256 => mapping(address => mapping(string => bool))) _features;
-    // tokenId -> user -> block.number hold token
-    mapping(uint256 => mapping(address => uint256)) _holdingTimes;
 
     function initialize(
         string memory name,
@@ -400,12 +398,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     function createAuction(uint256 tokenId) external nonReentrant {
         require(available(tokenId), "N_C0");
-        address currentOwner = ownerOf(tokenId);
-        if (currentOwner != address(this)) {
-            // recalculate holding time of user
-            _holdingTimes[tokenId][currentOwner] += _calculateHoldingTime(tokenId, currentOwner);
-        }
-
         _createAuction(tokenId);
     }
 
@@ -609,14 +601,15 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             return false;
         }
         uint256 userBalance = IERC20Upgradeable(_gmToken).balanceOf(user);
-        uint256 userHoldingTime = _holdingTimes[tokenId][user];
 
         (string memory featureSetting, uint256 balanceSetting, uint256 holdTimeSetting) = getSettingFeature(featureName);
         if (bytes(featureSetting).length == 0) {
             return false;
         }
-        if (userBalance >= (balanceSetting * 10 ** 18) && userHoldingTime >= (holdTimeSetting * 10 ** 18)) {
-            return true;
+        if (userBalance >= (balanceSetting * 10 ** 18)) {
+            if (block.number - _mintAt[tokenId] >= holdTimeSetting) {
+                return true;
+            }
         }
 
         return false;
