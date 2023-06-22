@@ -641,8 +641,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         ];
 
         // default
-        balances = [uint256(20), 30, 50, 80, 100, 100, 200, 300, 500, 800];
-        holdTimes = [uint256(1000), 2000, 3000, 5000, 8000, 10000, 10000, 10000, 10000, 10000];
+        balances = [uint256(5), 8, 13, 21, 21, 34, 55, 89, 144, 233];
+        holdTimes = [uint256(1000), 2000, 3000, 5000, 8000, 8000, 8000, 8000, 8000, 8000];
 
         IParameterControl param = IParameterControl(_paramsAddress);
         // try get from params address
