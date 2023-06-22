@@ -235,6 +235,10 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             return false;
         }
         if (block.number - _mintAt[tokenId] <= _getBlockReserve()) {
+            if (ownerOf(tokenId) == address(this)) {
+                // orphan token when minting
+                return true;
+            }
             return false;
         }
         if (ownerOf(tokenId) == _admin) {
@@ -307,7 +311,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _settleAuction(tokenId, msg.sender == ownerOf(tokenId));
     }
 
-    function _settleAuction(uint256 tokenId, bool tokenOwner) internal {
+    function _settleAuction(uint256 tokenId) internal {
         bytes32 auctionId = _auctions[tokenId].auctionId;
 
         require(_auctions[tokenId].startTime != 0, "Auction hasn't begun");
