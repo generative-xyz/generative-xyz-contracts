@@ -398,7 +398,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
         if (oldOwner != address(this)) {
             // reset _features
-            (string[10] memory featuresSetting, uint16[10] memory balancesSetting, uint16[10] memory holdTimesSetting) = getSettingFeatures();
+            (string[10] memory featuresSetting, uint256[10] memory balancesSetting, uint256[10] memory holdTimesSetting) = getSettingFeatures();
             for (uint256 i; i < featuresSetting.length; i++) {
                 _features[tokenId][oldOwner][featuresSetting[i]] = false;
             }
@@ -626,7 +626,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _features[tokenId][msg.sender][featureName] = true;
     }
 
-    function getSettingFeatures() public view returns (string[10] memory features, uint16[10] memory balances, uint16[10] memory holdTimes) {
+    function getSettingFeatures() public view returns (string[10] memory features, uint256[10] memory balances, uint256[10] memory holdTimes) {
         features = [
         "feature_suneffect",
         "feature_cloudlayer",
@@ -640,12 +640,27 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         "feature_sunaura"
         ];
 
-        balances = [20, 30, 50, 80, 100, 100, 200, 300, 500, 800];
-        holdTimes = [1000, 2000, 3000, 5000, 8000, 10000, 10000, 10000, 10000, 10000];
+        // default
+        balances = [uint256(20), 30, 50, 80, 100, 100, 200, 300, 500, 800];
+        holdTimes = [uint256(1000), 2000, 3000, 5000, 8000, 10000, 10000, 10000, 10000, 10000];
+
+        IParameterControl param = IParameterControl(_paramsAddress);
+        // try get from params address
+        for (uint256 i = 0; i < features.length; i++) {
+            string memory nameParam = features[i];
+            uint256 val = param.getUInt256(string(abi.encodePacked("soul", "_", nameParam, "_balance_", StringsUpgradeable.toString(i))));
+            if (val > 0) {
+                balances[i] = val;
+            }
+            val = param.getUInt256(string(abi.encodePacked("soul", "_", nameParam, "_holdTime_", StringsUpgradeable.toString(i))));
+            if (val > 0) {
+                holdTimes[i] = val;
+            }
+        }
     }
 
     function getSettingFeature(string memory featureName) private view returns (string memory, uint256, uint256) {
-        (string[10] memory features, uint16[10] memory balances, uint16[10] memory holdTimes) = getSettingFeatures();
+        (string[10] memory features, uint256[10] memory balances, uint256[10] memory holdTimes) = getSettingFeatures();
         for (uint16 i = 0; i < features.length; i++) {
             if (keccak256(abi.encodePacked((featureName))) == keccak256(abi.encodePacked((features[i])))) {
                 return (features[i], balances[i], holdTimes[i]);
