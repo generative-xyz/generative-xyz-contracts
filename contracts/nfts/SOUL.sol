@@ -648,13 +648,13 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         // try get from params address
         for (uint256 i = 0; i < features.length; i++) {
             string memory nameParam = features[i];
-            uint256 val = param.getUInt256(string(abi.encodePacked("soul", "_", nameParam, "_balance_", StringsUpgradeable.toString(i))));
-            if (val > 0) {
-                balances[i] = val;
+            uint256 valBalance = param.getUInt256(string(abi.encodePacked("soul", "_", nameParam, "_balance_", StringsUpgradeable.toString(i))));
+            if (valBalance > 0) {
+                balances[i] = valBalance;
             }
-            val = param.getUInt256(string(abi.encodePacked("soul", "_", nameParam, "_holdTime_", StringsUpgradeable.toString(i))));
-            if (val > 0) {
-                holdTimes[i] = val;
+            uint256 valHoldTime = param.getUInt256(string(abi.encodePacked("soul", "_", nameParam, "_holdTime_", StringsUpgradeable.toString(i))));
+            if (valHoldTime > 0) {
+                holdTimes[i] = valHoldTime;
             }
         }
     }
