@@ -626,8 +626,20 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _features[tokenId][msg.sender][featureName] = true;
     }
 
-    function getSettingFeatures() private view returns (string[10] memory features, uint16[10] memory balances, uint16[10] memory holdTimes) {
-        features = ["feature_suneffect", "feature_cloudlayer", "feature_foreground", "feature_decor", "feature_rainbow", "feature_sunpillar", "feature_specialobj", "feature_thunder", "feature_rain", "feature_sunaura"];
+    function getSettingFeatures() public view returns (string[10] memory features, uint16[10] memory balances, uint16[10] memory holdTimes) {
+        features = [
+        "feature_suneffect",
+        "feature_cloudlayer",
+        "feature_foreground",
+        "feature_decor",
+        "feature_rainbow",
+        "feature_sunpillar",
+        "feature_specialobj",
+        "feature_thunder",
+        "feature_rain",
+        "feature_sunaura"
+        ];
+
         balances = [20, 30, 50, 80, 100, 100, 200, 300, 500, 800];
         holdTimes = [1000, 2000, 3000, 5000, 8000, 10000, 10000, 10000, 10000, 10000];
     }
