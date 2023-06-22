@@ -309,7 +309,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     // New solution -> Auction
     function settleAuction(uint256 tokenId) external override nonReentrant {
-        _settleAuction(tokenId, msg.sender == ownerOf(tokenId));
+        _settleAuction(tokenId);
     }
 
     function _settleAuction(uint256 tokenId) internal {
