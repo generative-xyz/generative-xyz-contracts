@@ -391,14 +391,19 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         emit AuctionCreated(tokenId, startTime, endTime, msg.sender, auction.auctionId, auction);
     }
 
-    function _calculateHoldingTime(uint256 tokenId, address holder) internal returns (uint256) {
-        // TODO
-        return 0;
-    }
-
     function createAuction(uint256 tokenId) external nonReentrant {
         require(available(tokenId), "N_C0");
+        address oldOwner = ownerOf(tokenId);
         _createAuction(tokenId);
+
+        if (oldOwner != address(this)) {
+            // reset _features
+            (string[10] memory featuresSetting, uint16[10] memory balancesSetting, uint16[10] memory holdTimesSetting) = getSettingFeatures();
+            for (uint256 i; i < featuresSetting.length; i++) {
+                _features[tokenId][oldOwner][featuresSetting[i]] = false;
+            }
+        }
+
     }
 
     function createBid(uint256 tokenId, uint256 amount) external override nonReentrant {
