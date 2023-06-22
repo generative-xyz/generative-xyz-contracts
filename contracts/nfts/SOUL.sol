@@ -52,7 +52,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     mapping(uint256 => string) public _names;
 
     // tokenId -> user -> feature_name -> unlock bool
-    mapping(uint256 => mapping(address => mapping(string => bool))) _features;
+    mapping(uint256 => mapping(address => mapping(string => bool))) public _features;
 
     function initialize(
         string memory name,
