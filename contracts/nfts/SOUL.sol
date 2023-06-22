@@ -398,7 +398,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
         if (oldOwner != address(this)) {
             // reset _features
-            (string[10] memory featuresSetting, uint256[10] memory balancesSetting, uint256[10] memory holdTimesSetting) = getSettingFeatures();
+            (string[11] memory featuresSetting, uint256[11] memory balancesSetting, uint256[11] memory holdTimesSetting) = getSettingFeatures();
             for (uint256 i; i < featuresSetting.length; i++) {
                 _features[tokenId][oldOwner][featuresSetting[i]] = false;
             }
@@ -605,13 +605,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         if (currentState) {
             return false;
         }
-        uint256 userBalance = IERC20Upgradeable(_gmToken).balanceOf(user);
-
         (string memory featureSetting, uint256 balanceSetting, uint256 holdTimeSetting) = getSettingFeature(featureName);
         if (bytes(featureSetting).length == 0) {
             return false;
         }
-        if (userBalance >= (balanceSetting * 10 ** 18)) {
+        if (_getBalanceToken(user) >= (balanceSetting * 10 ** 18)) {
             if (block.number - _mintAt[tokenId] >= holdTimeSetting) {
                 return true;
             }
@@ -626,23 +624,24 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         _features[tokenId][msg.sender][featureName] = true;
     }
 
-    function getSettingFeatures() public view returns (string[10] memory features, uint256[10] memory balances, uint256[10] memory holdTimes) {
+    function getSettingFeatures() public view returns (string[11] memory features, uint256[11] memory balances, uint256[11] memory holdTimes) {
         features = [
         "feature_suneffect",
         "feature_cloudlayer",
         "feature_foreground",
         "feature_decor",
-        "feature_rainbow",
-        "feature_sunpillar",
         "feature_specialobj",
+        "feature_sunshape",
+        "feature_rainbow",
         "feature_thunder",
         "feature_rain",
-        "feature_sunaura"
+        "feature_sunaura",
+        "feature_sunpillar"
         ];
 
         // default
-        balances = [uint256(5), 8, 13, 21, 21, 34, 55, 89, 144, 233];
-        holdTimes = [uint256(1000), 2000, 3000, 5000, 8000, 8000, 8000, 8000, 8000, 8000];
+        balances = [uint256(5), 8, 13, 21, 21, 34, 55, 89, 144, 233, 377];
+        holdTimes = [uint256(1000), 2000, 3000, 5000, 8000, 8000, 8000, 8000, 8000, 8000, 8000];
 
         IParameterControl param = IParameterControl(_paramsAddress);
         // try get from params address
@@ -660,7 +659,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function getSettingFeature(string memory featureName) private view returns (string memory, uint256, uint256) {
-        (string[10] memory features, uint256[10] memory balances, uint256[10] memory holdTimes) = getSettingFeatures();
+        (string[11] memory features, uint256[11] memory balances, uint256[11] memory holdTimes) = getSettingFeatures();
         for (uint16 i = 0; i < features.length; i++) {
             if (keccak256(abi.encodePacked((featureName))) == keccak256(abi.encodePacked((features[i])))) {
                 return (features[i], balances[i], holdTimes[i]);
