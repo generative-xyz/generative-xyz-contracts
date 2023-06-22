@@ -25,6 +25,4 @@ interface IAuction {
 
     function createBid(uint256 tokenId, uint256 amount) external;
 
-    //function claimBid(uint256 tokenId, bytes32 auctionId) external;
-
 }

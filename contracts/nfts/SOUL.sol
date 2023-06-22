@@ -12,21 +12,15 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/IERC721ReceiverUpgradea
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
 import "../libs/structs/NFTCollection.sol";
-import "../libs/structs/NFTProjectData.sol";
 import "../interfaces/IParameterControl.sol";
 import "../libs/helpers/Base64.sol";
 import "../libs/helpers/StringsUtils.sol";
-import "../libs/configs/GenerativeProjectDataConfigs.sol";
 import "../interfaces/IRandomizer.sol";
 import "../services/BFS.sol";
 import "../interfaces/IAuction.sol";
 import "../libs/structs/Auction.sol";
 
 contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IAuction, IERC721ReceiverUpgradeable {
-
-    event Reserve(address indexed reserver, uint256 indexed tokenId, address indexed owner, uint256 blockNumber);
-    event Claim(address indexed reserver, uint256 indexed tokenId, address indexed owner, uint256 blockNumber);
-
     address public _admin;
     address public _paramsAddress;
     address public _randomizerAddr;
@@ -56,6 +50,11 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     mapping(uint256 => mapping(bytes32 => address[])) public _bidderAuctionsList;
 
     mapping(uint256 => string) public _names;
+
+    // tokenId -> user -> feature_name -> unlock bool
+    mapping(uint256 => mapping(address => mapping(string => bool))) _features;
+    // tokenId -> user -> block.number hold token
+    mapping(uint256 => mapping(address => uint256)) _holdingTimes;
 
     function initialize(
         string memory name,
@@ -394,8 +393,19 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         emit AuctionCreated(tokenId, startTime, endTime, msg.sender, auction.auctionId, auction);
     }
 
+    function _calculateHoldingTime(uint256 tokenId, address holder) internal returns (uint256) {
+        // TODO
+        return 0;
+    }
+
     function createAuction(uint256 tokenId) external nonReentrant {
         require(available(tokenId), "N_C0");
+        address currentOwner = ownerOf(tokenId);
+        if (currentOwner != address(this)) {
+            // recalculate holding time of user
+            _holdingTimes[tokenId][currentOwner] += _calculateHoldingTime(tokenId, currentOwner);
+        }
+
         _createAuction(tokenId);
     }
 
@@ -509,10 +519,6 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         html = string(abi.encodePacked('data:text/html;base64,', Base64.encode(abi.encodePacked(html))));
 
         string memory _animationURI = string(abi.encodePacked(', "animation_url":"', html, '"'));
-        /*string memory _baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI_TRAIT);
-        _baseURI = string(abi.encodePacked(_baseURI, "/",
-            StringsUpgradeable.toHexString(address(this)), "/",
-            StringsUpgradeable.toString(tokenId), "?seed=", StringsUtils.toHex(seed)));*/
         result = string(
             abi.encodePacked(
                 '{"name":"', _names[tokenId], '","description": ""',
@@ -593,5 +599,48 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     function onERC721Received(address, address, uint256, bytes calldata) external pure returns (bytes4) {
         return IERC721ReceiverUpgradeable.onERC721Received.selector;
+    }
+
+    /* @Features: unlock new feature from SOUL
+    */
+    function canUnlockFeature(uint256 tokenId, address user, string memory featureName) public view returns (bool) {
+        bool currentState = _features[tokenId][user][featureName];
+        if (currentState) {
+            return false;
+        }
+        uint256 userBalance = IERC20Upgradeable(_gmToken).balanceOf(user);
+        uint256 userHoldingTime = _holdingTimes[tokenId][user];
+
+        (string memory featureSetting, uint256 balanceSetting, uint256 holdTimeSetting) = getSettingFeature(featureName);
+        if (bytes(featureSetting).length == 0) {
+            return false;
+        }
+        if (userBalance >= (balanceSetting * 10 ** 18) && userHoldingTime >= (holdTimeSetting * 10 ** 18)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    function unlockFeature(uint256 tokenId, string memory featureName) public nonReentrant {
+        require(canUnlockFeature(tokenId, msg.sender, featureName));
+        require(ownerOf(tokenId) == msg.sender);
+        _features[tokenId][msg.sender][featureName] = true;
+    }
+
+    function getSettingFeatures() private view returns (string[10] memory features, uint16[10] memory balances, uint16[10] memory holdTimes) {
+        features = ["feature_suneffect", "feature_cloudlayer", "feature_foreground", "feature_decor", "feature_rainbow", "feature_sunpillar", "feature_specialobj", "feature_thunder", "feature_rain", "feature_sunaura"];
+        balances = [20, 30, 50, 80, 100, 100, 200, 300, 500, 800];
+        holdTimes = [1000, 2000, 3000, 5000, 8000, 10000, 10000, 10000, 10000, 10000];
+    }
+
+    function getSettingFeature(string memory featureName) private view returns (string memory, uint256, uint256) {
+        (string[10] memory features, uint16[10] memory balances, uint16[10] memory holdTimes) = getSettingFeatures();
+        for (uint16 i = 0; i < features.length; i++) {
+            if (keccak256(abi.encodePacked((featureName))) == keccak256(abi.encodePacked((features[i])))) {
+                return (features[i], balances[i], holdTimes[i]);
+            }
+        }
+        return ("", 0, 0);
     }
 }
