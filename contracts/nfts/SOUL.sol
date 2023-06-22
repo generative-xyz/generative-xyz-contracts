@@ -250,7 +250,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         // check gm balance
         // by threshold on config
         uint256 threshold = _getTokenThreshold();
-        if (_getBalanceToken(ownerOf(tokenId)) < threshold) {
+        if (_getBalanceToken(ownerOf(tokenId)) + _biddingBalance[ownerOf(tokenId)][_gmToken] < threshold) {
             return true;
         }
         return false;
@@ -266,7 +266,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         if (erc20Token == address(0)) {
             erc20Token = _gmToken;
         }
-        if (_getBalanceToken(walletAddress) + _biddingBalance[walletAddress][erc20Token] >= _getTokenThreshold()) {
+        if (_getBalanceToken(walletAddress) + _biddingBalance[walletAddress][_gmToken] >= _getTokenThreshold()) {
             return true;
         }
         return false;
@@ -281,6 +281,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         return blockReserve;
     }
 
+    // balance of GM token
     function _getBalanceToken(address owner) private view returns (uint256) {
         return IERC20Upgradeable(_gmToken).balanceOf(owner);
     }
@@ -609,7 +610,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         if (bytes(featureSetting).length == 0) {
             return false;
         }
-        if (_getBalanceToken(user) >= (balanceSetting * 10 ** 18)) {
+        if (_getBalanceToken(user) + _biddingBalance[user][_gmToken] >= (balanceSetting * 10 ** 18)) {
             if (block.number - _mintAt[tokenId] >= holdTimeSetting) {
                 return true;
             }
