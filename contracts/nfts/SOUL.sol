@@ -236,7 +236,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         }
         if (block.number - _mintAt[tokenId] <= _getBlockReserve()) {
             if (ownerOf(tokenId) == address(this)) {
-                // orphan token when minting
+                // orphan token when minting, made by admin
+                // in this case, immediately createAuction in 7 days
                 return true;
             }
             return false;
