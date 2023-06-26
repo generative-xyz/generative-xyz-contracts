@@ -21,6 +21,8 @@ import "../interfaces/IAuction.sol";
 import "../libs/structs/Auction.sol";
 
 contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IAuction, IERC721ReceiverUpgradeable {
+    event UnlockFeature(address user, uint256 blockNumber, uint256 tokenId, string featureName);
+
     address public _admin;
     address public _paramsAddress;
     address public _randomizerAddr;
@@ -628,6 +630,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         require(canUnlockFeature(tokenId, msg.sender, featureName));
         require(ownerOf(tokenId) == msg.sender);
         _features[tokenId][msg.sender][featureName] = true;
+
+        emit UnlockFeature(msg.sender, block.number, tokenId, featureName);
     }
 
     function getSettingFeatures() public view returns (string[11] memory features, uint256[11] memory balances, uint256[11] memory holdTimes) {
