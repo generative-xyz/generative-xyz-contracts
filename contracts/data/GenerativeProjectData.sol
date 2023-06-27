@@ -174,19 +174,17 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
 
-        if (true) {
+        if (projectDetail._scripts.length == 1) {
             // for old format which used simple template file
             string memory scripts = "";
             string memory inflate;
             Inflate.ErrorCode err;
-            for (uint256 i; i < projectDetail._scripts.length; i++) {
-                if (bytes(projectDetail._scripts[i]).length > 0) {
-                    (inflate, err) = this.inflateString(projectDetail._scripts[i]);
-                    if (err != Inflate.ErrorCode.ERR_NONE) {
-                        scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
-                    } else {
-                        scripts = string(abi.encodePacked(scripts, inflate));
-                    }
+            if (bytes(projectDetail._scripts[0]).length > 0) {
+                (inflate, err) = this.inflateString(projectDetail._scripts[0]);
+                if (err != Inflate.ErrorCode.ERR_NONE) {
+                    scripts = string(abi.encodePacked(scripts, projectDetail._scripts[0]));
+                } else {
+                    scripts = string(abi.encodePacked(scripts, inflate));
                 }
             }
             result = scripts;
@@ -195,7 +193,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
             string memory scripts = "";
             string memory inflate;
             Inflate.ErrorCode err;
-            for (uint256 i; i < projectDetail._scripts.length; i++) {
+            for (uint256 i = 1; i < projectDetail._scripts.length; i++) {
                 if (bytes(projectDetail._scripts[i]).length > 0) {
                     (inflate, err) = this.inflateString(projectDetail._scripts[i]);
                     if (err != Inflate.ErrorCode.ERR_NONE) {
