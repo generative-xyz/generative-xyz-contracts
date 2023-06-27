@@ -170,69 +170,55 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         }
     }
 
-    /*function tokenBaseURI(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
-        IParameterControl param = IParameterControl(_paramAddr);
-
-        // get base uri
-        string memory _baseURI = param.get(GenerativeProjectDataConfigs.BASE_URI);
-
-        result = string(
-            abi.encodePacked(
-                _baseURI, "/",
-                StringsUpgradeable.toHexString(_generativeProjectAddr), "/",
-                StringsUpgradeable.toString(tokenId), "?seed=",
-                StringsUtils.toHex(seed)
-            )
-        );
-    }*/
-
     function tokenHTML(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
 
-        string memory scripts = "";
-        string memory inflate;
-        Inflate.ErrorCode err;
-        for (uint256 i; i < projectDetail._scripts.length; i++) {
-            if (bytes(projectDetail._scripts[i]).length > 0) {
-                (inflate, err) = this.inflateString(projectDetail._scripts[i]);
-                if (err != Inflate.ErrorCode.ERR_NONE) {
-                    scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
-                } else {
-                    /*scripts = string(abi.encodePacked(scripts, '<script>', inflate, '</script>'));*/
-                    scripts = string(abi.encodePacked(scripts, inflate));
+        if (true) {
+            // for old format which used simple template file
+            string memory scripts = "";
+            string memory inflate;
+            Inflate.ErrorCode err;
+            for (uint256 i; i < projectDetail._scripts.length; i++) {
+                if (bytes(projectDetail._scripts[i]).length > 0) {
+                    (inflate, err) = this.inflateString(projectDetail._scripts[i]);
+                    if (err != Inflate.ErrorCode.ERR_NONE) {
+                        scripts = string(abi.encodePacked(scripts, projectDetail._scripts[i]));
+                    } else {
+                        scripts = string(abi.encodePacked(scripts, inflate));
+                    }
                 }
             }
-        }
-
-        /*string memory scriptType = "";
-        string memory randomFuncScript = '<script id="snippet-random-code">let seed=window.location.href.split("/").find(e=>e.includes("i0"));if(null==seed){let e="0123456789abcdefghijklmnopqrstuvwsyz";seed=new URLSearchParams(window.location.search).get("seed")||Array(64).fill(0).map($=>e[Math.random()*e.length|0]).join("")+"i0"}else{let $="seed=";for(let l=0;l<seed.length-$.length;++l)if(seed.substring(l,l+$.length)==$){seed=seed.substring(l+$.length);break}}function cyrb128(e){let $=1779033703,l=3144134277,t=1013904242,n=2773480762;for(let i=0,_;i<e.length;i++)$=l^Math.imul($^(_=e.charCodeAt(i)),597399067),l=t^Math.imul(l^_,2869860233),t=n^Math.imul(t^_,951274213),n=$^Math.imul(n^_,2716044179);return $=Math.imul(t^$>>>18,597399067),l=Math.imul(n^l>>>22,2869860233),t=Math.imul($^t>>>17,951274213),n=Math.imul(l^n>>>19,2716044179),[($^l^t^n)>>>0,(l^$)>>>0,(t^$)>>>0,(n^$)>>>0]}function sfc32(e,$,l,t){return function(){l>>>=0,t>>>=0;var n=(e>>>=0)+($>>>=0)|0;return e=$^$>>>9,$=l+(l<<3)|0,l=(l=l<<21|l>>>11)+(n=n+(t=t+1|0)|0)|0,(n>>>0)/4294967296}}let mathRand=sfc32(...cyrb128(seed));</script>';
-        if (_paramAddr != address(0x0)) {
-            IParameterControl param = IParameterControl(_paramAddr);
-            for (uint256 i = 0; i < projectDetail._scriptType.length; i++) {
-                scriptType = string(abi.encodePacked(scriptType, param.get(projectDetail._scriptType[i])));
+            result = scripts;
+        } else {
+            // for new format which used advance template file for supporting fully on-chain javascript libs
+            string memory scripts = "";
+            string memory inflate;
+            Inflate.ErrorCode err;
+            for (uint256 i; i < projectDetail._scripts.length; i++) {
+                if (bytes(projectDetail._scripts[i]).length > 0) {
+                    (inflate, err) = this.inflateString(projectDetail._scripts[i]);
+                    if (err != Inflate.ErrorCode.ERR_NONE) {
+                        scripts = string(abi.encodePacked(scripts, '<script>', projectDetail._scripts[i], '</script>'));
+                    } else {
+                        scripts = string(abi.encodePacked(scripts, '<script>', inflate, '</script>'));
+                    }
+                }
             }
-            randomFuncScript = param.get(GenerativeProjectDataConfigs.RANDOM_FUNC_SCRIPT);
+            result = string(abi.encodePacked(
+                    "<html>",
+                    "<head><meta charset='UTF-8'>",
+                    libsScript(projectDetail._scriptType), // load libs here
+                    variableScript(seed, tokenId), // load vars
+                    randomFuncScript(), // load random func script
+                    '<style>', projectDetail._styles, '</style>',
+                    '</head><body>',
+                    scripts,
+                    "</body>",
+                    "</html>"
+                ));
+            result = scripts;
         }
-
-        result = string(abi.encodePacked(
-                "<html>",
-                "<head><meta charset='UTF-8'>",
-                scriptType, // load lib here
-                '<script type="text/javascript" id="snippet-contract-code">let tokenData = {"tokenId":', StringsUpgradeable.toString(tokenId), ', "seed": "', StringsUtils.toHex(seed), '"};</script>',
-                randomFuncScript,
-                '<style>', projectDetail._styles, '</style>',
-                '</head><body>',
-                scripts,
-                "</body>",
-                "</html>"
-            ));*/
-        result = scripts;
-    }
-
-    function htmlScript(string memory) external view returns (string memory result){
-        result = "<script sandbox='allow-scripts' type='text/javascript'>";
-        result = string(abi.encodePacked(result, "</script>"));
     }
 
     function loadLibFileContent(string memory fileName) internal view returns (string memory script) {
@@ -247,6 +233,36 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
             (bytes memory data, int256 nextChunk) = bfs.load(scriptProvider, fileName, i);
             script = string(abi.encodePacked(script, string(data)));
         }
+    }
+
+    function libScript(string memory fileName) public view returns (string memory result){
+        result = "<script sandbox='allow-scripts' type='text/javascript'>";
+        result = string(abi.encodePacked(result, loadLibFileContent(fileName)));
+        result = string(abi.encodePacked(result, "</script>"));
+    }
+
+    function libsScript(string[] memory libs) private view returns (string memory scriptLibs) {
+        scriptLibs = "";
+        for (uint256 i = 0; i < libs.length; i++) {
+            string memory lib = libScript(libs[i]);
+            scriptLibs = string(abi.encodePacked(scriptLibs, lib));
+        }
+    }
+
+    function randomFuncScript() public view returns (string memory) {
+        string memory randomFuncScript = IParameterControl(_paramAddr).get(GenerativeProjectDataConfigs.RANDOM_FUNC_SCRIPT);
+        if ((bytes(randomFuncScript)).length == 0) {
+            randomFuncScript = '<script id="snippet-random-code">if(null==seed){let $="0123456789abcdefghijklmnopqrstuvwsyz";seed=new URLSearchParams(window.location.search).get("seed")||Array(64).fill(0).map(e=>$[Math.random()*$.length|0]).join("")+"i0"}else{let e="seed=";for(let l=0;l<seed.length-e.length;++l)if(seed.substring(l,l+e.length)==e){seed=seed.substring(l+e.length);break}}function cyrb128($){let e=1779033703,l=3144134277,t=1013904242,n=2773480762;for(let _=0,i;_<$.length;_++)e=l^Math.imul(e^(i=$.charCodeAt(_)),597399067),l=t^Math.imul(l^i,2869860233),t=n^Math.imul(t^i,951274213),n=e^Math.imul(n^i,2716044179);return e=Math.imul(t^e>>>18,597399067),l=Math.imul(n^l>>>22,2869860233),t=Math.imul(e^t>>>17,951274213),n=Math.imul(l^n>>>19,2716044179),[(e^l^t^n)>>>0,(l^e)>>>0,(t^e)>>>0,(n^e)>>>0]}function sfc32($,e,l,t){return function(){l>>>=0,t>>>=0;var n=($>>>=0)+(e>>>=0)|0;return $=e^e>>>9,e=l+(l<<3)|0,l=(l=l<<21|l>>>11)+(n=n+(t=t+1|0)|0)|0,(n>>>0)/4294967296}}let mathRand=sfc32(...cyrb128(seed));</script>';
+        }
+        return randomFuncScript;
+    }
+
+
+    function variableScript(bytes32 seed, uint256 tokenId) public view returns (string memory result) {
+        result = '<script type="text/javascript" id="snippet-contract-code">';
+        result = string(abi.encodePacked(result, "let seed='", StringsUtils.toHex(seed), "';"));
+        result = string(abi.encodePacked(result, "let tokenId='", StringsUpgradeable.toString(tokenId), "';"));
+        result = string(abi.encodePacked(result, "</script>"));
     }
 
     function inflateScript(string memory script) public view returns (string memory result, Inflate.ErrorCode err) {
