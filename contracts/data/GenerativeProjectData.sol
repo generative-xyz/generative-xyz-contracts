@@ -22,6 +22,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     address public _admin;
     address public _paramAddr;
     address public _generativeProjectAddr;
+    address public _bfs;
 
     function initialize(address admin, address paramAddr, address generativeProjectAddr) initializer public {
         _admin = admin;
@@ -54,6 +55,14 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
         // change Generative project address
         if (_generativeProjectAddr != newAddr) {
             _generativeProjectAddr = newAddr;
+        }
+    }
+
+    function changeBfs(address newAddr) external {
+        require(msg.sender == _admin && newAddr != address(0), Errors.ONLY_ADMIN_ALLOWED);
+
+        if (_bfs != newAddr) {
+            _bfs = newAddr;
         }
     }
 
@@ -219,6 +228,25 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                 "</html>"
             ));*/
         result = scripts;
+    }
+
+    function htmlScript(string memory) external view returns (string memory result){
+        result = "<script sandbox='allow-scripts' type='text/javascript'>";
+        result = string(abi.encodePacked(result, "</script>"));
+    }
+
+    function loadLibFileContent(string memory fileName) internal view returns (string memory script) {
+        script = "";
+        BFS bfs = BFS(_bfs);
+        // count file
+        address scriptProvider = IParameterControl(_paramAddr).getAddress("SCRIPT_PROVIDER");
+        uint256 count = bfs.count(scriptProvider, fileName);
+        count += 1;
+        // load and concat string
+        for (uint256 i = 0; i < count; i++) {
+            (bytes memory data, int256 nextChunk) = bfs.load(scriptProvider, fileName, i);
+            script = string(abi.encodePacked(script, string(data)));
+        }
     }
 
     function inflateScript(string memory script) public view returns (string memory result, Inflate.ErrorCode err) {
