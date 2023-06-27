@@ -552,13 +552,12 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         BFS bfs = BFS(_bfs);
         string memory fileName = "p5js@1.5.0.js";
         // count file
-        IParameterControl param = IParameterControl(_paramsAddress);
-        address scriptProvider = param.getAddress("SCRIPT_PROVIDER");
+        address scriptProvider = IParameterControl(_paramsAddress).getAddress("SCRIPT_PROVIDER");
         uint256 count = bfs.count(scriptProvider, fileName);
         count += 1;
         // load and concat string
         for (uint256 i = 0; i < count; i++) {
-            (bytes memory data, int256 nextChunk) = bfs.load(_admin, fileName, i);
+            (bytes memory data, int256 nextChunk) = bfs.load(scriptProvider, fileName, i);
             result = string(abi.encodePacked(result, string(data)));
         }
         result = string(abi.encodePacked(result, "</script>"));
@@ -571,8 +570,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         BFS bfs = BFS(_bfs);
         string memory fileName = "web3js@1.2.7.js";
         // count file
-        IParameterControl param = IParameterControl(_paramsAddress);
-        address scriptProvider = param.getAddress("SCRIPT_PROVIDER");
+        address scriptProvider = IParameterControl(_paramsAddress).getAddress("SCRIPT_PROVIDER");
         uint256 count = bfs.count(scriptProvider, fileName);
         count += 1;
         // load and concat string
