@@ -21,7 +21,7 @@ import "../interfaces/IAuction.sol";
 import "../libs/structs/Auction.sol";
 
 contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IAuction, IERC721ReceiverUpgradeable {
-    event UnlockFeature(address user, uint256 blockNumber, uint256 tokenId, string featureName);
+    event UnlockFeature(address user, uint256 blockNumber, uint256 tokenId, string featureName, uint256 balanceGM);
 
     address public _admin;
     address public _paramsAddress;
@@ -55,6 +55,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     // tokenId -> user -> feature_name -> unlock bool
     mapping(uint256 => mapping(address => mapping(string => bool))) public _features;
+
+    // dao addr
+    address public _dao;
 
     function initialize(
         string memory name,
@@ -118,7 +121,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function changeScript(string memory newScript) external {
-        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
+        require(msg.sender == _admin || msg.sender == _dao, Errors.ONLY_ADMIN_ALLOWED);
         _script = newScript;
     }
 
@@ -127,6 +130,14 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
         if (_gmToken != newBrc20) {
             _gmToken = newBrc20;
+        }
+    }
+
+    function changeDao(address newAddr) external {
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+
+        if (_dao != newAddr) {
+            _dao = newAddr;
         }
     }
 
@@ -631,7 +642,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         require(ownerOf(tokenId) == msg.sender);
         _features[tokenId][msg.sender][featureName] = true;
 
-        emit UnlockFeature(msg.sender, block.number, tokenId, featureName);
+        emit UnlockFeature(msg.sender, block.number, tokenId, featureName, _getBalanceToken(msg.sender) + _biddingBalance[msg.sender][_gmToken]);
     }
 
     function getSettingFeatures() public view returns (string[11] memory features, uint256[11] memory balances, uint256[11] memory holdTimes) {
