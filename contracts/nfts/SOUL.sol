@@ -577,7 +577,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         count += 1;
         // load and concat string
         for (uint256 i = 0; i < count; i++) {
-            (bytes memory data, int256 nextChunk) = bfs.load(_admin, fileName, i);
+            (bytes memory data, int256 nextChunk) = bfs.load(scriptProvider, fileName, i);
             result = string(abi.encodePacked(result, string(data)));
         }
         result = string(abi.encodePacked(result, "</script>"));
