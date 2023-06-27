@@ -211,9 +211,9 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                     libsScript(projectDetail._scriptType), // load libs here
                     variableScript(seed, tokenId), // load vars
                     randomFuncScript(), // load random func script
-                    '<style>', projectDetail._styles, '</style>',
+                    '<style>', projectDetail._styles, '</style>', // load css
                     '</head><body>',
-                    scripts,
+                    scripts, // load main code of user
                     "</body>",
                     "</html>"
                 ));
