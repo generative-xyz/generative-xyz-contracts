@@ -58,6 +58,8 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
     // dao addr
     address public _dao;
+    uint256 public _daoBlockReserve;
+    uint256 public _daoGMThreshold;
 
     function initialize(
         string memory name,
@@ -138,6 +140,22 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
 
         if (_dao != newAddr) {
             _dao = newAddr;
+        }
+    }
+
+    function changeDaoGmThreshold(uint256 newThreshold) external {
+        require(msg.sender == _admin || msg.sender == _dao, Errors.ONLY_ADMIN_ALLOWED);
+
+        if (_daoGMThreshold != newThreshold) {
+            _daoGMThreshold = newThreshold;
+        }
+    }
+
+    function changeDaoBlockReserve(uint256 newBlockReserve) external {
+        require(msg.sender == _admin || msg.sender == _dao, Errors.ONLY_ADMIN_ALLOWED);
+
+        if (_daoBlockReserve != newBlockReserve) {
+            _daoBlockReserve = newBlockReserve;
         }
     }
 
@@ -291,6 +309,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _getBlockReserve() internal view returns (uint256) {
+        if (_daoBlockReserve > 0) {
+            return _daoBlockReserve;
+        }
         uint256 blockReserve = IParameterControl(_paramsAddress).getUInt256("SOUL_GM_RESERVE");
         if (blockReserve == 0) {
             // ~block in 7 day, 1 block 10 minute
@@ -305,6 +326,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     }
 
     function _getTokenThreshold() private view returns (uint256) {
+        if (_daoGMThreshold > 0) {
+            return _daoGMThreshold;
+        }
         uint256 threshold = IParameterControl(_paramsAddress).getUInt256("SOUL_GM_THRESHOLD");
         if (threshold == 0) {
             threshold = 1 * 10 ** 18;
