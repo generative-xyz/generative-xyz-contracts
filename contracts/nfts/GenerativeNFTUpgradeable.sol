@@ -24,7 +24,8 @@ import "../services/BFS.sol";
 import "../data/GenerativeProjectData.sol";
 import "./BaseERC721OwnerSeedUpgradeable.sol";
 
-
+// Use this contract as Implementation for GenerativeNFTProxy
+// GenerativeNFT.sol now is deprecated version
 contract GenerativeNFTUpgradeable is Initializable, BaseERC721OwnerSeedUpgradeable, IGenerativeNFTUpgradeable {
     NFTProject.ProjectMinting public _project;
     mapping(address => bool) public _reserves;
