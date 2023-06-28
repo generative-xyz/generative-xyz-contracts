@@ -97,6 +97,15 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         }
     }
 
+    function changeProjectImplementation(address newAddr) external {
+        require(msg.sender == _admin && newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
+
+        // change
+        if (_projectImplementation != newAddr) {
+            _projectImplementation = newAddr;
+        }
+    }
+
     /*function withdraw(address erc20Addr, uint256 amount) external nonReentrant {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         address operatorTreasureAddress = msg.sender;
