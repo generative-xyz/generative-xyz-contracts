@@ -148,6 +148,19 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "getGenerativeNFTImpl",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "impl",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
