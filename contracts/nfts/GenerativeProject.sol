@@ -36,6 +36,8 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
 
     mapping(uint256 => NFTProject.Project) _projects;
 
+    address public _projectImplementation;
+
     function initialize(
         string memory name,
         string memory symbol,
@@ -370,5 +372,9 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
     onlyAllowedOperator(from)
     {
         super.safeTransferFrom(from, to, tokenId, data);
+    }
+
+    function getGenerativeNFTImpl() external view returns (address impl) {
+        impl = _projectImplementation;
     }
 }

@@ -7,4 +7,6 @@ interface IGenerativeProject is IERC721Upgradeable {
     function projectDetails(uint256 _projectId) external view returns (NFTProject.Project memory project);
 
     function completeProject(uint256 projectId) external;
+
+    function getGenerativeNFTImpl() external view returns (address impl);
 }
