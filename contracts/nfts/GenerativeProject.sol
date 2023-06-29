@@ -18,6 +18,8 @@ import "../libs/configs/GenerativeNFTConfigs.sol";
 import "../libs/configs/GENDaoConfigs.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/Royalty.sol";
+import "./GenerativeNFTProxy.sol";
+import "../interfaces/IGenerativeNFTUpgradeable.sol";
 
 
 contract GenerativeProject is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable, IERC2981Upgradeable, IGenerativeProject, DefaultOperatorFiltererUpgradeable {
@@ -106,26 +108,6 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         }
     }
 
-    /*function withdraw(address erc20Addr, uint256 amount) external nonReentrant {
-        require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
-        address operatorTreasureAddress = msg.sender;
-        IParameterControl _p = IParameterControl(_paramsAddress);
-        address operatorTreasureConfig = _p.getAddress(GENDaoConfigs.OPERATOR_TREASURE_ADDR);
-        if (operatorTreasureConfig != Errors.ZERO_ADDR) {
-            operatorTreasureAddress = operatorTreasureConfig;
-        }
-        bool success;
-        if (erc20Addr == address(0x0)) {
-            require(address(this).balance >= amount);
-            (success,) = operatorTreasureAddress.call{value : amount}("");
-            require(success);
-        } else {
-            IERC20Upgradeable tokenERC20 = IERC20Upgradeable(erc20Addr);
-            // transfer erc-20 token
-            require(tokenERC20.transfer(operatorTreasureAddress, amount));
-        }
-    }*/
-
     function withdraw(address receiver, address erc20Addr, uint256 amount) external nonReentrant {
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         bool success;
@@ -190,9 +172,13 @@ contract GenerativeProject is Initializable, ERC721PausableUpgradeable, Reentran
         _safeMint(project._creatorAddr, _currentProjectId);
 
         // set to generative nft
-        address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress(GenerativeProjectConfigs.GENERATIVE_NFT_TEMPLATE));
+        /* Deprecated
+         address generativeNFTAdd = ClonesUpgradeable.clone(_p.getAddress(GenerativeProjectConfigs.GENERATIVE_NFT_TEMPLATE));*/
+        GenerativeNFTProxy generativeNFT = new GenerativeNFTProxy();
+        address generativeNFTAdd = address(generativeNFT);
         _projects[_currentProjectId]._genNFTAddr = generativeNFTAdd;
-        IGenerativeNFT nft = IGenerativeNFT(generativeNFTAdd);
+        IGenerativeNFTUpgradeable nft = IGenerativeNFTUpgradeable(generativeNFTAdd);
+        nft.initialize("", "");
         nft.init(
             NFTProject.ProjectMinting(
                 address(this),
