@@ -61,6 +61,9 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
     uint256 public _daoBlockReserve;
     uint256 public _daoGMThreshold;
 
+    // tokenId => block.number last settle
+    mapping(uint256 => uint256) public _lastSettle;
+
     function initialize(
         string memory name,
         string memory symbol,
@@ -232,6 +235,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
         bytes32 seed = random.generateTokenHash(tokenId);
         _setTokenSeed(tokenId, seed);
         _mintAt[tokenId] = block.number;
+        _lastSettle[tokenId] = _mintAt[tokenId];
     }
 
     function _setTokenSeed(uint256 tokenId, bytes32 seed) internal {
@@ -365,6 +369,7 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             if (balanceOf(_auctions[tokenId].bidder) == 0) {
                 // only transfer when winner balance = 0 -> can not cheat on >= 1 auction
                 _transfer(address(this), _auctions[tokenId].bidder, _auctions[tokenId].tokenId);
+                _lastSettle[tokenId] = block.number;
             } else {
                 // refund bidding amount for winner
                 // add back to balance 
@@ -651,8 +656,14 @@ contract SOUL is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpgrad
             return false;
         }
         if (_getBalanceToken(user) + _biddingBalance[user][_gmToken] >= (balanceSetting * 10 ** 18)) {
-            if (block.number - _mintAt[tokenId] >= holdTimeSetting) {
-                return true;
+            if (_lastSettle[tokenId] > 0) {
+                if (block.number - _lastSettle[tokenId] >= holdTimeSetting) {
+                    return true;
+                }
+            } else {
+                if (block.number - _mintAt[tokenId] >= holdTimeSetting) {
+                    return true;
+                }
             }
         }
 
