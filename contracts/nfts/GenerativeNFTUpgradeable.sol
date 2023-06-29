@@ -229,16 +229,8 @@ contract GenerativeNFTUpgradeable is Initializable, BaseERC721OwnerSeedUpgradeab
         require(_exists(tokenId), Errors.INV_TOKEN);
         IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
         bytes32 seed = this.tokenIdToHash(tokenId);
-        /*return projectData.tokenBaseURI(_project._projectId, tokenId, seed);*/
         return projectData.tokenURI(_project._projectId, tokenId, seed);
     }
-
-    /*function tokenGenerativeURI(uint256 tokenId) public view returns (string memory) {
-        require(_exists(tokenId), Errors.INV_TOKEN);
-        IGenerativeProjectData projectData = IGenerativeProjectData(_projectDataContextAddr);
-        bytes32 seed = _tokenIdToHash(tokenId);
-        return projectData.tokenURI(_project._projectId, tokenId, seed);
-    }*/
 
     function projectIndex() external view returns (uint24) {
         return _project._index;
