@@ -15,19 +15,18 @@ class GenerativeNFTUpgradeable {
         this.senderPublicKey = senderPublicKey;
     }
 
-    async deploy(name: any, symbol: any) {
+    async deploy() {
         console.log("Network run", this.network, hardhatConfig.networks[this.network].url);
         // if (this.network == "local") {
         //     console.log("not run local");
         //     return;
         // }
+
         const nft = await ethers.getContractFactory("GenerativeNFTUpgradeable");
-        const proxy = await upgrades.deployProxy(nft, [name, symbol], {
-            initializer: 'initialize(string, string)',
-        });
-        await proxy.deployed();
-        console.log("GenerativeProject deployed at proxy:", proxy.address);
-        return proxy.address;
+        const nftDeployed = await nft.deploy();
+
+        console.log("GenerativeNFTUpgradeable template contract deployed:", nftDeployed.address);
+        return nftDeployed.address;
     }
 
     getContract(contractAddress: any) {

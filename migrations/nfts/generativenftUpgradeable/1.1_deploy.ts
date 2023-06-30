@@ -9,7 +9,7 @@ import {GenerativeNFTUpgradeable} from "./GenerativeNFT";
             return;
         }
         const nft = new GenerativeNFTUpgradeable(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-        const address = await nft.deploy("Template", "Template");
+        const address = await nft.deploy();
         console.log("%s GenerativeNFTUpgradeable address: %s", process.env.NETWORK, address);
     } catch (e) {
         // Deal with the fact the chain failed

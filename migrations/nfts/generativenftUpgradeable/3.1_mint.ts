@@ -18,6 +18,8 @@ import {GenerativeNFTUpgradeable} from "./GenerativeNFT";
 
         const nft = new GenerativeNFTUpgradeable(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
         a.project = await nft.getProject(a.parent._genNFTAddr);
+        console.log(a.project);
+        
         for (let i = 0; i < 1; i++) {
             const tx = await nft.mint(a.parent._genNFTAddr, a.project._mintPrice, process.env.PUBLIC_KEY, ["0x1"], 0);
             console.log("tx: ", tx?.transactionHash, tx?.status);
