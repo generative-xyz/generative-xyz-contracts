@@ -22,10 +22,10 @@ contract BaseERC721OwnerSeedUpgradeable is Initializable, ERC721PausableUpgradea
     string public _nameCol;
     uint256 public _royalty;// % royalty second sale
 
-    function initialize(
+    function __BaseERC721OwnerSeedUpgradeable_init( 
         string memory name,
         string memory symbol
-    ) initializer virtual public {
+    ) internal onlyInitializing {
         __ERC721_init(name, symbol);
         __ReentrancyGuard_init();
         __ERC721Pausable_init();

@@ -16,4 +16,9 @@ interface IGenerativeNFTUpgradeable is IBaseERC721OwnerSeedUpgradeable {
     function projectIndex() external view returns (uint24);
 
     function projectAddress() external view returns (address);
+
+    function initialize(
+        string memory name,
+        string memory symbol
+    ) external;
 }

@@ -30,8 +30,8 @@ contract GenerativeNFTUpgradeable is Initializable, BaseERC721OwnerSeedUpgradeab
     NFTProject.ProjectMinting public _project;
     mapping(address => bool) public _reserves;
 
-    function initialize(string memory name, string memory symbol) initializer override(BaseERC721OwnerSeedUpgradeable, IBaseERC721OwnerSeedUpgradeable) public {
-        super.initialize(name, symbol);
+    function initialize(string memory name, string memory symbol) initializer override public {
+        __BaseERC721OwnerSeedUpgradeable_init(name, symbol);
     }
 
     function owner() public view override returns (address) {
