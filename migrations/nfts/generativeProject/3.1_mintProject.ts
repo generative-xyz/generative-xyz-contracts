@@ -8,7 +8,7 @@ import dayjs = require("dayjs");
 
 (async () => {
     try {
-        if (process.env.NETWORK != "tc_testnet") {
+        if (process.env.NETWORK != "local") {
             console.log("wrong network");
             return;
         }
@@ -32,7 +32,7 @@ import dayjs = require("dayjs");
                     _image: "ipfs://QmZha95v86iME98rpxrJWbHerK3JjEHKkiGpdS4NgZKjdb",
                     _social: JSON.parse(JSON.stringify({
                         _web: "https://generative.xyz",
-                        _twitter: "https://twitter.com/thaibao56",
+                        _twitter: "https://twitter.com/asf",
                         _discord: "https://discord.com/channels/123/123",
                         _medium: "",
                         _instagram: "",
