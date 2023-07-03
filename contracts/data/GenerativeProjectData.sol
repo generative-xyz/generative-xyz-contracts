@@ -173,8 +173,9 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
     function tokenHTML(uint256 projectId, uint256 tokenId, bytes32 seed) external view returns (string memory result) {
         IGenerativeProject projectContract = IGenerativeProject(_generativeProjectAddr);
         NFTProject.Project memory projectDetail = projectContract.projectDetails(projectId);
-
-        if (projectDetail._scripts.length == 1) {
+        if (projectDetail._scripts.length == 0) {
+            result = "";
+        } else if (projectDetail._scripts.length == 1) {
             // for old format which used simple template file
             string memory scripts = "";
             string memory inflate;
