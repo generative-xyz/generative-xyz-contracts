@@ -204,7 +204,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
                     }
                 }
             }
-            result = string(abi.encodePacked(
+            scripts = string(abi.encodePacked(
                     "<html>",
                     "<head><meta charset='UTF-8'>",
                     libsScript(projectDetail._scriptType), // load libs here
