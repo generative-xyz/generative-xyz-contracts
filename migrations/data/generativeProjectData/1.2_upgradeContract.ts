@@ -2,7 +2,7 @@ import {GenerativeProjectData} from "./generativeProjectData";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "mumbai") {
+        if (process.env.NETWORK != "tc_testnet") {
             console.log("wrong network");
             return;
         }

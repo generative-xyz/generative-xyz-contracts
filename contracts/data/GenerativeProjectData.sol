@@ -274,7 +274,7 @@ contract GenerativeProjectData is OwnableUpgradeable, IGenerativeProjectData {
 
     function inflate(bytes memory data) internal view returns (string memory result, Inflate.ErrorCode err) {
         bytes memory buff;
-        (err, buff) = Inflate.puff(data, data.length * 5);
+        (err, buff) = Inflate.puff(data, data.length * 20);
         if (err == Inflate.ErrorCode.ERR_NONE) {
             uint256 breakLen = 0;
             while (true) {
