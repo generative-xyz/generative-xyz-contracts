@@ -277,6 +277,20 @@ class Soul {
         return await temp?.nftContract.methods.available(tokenId).call(tx);
     }
 
+    async _auctions(contractAddress: any, tokenId: any) {
+        let temp = this.getContract(contractAddress);
+        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+
+        //the transaction
+        const tx = {
+            from: this.senderPublicKey,
+            to: contractAddress,
+            nonce: nonce,
+        }
+
+        return await temp?.nftContract.methods._auctions(tokenId).call(tx);
+    }
+
     async biddable(contractAddress: any, tokenId: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
@@ -291,9 +305,9 @@ class Soul {
         return await temp?.nftContract.methods.biddable(tokenId).call(tx);
     }
 
-    async mint(contractAddress: any, to: any, totalGM: any, signature: any, gas: any) {
+    async mint(contractAddress: any, to: any, totalGM: any, signature: any, gas: any, nonce: any) {
         let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+        // const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
         const fun = temp?.nftContract.methods.mint(to, totalGM, signature);
         //the transaction
@@ -324,6 +338,7 @@ class Soul {
             nonce: nonce,
             gas: gas,
             data: fun.encodeABI(),
+            gasPrice: ethers.utils.parseUnits("10", "gwei"),
         }
 
         if (tx.gas == 0) {
@@ -333,9 +348,9 @@ class Soul {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async createAuction(contractAddress: any, tokenId: any, gas: any) {
+    async createAuction(contractAddress: any, tokenId: any, gas: any, nonce: any) {
         let temp = this.getContract(contractAddress);
-        const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+        // const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
         const fun = temp?.nftContract.methods.createAuction(tokenId);
         //the transaction
@@ -345,6 +360,7 @@ class Soul {
             nonce: nonce,
             gas: gas,
             data: fun.encodeABI(),
+            gasPrice: ethers.utils.parseUnits("10", "gwei"),
         }
 
         if (tx.gas == 0) {
