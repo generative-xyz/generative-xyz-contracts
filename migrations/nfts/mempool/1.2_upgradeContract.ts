@@ -2,7 +2,7 @@ import {Mempool} from "./mempool";
 
 (async () => {
     try {
-        if (process.env.NETWORK != "tc_testnet") {
+        if (process.env.NETWORK != "polygon") {
             console.log("wrong network");
             return;
         }
