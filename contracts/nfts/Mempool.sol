@@ -106,7 +106,7 @@ contract Mempool is Initializable, ERC721PausableUpgradeable, ReentrancyGuardUpg
     function variableScript(bytes32 seed, uint256 tokenId) public view returns (string memory result) {
         result = '<script id="snippet-contract-code" type="text/javascript">';
         result = string(abi.encodePacked(result, "let seed='", StringsUtils.toHex(seed), "';"));
-        result = string(abi.encodePacked(result, "let TOKEN_ID='", StringsUpgradeable.toString(tokenId), "';", 'const urlParams=new URLSearchParams(window.location.search),tempTokenID=urlParams.get("TOKEN_ID");null!==tempTokenID&&NaN!==tempTokenID&&""!==tempTokenID&&(TOKEN_ID=parseInt(tempTokenID);'));
+        result = string(abi.encodePacked(result, "let TOKEN_ID='", StringsUpgradeable.toString(tokenId), "';"));
         result = string(abi.encodePacked(result, "</script>"));
     }
 
