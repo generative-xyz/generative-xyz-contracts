@@ -17,9 +17,6 @@ class Mempool {
 
     async deployUpgradeable(name: string, symbol: string,
                             adminAddress: any,
-                            paramAdd: any,
-                            randomizer: any,
-                            bfs: any,
     ) {
         if (this.network == "local") {
             console.log("not run local");
@@ -28,8 +25,8 @@ class Mempool {
 
         const contract = await ethers.getContractFactory("Mempool");
         console.log("Mempool.deploying ...")
-        const proxy = await upgrades.deployProxy(contract, [name, symbol, adminAddress, paramAdd, randomizer, bfs], {
-            initializer: 'initialize(string, string, address, address, address, address)',
+        const proxy = await upgrades.deployProxy(contract, [name, symbol, adminAddress], {
+            initializer: 'initialize(string, string, address)',
         });
         await proxy.deployed();
         console.log("Mempool deployed at proxy:", proxy.address);
