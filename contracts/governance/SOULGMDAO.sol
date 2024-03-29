@@ -87,7 +87,7 @@ contract SOULGMDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable
         require(msg.sender == _admin, Errors.ONLY_ADMIN_ALLOWED);
         if (_votingToken != _new) {
             _votingToken = _new;
-            token = IVotesUpgradeable(_new);
+            token = IERC5805Upgradeable(_new);
         }
     }
 
@@ -197,6 +197,15 @@ contract SOULGMDAO is GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable
     override(GovernorUpgradeable)
     {
         super._execute(proposalId, targets, values, calldatas, descriptionHash);
+    }
+
+    function cancel(
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory calldatas,
+        bytes32 descriptionHash
+    ) public virtual override(GovernorUpgradeable, GovernorCompatibilityBravoUpgradeable) returns (uint256) {
+        return super._cancel(targets, values, calldatas, descriptionHash);
     }
 
     function _cancel(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)

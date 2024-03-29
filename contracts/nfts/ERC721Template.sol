@@ -95,4 +95,13 @@ contract ERC721Template is ERC721, ERC721URIStorage, IERC2981, Ownable {
         receiver = this.owner();
         royaltyAmount = _salePrice * 1000 / 10000;
     }
+
+    function supportsInterface(bytes4 interfaceId)
+    public
+    view
+    override(IERC165, ERC721, ERC721URIStorage)
+    returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
 }

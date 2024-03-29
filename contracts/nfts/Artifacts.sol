@@ -121,4 +121,13 @@ contract Artifacts is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradea
         receiver = this.owner();
         royaltyAmount = _salePrice * 1000 / 10000;
     }
+
+    function supportsInterface(bytes4 interfaceId)
+    public
+    view
+    override(IERC165Upgradeable, ERC721URIStorageUpgradeable, ERC721Upgradeable)
+    returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
 }
