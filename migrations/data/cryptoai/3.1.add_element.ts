@@ -2,7 +2,7 @@ import {initConfig} from "./index";
 import {CryptoAIData} from "./cryptoAIData";
 // @ts-ignore
 import * as data from './datajson/data-compressed.json';
-import {DNA, ELEMENT, KEY_DNA, TRAITS_DNA} from "./data";
+import {DNA, ELEMENT, KEY_DNA, PALLET_COLOR, TRAITS_DNA} from "./data";
 
 async function main() {
     if (process.env.NETWORK != "local") {
@@ -93,6 +93,10 @@ async function main() {
         // await dataContract.addDNAVariant(address, 0, DNA.ROBOT, data.DNA.Robot.names, data.DNA.Robot.traits, data.DNA.Robot.positions);
         // await dataContract.addDNAVariant(address, 0, DNA.HUMAN, data.DNA.Human.names, data.DNA.Human.traits, data.DNA.Human.positions);
         // await dataContract.addDNAVariant(address, 0, DNA.MONKEY, data.DNA.Monkey.names, data.DNA.Monkey.traits, data.DNA.Monkey.positions);
+
+        //Add Pallet Color
+        await dataContract.addPallets(address, 0, PALLET_COLOR);
+
 
     } catch (error) {
         console.log("Error checking positions:", error);

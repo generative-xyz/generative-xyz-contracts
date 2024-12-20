@@ -47,4 +47,8 @@ library CryptoAIStructs {
         uint256 dna;
     }
 
+    struct Pallet {
+        uint8[] color;
+    }
+
 }
