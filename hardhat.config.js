@@ -84,14 +84,14 @@ module.exports = {
             url: process.env.FANTOM_TESTNET_API_URL,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
         },
-        harmony: {
-            url: process.env.HARMONY_MAINNET_API_URL,
-            accounts: [`0x${process.env.PRIVATE_KEY}`],
-        },
-        harmony_testnet: {
-            url: process.env.HARMONY_TESTNET_API_URL,
-            accounts: [`0x${process.env.PRIVATE_KEY}`],
-        },
+        // harmony: {
+        //     url: process.env.HARMONY_MAINNET_API_URL,
+        //     accounts: [`0x${process.env.PRIVATE_KEY}`],
+        // },
+        // harmony_testnet: {
+        //     url: process.env.HARMONY_TESTNET_API_URL,
+        //     accounts: [`0x${process.env.PRIVATE_KEY}`],
+        // },
         kardia: {
             url: process.env.KARDIA_MAINNET_API_URL,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
@@ -124,6 +124,8 @@ module.exports = {
             url: process.env.TC_MAINNET_API_URL,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
             timeout: 100_000,
+        }, base_mainnet: {
+            url: process.env.BASE_MAINNET, accounts: [`0x${process.env.PRIVATE_KEY}`], timeout: 100_000,
         }
     },
     mocha: {
