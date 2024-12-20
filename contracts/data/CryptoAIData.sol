@@ -215,6 +215,21 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         items[_DNAType].positions = _positions;
     }
 
+    function addDNAVariantRobot(string[] memory _DNAName, uint16[] memory _rarities) public
+    onlyDeployer unsealed {
+        items["Robot"].names = _DNAName;
+        items["Robot"].rarities = _rarities;
+        items["Robot"].c_rarities = _rarities;
+        items["Robot"].positions = new uint16[][](_DNAName.length);
+    }
+
+    function addDNAVariantRobotPosition(uint16[][] memory _positions, uint256 index, uint256 length) public
+    onlyDeployer unsealed {
+        for (uint256 i = index; i < length; i++) {
+            items["Robot"].positions[i] = _positions[i - index];
+        }
+    }
+
     /*function getDNAVariant(string memory _DNAType) public view returns (CryptoAIStructs.ItemDetail memory) {
         CryptoAIStructs.ItemDetail memory item = items[_DNAType];
         return item;
