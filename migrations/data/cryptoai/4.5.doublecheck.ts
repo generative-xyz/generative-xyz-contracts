@@ -21,7 +21,7 @@ async function main() {
     const num = parseInt(args[0]);
 
     // Keep original duplicate checking
-    const attrsChecked = [];
+    const attrsChecked: string[] = [];
     const attrsDuplicated = [];
 
     // Add rarity tracking
@@ -79,7 +79,7 @@ async function main() {
     }
 
     // Write duplicates file
-    const duplicatesPath = "migrations/data/datajson/duplicates.json";
+    const duplicatesPath = "migrations/data/cryptoai/datajson/duplicates.json";
     console.log("Writing duplicates to:", duplicatesPath);
     console.log("Total items checked:", attrsChecked.length);
     console.log("Total duplicates found:", attrsDuplicated.length);
@@ -98,7 +98,7 @@ async function main() {
         });
     });
 
-    const rarityPath = "migrations/data/datajson/data-rarity.json";
+    const rarityPath = "migrations/data/cryptoai/datajson/data-rarity.json";
     console.log("Writing rarity data to:", rarityPath);
     console.log("Total tokens analyzed:", totalTokens);
     await fs.writeFile(rarityPath, JSON.stringify(rarityData, null, 2));
