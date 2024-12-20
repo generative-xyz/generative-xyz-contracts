@@ -19,25 +19,25 @@ async function main() {
         const address = configaaa["dataContractAddress"];
 
         // Check positions for each element
-        data.elements.Mouth.positions.forEach((pos: any[], index: string | number) => {
+        data.elements.Mouth.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null) === null) {
                 throw new Error(`Null position found in Mouth element - Name: ${data.elements.Mouth.names[index]}, Trait: ${data.elements.Mouth.traits[index]}`);
             }
         });
 
-        data.elements.Body.positions.forEach((pos: any[], index: string | number) => {
+        data.elements.Body.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null) === null) {
                 throw new Error(`Null position found in Body element - Name: ${data.elements.Body.names[index]}, Trait: ${data.elements.Body.traits[index]}`);
             }
         });
 
-        data.elements.Eyes.positions.forEach((pos: any[], index: string | number) => {
+        data.elements.Eyes.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null) === null) {
                 throw new Error(`Null position found in Eyes element - Name: ${data.elements.Eyes.names[index]}, Trait: ${data.elements.Eyes.traits[index]}`);
             }
         });
 
-        data.elements.Head.positions.forEach((pos: any[], index: string | number) => {
+        data.elements.Head.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null) === null) {
                 throw new Error(`Null position found in Head element - Name: ${data.elements.Head.names[index]}, Trait: ${data.elements.Head.traits[index]}`);
             }
@@ -49,37 +49,37 @@ async function main() {
         await dataContract.addItem(address, 0, ELEMENT.BODY, data.elements.Body.names, data.elements.Body.traits, data.elements.Body.positions);
 
         // Check positions for each DNA variant
-        data.DNA.Dog.positions.forEach((pos: any[], index: string | number) => {
+        data.DNA.Dog.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null) === null) {
                 throw new Error(`Null position found in Dog DNA - Name: ${data.DNA.Dog.names[index]}, Trait: ${data.DNA.Dog.traits[index]}`);
             }
         });
 
-        data.DNA.Cat.positions.forEach((pos: any[], index: string | number) => {
+        data.DNA.Cat.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null) === null) {
                 throw new Error(`Null position found in Cat DNA - Name: ${data.DNA.Cat.names[index]}, Trait: ${data.DNA.Cat.traits[index]}`);
             }
         });
 
-        data.DNA.Frog.positions.forEach((pos: any[], index: string | number) => {
+        data.DNA.Frog.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null) === null) {
                 throw new Error(`Null position found in Frog DNA - Name: ${data.DNA.Frog.names[index]}, Trait: ${data.DNA.Frog.traits[index]}`);
             }
         });
 
-        data.DNA.Robot.positions.forEach((pos: any[], index: string | number) => {
+        data.DNA.Robot.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null) === null) {
                 throw new Error(`Null position found in Robot DNA - Name: ${data.DNA.Robot.names[index]}, Trait: ${data.DNA.Robot.traits[index]}`);
             }
         });
 
-        data.DNA.Human.positions.forEach((pos: any[], index: string | number) => {
+        data.DNA.Human.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null) === null) {
                 throw new Error(`Null position found in Human DNA - Name: ${data.DNA.Human.names[index]}, Trait: ${data.DNA.Human.traits[index]}`);
             }
         });
 
-        data.DNA.Monkey.positions.forEach((pos: any[], index: string | number) => {
+        data.DNA.Monkey.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null)) {
                 throw new Error(`Null position found in Monkey DNA - Name: ${data.DNA.Monkey.names[index]}, Trait: ${data.DNA.Monkey.traits[index]}`);
             }
