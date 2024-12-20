@@ -112,7 +112,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         // agent is minted on nft collection, but not unlock render svg by rarity info
         require(_cryptoAIAgentAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(unlockedTokens[tokenId].tokenID == 0, Errors.TOKEN_ID_UNLOCKED);
-
+        IMintableAgent nft = IMintableAgent(_cryptoAIAgentAddr);
+        require(nft.isUnlockedAgent(tokenId), Errors.TOKEN_ID_NOT_EXISTED);
         unlockedTokens[tokenId].tokenID = tokenId;
     }
 
