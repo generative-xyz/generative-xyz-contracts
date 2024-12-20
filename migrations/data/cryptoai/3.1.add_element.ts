@@ -93,9 +93,11 @@ async function main() {
         // await dataContract.addDNAVariant(address, 0, DNA.DOG, data.DNA.Dog.names, data.DNA.Dog.traits, data.DNA.Dog.positions);
         // await dataContract.addDNAVariant(address, 0, DNA.CAT, data.DNA.Cat.names, data.DNA.Cat.traits, data.DNA.Cat.positions);
         // await dataContract.addDNAVariant(address, 0, DNA.FROG, data.DNA.Frog.names, data.DNA.Frog.traits, data.DNA.Frog.positions);
-        // await dataContract.addDNAVariant(address, 0, DNA.ROBOT, data.DNA.Robot.names, data.DNA.Robot.traits, data.DNA.Robot.positions);
         // await dataContract.addDNAVariant(address, 0, DNA.HUMAN, data.DNA.Human.names, data.DNA.Human.traits, data.DNA.Human.positions);
         // await dataContract.addDNAVariant(address, 0, DNA.MONKEY, data.DNA.Monkey.names, data.DNA.Monkey.traits, data.DNA.Monkey.positions);
+        // await dataContract.addDNAVariantRobot(address, 0, data.DNA.Robot.names, data.DNA.Robot.traits);
+        // await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(0, 5), 0, 5);
+        // await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(5, 10), 5, 10);
 
 
     } catch (error) {
