@@ -48,9 +48,6 @@ async function main() {
         await dataContract.addItem(address, 0, ELEMENT.EYES, data.elements.Eyes.names, data.elements.Eyes.traits, data.elements.Eyes.positions);
         await dataContract.addItem(address, 0, ELEMENT.BODY, data.elements.Body.names, data.elements.Body.traits, data.elements.Body.positions);
 
-        // //ADD DNA
-        await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
-
         // Check positions for each DNA variant
         data.DNA.Dog.positions.forEach((pos: any[], index: string | number) => {
             if (pos.find(p => p === null) === null) {
@@ -87,7 +84,8 @@ async function main() {
                 throw new Error(`Null position found in Monkey DNA - Name: ${data.DNA.Monkey.names[index]}, Trait: ${data.DNA.Monkey.traits[index]}`);
             }
         });
-
+        // //ADD DNA
+        await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
         //ADD DNA Variant
         await dataContract.addDNAVariant(address, 0, DNA.DOG, data.DNA.Dog.names, data.DNA.Dog.traits, data.DNA.Dog.positions);
         await dataContract.addDNAVariant(address, 0, DNA.CAT, data.DNA.Cat.names, data.DNA.Cat.traits, data.DNA.Cat.positions);
