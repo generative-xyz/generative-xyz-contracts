@@ -19,7 +19,7 @@ async function main() {
         const address = configaaa["dataContractAddress"];
 
         //Add Pallet Color
-        await dataContract.setPallets(address, 0, PALLET_COLOR);
+        // await dataContract.setPallets(address, 0, PALLET_COLOR);
 
         // Check positions for each element
         data.elements.Mouth.positions.forEach((pos: any[], index: number) => {
@@ -46,7 +46,7 @@ async function main() {
             }
         });
 
-        await dataContract.addItem(address, 0, ELEMENT.MOUTH, data.elements.Mouth.names, data.elements.Mouth.traits, data.elements.Mouth.positions);
+        // await dataContract.addItem(address, 0, ELEMENT.MOUTH, data.elements.Mouth.names, data.elements.Mouth.traits, data.elements.Mouth.positions);
         // await dataContract.addItem(address, 0, ELEMENT.HEAD, data.elements.Head.names, data.elements.Head.traits, data.elements.Head.positions);
         // await dataContract.addItem(address, 0, ELEMENT.EYES, data.elements.Eyes.names, data.elements.Eyes.traits, data.elements.Eyes.positions);
         // await dataContract.addItem(address, 0, ELEMENT.BODY, data.elements.Body.names, data.elements.Body.traits, data.elements.Body.positions);
