@@ -306,35 +306,51 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     function cryptoAIImage(uint256 tokenId)
     public view
     returns (bytes memory) {
-        require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
-
+//        require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
+//
         uint16[][] memory data = new uint16[][](5);
+        uint8[][] memory data1 = new uint8[][](5);
         for (uint256 i = 0; i < partsName.length; i++) {
             if (i == 0) {
                 data[i] = items[DNA_TYPES.names[unlockedTokens[tokenId].dna]].positions[unlockedTokens[tokenId].traits[i]];
             } else {
                 data[i] = items[partsName[i]].positions[unlockedTokens[tokenId].traits[i]];
             }
+            uint256 k = 0;
+            for (uint256 j; j < data[i].length; j++) {
+                console.log(1111);
+                if (j == 0 && j % 2 != 0) {
+                    console.log(2);
+                    data1[i][k] = uint8(data[i][j]);
+                    k++;
+                } else {
+                    console.log(3);
+                    uint8[] memory p = pallets[data[i][j]];
+                    data1[i][k] = p[0];
+                    k++;
+                    data1[i][k] = p[1];
+                    k++;
+                    data1[i][k] = p[2];
+                    k++;
+                }
+            }
         }
         bytes memory pixels = new bytes(2304);
-        uint256 totalLength = data[0].length + data[1].length + data[2].length + data[3].length + data[4].length;
+        uint256 totalLength = data1[0].length + data1[1].length + data1[2].length + data1[3].length + data1[4].length;
         uint256 idx;
         uint8[] memory pos;
-        // x, y, pallet index
-        for (uint256 i = 0; i < totalLength; i += 3) {
-            uint8[] memory pallet = pallets[i + 2];
-
-            uint256 offset = data[0].length;
+        for (uint256 i = 0; i < totalLength; i += 5) {
+            uint256 offset = data1[0].length;
             uint256 prevOffset = 0;
             for (uint256 j = 0; j < 5; j++) {
                 if (i < offset) {
-                    pos = data[j];
+                    pos = data1[j];
                     idx = i - prevOffset;
                     break;
                 }
                 prevOffset = offset;
                 if (j < 4) {
-                    offset += data[j + 1].length;
+                    offset += data1[j + 1].length;
                 }
             }
             uint16 p = (uint16(pos[idx + 1]) * GRID_SIZE + uint16(pos[idx])) << 2;
