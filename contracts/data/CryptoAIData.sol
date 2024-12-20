@@ -223,19 +223,22 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     function addItem(
         string memory _itemType,
         string[] memory _names,
-        uint16[] memory _rarities,
+        uint256[] memory _rarities,
         uint256[][] memory _positions
     ) public
     onlyDeployer unsealed
     {
         items[_itemType].names = _names;
-        console.log(_names.length);
         items[_itemType].rarities = _rarities;
-        console.log(_rarities.length);
         items[_itemType].c_rarities = _rarities;
-        console.log(_rarities.length);
-        items[_itemType].positions = _positions;
-        console.log(_positions.length);
+
+        items[_itemType].positions = new uint256[][](_positions.length);
+        for (uint256 i = 0; i < _positions.length; i++) {
+            items[_itemType].positions[i] = new uint256[](_positions[i].length);
+            for (uint256 j = 0; j < _positions[i].length; j++) {
+                items[_itemType].positions[i][j] = _positions[i][j]; // Assign values
+            }
+        }
     }
 
     /*function getItem(string memory _itemType) public view returns (CryptoAIStructs.ItemDetail memory) {

@@ -9,16 +9,9 @@ library CryptoAIStructs {
 
     struct ItemDetail {
         string[] names;
-        uint256[] rarities;  // 0-200
+        uint256[] rarities;
         uint256[] c_rarities;
-        uint256[][] positions; // x,y,r,g,b stored sequentially
-    }
-
-    struct ItemDetailAdd {
-        string ele_type;
-        string[] names;
-        uint16[] rarities;  // 0-200
-        uint8[][] positions; // x,y,r,g,b stored sequentially
+        uint256[][] positions; // x,y, index of pallets stored sequentially
     }
 
     struct DNA_TYPE {
