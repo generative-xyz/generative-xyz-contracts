@@ -38,7 +38,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     // assets
     mapping(uint256 => CryptoAIStructs.Token) private unlockedTokens;
     mapping(string => CryptoAIStructs.ItemDetail) private items;
-    mapping(uint16 => CryptoAIStructs.Pallet) private pallets;
+
+    uint8[][] private pallets;
     CryptoAIStructs.DNA_TYPE private DNA_TYPES;// cat dog human
     mapping(bytes32 => bool) private usedPairs;
 
@@ -206,13 +207,12 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         return DNA_TYPES;
     }*/
 
-    function addDNAVariant(string memory _DNAType, string[] memory _DNAName, uint16[] memory _rarities, uint8[][] memory _positions) public
+    function addDNAVariant(string memory _DNAType, string[] memory _DNAName, uint16[] memory _rarities, uint256[][] memory _positions) public
     onlyDeployer unsealed {
         items[_DNAType].names = _DNAName;
         items[_DNAType].rarities = _rarities;
         items[_DNAType].c_rarities = _rarities;
         items[_DNAType].positions = _positions;
-        emit CryptoAIStructs.DNAVariantAdded(_DNAType, _DNAName, _rarities, _positions);
     }
 
     function addBatchDNAVariant(CryptoAIStructs.ItemDetailAdd[] memory dna) public
@@ -234,15 +234,18 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         string memory _itemType,
         string[] memory _names,
         uint16[] memory _rarities,
-        uint8[][] memory _positions
+        uint256[][] memory _positions
     ) public
     onlyDeployer unsealed
     {
         items[_itemType].names = _names;
+        console.log(_names.length);
         items[_itemType].rarities = _rarities;
+        console.log(_rarities.length);
         items[_itemType].c_rarities = _rarities;
+        console.log(_rarities.length);
         items[_itemType].positions = _positions;
-        emit CryptoAIStructs.ItemAdded(_itemType, _names, _rarities, _positions);
+        console.log(_positions.length);
     }
 
     /*function getItem(string memory _itemType) public view returns (CryptoAIStructs.ItemDetail memory) {
@@ -264,11 +267,9 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         }
     }
 
-    function addPallets(CryptoAIStructs.Pallet[][] memory _pallets) public
+    function setPallets(uint8[][] memory _pallets) public
     onlyDeployer unsealed {
-        for(uint16 i = 0 ; i < _pallets.length ; i++) {
-            pallets[i] = _pallets[i];
-        }
+        pallets = _pallets;
     }
 
 
@@ -319,7 +320,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     returns (bytes memory) {
         require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
 
-        uint8[][] memory data = new uint8[][](5);
+        uint256[][] memory data = new uint256[][](5);
         for (uint256 i = 0; i < partsName.length; i++) {
             if (i == 0) {
                 data[i] = items[DNA_TYPES.names[unlockedTokens[tokenId].dna]].positions[unlockedTokens[tokenId].traits[i]];
@@ -331,8 +332,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         uint256 totalLength = data[0].length + data[1].length + data[2].length + data[3].length + data[4].length;
         uint256 idx;
         uint8[] memory pos;
-        for (uint256 i = 0; i < totalLength; i += 5) {
-            uint256 offset = data[0].length;
+        for (uint256 i = 0; i < totalLength; i += 3) {
+            /*uint256 offset = data[0].length;
             uint256 prevOffset = 0;
             for (uint256 j = 0; j < 5; j++) {
                 if (i < offset) {
@@ -350,7 +351,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
             pixels[p] = bytes1(pos[idx + 2]);
             pixels[p + 1] = bytes1(pos[idx + 3]);
             pixels[p + 2] = bytes1(pos[idx + 4]);
-            pixels[p + 3] = bytes1(0xFF);
+            pixels[p + 3] = bytes1(0xFF);*/
             /*TODO:
              assembly {
                 let posPtr := add(pos, 0x20)
