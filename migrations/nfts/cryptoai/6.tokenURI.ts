@@ -8,9 +8,13 @@ async function main() {
     }
 
     let config = await initConfig();
-
+    const args = process.argv.slice(2);
+    if (args.length == 0) {
+        console.log("missing number")
+        return;
+    }
     const dataContract = new CryptoAI(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-    const data = await dataContract.tokenURI(config.contractAddress, 1);
+    const data = await dataContract.tokenURI(config.contractAddress, args[0]);
     console.log(data);
 }
 
