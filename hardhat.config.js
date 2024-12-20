@@ -124,7 +124,8 @@ module.exports = {
             url: process.env.TC_MAINNET_API_URL,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
             timeout: 100_000,
-        }, base_mainnet: {
+        },
+        base_mainnet: {
             url: process.env.BASE_MAINNET, accounts: [`0x${process.env.PRIVATE_KEY}`], timeout: 100_000,
         }
     },

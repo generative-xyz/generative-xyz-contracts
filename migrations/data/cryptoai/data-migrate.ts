@@ -14,33 +14,53 @@ interface PixelData {
   positions: number[];
 }
 
+// Create a palette map to store unique colors
+const colorPalette: number[][] = [];
+
+const getColorIndex = (color: number[]): number => {
+  const colorString = `rgb(${color[0]},${color[1]},${color[2]})`;
+  let index = colorPalette.findIndex(c => c[0] === color[0] && c[1] === color[1] && c[2] === color[2]);
+  if (index === -1) {
+    index = colorPalette.length;
+    colorPalette.push(color);
+  }
+  return index;
+};
+
 const convertSvgToPositions = (svgContent: string, filePath: string): number[] => {
   const parsed = parseSync(svgContent);
   const positions: number[] = [];
   const errors: string[] = [];
-  
+
   const processRect = (rect: any) => {
     try {
       const x = parseInt(rect.attributes.x);
       const y = parseInt(rect.attributes.y);
 
-      // Extract RGB values from fill color
-      const fill = rect.attributes.fill || '#000000';
-      const rgb = fill.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
+      // Get color from attributes or default
+      const fill = rect.attributes.fill || [0,0,0];
 
-      if (!rgb) {
-        throw new Error('Invalid RGB color format');
+      // Extract RGB values
+      let [r,g,b] = [0,0,0];
+      if (fill.startsWith('#')) {
+        // Convert hex to rgb
+        const hex = fill.substring(1);
+        r = parseInt(hex.substring(0,2), 16);
+        g = parseInt(hex.substring(2,4), 16);
+        b = parseInt(hex.substring(4,6), 16);
+      } else if (fill.startsWith('rgb')) {
+        // Parse rgb format
+        [r,g,b] = fill.match(/\d+/g).map(Number);
       }
 
-      const r = parseInt(rgb[1], 16);
-      const g = parseInt(rgb[2], 16); 
-      const b = parseInt(rgb[3], 16);
-
-      if (isNaN(x) || isNaN(y) || isNaN(r) || isNaN(g) || isNaN(b)) {
-        throw new Error('Invalid number values');
+      if (isNaN(x) || isNaN(y)) {
+        throw new Error('Invalid coordinate values');
       }
 
-      positions.push(x, y, r, g, b);
+      // Get palette index for the rgb color
+      const colorIndex = getColorIndex([r,g,b]);
+
+      positions.push(x, y, colorIndex);
     } catch (error) {
       // Only store unique error messages for each file
       const errorMsg = `Error processing rect in ${filePath}: ${error.message}`;
@@ -68,19 +88,19 @@ const convertSvgToPositions = (svgContent: string, filePath: string): number[] =
       if (fs.existsSync(PATH_OUTPUT_ERRORS)) {
         existingErrors = JSON.parse(fs.readFileSync(PATH_OUTPUT_ERRORS, 'utf-8'));
       }
-      
+
       // Filter out duplicate errors before writing
       const uniqueErrors = Array.from(new Set([...existingErrors, ...errors]));
-      
+
       fs.writeFileSync(
-        PATH_OUTPUT_ERRORS, 
-        JSON.stringify(uniqueErrors, null, 2)
+          PATH_OUTPUT_ERRORS,
+          JSON.stringify(uniqueErrors, null, 2)
       );
     } catch (e) {
       // If file doesn't exist or is invalid JSON, write only new errors
       fs.writeFileSync(
-        PATH_OUTPUT_ERRORS,
-        JSON.stringify(errors, null, 2) 
+          PATH_OUTPUT_ERRORS,
+          JSON.stringify(errors, null, 2)
       );
     }
   }
@@ -94,7 +114,9 @@ const convertAssetsToJson = (assetsPath: string): Record<string, Record<string, 
       throw new Error(`Assets directory not found at: ${assetsPath}`);
     }
 
-    const allData: Record<string, Record<string, any>> = {};
+    const allData: Record<string, Record<string, any>> = {
+      palette: colorPalette // Add palette to output data
+    };
 
     // Use glob to find all SVG files in subdirectories
     const svgFiles = glob.sync(path.join(assetsPath, '**/*.svg'));

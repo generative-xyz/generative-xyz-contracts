@@ -2,7 +2,7 @@ import {initConfig} from "./index";
 import {CryptoAIData} from "./cryptoAIData";
 // @ts-ignore
 import * as data from './datajson/data-compressed.json';
-import {DNA, ELEMENT, KEY_DNA, TRAITS_DNA} from "./data";
+import {DNA, ELEMENT, KEY_DNA, PALLET_COLOR, TRAITS_DNA} from "./data";
 
 async function main() {
     if (process.env.NETWORK != "local") {
@@ -17,6 +17,9 @@ async function main() {
 
         //ADD Element
         const address = configaaa["dataContractAddress"];
+
+        //Add Pallet Color
+        await dataContract.setPallets(address, 0, PALLET_COLOR);
 
         // Check positions for each element
         data.elements.Mouth.positions.forEach((pos: any[], index: number) => {
@@ -43,7 +46,7 @@ async function main() {
             }
         });
 
-        // await dataContract.addItem(address, 0, ELEMENT.MOUTH, data.elements.Mouth.names, data.elements.Mouth.traits, data.elements.Mouth.positions);
+        await dataContract.addItem(address, 0, ELEMENT.MOUTH, data.elements.Mouth.names, data.elements.Mouth.traits, data.elements.Mouth.positions);
         // await dataContract.addItem(address, 0, ELEMENT.HEAD, data.elements.Head.names, data.elements.Head.traits, data.elements.Head.positions);
         // await dataContract.addItem(address, 0, ELEMENT.EYES, data.elements.Eyes.names, data.elements.Eyes.traits, data.elements.Eyes.positions);
         // await dataContract.addItem(address, 0, ELEMENT.BODY, data.elements.Body.names, data.elements.Body.traits, data.elements.Body.positions);
@@ -93,6 +96,7 @@ async function main() {
         // await dataContract.addDNAVariant(address, 0, DNA.ROBOT, data.DNA.Robot.names, data.DNA.Robot.traits, data.DNA.Robot.positions);
         // await dataContract.addDNAVariant(address, 0, DNA.HUMAN, data.DNA.Human.names, data.DNA.Human.traits, data.DNA.Human.positions);
         // await dataContract.addDNAVariant(address, 0, DNA.MONKEY, data.DNA.Monkey.names, data.DNA.Monkey.traits, data.DNA.Monkey.positions);
+
 
     } catch (error) {
         console.log("Error checking positions:", error);
