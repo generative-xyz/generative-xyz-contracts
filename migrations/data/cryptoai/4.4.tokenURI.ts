@@ -20,7 +20,7 @@ async function main() {
         return;
     }
     const data = await dataContract.tokenURI(address, parseInt(args[0]));
-    const path = "./migrations/token_" + args[0] + ".json";
+    const path = "./migrations/data/cryptoai/token_" + args[0] + ".json";
     console.log("path", path);
     await fs.writeFile(path, data);
 }
