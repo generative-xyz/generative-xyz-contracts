@@ -320,8 +320,11 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         uint256 totalLength = data[0].length + data[1].length + data[2].length + data[3].length + data[4].length;
         uint256 idx;
         uint8[] memory pos;
+        // x, y, pallet index
         for (uint256 i = 0; i < totalLength; i += 3) {
-            /*uint256 offset = data[0].length;
+            uint8[] pallet = pallets[i + 2];
+
+            uint256 offset = data[0].length;
             uint256 prevOffset = 0;
             for (uint256 j = 0; j < 5; j++) {
                 if (i < offset) {
@@ -339,7 +342,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
             pixels[p] = bytes1(pos[idx + 2]);
             pixels[p + 1] = bytes1(pos[idx + 3]);
             pixels[p + 2] = bytes1(pos[idx + 4]);
-            pixels[p + 3] = bytes1(0xFF);*/
+            pixels[p + 3] = bytes1(0xFF);
             /*TODO:
              assembly {
                 let posPtr := add(pos, 0x20)
