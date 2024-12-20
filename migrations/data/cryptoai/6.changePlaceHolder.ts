@@ -1,4 +1,4 @@
-import {initConfig} from "../../index";
+import {initConfig} from "./index";
 import {CryptoAIData} from "./cryptoAIData";
 import {promises as fs} from "fs";
 

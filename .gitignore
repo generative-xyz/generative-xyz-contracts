@@ -45,4 +45,6 @@ package-lock.json
 
 .idea
 
-.openzeppelin/unknown-22213-regtest.json
+.openzeppelin/unknown-22213-regtest.jsonpac
+
+artifacts

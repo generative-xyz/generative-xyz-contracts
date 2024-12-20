@@ -1,5 +1,5 @@
 import {CryptoAIData} from "./cryptoAIData";
-import {initConfig} from "../../index";
+import {initConfig} from "./index";
 
 async function main() {
     if (process.env.NETWORK != "local") {

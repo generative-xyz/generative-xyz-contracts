@@ -1,5 +1,5 @@
 import {promises as fs} from "fs";
-import {initConfig} from "../../index";
+import {initConfig} from "./index";
 import {CryptoAIData} from "./cryptoAIData";
 
 async function main() {

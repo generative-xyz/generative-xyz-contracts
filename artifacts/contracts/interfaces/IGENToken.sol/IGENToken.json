@@ -167,6 +167,19 @@
       "type": "event"
     },
     {
+      "inputs": [],
+      "name": "CLOCK_MODE",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -228,6 +241,19 @@
           "internalType": "uint256",
           "name": "",
           "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "clock",
+      "outputs": [
+        {
+          "internalType": "uint48",
+          "name": "",
+          "type": "uint48"
         }
       ],
       "stateMutability": "view",
@@ -307,7 +333,7 @@
       "inputs": [
         {
           "internalType": "uint256",
-          "name": "blockNumber",
+          "name": "timepoint",
           "type": "uint256"
         }
       ],
@@ -331,7 +357,7 @@
         },
         {
           "internalType": "uint256",
-          "name": "blockNumber",
+          "name": "timepoint",
           "type": "uint256"
         }
       ],

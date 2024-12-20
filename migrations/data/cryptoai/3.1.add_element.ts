@@ -1,4 +1,4 @@
-import {initConfig} from "../../index";
+import {initConfig} from "./index";
 import {CryptoAIData} from "./cryptoAIData";
 import * as data from './datajson/data-compressed.json';
 import {DNA, ELEMENT, KEY_DNA, TRAITS_DNA} from "./data";

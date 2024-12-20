@@ -1,5 +1,5 @@
 import {CryptoAIData} from "./cryptoAIData";
-import {initConfig} from "../../index";
+import {initConfig} from "./index";
 
 // import {DATA_DNA, DNA} from "./data";
 

@@ -3,7 +3,7 @@ import * as path from "path";
 import {DNA} from "./data";
 
 const {ethers, upgrades} = require("hardhat");
-const hardhatConfig = require("../../hardhat.config");
+const hardhatConfig = require("../../../hardhat.config");
 
 class CryptoAIData {
     network: string;
@@ -31,10 +31,9 @@ class CryptoAIData {
         const proxy = await upgrades.deployProxy(contract, [deployerAddr], {
             initializer: 'initialize(address)',
         });
-        await proxy.waitForDeployment();
-        const proxyAddr = await proxy.getAddress();
-        console.log("CryptoAIData deployed at proxy:", proxyAddr);
-        return proxyAddr;
+        await proxy.deployed();
+        console.log("CryptoAIData deployed at proxy:", proxy.address);
+        return proxy.address;
     }
 
     getContract(contractAddress: any, contractName: any = "./artifacts/contracts/data/CryptoAIData.sol/CryptoAIData.json") {
