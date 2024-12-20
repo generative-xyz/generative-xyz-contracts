@@ -45,16 +45,12 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     string internal PLACEHOLDER_IMAGE;
 
     modifier unsealed() {
-        /* TODO: uncomment when deploy
         require(!_contractSealed, Errors.CONTRACT_SEALED);
-        */
         _;
     }
 
     modifier _sealed() {
-        /* TODO: uncomment when deploy
         require(_contractSealed, Errors.CONTRACT_SEALED);
-        */
         _;
     }
 
@@ -64,9 +60,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     }
 
     modifier onlyAIAgentContract() {
-        /* TODO: uncomment when deploy
         require(msg.sender == _cryptoAIAgentAddr, Errors.ONLY_AGENT_CONTRACT);
-        */
         _;
     }
 
