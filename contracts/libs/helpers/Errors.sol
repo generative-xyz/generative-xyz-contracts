@@ -58,4 +58,5 @@ library Errors {
     string public constant TOKEN_ID_UNLOCKED = "502";
     string public constant USED_PAIRs = "503";
     string public constant TOKEN_ID_NOT_EXISTED = "504";
+    string public constant WEIGHT_OUT = "505";
 }

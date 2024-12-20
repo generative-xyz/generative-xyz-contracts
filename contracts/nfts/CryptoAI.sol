@@ -93,7 +93,7 @@ contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeab
     }
 
     function getAgentRarity(uint256 _agentId) external view returns (uint256) {
-        return _agentId + 1151;
+        return _agentId + 1511;
     }
 
     function _burn(uint256 tokenId) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable) {

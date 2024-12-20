@@ -10,7 +10,7 @@ import "../interfaces/ICryptoAIData.sol";
 import "../interfaces/IAgentNFT.sol";
 import "../libs/structs/CryptoAIStructs.sol";
 import "../libs/helpers/Errors.sol";
-//import "hardhat/console.sol";
+import "hardhat/console.sol";
 
 contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     uint256 public constant TOKEN_LIMIT = 0x3E8; // 0x2710
@@ -426,7 +426,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     }
 
     function selectTrait(uint256[] memory c_rarities, uint256[] memory rarities, uint256 weight, uint256 tokenId, uint256 attempt) internal view returns (uint256 index) {
-        // require(weight >= 1511 && weight <= 10000, "Weight out of range");
+        require(weight >= 1511 && weight <= 10000, Errors.WEIGHT_OUT);
         uint256 normalizedWeight;
         uint256[] memory cumulativeRarity = new uint256[](c_rarities.length);
         assembly {
