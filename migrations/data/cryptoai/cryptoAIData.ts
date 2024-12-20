@@ -56,7 +56,7 @@ class CryptoAIData {
         const contractUpdated = await ethers.getContractFactory("CryptoAIData");
         console.log('Upgrading CryptoAIData... by proxy ' + proxyAddress);
         const tx = await upgrades.upgradeProxy(proxyAddress, contractUpdated);
-        console.log('CryptoAIData upgraded on tx address ' + await tx.getAddress());
+        console.log('CryptoAIData upgraded on tx address ' + await tx.address);
         return tx;
     }
 
