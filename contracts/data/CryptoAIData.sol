@@ -207,7 +207,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         return DNA_TYPES;
     }*/
 
-    function addDNAVariant(string memory _DNAType, string[] memory _DNAName, uint16[] memory _rarities, uint256[][] memory _positions) public
+    function addDNAVariant(string memory _DNAType, string[] memory _DNAName, uint16[] memory _rarities, uint16[][] memory _positions) public
     onlyDeployer unsealed {
         items[_DNAType].names = _DNAName;
         items[_DNAType].rarities = _rarities;
@@ -224,21 +224,14 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         string memory _itemType,
         string[] memory _names,
         uint256[] memory _rarities,
-        uint256[][] memory _positions
+        uint16[][] memory _positions
     ) public
     onlyDeployer unsealed
     {
         items[_itemType].names = _names;
         items[_itemType].rarities = _rarities;
         items[_itemType].c_rarities = _rarities;
-
-        items[_itemType].positions = new uint256[][](_positions.length);
-        for (uint256 i = 0; i < _positions.length; i++) {
-            items[_itemType].positions[i] = new uint256[](_positions[i].length);
-            for (uint256 j = 0; j < _positions[i].length; j++) {
-                items[_itemType].positions[i][j] = _positions[i][j]; // Assign values
-            }
-        }
+        items[_itemType].positions = _positions;
     }
 
     /*function getItem(string memory _itemType) public view returns (CryptoAIStructs.ItemDetail memory) {
@@ -300,7 +293,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     returns (bytes memory) {
         require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
 
-        uint256[][] memory data = new uint256[][](5);
+        uint16[][] memory data = new uint16[][](5);
         for (uint256 i = 0; i < partsName.length; i++) {
             if (i == 0) {
                 data[i] = items[DNA_TYPES.names[unlockedTokens[tokenId].dna]].positions[unlockedTokens[tokenId].traits[i]];

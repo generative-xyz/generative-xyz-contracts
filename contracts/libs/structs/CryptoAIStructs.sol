@@ -11,7 +11,7 @@ library CryptoAIStructs {
         string[] names;
         uint256[] rarities;
         uint256[] c_rarities;
-        uint256[][] positions; // x,y, index of pallets stored sequentially
+        uint16[][] positions; // x,y, index of pallets stored sequentially
     }
 
     struct DNA_TYPE {
