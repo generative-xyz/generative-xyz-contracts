@@ -51,11 +51,8 @@ async function main() {
             }
         });
 
-        await dataContract.addBatchItem(address, 0, DATA_ELEMENTS_1);
-        await dataContract.addBatchItem(address, 0, DATA_ELEMENTS_2);
-
-        // //ADD DNA
-        await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
+        // await dataContract.addBatchItem(address, 0, DATA_ELEMENTS_1);
+        // await dataContract.addBatchItem(address, 0, DATA_ELEMENTS_2);
 
         // Check positions for each DNA variant
         data.DNA.Dog.positions.forEach((pos: any[], index: number) => {
@@ -93,11 +90,13 @@ async function main() {
                 throw new Error(`Null position found in Monkey DNA - Name: ${data.DNA.Monkey.names[index]}, Trait: ${data.DNA.Monkey.traits[index]}`);
             }
         });
+        // //ADD DNA
+        await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
 
         //ADD DNA Variant
-        await dataContract.addBatchDNAVariant(address, 0,DATA_DNA_VARIANT_1);
-        await dataContract.addBatchDNAVariant(address, 0,DATA_DNA_VARIANT_2);
-        await dataContract.addBatchDNAVariant(address, 0,DATA_DNA_VARIANT_3);
+        // await dataContract.addBatchDNAVariant(address, 0,DATA_DNA_VARIANT_1);
+        // await dataContract.addBatchDNAVariant(address, 0,DATA_DNA_VARIANT_2);
+        // await dataContract.addBatchDNAVariant(address, 0,DATA_DNA_VARIANT_3);
 
     } catch (error) {
         console.log("Error checking positions:", error);
