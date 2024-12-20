@@ -322,7 +322,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         uint8[] memory pos;
         // x, y, pallet index
         for (uint256 i = 0; i < totalLength; i += 3) {
-            uint8[] pallet = pallets[i + 2];
+            uint8[] memory pallet = pallets[i + 2];
 
             uint256 offset = data[0].length;
             uint256 prevOffset = 0;
