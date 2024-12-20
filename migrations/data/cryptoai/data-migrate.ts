@@ -4,9 +4,9 @@ import * as path from 'path';
 const { parseSync } = require('svgson');
 
 // Use absolute path to testAssets folder
-const PATH_ASSETS = path.join(__dirname, '../assets');
-const PATH_OUTPUT = 'migrations/data/datajson/data-compressed.json';
-const PATH_OUTPUT_ERRORS = 'migrations/data/datajson/data-errors.json';
+const PATH_ASSETS = path.join(__dirname, '../cryptoai/assets');
+const PATH_OUTPUT = 'migrations/data/cryptoai/datajson/data-compressed.json';
+const PATH_OUTPUT_ERRORS = 'migrations/data/cryptoai/datajson/data-errors.json';
 
 interface PixelData {
   name: string;
