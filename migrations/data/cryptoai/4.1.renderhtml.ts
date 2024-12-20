@@ -30,7 +30,7 @@ async function main() {
             console.log(i, " failed");
         }
     }
-    const path = "./migrations/testhtml.html";
+    const path = "./migrations/data/cryptoai/testhtml.html";
     console.log("path", path);
     await fs.writeFile(path, htmls);
 
