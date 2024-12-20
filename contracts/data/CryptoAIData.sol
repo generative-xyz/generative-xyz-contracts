@@ -126,6 +126,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         require(unlockedTokens[tokenId].weight == 0, Errors.TOKEN_ID_UNLOCKED);
         unlockedTokens[tokenId].weight = nft.getAgentRarity(tokenId);
         */
+        /* Test */
         unlockedTokens[tokenId].tokenID = tokenId;
         unlockedTokens[tokenId].weight = tokenId + 1511;
         if (unlockedTokens[tokenId].weight >= 10000) {
@@ -134,12 +135,12 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
 
         unlockedTokens[tokenId].dna = selectTrait(DNA_TYPES.c_rarities, DNA_TYPES.rarities, unlockedTokens[tokenId].weight, tokenId, 0);
         partsName[0] = DNA_TYPES.names[unlockedTokens[tokenId].dna];
-        if (DNA_TYPES.rarities[unlockedTokens[tokenId].dna] < 300) {
+        /*if (DNA_TYPES.rarities[unlockedTokens[tokenId].dna] < 300) {
             uint256 dnaIndex = unlockedTokens[tokenId].dna;
             uint256 rarity = DNA_TYPES.c_rarities[dnaIndex];
             rarity = rarity * 99 / 100;
             DNA_TYPES.c_rarities[dnaIndex] = rarity > 0 ? rarity : 1;
-        }
+        }*/
 
         bytes32 pairHash;
         uint256 maxAttempts = 5;
@@ -214,7 +215,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
 
     function addBatchDNAVariant(CryptoAIStructs.ItemDetailAdd[] memory dna) public
     onlyDeployer unsealed {
-        for(uint i = 0  ; i < dna.length; i++) {
+        for (uint i = 0; i < dna.length; i++) {
             items[dna[i].ele_type].names = dna[i].names;
             items[dna[i].ele_type].rarities = dna[i].rarities;
             items[dna[i].ele_type].c_rarities = dna[i].rarities;
@@ -253,7 +254,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     ) public
     onlyDeployer unsealed
     {
-        for(uint i = 0 ; i < elements.length ; i++) {
+        for (uint i = 0; i < elements.length; i++) {
             items[elements[i].ele_type].names = elements[i].names;
             items[elements[i].ele_type].rarities = elements[i].rarities;
             items[elements[i].ele_type].c_rarities = elements[i].rarities;
