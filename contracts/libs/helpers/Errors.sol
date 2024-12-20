@@ -15,6 +15,10 @@ library Errors {
     string public constant INV_ADD = "100";
     string public constant ONLY_ADMIN_ALLOWED = "101";
     string public constant ONLY_CREATOR = "102";
+    string public constant ONLY_DEPLOYER = "103";
+    string public constant ONLY_AGENT_CONTRACT = "104";
+    string public constant INVALID_ITEM_TYPE = "105";
+    string public constant ITEM_NOT_EXIST = "106";
 
     // validation error
     string public constant MISSING_NAME = "200";
@@ -48,4 +52,10 @@ library Errors {
     string public constant DAO_VESTING_ERROR_ADDR = "402";
     string public constant VESTING_TIME_LOCK = "403";
     string public constant VESTING_REMAIN = "404";
+
+    string public constant CONTRACT_SEALED = "500";
+    string public constant TOKEN_ID_NOT_UNLOCKED = "501"; // agent not really minted on AI agent contract -> still in queue because not reach threadhold
+    string public constant TOKEN_ID_UNLOCKED = "502";
+    string public constant USED_PAIRs = "503";
+    string public constant TOKEN_ID_NOT_EXISTED = "504";
 }

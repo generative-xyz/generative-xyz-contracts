@@ -1,0 +1,292 @@
+<canvas id="canvas"></canvas>
+<script>
+  document.body.style.margin = 0;
+  document.body.style.padding = 0;
+  let TokenID = "52"; // hard code
+
+  function cyrb128($) {
+    let _ = 1779033703,
+      u = 3144134277,
+      i = 1013904242,
+      l = 2773480762;
+    for (let n = 0, r; n < $.length; n++) (_ = u ^ Math.imul(_ ^ (r = $.charCodeAt(n)), 597399067)), (u = i ^ Math.imul(u ^ r, 2869860233)), (i = l ^ Math.imul(i ^ r, 951274213)), (l = _ ^ Math.imul(l ^ r, 2716044179));
+    return (_ = Math.imul(i ^ (_ >>> 18), 597399067)), (u = Math.imul(l ^ (u >>> 22), 2869860233)), (i = Math.imul(_ ^ (i >>> 17), 951274213)), (l = Math.imul(u ^ (l >>> 19), 2716044179)), [(_ ^ u ^ i ^ l) >>> 0, (u ^ _) >>> 0, (i ^ _) >>> 0, (l ^ _) >>> 0];
+  }
+
+  function sfc32($, _, u, i) {
+    return function () {
+      (u >>>= 0), (i >>>= 0);
+      var l = (($ >>>= 0) + (_ >>>= 0)) | 0;
+      return ($ = _ ^ (_ >>> 9)), (_ = (u + (u << 3)) | 0), (u = ((u = (u << 21) | (u >>> 11)) + (l = (l + (i = (i + 1) | 0)) | 0)) | 0), (l >>> 0) / 4294967296;
+    };
+  }
+
+  let mathRand = sfc32(...cyrb128(TokenID));
+  function darkenColor(hexColor, brightnessReduction = 50) {
+    let r = parseInt(hexColor.slice(1, 3), 16);
+    let g = parseInt(hexColor.slice(3, 5), 16);
+    let b = parseInt(hexColor.slice(5, 7), 16);
+
+    let max = Math.max(r, g, b),
+      min = Math.min(r, g, b);
+    let h, s;
+    let brightness = max;
+
+    let d = max - min;
+    s = max === 0 ? 0 : d / max;
+
+    if (max === min) {
+      h = 0;
+    } else {
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+        case g:
+          h = (b - r) / d + 2;
+          break;
+        case b:
+          h = (r - g) / d + 4;
+          break;
+      }
+      h /= 6;
+    }
+
+    brightness = Math.max(0, brightness - brightnessReduction);
+
+    let i = Math.floor(h * 6);
+    let f = h * 6 - i;
+    let p = brightness * (1 - s);
+    let q = brightness * (1 - f * s);
+    let t = brightness * (1 - (1 - f) * s);
+
+    switch (i % 6) {
+      case 0:
+        (r = brightness), (g = t), (b = p);
+        break;
+      case 1:
+        (r = q), (g = brightness), (b = p);
+        break;
+      case 2:
+        (r = p), (g = brightness), (b = t);
+        break;
+      case 3:
+        (r = p), (g = q), (b = brightness);
+        break;
+      case 4:
+        (r = t), (g = p), (b = brightness);
+        break;
+      case 5:
+        (r = brightness), (g = p), (b = q);
+        break;
+    }
+
+    return (
+      "#" +
+      [r, g, b]
+        .map((x) => {
+          const hex = Math.round(x).toString(16);
+          return hex.length === 1 ? "0" + hex : hex;
+        })
+        .join("")
+    );
+  }
+
+  class Vector {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+
+  class Ball {
+    constructor(x, y, color, SIZE) {
+      this.location = new Vector(x, y);
+      this.canvasSize = SIZE;
+      this.cellSize = Math.floor(map(PTS, ptsMin, ptsMax, this.canvasSize / 12, this.canvasSize / 16));
+      this.color = color;
+    }
+
+    display(ctx) {
+      ctx.strokeStyle = S_COL;
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.rect(this.location.x - this.cellSize / 2, this.location.y - this.cellSize / 2, this.cellSize, this.cellSize);
+      ctx.fill();
+      ctx.stroke();
+    }
+  }
+
+  let canvas = document.getElementById("canvas");
+  let ctx = canvas.getContext("2d");
+
+  let PTS;
+  let SIZE = Math.min(window.innerWidth, window.innerHeight);
+  let RES = SIZE / 1000;
+  let MG = SIZE * 0.1;
+  let S_WGHT = 2 * RES;
+  let S_COL = "0";
+  const ptsMin = 10;
+  const ptsMax = 30;
+
+  let cols, rows;
+  let nodes = [];
+
+  const COLORS = [
+    ["#4B8DA3", "#F0E68C", "#FFDAB9", "#DDA0DD", "#FFF0F5"],
+    ["#775A3D", "#6B8E23"],
+    ["#355a7a", "#008B8B", "#E0FFFF", "#B0E0E6", "#AFEEEE"],
+    ["#FF4500", "#FFD700", "#FFA500"],
+    ["#556B2F", "#228B22", "#9ACD32", "#3CB371", "#90EE90"],
+    ["#A9A9A9", "#D3D3D3", "#C0C0C0"],
+    ["#CA3600", "#FF6347", "#FFB6C1", "#FFA07A", "#FFC0CB"],
+    ["#8A6200", "#F4A460", "#DAA520", "#CD853F", "#D2691E"],
+    ["#070797", "#4169E1", "#4AD2FA", "#B887FF"],
+    ["#407070", "#6C6464", "#7DA6A6", "#BEBEBE"],
+    ["#74AAB0", "#AFEEEE", "#E0FFFF", "#BBFFFF"],
+    ["#A83D3D", "#FF7F50", "#F08080", "#FF6347", "#FA8072"],
+    ["#C7B6A2", "#D2D2D2", "#E0E0E0", "#F0F0F0", "#FFFFFF"],
+    ["#311DAA", "#00FF00", "#00FFFF", "#FF00FF", "#FF7F00", "#FFD700"],
+    ["#AD9D8E", "#D3A880", "#F4D0A0", "#F5D5A4", "#FFF0E0"],
+    ["#0066CC", "#0099CC", "#66CCFF", "#99FFFF", "#CCFFFF"],
+    ["#663399", "#7A4499", "#9966CC", "#BB88FF", "#DDA0DD"],
+    ["#008000", "#00CC00", "#00FF00", "#99FF66", "#CCFF99"],
+    ["#C28C38", "#D9A665", "#E9C48A", "#F2D8AF", "#F5E7D2"],
+    ["#C71585", "#FF1493", "#FFB6C1", "#FF69B4", "#DB7093"],
+  ];
+
+  ctx.lineWidth = S_WGHT;
+
+  PTS = ptsMin + Math.floor(mathRand() * (ptsMax - ptsMin));
+
+  let thisPalette = COLORS[Math.floor(mathRand() * COLORS.length)];
+
+  let colsMin = Math.floor(map(PTS, ptsMin, ptsMax, 2, 4));
+  cols = colsMin + Math.floor(mathRand() * 5);
+
+  let ptsTemp = PTS;
+  nodes = [];
+  let ptsRows = [];
+  let ptsCols = [];
+  let colStyle = mathRand();
+  let colorIndex = 0;
+
+  for (let i = 0; i < cols; i++) {
+    let colsTemp = Math.abs(cols - i - 0.0);
+    let ptsRowMin = Math.floor((ptsTemp / colsTemp) * (0.75 + mathRand() * (0.25 + (cols - i) * 0.1)));
+    let ptsRowMax = Math.floor((ptsTemp / colsTemp) * (1 + mathRand() * (0.15 + (cols - i) * 0.1)));
+    let ptsRow = i !== cols - 1 ? Math.floor(ptsRowMin + mathRand() * (ptsRowMax - ptsRowMin)) : ptsTemp;
+
+    ptsRows.push(ptsRow);
+
+    ptsTemp = ptsTemp - ptsRow;
+  }
+
+  if (colStyle > 0.66) {
+    for (let i = 0; i < cols; i++) {
+      let columnColorIndex = Math.floor(mathRand() * thisPalette.length);
+      for (let j = 0; j < ptsRows[i]; j++) {
+        ptsCols.push(thisPalette[columnColorIndex]);
+      }
+    }
+  } else if (colStyle > 0.33) {
+    let maxRows = Math.max(...ptsRows);
+    let rowColors = Array(maxRows)
+      .fill()
+      .map(() => thisPalette[Math.floor(mathRand() * thisPalette.length)]);
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < ptsRows[i]; j++) {
+        ptsCols.push(rowColors[j]);
+      }
+    }
+  } else {
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < ptsRows[i]; j++) {
+        ptsCols.push(thisPalette[Math.floor(mathRand() * thisPalette.length)]);
+      }
+    }
+  }
+
+  function setup() {
+    canvas.width = SIZE;
+    canvas.height = SIZE;
+
+    colorIndex = 0;
+    for (let i = 0; i < cols; i++) {
+      let ptsRow = ptsRows[i];
+      let posX = (SIZE - 2 * MG) / (cols + 1);
+      nodes[i] = [];
+      for (let j = 0; j < ptsRow; j++) {
+        let k = colStyle > 0.66 ? j : colStyle > 0.33 ? i : i * (j + 1);
+        let posY = (SIZE - 2 * MG) / (ptsRow + 1);
+        nodes[i][j] = new Ball(MG + posX * (i + 1), MG + posY * (j + 1), ptsCols[colorIndex], SIZE);
+        colorIndex++;
+      }
+    }
+  }
+
+  function draw() {
+    ctx.fillStyle = darkenColor(thisPalette[0]);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.lineWidth = S_WGHT / 2;
+    ctx.strokeStyle = S_COL;
+
+    for (let i = 0; i < nodes.length - 1; i++) {
+      for (let j = 0; j < nodes[i].length; j++) {
+        for (let k = 0; k < nodes[i + 1].length; k++) {
+          ctx.beginPath();
+          ctx.moveTo(nodes[i][j].location.x, nodes[i][j].location.y);
+          ctx.lineTo(nodes[i + 1][k].location.x, nodes[i + 1][k].location.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    ctx.lineWidth = S_WGHT;
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = 0; j < nodes[i].length; j++) {
+        nodes[i][j].display(ctx);
+      }
+    }
+  }
+
+  function map(value, start1, stop1, start2, stop2) {
+    return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "k" || event.key === "K") {
+      saveCanvasAs4K();
+    }
+    if (event.key === "s" || event.key === "S") {
+      saveCanvas(`Locked CryptoAgents #${TokenID}.png`);
+    }
+  });
+
+  function saveCanvas(filename) {
+    const link = document.createElement("a");
+    link.download = filename;
+    link.href = canvas.toDataURL();
+    link.click();
+  }
+
+  function saveCanvasAs4K() {
+    const oldRES = RES;
+    SIZE = 4000;
+    RES = SIZE / 1000;
+    S_WGHT = 2 * RES;
+    setup();
+    draw();
+    saveCanvas(`Locked CryptoAgents #${TokenID} 4K.png`);
+
+    RES = oldRES;
+    SIZE = RES * 1000;
+    S_WGHT = 2 * RES;
+    setup();
+    draw();
+  }
+
+  setup();
+  draw();
+</script>
