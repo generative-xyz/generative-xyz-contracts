@@ -45,7 +45,16 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     string internal PLACEHOLDER_IMAGE;
 
     modifier unsealed() {
+        /* TODO: uncomment when deploy
         require(!_contractSealed, Errors.CONTRACT_SEALED);
+        */
+        _;
+    }
+
+    modifier _sealed() {
+        /* TODO: uncomment when deploy
+        require(_contractSealed, Errors.CONTRACT_SEALED);
+        */
         _;
     }
 
@@ -98,40 +107,38 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
 
     function sealContract()
     external
-    unsealed {
+    unsealed onlyDeployer {
         _contractSealed = true;
     }
 
     function mintAgent(uint256 tokenId)
     external
-    onlyAIAgentContract
+    onlyAIAgentContract _sealed
     () {
         // agent is minted on nft collection, but not unlock render svg by rarity info
-        /* TODO: uncomment when deploy
         require(_cryptoAIAgentAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
-        require(unlockedTokens[tokenId].tokenID == 0, Errors.TOKEN_ID_NOT_UNLOCKED);
-        */
+        require(unlockedTokens[tokenId].tokenID == 0, Errors.TOKEN_ID_UNLOCKED);
+
         unlockedTokens[tokenId].tokenID = tokenId;
     }
 
     function unlockRenderAgent(uint256 tokenId)
     external
-    onlyAIAgentContract
+    onlyAIAgentContract _sealed
     () {
         // agent is minted on nft collection, and unlock render svg by rarity info
         IMintableAgent nft = IMintableAgent(_cryptoAIAgentAddr);
-        /* TODO: uncomment when deploy
-        require(_cryptoAIAgentAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
+        /* TODO: uncomment when deploy */
         require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
         require(unlockedTokens[tokenId].weight == 0, Errors.TOKEN_ID_UNLOCKED);
         unlockedTokens[tokenId].weight = nft.getAgentRarity(tokenId);
-        */
+
         /* Test */
-        unlockedTokens[tokenId].tokenID = tokenId;
+        /*unlockedTokens[tokenId].tokenID = tokenId;
         unlockedTokens[tokenId].weight = tokenId + 1511;
         if (unlockedTokens[tokenId].weight >= 10000) {
             unlockedTokens[tokenId].weight = 10000;
-        }
+        }*/
 
         unlockedTokens[tokenId].dna = selectTrait(DNA_TYPES.c_rarities, DNA_TYPES.rarities, unlockedTokens[tokenId].weight, tokenId, 0);
         partsName[0] = DNA_TYPES.names[unlockedTokens[tokenId].dna];
@@ -308,9 +315,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     function cryptoAIImage(uint256 tokenId)
     public view
     returns (bytes memory) {
-        /* TODO: uncomment when deploy
         require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
-        */
+
         uint8[][] memory data = new uint8[][](5);
         for (uint256 i = 0; i < partsName.length; i++) {
             if (i == 0) {
@@ -381,9 +387,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     public view
         // onlyAIAgentContract
     returns (string memory result) {
-        /* TODO: uncomment when deploy
-        require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].rarity > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
-        */
+        require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
+
         bytes memory pixels = cryptoAIImage(tokenId);
         string memory svg = '';
         bytes memory buffer = new bytes(8);
