@@ -34,14 +34,9 @@ contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeab
     function initialize(
         string memory name,
         string memory symbol,
-        address admin,
-        address deployer,
-        address paramsAddress,
-        address random,
-        address cryptoAiData
+        address deployer
     ) initializer public {
         _deployer = deployer;
-        _cryptoAiDataAddr = cryptoAiData;
         _indexMint = 1;
 
         __ERC721_init(name, symbol);
