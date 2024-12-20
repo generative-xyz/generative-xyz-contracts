@@ -10,7 +10,7 @@ import "../interfaces/ICryptoAIData.sol";
 import "../interfaces/IAgentNFT.sol";
 import "../libs/structs/CryptoAIStructs.sol";
 import "../libs/helpers/Errors.sol";
-import "hardhat/console.sol";
+//import "hardhat/console.sol";
 
 contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     uint256 public constant TOKEN_LIMIT = 0x3E8; // 0x2710
@@ -126,7 +126,6 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
         require(unlockedTokens[tokenId].weight == 0, Errors.TOKEN_ID_UNLOCKED);
         unlockedTokens[tokenId].weight = nft.getAgentRarity(tokenId);
-
         /* Test */
         /*unlockedTokens[tokenId].tokenID = tokenId;
         unlockedTokens[tokenId].weight = tokenId + 1511;
