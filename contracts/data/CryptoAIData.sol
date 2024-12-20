@@ -317,22 +317,18 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                 data[i] = items[partsName[i]].positions[unlockedTokens[tokenId].traits[i]];
             }
             uint256 k = 0;
+            data1[i] = new uint8[](data[i].length / 3 * 5);
             for (uint256 j; j < data[i].length; j++) {
-                console.log(1111);
-                if (j == 0 && j % 2 != 0) {
-                    console.log(2);
+                if (!((j >= 2) && ((j - 2) % 3 == 0))) {
                     data1[i][k] = uint8(data[i][j]);
-                    k++;
                 } else {
-                    console.log(3);
                     uint8[] memory p = pallets[data[i][j]];
                     data1[i][k] = p[0];
-                    k++;
-                    data1[i][k] = p[1];
-                    k++;
-                    data1[i][k] = p[2];
-                    k++;
+                    data1[i][k + 1] = p[1];
+                    data1[i][k + 2] = p[2];
+                    k += 2;
                 }
+                k++;
             }
         }
         bytes memory pixels = new bytes(2304);
