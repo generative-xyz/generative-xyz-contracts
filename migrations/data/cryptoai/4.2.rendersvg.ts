@@ -36,7 +36,7 @@ async function main() {
             break;
         }
     }
-    const path = "./migrations/testimage.html";
+    const path = "./migrations/data/cryptoai/testimage.html";
     console.log("path", path);
     await fs.writeFile(path, images);
 }
