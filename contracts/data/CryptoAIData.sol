@@ -17,7 +17,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     uint8 internal constant GRID_SIZE = 0x18;
     bytes16 internal constant _HEX_SYMBOLS = "0123456789abcdef";
     string private constant svgDataType = 'data:image/svg+xml;utf8,';
-    string internal constant SVG_HEADER = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' fill='#636B96'/>";
+    string internal constant SVG_HEADER = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' fill='%23636B96'/>";
     string internal constant SVG_FOOTER = '</svg>';
     string internal constant SVG_RECT = "<rect x='";
     string internal constant SVG_Y = "' y='";
