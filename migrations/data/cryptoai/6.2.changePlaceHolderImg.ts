@@ -11,7 +11,7 @@ async function main() {
     let config = await initConfig();
 
     const dataContract = new CryptoAIData(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-    const script = (await fs.readFile('./migrations/data/cryptoai/assets/')).toString();
+    const script = (await fs.readFile('./migrations/data/cryptoai/assets/agents-thumb-300.svg')).toString();
     console.log("script", script);
     await dataContract.changePlaceHolderImg(config.dataContractAddress, 0, script);
 }
