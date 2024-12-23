@@ -19,7 +19,7 @@ async function main() {
         const address = configaaa["dataContractAddress"];
 
         //Add Pallet Color
-        // await dataContract.setPallets(address, 0, PALLET_COLOR);
+        // await dataContract.setPalettes(address, 0, PALLET_COLOR);
 
         // Check positions for each element
         data.elements.Mouth.positions.forEach((pos: any[], index: number) => {

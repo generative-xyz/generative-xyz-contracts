@@ -224,12 +224,12 @@ class CryptoAIData {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async setPallets(contractAddress: any, gas: any, pallets: number[][]) {
+    async setPalettes(contractAddress: any, gas: any, pallets: number[][]) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
 
 
-        const fun = temp?.nftContract.methods.setPallets(pallets);
+        const fun = temp?.nftContract.methods.setPalettes(pallets);
         //the transaction
         const tx = {
             from: this.senderPublicKey,
