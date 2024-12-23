@@ -2,7 +2,7 @@ import {initConfig} from "./index";
 import {CryptoAIData} from "./cryptoAIData";
 // @ts-ignore
 import * as data from './datajson/data-compressed.json';
-import {DNA, ELEMENT, KEY_DNA, PALLET_COLOR, TRAITS_DNA} from "./data";
+import {DNA, ELEMENT, KEY_DNA, PALETTE_COLOR, TRAITS_DNA} from "./data";
 
 async function main() {
     if (process.env.NETWORK != "local") {
@@ -18,8 +18,8 @@ async function main() {
         //ADD Element
         const address = configaaa["dataContractAddress"];
 
-        //Add Pallet Color
-        // await dataContract.setPalettes(address, 0, PALLET_COLOR);
+        //Add palettes Color
+        await dataContract.setPalettes(address, 0, PALETTE_COLOR);
 
         // Check positions for each element
         data.elements.Mouth.positions.forEach((pos: any[], index: number) => {

@@ -255,9 +255,9 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         return item;
     }*/
 
-    function setPalettes(uint8[][] memory _palettes) public
+    function setPalettes(uint8[][] memory _pallets) public
     onlyDeployer unsealed {
-        palettes = _palettes;
+        palettes = _pallets;
     }
 
 
@@ -306,8 +306,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     function cryptoAIImage(uint256 tokenId)
     public view
     returns (bytes memory) {
-//        require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
-//
+        require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
+
         uint16[][] memory data = new uint16[][](5);
         uint8[][] memory data1 = new uint8[][](5);
         for (uint256 i = 0; i < partsName.length; i++) {
