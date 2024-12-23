@@ -22,6 +22,7 @@ async function main() {
         return;
     }
     let images = "";
+    let traits = "";
     const num = parseInt(args[0]);
     for (var i = 1; i <= num; i++) {
         try {
@@ -30,15 +31,17 @@ async function main() {
             console.log(i, " processed image");
             const attr = await dataContract.getAttrData(address, i);
             images += "<pre>" + attr + "</pre><br>";
-            console.log(i, " processed attr");
+            traits += `${attr},`;
         } catch (ex) {
             console.log(i, " failed");
             break;
         }
     }
     const path = "./migrations/data/cryptoai/testimage.html";
+    const pathJson = "./migrations/data/cryptoai/datajson/data-traits.json";
     console.log("path", path);
     await fs.writeFile(path, images);
+    await fs.writeFile(pathJson, traits);
 }
 
 main().catch(error => {
