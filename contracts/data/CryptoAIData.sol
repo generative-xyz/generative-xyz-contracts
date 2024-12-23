@@ -39,7 +39,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     mapping(uint256 => CryptoAIStructs.Token) private unlockedTokens;
     mapping(string => CryptoAIStructs.ItemDetail) private items;
 
-    uint8[][] private pallets;
+    uint8[][] private palettes;
     CryptoAIStructs.DNA_TYPE private DNA_TYPES;// cat dog human
     mapping(bytes32 => bool) private usedPairs;
 
@@ -255,9 +255,9 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         return item;
     }*/
 
-    function setPallets(uint8[][] memory _pallets) public
+    function setPalettes(uint8[][] memory _pallets) public
     onlyDeployer unsealed {
-        pallets = _pallets;
+        palettes = _pallets;
     }
 
 
@@ -322,7 +322,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                 if (!((j >= 2) && ((j - 2) % 3 == 0))) {
                     data1[i][k] = uint8(data[i][j]);
                 } else {
-                    uint8[] memory p = pallets[data[i][j]];
+                    uint8[] memory p = palettes[data[i][j]];
                     data1[i][k] = p[0];
                     data1[i][k + 1] = p[1];
                     data1[i][k + 2] = p[2];
