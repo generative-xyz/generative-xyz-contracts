@@ -38,6 +38,13 @@ module.exports = {
                     apiURL: "https://explorer.regtest.trustless.computer/api",
                     browserURL: "https://explorer.regtest.trustless.computer/api"
                 }
+            }, {
+                network: "base_mainnet",
+                chainId: 8453,
+                urls: {
+                    apiURL: "https://api.basescan.org/api",
+                    browserURL: "https://api.basescan.org/api"
+                }
             }
         ]
     },

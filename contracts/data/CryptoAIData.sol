@@ -13,7 +13,7 @@ import "../libs/helpers/Errors.sol";
 import "hardhat/console.sol";
 
 contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
-    uint256 public constant TOKEN_LIMIT = 0x3E8; // 0x2710
+    uint256 public constant TOKEN_LIMIT = 0x2710;
     uint8 internal constant GRID_SIZE = 0x18;
     bytes16 internal constant _HEX_SYMBOLS = "0123456789abcdef";
     string private constant svgDataType = 'data:image/svg+xml;utf8,';
@@ -44,7 +44,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     mapping(bytes32 => bool) private usedPairs;
 
     // assets
-    string internal PLACEHOLDER_IMAGE;
+    string internal PLACEHOLDER_SCRIPT;
+    string internal PLACEHOLDER_IMG;
 
     modifier unsealed() {
         require(!_contractSealed, Errors.CONTRACT_SEALED);
@@ -86,10 +87,16 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         }
     }
 
-    function changePlaceHolder(string memory content)
+    function changePlaceHolderScript(string memory content)
     external
     onlyDeployer unsealed {
-        PLACEHOLDER_IMAGE = content;
+        PLACEHOLDER_SCRIPT = content;
+    }
+
+    function changePlaceHolderImg(string memory content)
+    external
+    onlyDeployer unsealed {
+        PLACEHOLDER_IMG = content;
     }
 
     function changeCryptoAIAgentAddress(address newAddr)
@@ -170,28 +177,22 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         }
     }
 
-    /*function getTokenRarity(uint256 tokenId) public
-    view returns
-    (uint256) {
-        require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
-        return unlockedTokens[tokenId].weight;
-    }*/
-
     function tokenURI(uint256 tokenId)
     external view
     returns (string memory result) {
-//        require(tokenId < TOKEN_LIMIT, "Token ID out of bounds");
+        require(tokenId < TOKEN_LIMIT, Errors.INV_TOKEN);
         require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
         if (unlockedTokens[tokenId].weight == 0) {
             result = string(abi.encodePacked(
-                '{"animation_url": "',
-                cryptoAIImageHtml(tokenId),
+                '{"image": "', PLACEHOLDER_IMG,
+                '", "animation_url": "', cryptoAIImageHtml(tokenId),
                 '"}'
             ));
         } else {
             result = string(abi.encodePacked(
                 '{"image": "', cryptoAIImageSvg(tokenId),
-                '", "attributes": ', cryptoAIAttributes(tokenId), '}'
+                '", "attributes": ', cryptoAIAttributes(tokenId),
+                '}'
             ));
         }
     }
@@ -249,17 +250,10 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         items[_itemType].positions = _positions;
     }
 
-    /*function getItem(string memory _itemType) public view returns (CryptoAIStructs.ItemDetail memory) {
-        //        require(_itemId < itemCounts[_itemType], Errors.ITEM_NOT_EXIST);
-        CryptoAIStructs.ItemDetail memory item = items[_itemType];
-        return item;
-    }*/
-
     function setPalettes(uint8[][] memory _pallets) public
     onlyDeployer unsealed {
         palettes = _pallets;
     }
-
 
     function cryptoAIAttributes(uint256 tokenId)
     public view
@@ -383,7 +377,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                     PLACEHOLDER_HEADER,
                     StringsUpgradeable.toString(tokenId),
                     PLACEHOLDER_FOOTER,
-                    PLACEHOLDER_IMAGE
+                    PLACEHOLDER_SCRIPT
                 )
             )
         ));
@@ -484,6 +478,6 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
             }
         }
 
-        revert("Random option selection failed");
+        revert(Errors.ITEM_NOT_EXIST);
     }
 }
