@@ -1,6 +1,7 @@
 import {initConfig} from "./index";
 import {CryptoAIData} from "./cryptoAIData";
 import {promises as fs} from "fs";
+import * as data from "./datajson/data-rarity.json";
 
 async function main() {
     if (process.env.NETWORK != "local") {
@@ -22,14 +23,22 @@ async function main() {
         return;
     }
     let images = "";
-    let traits = "";
     const num = parseInt(args[0]);
+    let traits = "";
     for (var i = 1; i <= num; i++) {
         try {
             const fullSVG = await dataContract.cryptoAIImageSvg(address, i);
             images += "<span>" + i + "</span><br>" + "<img width=\"64\" src=\"" + fullSVG + "\" title='" + i + "' />"
             console.log(i, " processed image");
-            const attr = await dataContract.getAttrData(address, i);
+            let attr = await dataContract.getAttrData(address, i);
+            let attrFormat = [...JSON.parse(attr)];
+            for (let j = 0; j < attrFormat.length; j++) {
+                const value = attrFormat[j]["value"];
+                const rarity = Object.keys(data.undefined).find(key => key === value);
+                const dataRarity = (data as any).undefined[`${rarity}`];
+                attrFormat[j]["rarity"] = dataRarity;
+            }
+            attr = JSON.stringify(attrFormat);
             images += "<pre>" + attr + "</pre><br>";
             traits += `${attr},`;
         } catch (ex) {
