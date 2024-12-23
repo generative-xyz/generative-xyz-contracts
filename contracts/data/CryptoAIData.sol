@@ -27,23 +27,26 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     string private constant htmlDataType = 'data:text/html;base64,';
     string internal constant PLACEHOLDER_HEADER = "<script>let TokenID='";
     string internal constant PLACEHOLDER_FOOTER = "'</script>";
-    string[5] private partsName;
 
+    // elements
+    string[5] private partsName;
     // deployer
     address public _deployer;
     // crypto ai agent address
     address public _cryptoAIAgentAddr;
+    // seal flag
     bool private _contractSealed;
 
-    // assets
+    // assets image after unlocking
     mapping(uint256 => CryptoAIStructs.Token) private unlockedTokens;
     mapping(string => CryptoAIStructs.ItemDetail) private items;
 
+    // palette colors
     uint8[][] private palettes;
     CryptoAIStructs.DNA_TYPE private DNA_TYPES;// cat dog human
     mapping(bytes32 => bool) private usedPairs;
 
-    // assets
+    // assets placeholder before unlocking
     string internal PLACEHOLDER_SCRIPT;
     string internal PLACEHOLDER_IMG;
 
@@ -370,7 +373,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     function cryptoAIImageHtml(uint256 tokenId)
     public view
     returns (string memory result) {
-        return string(abi.encodePacked(
+        return string(abi.encodePacked(PLACEHOLDER_SCRIPT, StringsUpgradeable.toString(tokenId)));
+        /*return string(abi.encodePacked(
             htmlDataType,
             Base64.encode(
                 abi.encodePacked(
@@ -380,7 +384,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                     PLACEHOLDER_SCRIPT
                 )
             )
-        ));
+        ));*/
     }
 
     function cryptoAIImageSvg(uint256 tokenId)
