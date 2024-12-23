@@ -17,7 +17,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     uint8 internal constant GRID_SIZE = 0x18;
     bytes16 internal constant _HEX_SYMBOLS = "0123456789abcdef";
     string private constant svgDataType = 'data:image/svg+xml;utf8,';
-    string internal constant SVG_HEADER = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' fill='#636B96'/>";
+    string internal constant SVG_HEADER = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' fill='%23636B96'/>";
     string internal constant SVG_FOOTER = '</svg>';
     string internal constant SVG_RECT = "<rect x='";
     string internal constant SVG_Y = "' y='";
@@ -207,10 +207,6 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         DNA_TYPES.c_rarities = rarities;
     }
 
-    /*function getDNA() public view returns (CryptoAIStructs.DNA_TYPE memory) {
-        return DNA_TYPES;
-    }*/
-
     function addDNAVariant(string memory _DNAType, string[] memory _DNAName, uint16[] memory _rarities, uint16[][] memory _positions) public
     onlyDeployer unsealed {
         items[_DNAType].names = _DNAName;
@@ -233,11 +229,6 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
             items["Robot"].positions[i] = _positions[i - index];
         }
     }
-
-    /*function getDNAVariant(string memory _DNAType) public view returns (CryptoAIStructs.ItemDetail memory) {
-        CryptoAIStructs.ItemDetail memory item = items[_DNAType];
-        return item;
-    }*/
 
     function addItem(
         string memory _itemType,
@@ -355,16 +346,16 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
             pixels[p + 3] = bytes1(0xFF);
             /*TODO:
              assembly {
+                let pixelsPtr := add(pixels, 0x20)
                 let posPtr := add(pos, 0x20)
-                let value1 := and(mload(add(posPtr, add(idx, 1))), 0xFF)
-                let value2 := and(mload(add(posPtr, idx)), 0xFF)
-                let p := shl(2, add(mul(value1, GRID_SIZE), value2))
+                let p := mload(add(pixels, 0x40))
+                let idx := mload(add(pos, 0x40))
 
                 let pixelsPtr := add(pixels, 0x20)
-                mstore8(add(pixelsPtr, p), and(mload(add(posPtr, add(idx, 2))), 0xFF))
-                mstore8(add(add(pixelsPtr, p), 1), and(mload(add(posPtr, add(idx, 3))), 0xFF))
-                mstore8(add(add(pixelsPtr, p), 2), and(mload(add(posPtr, add(idx, 4))), 0xFF))
-                mstore8(add(add(pixelsPtr, p), 3), 0xFF)
+                mstore8(add(pixelsPtr, p), mload(add(posPtr, add(idx, 2))))
+                mstore8(add(pixelsPtr, add(p, 1)), mload(add(posPtr, add(idx, 3))))
+                mstore8(add(pixelsPtr, add(p, 2)), mload(add(posPtr, add(idx, 4))))
+                mstore8(add(pixelsPtr, add(p, 3)), 0xFF)
             }*/
         }
 
