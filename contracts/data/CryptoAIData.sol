@@ -268,7 +268,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         for (uint8 i = 0; i < partsName.length; i++) {
             if (i == 0) {
                 traitName = "DNA";
-                value = items[DNA_TYPES.names[unlockedTokens[tokenId].dna]].names[unlockedTokens[tokenId].traits[i]];
+                //value = items[DNA_TYPES.names[unlockedTokens[tokenId].dna]].names[unlockedTokens[tokenId].traits[i]];
+                value = DNA_TYPES.names[unlockedTokens[tokenId].dna];
             } else {
                 traitName = partsName[i];
                 value = items[partsName[i]].names[unlockedTokens[tokenId].traits[i]];
@@ -283,9 +284,9 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                 );
                 if (i > 0) {
                     byteString = abi.encodePacked(byteString, ",");
+                    count++;
                 }
                 byteString = abi.encodePacked(byteString, objString);
-                count++;
             }
         }
 
