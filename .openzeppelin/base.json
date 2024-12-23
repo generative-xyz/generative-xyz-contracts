@@ -19,6 +19,11 @@
       "address": "0x0ABA6CF721E9Ef51507503b6022219D1a6511923",
       "txHash": "0xb050e174b3315fcc7e12277bc432bbb04c60e112f42ed2346ee5f4c21c380253",
       "kind": "transparent"
+    },
+    {
+      "address": "0xeb2bf0d8140D076D3170453d70eb0728044DdEC2",
+      "txHash": "0x07ef46b96ff86ec428b62f2af80fa3fa4213c013702bef0769ccd5c247380735",
+      "kind": "transparent"
     }
   ],
   "impls": {
@@ -1657,6 +1662,1242 @@
             "numberOfBytes": "128"
           },
           "t_struct(Token)3836_storage": {
+            "label": "struct CryptoAIStructs.Token",
+            "members": [
+              {
+                "label": "tokenID",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "weight",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "traits",
+                "type": "t_array(t_uint256)5_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "dna",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "7"
+              }
+            ],
+            "numberOfBytes": "256"
+          },
+          "t_uint16": {
+            "label": "uint16",
+            "numberOfBytes": "2"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        },
+        "namespaces": {}
+      }
+    },
+    "d0803891b4db09fd60b4b7f776f2e4fec2588a1f37e367a2d39c762a2881e89c": {
+      "address": "0x19f145DC7dd56803fDc333cF46b0175F1801ffd8",
+      "txHash": "0xf5e5b6587470803e2ca69fdca73c2d4770dbe6cd4c23a45b15df788d51e90979",
+      "layout": {
+        "solcVersion": "0.8.12",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:63",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:68"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:40"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "partsName",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_array(t_string_storage)5_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:32"
+          },
+          {
+            "label": "_deployer",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_address",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:34"
+          },
+          {
+            "label": "_cryptoAIAgentAddr",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_address",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:36"
+          },
+          {
+            "label": "_contractSealed",
+            "offset": 20,
+            "slot": "107",
+            "type": "t_bool",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:38"
+          },
+          {
+            "label": "unlockedTokens",
+            "offset": 0,
+            "slot": "108",
+            "type": "t_mapping(t_uint256,t_struct(Token)3825_storage)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:41"
+          },
+          {
+            "label": "items",
+            "offset": 0,
+            "slot": "109",
+            "type": "t_mapping(t_string_memory_ptr,t_struct(ItemDetail)3804_storage)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:42"
+          },
+          {
+            "label": "palettes",
+            "offset": 0,
+            "slot": "110",
+            "type": "t_array(t_array(t_uint8)dyn_storage)dyn_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:45"
+          },
+          {
+            "label": "DNA_TYPES",
+            "offset": 0,
+            "slot": "111",
+            "type": "t_struct(DNA_TYPE)3814_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:46"
+          },
+          {
+            "label": "usedPairs",
+            "offset": 0,
+            "slot": "114",
+            "type": "t_mapping(t_bytes32,t_bool)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:47"
+          },
+          {
+            "label": "PLACEHOLDER_SCRIPT",
+            "offset": 0,
+            "slot": "115",
+            "type": "t_string_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:50"
+          },
+          {
+            "label": "PLACEHOLDER_IMG",
+            "offset": 0,
+            "slot": "116",
+            "type": "t_string_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:51"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_array(t_uint16)dyn_storage)dyn_storage": {
+            "label": "uint16[][]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_array(t_uint8)dyn_storage)dyn_storage": {
+            "label": "uint8[][]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_string_storage)5_storage": {
+            "label": "string[5]",
+            "numberOfBytes": "160"
+          },
+          "t_array(t_string_storage)dyn_storage": {
+            "label": "string[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint16)dyn_storage": {
+            "label": "uint16[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_array(t_uint256)5_storage": {
+            "label": "uint256[5]",
+            "numberOfBytes": "160"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint8)dyn_storage": {
+            "label": "uint8[]",
+            "numberOfBytes": "32"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_bool)": {
+            "label": "mapping(bytes32 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_string_memory_ptr,t_struct(ItemDetail)3804_storage)": {
+            "label": "mapping(string => struct CryptoAIStructs.ItemDetail)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Token)3825_storage)": {
+            "label": "mapping(uint256 => struct CryptoAIStructs.Token)",
+            "numberOfBytes": "32"
+          },
+          "t_string_memory_ptr": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(DNA_TYPE)3814_storage": {
+            "label": "struct CryptoAIStructs.DNA_TYPE",
+            "members": [
+              {
+                "label": "names",
+                "type": "t_array(t_string_storage)dyn_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "c_rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              }
+            ],
+            "numberOfBytes": "96"
+          },
+          "t_struct(ItemDetail)3804_storage": {
+            "label": "struct CryptoAIStructs.ItemDetail",
+            "members": [
+              {
+                "label": "names",
+                "type": "t_array(t_string_storage)dyn_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "c_rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "positions",
+                "type": "t_array(t_array(t_uint16)dyn_storage)dyn_storage",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(Token)3825_storage": {
+            "label": "struct CryptoAIStructs.Token",
+            "members": [
+              {
+                "label": "tokenID",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "weight",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "traits",
+                "type": "t_array(t_uint256)5_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "dna",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "7"
+              }
+            ],
+            "numberOfBytes": "256"
+          },
+          "t_uint16": {
+            "label": "uint16",
+            "numberOfBytes": "2"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        },
+        "namespaces": {}
+      }
+    },
+    "6946c5b77d90efad45add3fd9550a9c1e68b27775f87d69a5484cdbc7e5e9370": {
+      "address": "0x3029DB2c1c264De9DAe591935Ee4F92738e9a1d9",
+      "txHash": "0x04b9bc052e756ef98d4392a68122d067b131fd7b2ee92cc4c58ea660491328f9",
+      "layout": {
+        "solcVersion": "0.8.12",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:63",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:68"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:40"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "partsName",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_array(t_string_storage)5_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:32"
+          },
+          {
+            "label": "_deployer",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_address",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:34"
+          },
+          {
+            "label": "_cryptoAIAgentAddr",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_address",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:36"
+          },
+          {
+            "label": "_contractSealed",
+            "offset": 20,
+            "slot": "107",
+            "type": "t_bool",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:38"
+          },
+          {
+            "label": "unlockedTokens",
+            "offset": 0,
+            "slot": "108",
+            "type": "t_mapping(t_uint256,t_struct(Token)3825_storage)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:41"
+          },
+          {
+            "label": "items",
+            "offset": 0,
+            "slot": "109",
+            "type": "t_mapping(t_string_memory_ptr,t_struct(ItemDetail)3804_storage)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:42"
+          },
+          {
+            "label": "palettes",
+            "offset": 0,
+            "slot": "110",
+            "type": "t_array(t_array(t_uint8)dyn_storage)dyn_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:45"
+          },
+          {
+            "label": "DNA_TYPES",
+            "offset": 0,
+            "slot": "111",
+            "type": "t_struct(DNA_TYPE)3814_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:46"
+          },
+          {
+            "label": "usedPairs",
+            "offset": 0,
+            "slot": "114",
+            "type": "t_mapping(t_bytes32,t_bool)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:47"
+          },
+          {
+            "label": "PLACEHOLDER_SCRIPT",
+            "offset": 0,
+            "slot": "115",
+            "type": "t_string_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:50"
+          },
+          {
+            "label": "PLACEHOLDER_IMG",
+            "offset": 0,
+            "slot": "116",
+            "type": "t_string_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:51"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_array(t_uint16)dyn_storage)dyn_storage": {
+            "label": "uint16[][]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_array(t_uint8)dyn_storage)dyn_storage": {
+            "label": "uint8[][]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_string_storage)5_storage": {
+            "label": "string[5]",
+            "numberOfBytes": "160"
+          },
+          "t_array(t_string_storage)dyn_storage": {
+            "label": "string[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint16)dyn_storage": {
+            "label": "uint16[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_array(t_uint256)5_storage": {
+            "label": "uint256[5]",
+            "numberOfBytes": "160"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint8)dyn_storage": {
+            "label": "uint8[]",
+            "numberOfBytes": "32"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_bool)": {
+            "label": "mapping(bytes32 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_string_memory_ptr,t_struct(ItemDetail)3804_storage)": {
+            "label": "mapping(string => struct CryptoAIStructs.ItemDetail)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Token)3825_storage)": {
+            "label": "mapping(uint256 => struct CryptoAIStructs.Token)",
+            "numberOfBytes": "32"
+          },
+          "t_string_memory_ptr": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(DNA_TYPE)3814_storage": {
+            "label": "struct CryptoAIStructs.DNA_TYPE",
+            "members": [
+              {
+                "label": "names",
+                "type": "t_array(t_string_storage)dyn_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "c_rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              }
+            ],
+            "numberOfBytes": "96"
+          },
+          "t_struct(ItemDetail)3804_storage": {
+            "label": "struct CryptoAIStructs.ItemDetail",
+            "members": [
+              {
+                "label": "names",
+                "type": "t_array(t_string_storage)dyn_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "c_rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "positions",
+                "type": "t_array(t_array(t_uint16)dyn_storage)dyn_storage",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(Token)3825_storage": {
+            "label": "struct CryptoAIStructs.Token",
+            "members": [
+              {
+                "label": "tokenID",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "weight",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "traits",
+                "type": "t_array(t_uint256)5_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "dna",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "7"
+              }
+            ],
+            "numberOfBytes": "256"
+          },
+          "t_uint16": {
+            "label": "uint16",
+            "numberOfBytes": "2"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        },
+        "namespaces": {}
+      }
+    },
+    "b7922b29321f9bbb525052fe08f2a0249be4f779624a4d4b1b4c9bd7907129ae": {
+      "address": "0xEDC43e2E5463Be0120EeA6621749Fc9c12FfD839",
+      "txHash": "0x243f2076cab102eee44e4d36ff2b3d459da59b152f8548eae4e16bf19ea8c6b2",
+      "layout": {
+        "solcVersion": "0.8.12",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:63",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:68"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:40"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "partsName",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_array(t_string_storage)5_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:32"
+          },
+          {
+            "label": "_deployer",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_address",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:34"
+          },
+          {
+            "label": "_cryptoAIAgentAddr",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_address",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:36"
+          },
+          {
+            "label": "_contractSealed",
+            "offset": 20,
+            "slot": "107",
+            "type": "t_bool",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:38"
+          },
+          {
+            "label": "unlockedTokens",
+            "offset": 0,
+            "slot": "108",
+            "type": "t_mapping(t_uint256,t_struct(Token)3817_storage)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:41"
+          },
+          {
+            "label": "items",
+            "offset": 0,
+            "slot": "109",
+            "type": "t_mapping(t_string_memory_ptr,t_struct(ItemDetail)3796_storage)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:42"
+          },
+          {
+            "label": "palettes",
+            "offset": 0,
+            "slot": "110",
+            "type": "t_array(t_array(t_uint8)dyn_storage)dyn_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:45"
+          },
+          {
+            "label": "DNA_TYPES",
+            "offset": 0,
+            "slot": "111",
+            "type": "t_struct(DNA_TYPE)3806_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:46"
+          },
+          {
+            "label": "usedPairs",
+            "offset": 0,
+            "slot": "114",
+            "type": "t_mapping(t_bytes32,t_bool)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:47"
+          },
+          {
+            "label": "PLACEHOLDER_SCRIPT",
+            "offset": 0,
+            "slot": "115",
+            "type": "t_string_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:50"
+          },
+          {
+            "label": "PLACEHOLDER_IMG",
+            "offset": 0,
+            "slot": "116",
+            "type": "t_string_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:51"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_array(t_uint16)dyn_storage)dyn_storage": {
+            "label": "uint16[][]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_array(t_uint8)dyn_storage)dyn_storage": {
+            "label": "uint8[][]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_string_storage)5_storage": {
+            "label": "string[5]",
+            "numberOfBytes": "160"
+          },
+          "t_array(t_string_storage)dyn_storage": {
+            "label": "string[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint16)dyn_storage": {
+            "label": "uint16[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_array(t_uint256)5_storage": {
+            "label": "uint256[5]",
+            "numberOfBytes": "160"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint8)dyn_storage": {
+            "label": "uint8[]",
+            "numberOfBytes": "32"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_bool)": {
+            "label": "mapping(bytes32 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_string_memory_ptr,t_struct(ItemDetail)3796_storage)": {
+            "label": "mapping(string => struct CryptoAIStructs.ItemDetail)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Token)3817_storage)": {
+            "label": "mapping(uint256 => struct CryptoAIStructs.Token)",
+            "numberOfBytes": "32"
+          },
+          "t_string_memory_ptr": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(DNA_TYPE)3806_storage": {
+            "label": "struct CryptoAIStructs.DNA_TYPE",
+            "members": [
+              {
+                "label": "names",
+                "type": "t_array(t_string_storage)dyn_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "c_rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              }
+            ],
+            "numberOfBytes": "96"
+          },
+          "t_struct(ItemDetail)3796_storage": {
+            "label": "struct CryptoAIStructs.ItemDetail",
+            "members": [
+              {
+                "label": "names",
+                "type": "t_array(t_string_storage)dyn_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "c_rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "positions",
+                "type": "t_array(t_array(t_uint16)dyn_storage)dyn_storage",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(Token)3817_storage": {
+            "label": "struct CryptoAIStructs.Token",
+            "members": [
+              {
+                "label": "tokenID",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "weight",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "traits",
+                "type": "t_array(t_uint256)5_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "dna",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "7"
+              }
+            ],
+            "numberOfBytes": "256"
+          },
+          "t_uint16": {
+            "label": "uint16",
+            "numberOfBytes": "2"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        },
+        "namespaces": {}
+      }
+    },
+    "34b0fc9fe9e3510c56df12c7f66be6291b40ad76a51ddce961534b8f427fee3f": {
+      "address": "0xa2572f83Ef241b49de81e437eFa77b1Ac446Dec8",
+      "txHash": "0x728ea23eac4c5df8b2e7e51a1f6b59a6686355b05a1ad49c8489824d45004ec6",
+      "layout": {
+        "solcVersion": "0.8.12",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:63",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:68"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:40"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "partsName",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_array(t_string_storage)5_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:32"
+          },
+          {
+            "label": "_deployer",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_address",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:34"
+          },
+          {
+            "label": "_cryptoAIAgentAddr",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_address",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:36"
+          },
+          {
+            "label": "_contractSealed",
+            "offset": 20,
+            "slot": "107",
+            "type": "t_bool",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:38"
+          },
+          {
+            "label": "unlockedTokens",
+            "offset": 0,
+            "slot": "108",
+            "type": "t_mapping(t_uint256,t_struct(Token)3817_storage)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:41"
+          },
+          {
+            "label": "items",
+            "offset": 0,
+            "slot": "109",
+            "type": "t_mapping(t_string_memory_ptr,t_struct(ItemDetail)3796_storage)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:42"
+          },
+          {
+            "label": "palettes",
+            "offset": 0,
+            "slot": "110",
+            "type": "t_array(t_array(t_uint8)dyn_storage)dyn_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:45"
+          },
+          {
+            "label": "DNA_TYPES",
+            "offset": 0,
+            "slot": "111",
+            "type": "t_struct(DNA_TYPE)3806_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:46"
+          },
+          {
+            "label": "usedPairs",
+            "offset": 0,
+            "slot": "114",
+            "type": "t_mapping(t_bytes32,t_bool)",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:47"
+          },
+          {
+            "label": "PLACEHOLDER_SCRIPT",
+            "offset": 0,
+            "slot": "115",
+            "type": "t_string_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:50"
+          },
+          {
+            "label": "PLACEHOLDER_IMG",
+            "offset": 0,
+            "slot": "116",
+            "type": "t_string_storage",
+            "contract": "CryptoAIData",
+            "src": "contracts/data/CryptoAIData.sol:51"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_array(t_uint16)dyn_storage)dyn_storage": {
+            "label": "uint16[][]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_array(t_uint8)dyn_storage)dyn_storage": {
+            "label": "uint8[][]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_string_storage)5_storage": {
+            "label": "string[5]",
+            "numberOfBytes": "160"
+          },
+          "t_array(t_string_storage)dyn_storage": {
+            "label": "string[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint16)dyn_storage": {
+            "label": "uint16[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_array(t_uint256)5_storage": {
+            "label": "uint256[5]",
+            "numberOfBytes": "160"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint8)dyn_storage": {
+            "label": "uint8[]",
+            "numberOfBytes": "32"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_bool)": {
+            "label": "mapping(bytes32 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_string_memory_ptr,t_struct(ItemDetail)3796_storage)": {
+            "label": "mapping(string => struct CryptoAIStructs.ItemDetail)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Token)3817_storage)": {
+            "label": "mapping(uint256 => struct CryptoAIStructs.Token)",
+            "numberOfBytes": "32"
+          },
+          "t_string_memory_ptr": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(DNA_TYPE)3806_storage": {
+            "label": "struct CryptoAIStructs.DNA_TYPE",
+            "members": [
+              {
+                "label": "names",
+                "type": "t_array(t_string_storage)dyn_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "c_rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              }
+            ],
+            "numberOfBytes": "96"
+          },
+          "t_struct(ItemDetail)3796_storage": {
+            "label": "struct CryptoAIStructs.ItemDetail",
+            "members": [
+              {
+                "label": "names",
+                "type": "t_array(t_string_storage)dyn_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "c_rarities",
+                "type": "t_array(t_uint256)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "positions",
+                "type": "t_array(t_array(t_uint16)dyn_storage)dyn_storage",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(Token)3817_storage": {
             "label": "struct CryptoAIStructs.Token",
             "members": [
               {
