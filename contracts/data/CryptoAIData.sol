@@ -272,7 +272,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
             }
             if (bytes(value).length != 0) {
                 bytes memory objString = abi.encodePacked(
-                    '{"trait":"',
+                    '{"trait_type":"',
                     traitName,
                     '","value":"',
                     value,
@@ -287,7 +287,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         }
 
         byteString = abi.encodePacked(
-            '{"trait": "attributes"',
+            '{"trait_type": "attributes"',
             ',"value":"',
             StringsUpgradeable.toString(count),
             '"},'
