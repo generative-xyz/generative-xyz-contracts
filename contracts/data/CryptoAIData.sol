@@ -373,7 +373,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     function cryptoAIImageHtml(uint256 tokenId)
     public view
     returns (string memory result) {
-        return string(abi.encodePacked(
+        return string(abi.encodePacked(PLACEHOLDER_SCRIPT, StringsUpgradeable.toString(tokenId)));
+        /*return string(abi.encodePacked(
             htmlDataType,
             Base64.encode(
                 abi.encodePacked(
@@ -383,7 +384,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                     PLACEHOLDER_SCRIPT
                 )
             )
-        ));
+        ));*/
     }
 
     function cryptoAIImageSvg(uint256 tokenId)
