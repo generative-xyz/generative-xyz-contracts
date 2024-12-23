@@ -13,7 +13,7 @@ async function main() {
     const dataContract = new CryptoAIData(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
     const script = (await fs.readFile('./migrations/data/cryptoai/assets/placeholder-art-compressed.html')).toString();
     console.log("script", script);
-    await dataContract.changePlaceHolder(config.dataContractAddress, 0, script);
+    await dataContract.changePlaceHolderScript(config.dataContractAddress, 0, script);
 }
 
 main().catch(error => {
