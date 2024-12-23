@@ -44,7 +44,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     mapping(bytes32 => bool) private usedPairs;
 
     // assets
-    string internal PLACEHOLDER_IMAGE;
+    string internal PLACEHOLDER_SCRIPT;
+    string internal PLACEHOLDER_IMG;
 
     modifier unsealed() {
         require(!_contractSealed, Errors.CONTRACT_SEALED);
@@ -86,10 +87,16 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         }
     }
 
-    function changePlaceHolder(string memory content)
+    function changePlaceHolderScript(string memory content)
     external
     onlyDeployer unsealed {
-        PLACEHOLDER_IMAGE = content;
+        PLACEHOLDER_SCRIPT = content;
+    }
+
+    function changePlaceHolderImg(string memory content)
+    external
+    onlyDeployer unsealed {
+        PLACEHOLDER_IMG = content;
     }
 
     function changeCryptoAIAgentAddress(address newAddr)
@@ -177,14 +184,15 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
         if (unlockedTokens[tokenId].weight == 0) {
             result = string(abi.encodePacked(
-                '{"animation_url": "',
-                cryptoAIImageHtml(tokenId),
+                '{"image": "', PLACEHOLDER_IMG,
+                '", "animation_url": "', cryptoAIImageHtml(tokenId),
                 '"}'
             ));
         } else {
             result = string(abi.encodePacked(
                 '{"image": "', cryptoAIImageSvg(tokenId),
-                '", "attributes": ', cryptoAIAttributes(tokenId), '}'
+                '", "attributes": ', cryptoAIAttributes(tokenId),
+                '}'
             ));
         }
     }
@@ -369,7 +377,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                     PLACEHOLDER_HEADER,
                     StringsUpgradeable.toString(tokenId),
                     PLACEHOLDER_FOOTER,
-                    PLACEHOLDER_IMAGE
+                    PLACEHOLDER_SCRIPT
                 )
             )
         ));
