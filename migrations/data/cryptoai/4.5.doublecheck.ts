@@ -1,6 +1,6 @@
-import {promises as fs} from "fs";
-import {initConfig} from "./index";
-import {CryptoAIData} from "./cryptoAIData";
+import { promises as fs } from "fs";
+import { CryptoAIData } from "./cryptoAIData";
+import { initConfig } from "./index";
 
 async function main() {
     if (process.env.NETWORK != "local") {
@@ -28,6 +28,10 @@ async function main() {
     const attributeCounts: { [key: string]: { [key: string]: { counter: number; percent: number } } } = {};
     let totalTokens = 0;
 
+    // Store all traits
+    const allTraits: string[] = [];
+    let totalTraits = 0;
+
     for (let i = 1; i <= num; i++) {
         try {
             console.log(i, " checking");
@@ -52,10 +56,12 @@ async function main() {
             }
             attrsChecked.push(attrStr);
 
-            // Add rarity tracking
+            // Add rarity tracking and collect traits
             const attributes = JSON.parse(attr);
             attributes.forEach((attribute: any) => {
                 const {trait, value} = attribute;
+                totalTraits++;
+                allTraits.push(trait);
 
                 if (!attributeCounts[trait]) {
                     attributeCounts[trait] = {};
@@ -102,6 +108,13 @@ async function main() {
     console.log("Writing rarity data to:", rarityPath);
     console.log("Total tokens analyzed:", totalTokens);
     await fs.writeFile(rarityPath, JSON.stringify(rarityData, null, 2));
+
+    // Write all traits to a separate file
+    const traitsPath = "migrations/data/cryptoai/datajson/all-traits.json";
+    console.log("Writing all traits to:", traitsPath);
+    console.log("Total traits (including duplicates):", totalTraits);
+    console.log("All traits:", allTraits);
+    await fs.writeFile(traitsPath, JSON.stringify(allTraits, null, 2));
 }
 
 main().catch(error => {
