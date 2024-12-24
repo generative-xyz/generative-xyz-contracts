@@ -56,6 +56,7 @@ async function main() {
 
             // Add rarity tracking
             const attributes = JSON.parse(attr);
+            allTraits.push(attributes);
             attributes.forEach((attribute: any) => {
                 const {trait, value} = attribute;
 

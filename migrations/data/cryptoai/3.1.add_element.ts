@@ -46,10 +46,10 @@ async function main() {
             }
         });
 
-        // await dataContract.addItem(address, 0, ELEMENT.MOUTH, data.elements.Mouth.names, data.elements.Mouth.traits, data.elements.Mouth.positions);
-        // await dataContract.addItem(address, 0, ELEMENT.HEAD, data.elements.Head.names, data.elements.Head.traits, data.elements.Head.positions);
-        // await dataContract.addItem(address, 0, ELEMENT.EYES, data.elements.Eyes.names, data.elements.Eyes.traits, data.elements.Eyes.positions);
-        // await dataContract.addItem(address, 0, ELEMENT.BODY, data.elements.Body.names, data.elements.Body.traits, data.elements.Body.positions);
+        await dataContract.addItem(address, 0, ELEMENT.MOUTH, data.elements.Mouth.names, data.elements.Mouth.traits, data.elements.Mouth.positions);
+        await dataContract.addItem(address, 0, ELEMENT.HEAD, data.elements.Head.names, data.elements.Head.traits, data.elements.Head.positions);
+        await dataContract.addItem(address, 0, ELEMENT.EYES, data.elements.Eyes.names, data.elements.Eyes.traits, data.elements.Eyes.positions);
+        await dataContract.addItem(address, 0, ELEMENT.BODY, data.elements.Body.names, data.elements.Body.traits, data.elements.Body.positions);
 
         // Check positions for each DNA variant
         data.DNA.Dog.positions.forEach((pos: any[], index: number) => {
@@ -82,22 +82,22 @@ async function main() {
             }
         });
 
-        data.DNA.Monkey.positions.forEach((pos: any[], index: number) => {
+        data.DNA.Ape.positions.forEach((pos: any[], index: number) => {
             if (pos.find(p => p === null)) {
-                throw new Error(`Null position found in Monkey DNA - Name: ${data.DNA.Monkey.names[index]}, Trait: ${data.DNA.Monkey.traits[index]}`);
+                throw new Error(`Null position found in Monkey DNA - Name: ${data.DNA.Ape.names[index]}, Trait: ${data.DNA.Ape.traits[index]}`);
             }
         });
         // //ADD DNA
-        // await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
+        await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
         //ADD DNA Variant
-        // await dataContract.addDNAVariant(address, 0, DNA.DOG, data.DNA.Dog.names, data.DNA.Dog.traits, data.DNA.Dog.positions);
-        // await dataContract.addDNAVariant(address, 0, DNA.CAT, data.DNA.Cat.names, data.DNA.Cat.traits, data.DNA.Cat.positions);
-        // await dataContract.addDNAVariant(address, 0, DNA.FROG, data.DNA.Frog.names, data.DNA.Frog.traits, data.DNA.Frog.positions);
-        // await dataContract.addDNAVariant(address, 0, DNA.HUMAN, data.DNA.Human.names, data.DNA.Human.traits, data.DNA.Human.positions);
-        // await dataContract.addDNAVariant(address, 0, DNA.MONKEY, data.DNA.Monkey.names, data.DNA.Monkey.traits, data.DNA.Monkey.positions);
-        // await dataContract.addDNAVariantRobot(address, 0, data.DNA.Robot.names, data.DNA.Robot.traits);
-        // await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(0, 5), 0, 5);
-        // await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(5, 10), 5, 10);
+        await dataContract.addDNAVariant(address, 0, DNA.DOG, data.DNA.Dog.names, data.DNA.Dog.traits, data.DNA.Dog.positions);
+        await dataContract.addDNAVariant(address, 0, DNA.CAT, data.DNA.Cat.names, data.DNA.Cat.traits, data.DNA.Cat.positions);
+        await dataContract.addDNAVariant(address, 0, DNA.FROG, data.DNA.Frog.names, data.DNA.Frog.traits, data.DNA.Frog.positions);
+        await dataContract.addDNAVariant(address, 0, DNA.HUMAN, data.DNA.Human.names, data.DNA.Human.traits, data.DNA.Human.positions);
+        await dataContract.addDNAVariant(address, 0, DNA.APE, data.DNA.Ape.names, data.DNA.Ape.traits, data.DNA.Ape.positions);
+        await dataContract.addDNAVariantRobot(address, 0, data.DNA.Robot.names, data.DNA.Robot.traits);
+        await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(0, 5), 0, 5);
+        await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(5, 10), 5, 10);
 
 
     } catch (error) {

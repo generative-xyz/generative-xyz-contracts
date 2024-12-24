@@ -131,20 +131,19 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
 
     function unlockRenderAgent(uint256 tokenId)
     external
-    onlyAIAgentContract _sealed
-    () {
+{
         // agent is minted on nft collection, and unlock render svg by rarity info
         IMintableAgent nft = IMintableAgent(_cryptoAIAgentAddr);
         /* TODO: uncomment when deploy */
-        require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
+/*        require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
         require(unlockedTokens[tokenId].weight == 0, Errors.TOKEN_ID_UNLOCKED);
-        unlockedTokens[tokenId].weight = nft.getAgentRarity(tokenId);
+        unlockedTokens[tokenId].weight = nft.getAgentRarity(tokenId);*/
         /* Test */
-        /*unlockedTokens[tokenId].tokenID = tokenId;
+        unlockedTokens[tokenId].tokenID = tokenId;
         unlockedTokens[tokenId].weight = tokenId + 1511;
         if (unlockedTokens[tokenId].weight >= 10000) {
             unlockedTokens[tokenId].weight = 10000;
-        }*/
+        }
 
         unlockedTokens[tokenId].dna = selectTrait(DNA_TYPES.c_rarities, DNA_TYPES.rarities, unlockedTokens[tokenId].weight, tokenId, 0);
         partsName[0] = DNA_TYPES.names[unlockedTokens[tokenId].dna];
