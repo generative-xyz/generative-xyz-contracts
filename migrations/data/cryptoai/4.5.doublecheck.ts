@@ -1,6 +1,6 @@
-import {promises as fs} from "fs";
-import {initConfig} from "./index";
-import {CryptoAIData} from "./cryptoAIData";
+import { promises as fs } from "fs";
+import { CryptoAIData } from "./cryptoAIData";
+import { initConfig } from "./index";
 
 async function main() {
     if (process.env.NETWORK != "local") {
@@ -28,6 +28,7 @@ async function main() {
     const attributeCounts: { [key: string]: { [key: string]: { counter: number; percent: number } } } = {};
     let totalTokens = 0;
 
+    const arts: any[] = [];
     for (let i = 1; i <= num; i++) {
         try {
             console.log(i, " checking");
@@ -52,10 +53,12 @@ async function main() {
             }
             attrsChecked.push(attrStr);
 
+            const art: any = {};
             // Add rarity tracking
             const attributes = JSON.parse(attr);
             attributes.forEach((attribute: any) => {
-                const {trait, value} = attribute;
+                const { trait_type: trait, value } = attribute;
+              
 
                 if (!attributeCounts[trait]) {
                     attributeCounts[trait] = {};
@@ -68,9 +71,13 @@ async function main() {
                     };
                 }
 
+                if (trait !== 'attributes') {
+                    art[trait] = value;
+                }
                 attributeCounts[trait][value].counter++;
                 attributeCounts[trait][value].percent = Number(((attributeCounts[trait][value].counter / totalTokens) * 100).toFixed(2));
             });
+            arts.push(art);
 
         } catch (ex) {
             console.log(i, " failed");
@@ -102,6 +109,11 @@ async function main() {
     console.log("Writing rarity data to:", rarityPath);
     console.log("Total tokens analyzed:", totalTokens);
     await fs.writeFile(rarityPath, JSON.stringify(rarityData, null, 2));
+
+
+    const path = "./migrations/data/cryptoai/datajson/data-arts.json";
+    console.log("Writing arts data to:", path);
+    await fs.writeFile(path, JSON.stringify(arts, null, 2));
 }
 
 main().catch(error => {
