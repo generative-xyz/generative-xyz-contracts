@@ -41,7 +41,7 @@ const DATA_ELEMENTS_2 = [
 ]
 
 export enum DNA {
-    MONKEY = 'Monkey',
+    APE = 'Ape',
     CAT = 'Cat',
     DOG = 'Dog',
     FROG = 'Frog',
@@ -49,55 +49,9 @@ export enum DNA {
     HUMAN = 'Human',
 }
 
-const KEY_DNA = [DNA.CAT, DNA.DOG, DNA.FROG, DNA.ROBOT, DNA.HUMAN, DNA.MONKEY]
-const TRAITS_DNA = [data.DNA.Cat.trait, data.DNA.Dog.trait, data.DNA.Frog.trait, data.DNA.Robot.trait, data.DNA.Human.trait,data.DNA.Monkey.trait].map((item) => Number(item))
-
-const DATA_DNA_VARIANT_1 = [
-    {
-        ele_type: DNA.DOG,
-        names: data.DNA.Dog.names,
-        rarities: data.DNA.Dog.traits,
-        positions: data.DNA.Dog.positions,
-    },
-    {
-        ele_type: DNA.CAT,
-        names: data.DNA.Cat.names,
-        rarities: data.DNA.Cat.traits,
-        positions: data.DNA.Cat.positions,
-    },
-]
-
-const DATA_DNA_VARIANT_2 = [
-    {
-        ele_type: DNA.ROBOT,
-        names: data.DNA.Robot.names,
-        rarities: data.DNA.Robot.traits,
-        positions: data.DNA.Robot.positions,
-    },
-    {
-        ele_type: DNA.FROG,
-        names: data.DNA.Frog.names,
-        rarities: data.DNA.Frog.traits,
-        positions: data.DNA.Frog.positions,
-    },
-]
-
-
-const DATA_DNA_VARIANT_3 = [
-    {
-        ele_type: DNA.HUMAN,
-        names: data.DNA.Human.names,
-        rarities: data.DNA.Human.traits,
-        positions: data.DNA.Human.positions,
-    },
-    {
-        ele_type: DNA.MONKEY,
-        names: data.DNA.Monkey.names,
-        rarities: data.DNA.Monkey.traits,
-        positions: data.DNA.Monkey.positions,
-    },
-]
+const KEY_DNA = [DNA.CAT, DNA.DOG, DNA.FROG, DNA.ROBOT, DNA.HUMAN, DNA.APE]
+const TRAITS_DNA = [data.DNA.Cat.trait, data.DNA.Dog.trait, data.DNA.Frog.trait, data.DNA.Robot.trait, data.DNA.Human.trait,data.DNA.Ape.trait].map((item) => Number(item))
 
 const PALETTE_COLOR = data.palette;
 
-export { KEY_DNA, TRAITS_DNA, DATA_ELEMENTS_1, DATA_ELEMENTS_2, DATA_DNA_VARIANT_1, DATA_DNA_VARIANT_2, DATA_DNA_VARIANT_3, PALETTE_COLOR }
+export { KEY_DNA, TRAITS_DNA, DATA_ELEMENTS_1, DATA_ELEMENTS_2, PALETTE_COLOR }
