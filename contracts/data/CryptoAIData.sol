@@ -340,23 +340,15 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
             }
             uint16 p = (uint16(uint8(pos[idx + 1])) * GRID_SIZE + uint16(uint8(pos[idx]))) << 2;
 
-            pixels[p] = pos[idx + 2];
-            pixels[p + 1] = pos[idx + 3];
-            pixels[p + 2] = pos[idx + 4];
-            pixels[p + 3] = 0xFF;
-            /*TODO:
-             assembly {
-                let pixelsPtr := add(pixels, 0x20)
-                let posPtr := add(pos, 0x20)
-                let p := mload(add(pixels, 0x40))
-                let idx := mload(add(pos, 0x40))
+            assembly {
+                let posData := add(pos, 0x20)
+                let pixelsData := add(pixels, 0x20)
 
-                let pixelsPtr := add(pixels, 0x20)
-                mstore8(add(pixelsPtr, p), mload(add(posPtr, add(idx, 2))))
-                mstore8(add(pixelsPtr, add(p, 1)), mload(add(posPtr, add(idx, 3))))
-                mstore8(add(pixelsPtr, add(p, 2)), mload(add(posPtr, add(idx, 4))))
-                mstore8(add(pixelsPtr, add(p, 3)), 0xFF)
-            }*/
+                mstore8(add(pixelsData, p), byte(0, mload(add(posData, add(idx, 2)))))
+                mstore8(add(pixelsData, add(p, 1)), byte(0, mload(add(posData, add(idx, 3)))))
+                mstore8(add(pixelsData, add(p, 2)), byte(0, mload(add(posData, add(idx, 4)))))
+                mstore8(add(pixelsData, add(p, 3)), 0xFF)
+            }
         }
 
         return pixels;
