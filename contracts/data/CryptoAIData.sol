@@ -298,7 +298,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
 
         uint16[][] memory data = new uint16[][](5);
-        uint8[][] memory data1 = new uint8[][](5);
+        bytes[] memory dataPalette = new bytes[](5);
         for (uint256 i = 0; i < partsName.length; i++) {
             if (i == 0) {
                 data[i] = items[DNA_TYPES.names[unlockedTokens[tokenId].dna]].positions[unlockedTokens[tokenId].traits[i]];
@@ -306,44 +306,44 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                 data[i] = items[partsName[i]].positions[unlockedTokens[tokenId].traits[i]];
             }
             uint256 k = 0;
-            data1[i] = new uint8[](data[i].length / 3 * 5);
+            dataPalette[i] = new bytes(data[i].length / 3 * 5);
             for (uint256 j; j < data[i].length; j++) {
                 if (!((j >= 2) && ((j - 2) % 3 == 0))) {
-                    data1[i][k] = uint8(data[i][j]);
+                    dataPalette[i][k] = bytes1(uint8(data[i][j]));
                 } else {
                     uint8[] memory p = palettes[data[i][j]];
-                    data1[i][k] = p[0];
-                    data1[i][k + 1] = p[1];
-                    data1[i][k + 2] = p[2];
+                    dataPalette[i][k] = bytes1(p[0]);
+                    dataPalette[i][k + 1] = bytes1(p[1]);
+                    dataPalette[i][k + 2] = bytes1(p[2]);
                     k += 2;
                 }
                 k++;
             }
         }
         bytes memory pixels = new bytes(2304);
-        uint256 totalLength = data1[0].length + data1[1].length + data1[2].length + data1[3].length + data1[4].length;
-        uint256 idx;
-        uint8[] memory pos;
+        uint256 totalLength = dataPalette[0].length + dataPalette[1].length + dataPalette[2].length + dataPalette[3].length + dataPalette[4].length;
         for (uint256 i = 0; i < totalLength; i += 5) {
-            uint256 offset = data1[0].length;
+            uint256 idx;
+            bytes memory pos;
+            uint256 offset = dataPalette[0].length;
             uint256 prevOffset = 0;
             for (uint256 j = 0; j < 5; j++) {
                 if (i < offset) {
-                    pos = data1[j];
+                    pos = dataPalette[j];
                     idx = i - prevOffset;
                     break;
                 }
                 prevOffset = offset;
                 if (j < 4) {
-                    offset += data1[j + 1].length;
+                    offset += dataPalette[j + 1].length;
                 }
             }
-            uint16 p = (uint16(pos[idx + 1]) * GRID_SIZE + uint16(pos[idx])) << 2;
+            uint16 p = (uint16(uint8(pos[idx + 1])) * GRID_SIZE + uint16(uint8(pos[idx]))) << 2;
 
-            pixels[p] = bytes1(pos[idx + 2]);
-            pixels[p + 1] = bytes1(pos[idx + 3]);
-            pixels[p + 2] = bytes1(pos[idx + 4]);
-            pixels[p + 3] = bytes1(0xFF);
+            pixels[p] = pos[idx + 2];
+            pixels[p + 1] = pos[idx + 3];
+            pixels[p + 2] = pos[idx + 4];
+            pixels[p + 3] = 0xFF;
             /*TODO:
              assembly {
                 let pixelsPtr := add(pixels, 0x20)
