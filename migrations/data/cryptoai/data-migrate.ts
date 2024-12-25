@@ -4,7 +4,7 @@ import * as path from 'path';
 const { parseSync } = require('svgson');
 
 // Use absolute path to testAssets folder
-const PATH_ASSETS = path.join(__dirname, '../cryptoai/assets');
+const PATH_ASSETS = path.join(__dirname, '../cryptoai/assetsV2');
 const PATH_OUTPUT = 'migrations/data/cryptoai/datajson/data-compressed.json';
 const PATH_OUTPUT_ERRORS = 'migrations/data/cryptoai/datajson/data-errors.json';
 
