@@ -28,12 +28,11 @@ async function main() {
     const attributeCounts: { [key: string]: { [key: string]: { counter: number; percent: number } } } = {};
     let totalTokens = 0;
 
+    const arts: any[] = [];
     for (let i = 1; i <= num; i++) {
         try {
             console.log(i, " checking");
             const attr = await dataContract.getAttrData(address, i);
-            delete attr.DNA
-            
             const attrStr = JSON.stringify(attr);
             totalTokens++;
 
@@ -54,10 +53,12 @@ async function main() {
             }
             attrsChecked.push(attrStr);
 
+            const art: any = {};
             // Add rarity tracking
             const attributes = JSON.parse(attr);
             attributes.forEach((attribute: any) => {
-                const {trait, value} = attribute;
+                const { trait, value } = attribute;
+              
 
                 if (!attributeCounts[trait]) {
                     attributeCounts[trait] = {};
@@ -70,9 +71,11 @@ async function main() {
                     };
                 }
 
+                art[trait] = value;
                 attributeCounts[trait][value].counter++;
                 attributeCounts[trait][value].percent = Number(((attributeCounts[trait][value].counter / totalTokens) * 100).toFixed(2));
             });
+            arts.push(art);
 
         } catch (ex) {
             console.log(i, " failed");
@@ -105,7 +108,10 @@ async function main() {
     console.log("Total tokens analyzed:", totalTokens);
     await fs.writeFile(rarityPath, JSON.stringify(rarityData, null, 2));
 
-    
+
+    const path = "./migrations/data/cryptoai/datajson/data-arts.json";
+    console.log("Writing arts data to:", path);
+    await fs.writeFile(path, JSON.stringify(arts, null, 2));
 }
 
 main().catch(error => {
