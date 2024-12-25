@@ -1,1 +1,1394 @@
-[]
+[
+  {
+    "id": 165,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Whistle\"}]",
+    "duplicateOf": {
+      "id": 30,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Whistle\"}]"
+    }
+  },
+  {
+    "id": 546,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 287,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 995,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 519,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 1048,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 104,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 1173,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1135,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 1279,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 519,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 1548,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1248,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 1587,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Beanie\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 528,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Beanie\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 1821,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 1590,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 2090,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 806,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 2800,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 482,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 2911,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 2080,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 3238,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 3126,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 3267,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 3227,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 3360,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Sailor Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]",
+    "duplicateOf": {
+      "id": 3183,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Sailor Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]"
+    }
+  },
+  {
+    "id": 3411,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 1245,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 3416,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 2140,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 3423,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 1713,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 3430,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 715,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 3542,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Striped\"},{\"trait_type\":\"Head\",\"value\":\"Sombrero\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 3400,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Striped\"},{\"trait_type\":\"Head\",\"value\":\"Sombrero\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 3645,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 2162,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 3745,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Dog\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 2756,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Dog\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 3762,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Rainbow Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1285,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Rainbow Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 3874,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 3684,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 4150,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 198,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 4164,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Cat\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Rolling Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 1181,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Cat\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Rolling Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 4208,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 4104,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 4234,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 2797,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 4346,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 304,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 4430,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Whistle\"}]",
+    "duplicateOf": {
+      "id": 693,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Whistle\"}]"
+    }
+  },
+  {
+    "id": 4569,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Suit n Tie\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 2678,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Suit n Tie\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 4579,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 2750,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 4651,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Striped\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1605,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Striped\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 4802,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 401,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 4813,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 3077,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 4856,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 694,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 4939,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 499,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 4940,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Sweater\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 3652,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Sweater\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 4952,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Sailor Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Ew\"}]",
+    "duplicateOf": {
+      "id": 2200,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Sailor Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Ew\"}]"
+    }
+  },
+  {
+    "id": 4976,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 682,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 4999,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 4213,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 5012,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 4792,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 5050,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Christmas Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 3289,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Christmas Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 5070,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cigarette\"}]",
+    "duplicateOf": {
+      "id": 3223,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cigarette\"}]"
+    }
+  },
+  {
+    "id": 5089,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Blue Polo\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 28,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Blue Polo\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 5233,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 1651,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 5247,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Smoke Weed\"}]",
+    "duplicateOf": {
+      "id": 2378,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Smoke Weed\"}]"
+    }
+  },
+  {
+    "id": 5293,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 805,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 5332,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 1238,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 5360,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 5106,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 5435,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 2624,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 5443,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 4915,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 5448,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Pepe Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 4908,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Pepe Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 5457,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 1413,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 5460,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 2625,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 5476,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 3703,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 5608,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 5346,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 5683,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Ew\"}]",
+    "duplicateOf": {
+      "id": 3557,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Ew\"}]"
+    }
+  },
+  {
+    "id": 5784,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 3229,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 5839,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 4960,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 6076,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]",
+    "duplicateOf": {
+      "id": 3560,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]"
+    }
+  },
+  {
+    "id": 6105,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Bloody Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 2693,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Bloody Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 6149,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1810,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 6176,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 1402,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 6248,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 3936,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 6342,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 4074,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 6440,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]",
+    "duplicateOf": {
+      "id": 5575,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]"
+    }
+  },
+  {
+    "id": 6456,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Rainbow Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1166,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Rainbow Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 6481,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 5245,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 6522,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Pepe Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 5400,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Pepe Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 6553,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Ew\"}]",
+    "duplicateOf": {
+      "id": 2629,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Ew\"}]"
+    }
+  },
+  {
+    "id": 6566,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thief Eye Mask\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]",
+    "duplicateOf": {
+      "id": 5377,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thief Eye Mask\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]"
+    }
+  },
+  {
+    "id": 6706,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]",
+    "duplicateOf": {
+      "id": 4006,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]"
+    }
+  },
+  {
+    "id": 6737,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 3544,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 6745,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 1890,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 6747,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Tuxedo\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 4497,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Tuxedo\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 6749,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 3357,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 6759,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 4609,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Grainy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 6794,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thief Eye Mask\"},{\"trait_type\":\"Mouth\",\"value\":\"Smoke Weed\"}]",
+    "duplicateOf": {
+      "id": 6707,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thief Eye Mask\"},{\"trait_type\":\"Mouth\",\"value\":\"Smoke Weed\"}]"
+    }
+  },
+  {
+    "id": 6804,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 499,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 6812,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1324,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 6834,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1414,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 6842,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1810,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 6880,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 5935,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 6889,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 2223,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 6968,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Suit n Tie\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 6246,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Suit n Tie\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 6969,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 5425,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7049,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 3505,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 7138,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]",
+    "duplicateOf": {
+      "id": 1702,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]"
+    }
+  },
+  {
+    "id": 7149,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 3229,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7186,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 3567,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 7197,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 5972,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 7269,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 6458,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 7281,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 2477,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7298,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Smoke Weed\"}]",
+    "duplicateOf": {
+      "id": 5686,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Smoke Weed\"}]"
+    }
+  },
+  {
+    "id": 7345,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 6129,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7362,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Censored Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Gold Teeth\"}]",
+    "duplicateOf": {
+      "id": 1721,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Censored Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Gold Teeth\"}]"
+    }
+  },
+  {
+    "id": 7518,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 4444,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 7547,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Raglan\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cigarette\"}]",
+    "duplicateOf": {
+      "id": 6402,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Raglan\"},{\"trait_type\":\"Head\",\"value\":\"Black Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cigarette\"}]"
+    }
+  },
+  {
+    "id": 7548,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 857,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 7580,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Short-sleeve Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 2909,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Short-sleeve Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7603,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 4529,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 7660,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 5122,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 7672,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cigarette\"}]",
+    "duplicateOf": {
+      "id": 4748,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cigarette\"}]"
+    }
+  },
+  {
+    "id": 7717,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 4981,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 7731,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 517,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7775,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 2140,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 7782,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 3320,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7796,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 5177,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 7820,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 6335,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7827,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Blue Polo\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 6776,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Blue Polo\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 7870,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 31,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7877,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Rainbow Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 3219,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Rainbow Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 7924,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 5441,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 7966,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 287,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 7993,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 6976,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 8015,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Cat\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 5046,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Cat\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 8025,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 6758,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 8042,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 4932,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 8043,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 7787,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 8068,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Short-sleeve Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]",
+    "duplicateOf": {
+      "id": 6323,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Short-sleeve Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]"
+    }
+  },
+  {
+    "id": 8107,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 806,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 8182,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 1040,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 8270,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Dog Mouth\"}]",
+    "duplicateOf": {
+      "id": 2301,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Dog Mouth\"}]"
+    }
+  },
+  {
+    "id": 8344,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Striped\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 3918,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Striped\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 8369,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Pepe Mouth\"}]",
+    "duplicateOf": {
+      "id": 4192,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Pepe Mouth\"}]"
+    }
+  },
+  {
+    "id": 8454,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 1216,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 8491,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 1238,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Baseball Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 8505,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 4386,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 8552,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Dog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]",
+    "duplicateOf": {
+      "id": 8045,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Dog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]"
+    }
+  },
+  {
+    "id": 8555,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Short-sleeve Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 5572,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Short-sleeve Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 8618,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Gold Teeth\"}]",
+    "duplicateOf": {
+      "id": 4451,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Gold Teeth\"}]"
+    }
+  },
+  {
+    "id": 8641,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Sailor Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 1671,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Sailor Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 8677,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 4352,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 8681,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 8392,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Racing Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 8717,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Gold Teeth\"}]",
+    "duplicateOf": {
+      "id": 7596,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Gold Teeth\"}]"
+    }
+  },
+  {
+    "id": 8747,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Raglan\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 6357,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Raglan\"},{\"trait_type\":\"Head\",\"value\":\"Bandana\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 8792,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Gold Teeth\"}]",
+    "duplicateOf": {
+      "id": 5275,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Gold Teeth\"}]"
+    }
+  },
+  {
+    "id": 8833,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Dog Mouth\"}]",
+    "duplicateOf": {
+      "id": 2485,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Dog Mouth\"}]"
+    }
+  },
+  {
+    "id": 8871,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Crazy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 4688,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Crazy Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 8947,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]",
+    "duplicateOf": {
+      "id": 4780,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]"
+    }
+  },
+  {
+    "id": 8972,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 6801,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Double Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 9034,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Ew\"}]",
+    "duplicateOf": {
+      "id": 507,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Ew\"}]"
+    }
+  },
+  {
+    "id": 9067,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Cat\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 3419,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Cat\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 9129,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 2039,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Military Cap\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9137,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 2802,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 9155,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 2717,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Headset Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 9158,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Rainbow Puke\"}]",
+    "duplicateOf": {
+      "id": 4389,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Rainbow Puke\"}]"
+    }
+  },
+  {
+    "id": 9163,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 2444,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 9170,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 5261,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9211,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Cat Mouth\"}]",
+    "duplicateOf": {
+      "id": 3047,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Eye Patch\"},{\"trait_type\":\"Mouth\",\"value\":\"Cat Mouth\"}]"
+    }
+  },
+  {
+    "id": 9224,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]",
+    "duplicateOf": {
+      "id": 9171,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Mustache\"}]"
+    }
+  },
+  {
+    "id": 9229,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 2223,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Christmas Hat\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9233,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 304,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 9245,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 3887,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sunglasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 9248,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Striped\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 1018,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Striped\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 9458,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 832,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Curl Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9497,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Christmas Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 7474,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Christmas Jacket\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Binoculars\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 9501,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 3659,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9543,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]",
+    "duplicateOf": {
+      "id": 8400,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Astronaut Suit\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Anonymous Mask\"}]"
+    }
+  },
+  {
+    "id": 9586,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Pepe Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 9126,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Y Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Pepe Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 9620,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 1607,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"3D Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 9644,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Smoke Weed\"}]",
+    "duplicateOf": {
+      "id": 5876,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Anonymous Hoodie\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Smoke Weed\"}]"
+    }
+  },
+  {
+    "id": 9653,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 7945,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Thug Life Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 9699,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"3\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]",
+    "duplicateOf": {
+      "id": 3356,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"3\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Joyful\"}]"
+    }
+  },
+  {
+    "id": 9749,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 6414,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Sci-fi Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9776,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 2412,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9838,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 3794,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Transformer\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9859,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 7060,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Round Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 9882,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 5533,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Cyborg\"},{\"trait_type\":\"Head\",\"value\":\"Green Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  },
+  {
+    "id": 9940,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]",
+    "duplicateOf": {
+      "id": 4381,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Frog\"},{\"trait_type\":\"Body\",\"value\":\"Ironman Suit\"},{\"trait_type\":\"Head\",\"value\":\"Red Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Robotic Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Respirator Mask\"}]"
+    }
+  },
+  {
+    "id": 9943,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 9081,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Black Sporty\"},{\"trait_type\":\"Head\",\"value\":\"Magnetic Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"VR Glasses\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9945,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Unicorn\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]",
+    "duplicateOf": {
+      "id": 5196,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Robot Tee\"},{\"trait_type\":\"Head\",\"value\":\"Unicorn\"},{\"trait_type\":\"Eyes\",\"value\":\"Futuristic Device\"},{\"trait_type\":\"Mouth\",\"value\":\"Robot Mouth\"}]"
+    }
+  },
+  {
+    "id": 9973,
+    "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]",
+    "duplicateOf": {
+      "id": 3832,
+      "attr": "[{\"trait_type\": \"attributes\",\"value\":\"4\"},{\"trait_type\":\"DNA\",\"value\":\"Robot\"},{\"trait_type\":\"Body\",\"value\":\"Football\"},{\"trait_type\":\"Head\",\"value\":\"Blue Antenna\"},{\"trait_type\":\"Eyes\",\"value\":\"Laser Eyes\"},{\"trait_type\":\"Mouth\",\"value\":\"Cyborg Jaw\"}]"
+    }
+  }
+]
