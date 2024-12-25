@@ -57,7 +57,7 @@ async function main() {
             // Add rarity tracking
             const attributes = JSON.parse(attr);
             attributes.forEach((attribute: any) => {
-                const { trait, value } = attribute;
+                const { trait_type: trait, value } = attribute;
               
 
                 if (!attributeCounts[trait]) {
@@ -71,7 +71,9 @@ async function main() {
                     };
                 }
 
-                art[trait] = value;
+                if (trait !== 'attributes') {
+                    art[trait] = value;
+                }
                 attributeCounts[trait][value].counter++;
                 attributeCounts[trait][value].percent = Number(((attributeCounts[trait][value].counter / totalTokens) * 100).toFixed(2));
             });
