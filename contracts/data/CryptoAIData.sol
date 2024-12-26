@@ -166,7 +166,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
 
                 uint256 trait = selectTrait(c_rarities, rarities, unlockedTokens[tokenId].weight, tokenId, attempt);
                 unlockedTokens[tokenId].traits[i] = trait;
-                 if (rarities[trait] < 300) {
+                if (rarities[trait] < 300) {
                     uint256 rarity = c_rarities[trait] * 99 / 100;
                     c_rarities[trait] = rarity > 0 ? rarity : 1;
                 }
