@@ -171,17 +171,6 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                     uint256 rarity = c_rarities[trait] * 99 / 100;
                     c_rarities[trait] = rarity > 0 ? rarity : 1;
                 }
-                //TODO CHECK RARITY
-                /* if(unlockedTokens[tokenId].weight > 300000) {
-                    if (rarities[trait] < 300) {
-                        uint256 rarity = c_rarities[trait] * 99 / 100;
-                        c_rarities[trait] = rarity > 0 ? rarity : 1;
-                    }
-                } else {
-                    if (rarities[trait] < 300) {
-                        c_rarities[trait] = 0;
-                    }
-                } */
             }
             pairHash = keccak256(abi.encodePacked(unlockedTokens[tokenId].traits));
         }
