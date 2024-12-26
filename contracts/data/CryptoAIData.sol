@@ -243,6 +243,22 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         palettes = _pallets;
     }
 
+    function cryptoAIAttributesValue(uint256 tokenId)
+    public view
+    returns (string[] memory) {
+        string[] memory attrs = new string[](partsName.length);
+        for (uint8 i = 0; i < partsName.length; i++) {
+            string memory value;
+            if (i == 0) {
+                value = items[DNA_TYPES.names[unlockedTokens[tokenId].dna]].names[unlockedTokens[tokenId].traits[i]];
+            } else {
+                value = items[partsName[i]].names[unlockedTokens[tokenId].traits[i]];
+            }
+            attrs[i] = value;
+        }
+        return attrs;
+    }
+
     function cryptoAIAttributes(uint256 tokenId)
     public view
     returns (string memory text) {
