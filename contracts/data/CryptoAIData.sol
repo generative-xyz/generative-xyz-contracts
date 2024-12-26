@@ -148,12 +148,6 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
 
         unlockedTokens[tokenId].dna = selectTrait(DNA_TYPES.c_rarities, DNA_TYPES.rarities, unlockedTokens[tokenId].weight, tokenId, 0);
         partsName[0] = DNA_TYPES.names[unlockedTokens[tokenId].dna];
-        /*if (DNA_TYPES.rarities[unlockedTokens[tokenId].dna] < 300) {
-            uint256 dnaIndex = unlockedTokens[tokenId].dna;
-            uint256 rarity = DNA_TYPES.c_rarities[dnaIndex];
-            rarity = rarity * 99 / 100;
-            DNA_TYPES.c_rarities[dnaIndex] = rarity > 0 ? rarity : 1;
-        }*/
 
         bytes32 pairHash;
         uint256 maxAttempts = 5;
@@ -440,6 +434,11 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                 let rarity := mload(add(rarities, mul(add(i, 1), 0x20)))
                 let c_rarity := mload(add(c_rarities, mul(add(i, 1), 0x20)))
                 let adjustedRarity := div(mul(mul(rarity, exp(10, 18)), c_rarity), normalizedWeight)
+                if lt(weight, 3000) {
+                    if lt(rarity, 300) {
+                        adjustedRarity := 1
+                    }
+                }
                 totalRarity := add(totalRarity, adjustedRarity)
             }
             cumulativeRarity[i] = totalRarity;
