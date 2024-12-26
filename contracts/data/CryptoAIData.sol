@@ -248,9 +248,9 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     returns (string memory text) {
         bytes memory byteString;
         uint count = 0;
-        string memory traitName;
-        string memory value;
         for (uint8 i = 0; i < partsName.length; i++) {
+            string memory traitName;
+            string memory value;
             if (i == 0) {
                 traitName = "DNA";
                 //value = items[DNA_TYPES.names[unlockedTokens[tokenId].dna]].names[unlockedTokens[tokenId].traits[i]];
