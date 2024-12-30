@@ -450,9 +450,15 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                 let rarity := mload(add(rarities, mul(add(i, 1), 0x20)))
                 let c_rarity := mload(add(c_rarities, mul(add(i, 1), 0x20)))
                 let adjustedRarity := div(mul(mul(rarity, exp(10, 18)), c_rarity), normalizedWeight)
-                if lt(weight, 3000) {
+                if lt(weight, 5000) {
                     if lt(rarity, 300) {
                         adjustedRarity := 1
+                    }
+                }
+                if gt(weight, 5000) {
+                    if lt(rarity, 300) {
+                        let boostedRarity := mul(rarity, 2)
+                        adjustedRarity := div(mul(mul(boostedRarity, exp(10, 18)), c_rarity), normalizedWeight)
                     }
                 }
                 totalRarity := add(totalRarity, adjustedRarity)
