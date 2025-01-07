@@ -81,7 +81,13 @@ contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeab
     function unlock(uint256 tokenId) public payable {
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
-        cryptoAIDataContract.unlockRenderAgent(tokenId);
+        uint256[5] memory traits;
+        traits[0] = 1;
+        traits[1] = 1;
+        traits[2] = 1;
+        traits[3] = 1;
+        traits[4] = 1;
+        cryptoAIDataContract.unlockRenderAgent(tokenId, traits);
     }
 
     function isUnlockedAgent(uint256 _agentId) public view returns (bool) {

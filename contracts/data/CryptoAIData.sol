@@ -129,22 +129,22 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         unlockedTokens[tokenId].tokenID = tokenId;
     }
 
-    function unlockRenderAgent(uint256 tokenId)
+    /*function unlockRenderAgent(uint256 tokenId)
     external
     onlyAIAgentContract _sealed
     () {
         // agent is minted on nft collection, and unlock render svg by rarity info
         IMintableAgent nft = IMintableAgent(_cryptoAIAgentAddr);
-        /* TODO: uncomment when deploy */
+        *//* TODO: uncomment when deploy *//*
         require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
         require(unlockedTokens[tokenId].weight == 0, Errors.TOKEN_ID_UNLOCKED);
         unlockedTokens[tokenId].weight = nft.getAgentRarity(tokenId);
-        /* Test */
-        /*unlockedTokens[tokenId].tokenID = tokenId;
+        *//* Test *//*
+        *//*unlockedTokens[tokenId].tokenID = tokenId;
         unlockedTokens[tokenId].weight = tokenId + 1511;
         if (unlockedTokens[tokenId].weight >= 10000) {
             unlockedTokens[tokenId].weight = 10000;
-        }*/
+        }*//*
 
         unlockedTokens[tokenId].dna = selectTrait(DNA_TYPES.c_rarities, DNA_TYPES.rarities, unlockedTokens[tokenId].weight, tokenId, 0);
         partsName[0] = DNA_TYPES.names[unlockedTokens[tokenId].dna];
@@ -172,6 +172,24 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         if (!usedPairs[pairHash]) {
             usedPairs[pairHash] = true;
         }
+    }*/
+
+    function unlockRenderAgent(uint256 tokenId, uint256[5] memory traits)
+    external
+    onlyAIAgentContract _sealed
+    () {
+        // agent is minted on nft collection, and unlock render svg by rarity info
+        /* TODO: uncomment when deploy */
+        require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
+        require(unlockedTokens[tokenId].weight == 0, Errors.TOKEN_ID_UNLOCKED);
+        unlockedTokens[tokenId].weight = 1;
+
+        bytes32 pairHash = keccak256(abi.encodePacked(unlockedTokens[tokenId].traits));
+        require(!usedPairs[pairHash], Errors.USED_PAIRs);
+        if (!usedPairs[pairHash]) {
+            usedPairs[pairHash] = true;
+        }
+        unlockedTokens[tokenId].traits = traits;
     }
 
     function tokenURI(uint256 tokenId)
@@ -197,23 +215,23 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     ///////  DATA assets + rendering //////
     function addDNA(string[] memory _names, uint16[] memory rarities) public onlyDeployer unsealed {
         DNA_TYPES.names = _names;
-        DNA_TYPES.rarities = rarities;
-        DNA_TYPES.c_rarities = rarities;
+        // DNA_TYPES.rarities = rarities;
+        // DNA_TYPES.c_rarities = rarities;
     }
 
     function addDNAVariant(string memory _DNAType, string[] memory _DNAName, uint16[] memory _rarities, uint16[][] memory _positions) public
     onlyDeployer unsealed {
         items[_DNAType].names = _DNAName;
-        items[_DNAType].rarities = _rarities;
-        items[_DNAType].c_rarities = _rarities;
+        // items[_DNAType].rarities = _rarities;
+        // items[_DNAType].c_rarities = _rarities;
         items[_DNAType].positions = _positions;
     }
 
     function addDNAVariantRobot(string[] memory _DNAName, uint16[] memory _rarities) public
     onlyDeployer unsealed {
         items["Robot"].names = _DNAName;
-        items["Robot"].rarities = _rarities;
-        items["Robot"].c_rarities = _rarities;
+        // items["Robot"].rarities = _rarities;
+        // items["Robot"].c_rarities = _rarities;
         items["Robot"].positions = new uint16[][](_DNAName.length);
     }
 
@@ -233,8 +251,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     onlyDeployer unsealed
     {
         items[_itemType].names = _names;
-        items[_itemType].rarities = _rarities;
-        items[_itemType].c_rarities = _rarities;
+        // items[_itemType].rarities = _rarities;
+        // items[_itemType].c_rarities = _rarities;
         items[_itemType].positions = _positions;
     }
 
@@ -429,7 +447,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         result = string(abi.encodePacked(svgDataType, SVG_HEADER, svg, SVG_FOOTER));
     }
 
-    function selectTrait(uint256[] memory c_rarities, uint256[] memory rarities, uint256 weight, uint256 tokenId, uint256 attempt) internal view returns (uint256 index) {
+    /*function selectTrait(uint256[] memory c_rarities, uint256[] memory rarities, uint256 weight, uint256 tokenId, uint256 attempt) internal view returns (uint256 index) {
         require(weight >= 1511 && weight <= 10000, Errors.WEIGHT_OUT);
         uint256 normalizedWeight;
         uint256[] memory cumulativeRarity = new uint256[](c_rarities.length);
@@ -482,5 +500,5 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         }
 
         revert(Errors.ITEM_NOT_EXIST);
-    }
+    }*/
 }
