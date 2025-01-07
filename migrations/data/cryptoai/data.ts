@@ -41,7 +41,7 @@ const DATA_ELEMENTS_2 = [
 ]
 
 export enum DNA {
-    APE = 'Ape',
+    MONKEY = 'Monkey',
     CAT = 'Cat',
     DOG = 'Dog',
     FROG = 'Frog',
@@ -49,9 +49,9 @@ export enum DNA {
     HUMAN = 'Human',
 }
 
-const KEY_DNA = [DNA.CAT, DNA.DOG, DNA.FROG, DNA.ROBOT, DNA.HUMAN, DNA.APE]
-const TRAITS_DNA = [data.DNA.Cat.trait, data.DNA.Dog.trait, data.DNA.Frog.trait, data.DNA.Robot.trait, data.DNA.Human.trait,data.DNA.Ape.trait].map((item) => Number(item))
+const KEY_DNA = [DNA.CAT, DNA.DOG, DNA.FROG, DNA.ROBOT, DNA.HUMAN, DNA.MONKEY]
+const TRAITS_DNA = [data.DNA.Cat.trait, data.DNA.Dog.trait, data.DNA.Frog.trait, data.DNA.Robot.trait, data.DNA.Human.trait,data.DNA.Monkey.trait].map((item) => Number(item))
 
 const PALETTE_COLOR = data.palette;
 
-export { KEY_DNA, TRAITS_DNA, DATA_ELEMENTS_1, DATA_ELEMENTS_2, PALETTE_COLOR }
+export { DATA_ELEMENTS_1, DATA_ELEMENTS_2, KEY_DNA, PALETTE_COLOR, TRAITS_DNA }
