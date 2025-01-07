@@ -184,12 +184,14 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         require(unlockedTokens[tokenId].weight == 0, Errors.TOKEN_ID_UNLOCKED);
         unlockedTokens[tokenId].weight = 1;
 
-        bytes32 pairHash = keccak256(abi.encodePacked(unlockedTokens[tokenId].traits));
+        bytes32 pairHash = keccak256(abi.encodePacked(traits));
         require(!usedPairs[pairHash], Errors.USED_PAIRs);
-        if (!usedPairs[pairHash]) {
-            usedPairs[pairHash] = true;
-        }
+        usedPairs[pairHash] = true;
         unlockedTokens[tokenId].traits = traits;
+    }
+
+    function checkUsedPairs(uint256[] memory traits) public view returns (bool) {
+        return usedPairs[keccak256(abi.encodePacked(traits))];
     }
 
     function tokenURI(uint256 tokenId)
