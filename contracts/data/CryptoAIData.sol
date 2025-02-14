@@ -174,7 +174,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         }
     }*/
 
-    function unlockRenderAgent(uint256 tokenId, uint256[5] memory traits)
+    function unlockRenderAgent(uint256 tokenId, uint256 dna, uint256[5] memory traits)
     external
     onlyAIAgentContract _sealed
     () {
@@ -188,6 +188,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         require(!usedPairs[pairHash], Errors.USED_PAIRs);
         usedPairs[pairHash] = true;
         unlockedTokens[tokenId].traits = traits;
+        unlockedTokens[tokenId].dna = dna;
     }
 
     function checkUsedPairs(uint256[] memory traits) public view returns (bool) {
