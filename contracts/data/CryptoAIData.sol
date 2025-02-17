@@ -117,6 +117,12 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         _contractSealed = true;
     }
 
+    function unSealContract()
+    external
+    _sealed onlyDeployer {
+        _contractSealed = false;
+    }
+
     function mintAgent(uint256 tokenId)
     external
     onlyAIAgentContract _sealed
