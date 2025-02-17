@@ -82,7 +82,7 @@ contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeab
         _agentAddresses[_indexMint] = agentAddress;
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
         cryptoAIDataContract.mintAgent(_indexMint);
-        unlock(_indexMint, dna, traits);
+        cryptoAIDataContract.unlockRenderAgent(_indexMint, dna, traits);
 
         _indexMint += 1;
     }
