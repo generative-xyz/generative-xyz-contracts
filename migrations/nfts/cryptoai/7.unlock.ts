@@ -14,7 +14,7 @@ async function main() {
         return;
     }
     const dataContract = new CryptoAI(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-    await dataContract.unlock(config.contractAddress, 0, args[0]);
+    // await dataContract.unlock(config.contractAddress, 0, args[0]);
 
 }
 

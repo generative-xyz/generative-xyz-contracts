@@ -2,7 +2,7 @@ import {CryptoAI} from "./cryptoAI";
 import {initConfig} from "../../data/cryptoai";
 
 async function main() {
-    if (process.env.NETWORK != "local") {
+    if (process.env.NETWORK != "base_mainnet") {
         console.log("wrong network");
         return;
     }

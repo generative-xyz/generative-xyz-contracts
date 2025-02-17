@@ -28,12 +28,12 @@ class CryptoAI {
         // }
 
         const contract = await ethers.getContractFactory("CryptoAI");
-        console.log("CryptoAIData.deploying ...")
+        console.log("CryptoAI.deploying ...")
         const proxy = await upgrades.deployProxy(contract, [name, symbol, deployerAddr], {
             initializer: 'initialize(string, string, address)',
         });
         await proxy.deployed();
-        console.log("CryptoAIData deployed at proxy:", proxy.address);
+        console.log("CryptoAI deployed at proxy:", proxy.address);
         return proxy.address;
     }
 
@@ -106,10 +106,10 @@ class CryptoAI {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async mint(contractAddress: any, gas: any, to: any) {
+    async allowAdmin(contractAddress: any, gas: any, newAddr: any, allow: boolean) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-        const fun = temp?.nftContract.methods.mint(to)
+        const fun = temp?.nftContract.methods.allowAdmin(newAddr, allow)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
@@ -126,10 +126,10 @@ class CryptoAI {
         return await this.signedAndSendTx(temp?.web3, tx);
     }
 
-    async unlock(contractAddress: any, gas: any, tokenId: any) {
+    async mint(contractAddress: any, gas: any, to: any, agentAddr: any, dna: number, traits: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-        const fun = temp?.nftContract.methods.unlock(tokenId)
+        const fun = temp?.nftContract.methods.mint(to, agentAddr, dna, traits)
         //the transaction
         const tx = {
             from: this.senderPublicKey,
@@ -145,6 +145,26 @@ class CryptoAI {
 
         return await this.signedAndSendTx(temp?.web3, tx);
     }
+
+    // async unlock(contractAddress: any, gas: any, tokenId: any) {
+    //     let temp = this.getContract(contractAddress);
+    //     const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
+    //     const fun = temp?.nftContract.methods.unlock(tokenId)
+    //     //the transaction
+    //     const tx = {
+    //         from: this.senderPublicKey,
+    //         to: contractAddress,
+    //         nonce: nonce,
+    //         gas: gas,
+    //         data: fun.encodeABI(),
+    //     }
+    //
+    //     if (tx.gas == 0) {
+    //         tx.gas = await fun.estimateGas(tx);
+    //     }
+    //
+    //     return await this.signedAndSendTx(temp?.web3, tx);
+    // }
 
     async tokenURI(contractAddress: any, tokenId: any) {
         let temp = this.getContract(contractAddress);
