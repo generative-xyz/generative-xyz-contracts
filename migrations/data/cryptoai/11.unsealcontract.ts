@@ -10,7 +10,7 @@ async function main() {
     let config = await initConfig();
 
     const dataContract = new CryptoAIData(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-    await dataContract.changeCryptoAIAgentAddress(config.dataContractAddress, 0, config.contractAddress);
+    await dataContract.unsealContract(config.dataContractAddress, 0);
 }
 
 main().catch(error => {

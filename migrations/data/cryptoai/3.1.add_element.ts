@@ -5,7 +5,7 @@ import { DNA, ELEMENT, KEY_DNA, PALETTE_COLOR, TRAITS_DNA } from "./data";
 import * as data from './datajson/data-compressed.json';
 
 async function main() {
-    if (process.env.NETWORK != "local") {
+    if (process.env.NETWORK != "base_mainnet") {
         console.log("wrong network");
         return;
     }
