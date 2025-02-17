@@ -28,6 +28,8 @@ contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeab
 
     uint256 public _indexMint;
 
+    mapping(uint256 => address) public _agentAddresses;
+
     modifier onlyDeployer() {
         require(msg.sender == _deployer, Errors.ONLY_DEPLOYER);
         _;
@@ -72,12 +74,13 @@ contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeab
     }
 
     //@ERC721
-    function mint(address to, uint256 dna, uint256[5] memory traits) public onlyAdmin {
-        require(msg.sender == _deployer);
+    function mint(address to, address agentAddress, uint256 dna, uint256[5] memory traits) public onlyAdmin {
         require(to != Errors.ZERO_ADDR, Errors.INV_ADD);
+        require(agentAddress != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_indexMint <= TOKEN_LIMIT);
         _safeMint(to, _indexMint);
+        _agentAddresses[_indexMint] = agentAddress;
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
         cryptoAIDataContract.mintAgent(_indexMint);
         unlock(_indexMint, dna, traits);
