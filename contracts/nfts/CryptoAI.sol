@@ -17,14 +17,13 @@ import {IMintableAgent} from "../interfaces/IAgentNFT.sol";
 
 contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeable, IERC2981Upgradeable, OwnableUpgradeable {
     uint256 public constant TOKEN_LIMIT = 10000;
-    uint256 public constant MINT_PRINT = 1 ** 18;
 
     // deployer
     address public _deployer;
     // CryptoAIData
     address public _cryptoAiDataAddr;
     // admins
-    mapping(address => bool) _admins;
+    mapping(address => bool) public _admins;
 
     uint256 public _indexMint;
 
