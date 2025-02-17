@@ -15,19 +15,26 @@ import "../interfaces/ICryptoAIData.sol";
 import 'hardhat/console.sol';
 import {IMintableAgent} from "../interfaces/IAgentNFT.sol";
 
-contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeable, IERC2981Upgradeable, OwnableUpgradeable, IMintableAgent {
-    uint256 public constant TOKEN_LIMIT = 10000; // Changed to 10000
-    uint256 public constant MINT_PRINT = 1 ** 18; // Changed to 10000
+contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeable, IERC2981Upgradeable, OwnableUpgradeable {
+    uint256 public constant TOKEN_LIMIT = 10000;
+    uint256 public constant MINT_PRINT = 1 ** 18;
 
     // deployer
     address public _deployer;
     // CryptoAIData
     address public _cryptoAiDataAddr;
+    // admins
+    mapping(address => bool) _admins;
 
     uint256 public _indexMint;
 
     modifier onlyDeployer() {
         require(msg.sender == _deployer, Errors.ONLY_DEPLOYER);
+        _;
+    }
+
+    modifier onlyAdmin() {
+        require(_admins[msg.sender], Errors.ONLY_DEPLOYER);
         _;
     }
 
@@ -51,6 +58,11 @@ contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeab
         }
     }
 
+    function allowAdmin(address newAdm, bool allow) external onlyDeployer {
+        require(newAdm != Errors.ZERO_ADDR, Errors.INV_ADD);
+        _admins[newAdm] = allow;
+    }
+
     function changeCryptoAiDataAddress(address newAddr) external onlyDeployer {
         require(newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
 
@@ -59,47 +71,24 @@ contract CryptoAI is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradeab
         }
     }
 
-    function adminMint(address to) public {
-        require(_indexMint < 1000);
-        require(msg.sender == _deployer);
-        require(to != Errors.ZERO_ADDR, Errors.INV_ADD);
-        _safeMint(to, _indexMint);
-        _indexMint++;
-    }
-
     //@ERC721
-    function mint(address to) public payable {
+    function mint(address to, uint256 dna, uint256[5] memory traits) public onlyAdmin {
+        require(msg.sender == _deployer);
         require(to != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_indexMint <= TOKEN_LIMIT);
         _safeMint(to, _indexMint);
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
         cryptoAIDataContract.mintAgent(_indexMint);
+        unlock(_indexMint, dna, traits);
+
         _indexMint += 1;
     }
 
-    function unlock(uint256 tokenId) public payable {
+    function unlock(uint256 tokenId, uint256 dna, uint256[5] memory traits) public payable {
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
-        uint256[5] memory traits;
-        traits[0] = 1;
-        traits[1] = 1;
-        traits[2] = 1;
-        traits[3] = 1;
-        traits[4] = 1;
-        cryptoAIDataContract.unlockRenderAgent(tokenId, traits);
-    }
-
-    function isUnlockedAgent(uint256 _agentId) public view returns (bool) {
-        return true;
-    }
-
-    function getAgentRating(uint256 _agentId) external view returns (uint256, uint256) {
-        return (0, 0);
-    }
-
-    function getAgentRarity(uint256 _agentId) external view returns (uint256) {
-        return _agentId + 1511;
+        cryptoAIDataContract.unlockRenderAgent(tokenId, dna, traits);
     }
 
     function _burn(uint256 tokenId) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable) {
