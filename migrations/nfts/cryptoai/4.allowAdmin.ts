@@ -1,16 +1,17 @@
-import {CryptoAI} from "./cryptoAI";
-import {initConfig} from "../../data/cryptoai";
+import { initConfig } from "../../data/cryptoai";
+import { CryptoAI } from "./cryptoAI";
 
 async function main() {
-    if (process.env.NETWORK != "base_mainnet") {
-        console.log("wrong network");
-        return;
-    }
+    // if (process.env.NETWORK != "base_mainnet") {
+    //     console.log("wrong network");
+    //     return;
+    // }
 
     let config = await initConfig();
 
     const dataContract = new CryptoAI(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-    await dataContract.allowAdmin(config.contractAddress, 0, "0x8eaf68B6A6AD411B260699B0aC24Ad839F72FC07", true);
+    // Add address of user want to mint
+    await dataContract.allowAdmin(config.contractAddress, 0, "0x70997970C51812dc3A010C7d01b50e0d17dc79C8", true);
 
 }
 

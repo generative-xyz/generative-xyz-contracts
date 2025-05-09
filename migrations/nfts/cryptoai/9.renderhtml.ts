@@ -1,3 +1,4 @@
+import { promises as fs } from "fs";
 import { initConfig } from "../../data/cryptoai";
 import { CryptoAI } from "./cryptoAI";
 
@@ -14,8 +15,16 @@ async function main() {
         return;
     }
     const dataContract = new CryptoAI(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
-    const data = await dataContract.tokenURI(config.contractAddress, args[0]);
-    console.log(data);
+    let htmls = "";
+    for(let i = 1; i <= parseInt(args[0]); i++) {
+        const data = await dataContract.tokenURI(config.contractAddress, i);
+        const json = JSON.parse(data);
+        const image = json.image.replace('data:image/svg+xml;utf8,', '');
+        htmls += "<span>" + i + "</span><br>" + image + "<br>"
+        console.log(i, " processed");
+    }
+    const path = "./migrations/nfts/cryptoai/testhtml.html";
+    await fs.writeFile(path, htmls);
 }
 
 main().catch(error => {

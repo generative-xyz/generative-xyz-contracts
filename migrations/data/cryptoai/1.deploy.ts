@@ -1,11 +1,11 @@
-import {CryptoAIData} from "./cryptoAIData";
-import {initConfig, updateConfig} from "./index";
+import { CryptoAIData } from "./cryptoAIData";
+import { initConfig, updateConfig } from "./index";
 
 async function main() {
-    if (process.env.NETWORK != "base_mainnet") {
-        console.log("wrong network");
-        return;
-    }
+    // if (process.env.NETWORK != "base_mainnet") {
+    //     console.log("wrong network");
+    //     return;
+    // }
 
     await initConfig();
 

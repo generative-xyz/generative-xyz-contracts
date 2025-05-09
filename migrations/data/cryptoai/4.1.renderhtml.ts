@@ -1,6 +1,6 @@
-import {initConfig} from "./index";
-import {CryptoAIData} from "./cryptoAIData";
-import {promises as fs} from "fs";
+import { promises as fs } from "fs";
+import { CryptoAIData } from "./cryptoAIData";
+import { initConfig } from "./index";
 
 async function main() {
     if (process.env.NETWORK != "local") {
@@ -29,7 +29,7 @@ async function main() {
         } catch (ex) {
             console.log(i, " failed");
         }
-    }
+    } 
     const path = "./migrations/data/cryptoai/testhtml.html";
     console.log("path", path);
     await fs.writeFile(path, htmls);
