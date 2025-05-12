@@ -53,19 +53,23 @@ async function main() {
   const data_mintings = [];
   let indexArt = 1
   let indexSeed = 1
+  let dublicate = 1;
   const dataCompress = require('../../data/cryptoai/datajson/data-compressed.json');
   try {
     
     while (indexArt <= num) {
       let data =  generateRandomData(dataCompress, indexSeed);
       indexSeed++
-      if(checkDublicateArt(data_mintings, data)) {
-        console.log("____dublicate");
+      if (checkDublicateArt(data_mintings, data)) {
+        dublicate++;
+        console.log("____dublicate", dublicate);
         continue;
       }
       data_mintings.push(data);
+      console.log('process', indexArt);
       indexArt++;
     }
+    console.log('duplicates', indexSeed, dublicate);
 
     const rarityPath = "migrations/data/cryptoai/datajson/collections.json"
     await fs.writeFile(rarityPath, JSON.stringify(data_mintings, null, 2));
@@ -188,3 +192,5 @@ function traitsElement(arrAttrs: number[], seed: number): number {
   }
   return 0;
 }
+
+main();
