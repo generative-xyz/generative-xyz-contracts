@@ -12,23 +12,23 @@ async function generateRandomData(startSeed: number, endSeed: number): Promise<a
     for (let i = startSeed; i <= endSeed; i++) {
         try {
             // Generate a unique seed for each attribute using prime numbers to avoid patterns
-            const dnaSeed = i * 31;
-            const dnaTypeSeed = i * 53;
-            const mouthSeed = i * 37;
-            const headSeed = i * 41;
-            const eyesSeed = i * 43;
-            const bodySeed = i * 47;
+            const dnaSeed = consistentSeed(i * 31);
+            const dnaTypeSeed = consistentSeed(i * 53);
+            const mouthSeed = consistentSeed(i * 37);
+            const headSeed = consistentSeed(i * 41);
+            const eyesSeed = consistentSeed(i * 43);
+            const bodySeed = consistentSeed(i * 47);
 
                // Helper function to ensure index is within bounds
-            const getRandomIndex = (seed: number, length: number): number => {
-                const randomNum = Math.floor(Math.abs(Math.sin(seed) * 1000));
-                return randomNum % length;
-            };
+            // const getRandomIndex = (seed: number, length: number): number => {
+            //     const randomNum = Math.floor(Math.abs(Math.sin(seed) * 1000));
+            //     return randomNum % length;
+            // };
 
             // Generate random DNA index based on seed
             // const randomValue = Math.abs(Math.sin(dnaSeed)) * totalDNATypes;
             // const indexDNA = Math.floor(randomValue) % totalDNATypes; 
-            const indexDNA = getRandomIndex(dnaSeed, 6);
+            const indexDNA = traitsDNA(data.DNA, dnaSeed);
             
             // Get the DNA key at this index
             const dnaKey = Object.keys(data.DNA)[indexDNA];
@@ -42,11 +42,11 @@ async function generateRandomData(startSeed: number, endSeed: number): Promise<a
          
             
             // Calculate all indices safely within bounds
-            const indexNameDNAType = getRandomIndex(dnaTypeSeed, dnaTypeLength);
-            const indexNameMouth = getRandomIndex(mouthSeed, mouthLength);
-            const indexNameHead = getRandomIndex(headSeed, headLength);
-            const indexNameEyes = getRandomIndex(eyesSeed, eyesLength);
-            const indexNameBody = getRandomIndex(bodySeed, bodyLength);
+            const indexNameDNAType = traitsElement(data.DNA[dnaKey].traits, dnaTypeSeed);
+            const indexNameMouth = traitsElement(data.elements.Mouth.traits, mouthSeed);
+            const indexNameHead = traitsElement(data.elements.Head.traits, headSeed);
+            const indexNameEyes = traitsElement(data.elements.Eyes.traits, eyesSeed);
+            const indexNameBody = traitsElement(data.elements.Body.traits, bodySeed);
 
          
 
@@ -311,6 +311,43 @@ function traits(arrAttrs: [string, number][], seed: number): [string, number] {
   }
   return arrAttrs[0]; // Default return to satisfy TypeScript
 }
+
+function traitsDNA(arrAttrs: {trait: number, names: string[], positions: number[]}[], seed: number): number {
+  let trs: number[] = []
+  let indexMin = 0
+
+  for (let i = 0; i < arrAttrs.length; i++) {
+    indexMin += Number(arrAttrs[i].trait)
+    trs[i] = indexMin
+  }
+
+  const ftrs = Math.floor(consistentRand(seed, 0, indexMin))
+  for (let i = 0; i < trs.length; i++) {
+    if (ftrs < trs[i]) {
+      return i
+    }
+  }
+  return 0; // Default return to satisfy TypeScript
+}
+
+function traitsElement(arrAttrs: number[], seed: number): number {
+  let trs: number[] = []
+  let indexMin = 0
+
+  for (let i = 0; i < arrAttrs.length; i++) {
+    indexMin += Number(arrAttrs[i])
+    trs[i] = indexMin
+  }
+
+  const ftrs = Math.floor(consistentRand(seed, 0, indexMin))
+  for (let i = 0; i < trs.length; i++) {
+    if (ftrs < trs[i]) {
+      return i
+    }
+  }
+  return 0; // Default return to satisfy TypeScript
+}
+
 
 main().catch(error => {
     console.error(error);

@@ -2,67 +2,67 @@
   {
     "id": 1,
     "data": [
-      "Human",
+      "Robot",
       [
-        "human 5",
-        "Anonymous Hoodie",
-        "Viking Helmet",
-        "Censored Eyes",
-        "Dog Mouth"
+        "robot 10",
+        "Sorcerer Coat",
+        "Headset Antenna",
+        "Sparkled Eyes",
+        "Sad"
       ]
     ],
     "dataIndex": [
-      2,
+      0,
       [
-        3,
-        30,
-        3,
-        25,
-        23
+        9,
+        7,
+        16,
+        5,
+        7
       ]
     ]
   },
   {
     "id": 2,
     "data": [
-      "Dog",
+      "Robot",
       [
-        "dog 2",
-        "Ball Dress",
-        "Viking Helmet",
-        "Crazy Eyes",
-        "Disappointed"
+        "robot 1",
+        "Tuxedo",
+        "Sailor Hat",
+        "Eye Patch",
+        "Rainbow Puke"
       ]
     ],
     "dataIndex": [
-      4,
+      0,
       [
+        8,
         1,
-        28,
-        3,
-        24,
-        24
+        10,
+        21,
+        10
       ]
     ]
   },
   {
     "id": 3,
     "data": [
-      "Cat",
+      "Robot",
       [
-        "cat 3",
-        "Cyborg",
-        "Bowler Hat",
+        "robot 9",
+        "Rainbow Sweater",
+        "Baseball Cap",
         "Round Glasses",
         "Cigarette"
       ]
     ],
     "dataIndex": [
-      5,
+      0,
       [
         0,
-        22,
-        25,
+        12,
+        29,
         7,
         27
       ]
@@ -71,46 +71,46 @@
   {
     "id": 4,
     "data": [
-      "Cat",
+      "Robot",
       [
-        "cat 1",
-        "Robot Tee",
-        "Umbrella Cap",
-        "Bloody Eyes",
-        "Cat Mouth"
+        "robot 9",
+        "Tank-top",
+        "Magnetic Antenna",
+        "Robotic Glasses",
+        "Smirk"
       ]
     ],
     "dataIndex": [
-      5,
+      0,
       [
-        2,
-        10,
-        5,
-        26,
-        28
+        0,
+        3,
+        14,
+        9,
+        5
       ]
     ]
   },
   {
     "id": 5,
     "data": [
-      "Cat",
+      "Robot",
       [
-        "cat 3",
-        "Cyborg",
-        "Wizard Hat",
-        "Futuristic Device",
-        "Smirk"
+        "robot 9",
+        "Christmas Jacket",
+        "Y Antenna",
+        "",
+        "Dog Mouth"
       ]
     ],
     "dataIndex": [
-      5,
+      0,
       [
         0,
+        23,
+        0,
         22,
-        1,
-        19,
-        5
+        23
       ]
     ]
   }
