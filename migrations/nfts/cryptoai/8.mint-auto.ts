@@ -19,15 +19,6 @@ async function generateRandomData(startSeed: number, endSeed: number): Promise<a
             const eyesSeed = consistentSeed(i * 43);
             const bodySeed = consistentSeed(i * 47);
 
-               // Helper function to ensure index is within bounds
-            // const getRandomIndex = (seed: number, length: number): number => {
-            //     const randomNum = Math.floor(Math.abs(Math.sin(seed) * 1000));
-            //     return randomNum % length;
-            // };
-
-            // Generate random DNA index based on seed
-            // const randomValue = Math.abs(Math.sin(dnaSeed)) * totalDNATypes;
-            // const indexDNA = Math.floor(randomValue) % totalDNATypes; 
             const indexDNA = traitsDNA(data.DNA, dnaSeed);
             
             // Get the DNA key at this index
@@ -39,8 +30,7 @@ async function generateRandomData(startSeed: number, endSeed: number): Promise<a
             const eyesLength = data.elements.Eyes.names.length;
             const bodyLength = data.elements.Body.names.length;
 
-         
-            
+        
             // Calculate all indices safely within bounds
             const indexNameDNAType = traitsElement(data.DNA[dnaKey].traits, dnaTypeSeed);
             const indexNameMouth = traitsElement(data.elements.Mouth.traits, mouthSeed);
@@ -49,7 +39,6 @@ async function generateRandomData(startSeed: number, endSeed: number): Promise<a
             const indexNameBody = traitsElement(data.elements.Body.traits, bodySeed);
 
          
-
             // Validate indices
             if (indexNameDNAType >= dnaTypeLength || 
                 indexNameMouth >= mouthLength ||
@@ -75,16 +64,7 @@ async function generateRandomData(startSeed: number, endSeed: number): Promise<a
                 dnaKey,
                 [data.DNA[dnaKey].names[indexNameDNAType], data.elements.Body.names[indexNameBody], data.elements.Head.names[indexNameHead], data.elements.Eyes.names[indexNameEyes], data.elements.Mouth.names[indexNameMouth]]
             ];
-
-            console.log(randomData);
-
-            // if (i == 14) {
-            //     console.log(dnaKey);
-            //     console.log(data.DNA[dnaKey].names[indexNameDNAType]);
-            //     console.log(indexNameDNAType, dnaTypeLength , indexNameDNAType >= dnaTypeLength );
-            //     console.log('test',randomData);
-            // }
-
+          
             mintData.push({
                 id: i,
                 data: randomData,
@@ -151,8 +131,8 @@ async function checkDuplicateData(mintData: any[]): Promise<{hasDuplicates: bool
     }
 }
 
-async function generateUniqueRandomData(startSeed: number, endSeed: number): Promise<any[]> {
-    let mintData = await generateRandomData(startSeed, endSeed);
+async function generateUniqueRandomData(totalArtGen: number): Promise<any[]> {
+    let mintData = await generateRandomData(1, totalArtGen);
     let attempt = 1;
     let { hasDuplicates, duplicateIds } = await checkDuplicateData(mintData);
     
