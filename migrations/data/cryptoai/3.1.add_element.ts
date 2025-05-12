@@ -46,10 +46,9 @@ async function main() {
             }
         });
 
-        await dataContract.addItem(address, 0, ELEMENT.MOUTH, data.elements.Mouth.names, data.elements.Mouth.traits, data.elements.Mouth.positions);
-        await dataContract.addItem(address, 0, ELEMENT.HEAD, data.elements.Head.names, data.elements.Head.traits, data.elements.Head.positions);
-        await dataContract.addItem(address, 0, ELEMENT.EYES, data.elements.Eyes.names, data.elements.Eyes.traits, data.elements.Eyes.positions);
-        await dataContract.addItem(address, 0, ELEMENT.BODY, data.elements.Body.names, data.elements.Body.traits, data.elements.Body.positions);
+ 
+       
+       
 
         // Check positions for each DNA variant
         data.DNA.Dog.positions.forEach((pos: any[], index: number) => {
@@ -98,6 +97,12 @@ async function main() {
         await dataContract.addDNAVariantRobot(address, 0, data.DNA.Robot.names, data.DNA.Robot.traits);
         await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(0, 5), 0, 5);
         await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(5, 10), 5, 10);
+
+        await dataContract.addItem(address, 0, ELEMENT.BODY, data.elements.Body.names, data.elements.Body.traits, data.elements.Body.positions);
+        await dataContract.addItem(address, 0, ELEMENT.HEAD, data.elements.Head.names, data.elements.Head.traits, data.elements.Head.positions);
+         await dataContract.addItem(address, 0, ELEMENT.EYES, data.elements.Eyes.names, data.elements.Eyes.traits, data.elements.Eyes.positions);
+        await dataContract.addItem(address, 0, ELEMENT.MOUTH, data.elements.Mouth.names, data.elements.Mouth.traits, data.elements.Mouth.positions);
+      
 
 
     } catch (error) {

@@ -19,9 +19,16 @@ async function generateRandomData(startSeed: number, endSeed: number): Promise<a
             const eyesSeed = i * 43;
             const bodySeed = i * 47;
 
+               // Helper function to ensure index is within bounds
+            const getRandomIndex = (seed: number, length: number): number => {
+                const randomNum = Math.floor(Math.abs(Math.sin(seed) * 1000));
+                return randomNum % length;
+            };
+
             // Generate random DNA index based on seed
-            const randomValue = Math.abs(Math.sin(dnaSeed)) * totalDNATypes;
-            const indexDNA = Math.floor(randomValue) % totalDNATypes;
+            // const randomValue = Math.abs(Math.sin(dnaSeed)) * totalDNATypes;
+            // const indexDNA = Math.floor(randomValue) % totalDNATypes; 
+            const indexDNA = getRandomIndex(dnaSeed, 6);
             
             // Get the DNA key at this index
             const dnaKey = Object.keys(data.DNA)[indexDNA];
@@ -32,11 +39,7 @@ async function generateRandomData(startSeed: number, endSeed: number): Promise<a
             const eyesLength = data.elements.Eyes.names.length;
             const bodyLength = data.elements.Body.names.length;
 
-            // Helper function to ensure index is within bounds
-            const getRandomIndex = (seed: number, length: number): number => {
-                const randomNum = Math.floor(Math.abs(Math.sin(seed) * 1000));
-                return randomNum % length;
-            };
+         
             
             // Calculate all indices safely within bounds
             const indexNameDNAType = getRandomIndex(dnaTypeSeed, dnaTypeLength);
@@ -217,13 +220,14 @@ async function main() {
         const dataContract = new CryptoAI(process.env.NETWORK, process.env.PRIVATE_KEY, process.env.PUBLIC_KEY);
 
         const data = require('../../data/cryptoai/datajson/data-mint.json');
-        // for (const entry of data) {
-        //     await dataContract.mint(
-        //         config.contractAddress, 0, process.env.PUBLIC_KEY, process.env.PUBLIC_KEY,
-        //         entry.data[0],
-        //         entry.data[1]
-        //     );
-        // }
+        for (const entry of data) {
+            console.log(entry.dataIndex[0], entry.dataIndex[1]);
+            await dataContract.mint(
+                config.contractAddress, 0, process.env.PUBLIC_KEY, process.env.PUBLIC_KEY,
+                entry.dataIndex[0],
+                entry.dataIndex[1]
+            );
+        }
 
     } catch (error) {
         console.error("Error generating data:", error);
