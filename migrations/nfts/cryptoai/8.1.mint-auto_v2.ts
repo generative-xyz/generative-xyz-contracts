@@ -1,23 +1,26 @@
+
 import { promises as fs } from "fs";
-import { initConfig } from "../../data/cryptoai";
+const dropTraitValue = .95;
+const rageTriggerDrop = 450;
 
-function generateRandomData(data: any, indexGen: number): {name: any, index: any} {
-    const dnaSeed = consistentSeed(indexGen * 31);
-    const dnaTypeSeed = consistentSeed(indexGen * 53);
-    const mouthSeed = consistentSeed(indexGen * 37);
-    const headSeed = consistentSeed(indexGen * 41);
-    const eyesSeed = consistentSeed(indexGen * 43);
-    const bodySeed = consistentSeed(indexGen * 47);
+function generateRandomData(data: any, indexGen: number, indexDNA: number, rageDNA: number): {name: any, index: any} {
 
-    const indexDNA = traitsDNA(data.DNA, dnaSeed);
+    const dnaTypeSeed = consistentSeed(indexGen * 503);
+    const mouthSeed = consistentSeed(indexGen * 3007);
+    const headSeed = consistentSeed(indexGen * 40001);
+    const eyesSeed = consistentSeed(indexGen * 400003);
+    const bodySeed = consistentSeed(indexGen * 40000007);
+
+    // const indexDNA = traitsDNA(data.DNA, dnaSeed);
     
     const dnaKey = Object.keys(data.DNA)[indexDNA];
-   
-    const indexNameDNAType = traitsElement(data.DNA[dnaKey].traits, dnaTypeSeed);
-    const indexNameMouth = traitsElement(data.elements.Mouth.traits, mouthSeed);
-    const indexNameHead = traitsElement(data.elements.Head.traits, headSeed);
-    const indexNameEyes = traitsElement(data.elements.Eyes.traits, eyesSeed);
-    const indexNameBody = traitsElement(data.elements.Body.traits, bodySeed);
+  try {
+     const indexNameDNAType = traitsElement(data.DNA[dnaKey].traits, dnaTypeSeed, -1);
+    const indexNameMouth = traitsElement(data.elements.Mouth.traits, mouthSeed, rageDNA);
+    const indexNameHead = traitsElement(data.elements.Head.traits, headSeed, rageDNA);
+    const indexNameEyes = traitsElement(data.elements.Eyes.traits, eyesSeed, rageDNA);
+    const indexNameBody = traitsElement(data.elements.Body.traits, bodySeed, rageDNA);
+  
 
     const randomDataIndex = [
         indexDNA,
@@ -33,6 +36,16 @@ function generateRandomData(data: any, indexGen: number): {name: any, index: any
       name: randomData,
       index: randomDataIndex
     }
+     } catch (error) {
+    console.log('____error', dnaKey, data.DNA[dnaKey].traits);
+    // return;
+  }
+  
+  return {
+    name: [],
+    index: []
+  }
+    
 }
 
 
@@ -41,7 +54,7 @@ function checkDublicateArt(data_mintings: any[], data: any): boolean {
 }
 
 async function main() {
-    let config = await initConfig();
+    // let config = await initConfig();
     const args = process.argv.slice(2);
     if (args.length == 0) {
         console.log("missing number")
@@ -49,30 +62,69 @@ async function main() {
     }
 
     const num = parseInt(args[0]);
-    
+  
+  
   const data_mintings = [];
   let indexArt = 1
   let indexSeed = 1
-  let dublicate = 1;
-  const dataCompress = require('../../data/cryptoai/datajson/data-compressed.json');
+  const dataCompress = require('migrations/data/cryptoai/datajson/data-compressed.json');
+  let indexDNA = 0;
+  let startRageDNA = 300;
+  let stuckRangDNA = 0;
+
   try {
-    
+  
     while (indexArt <= num) {
-      let data =  generateRandomData(dataCompress, indexSeed);
+      const keyDNA = Object.keys(dataCompress.DNA)[indexDNA];
+      // const rageDNA = dataCompress.DNA[keyDNA].rageDNA;
+      startRageDNA = MathMap(indexArt + stuckRangDNA, 1, num, 300, 1000);
+
+      console.log('__rageDNA', startRageDNA);
+      let data = generateRandomData(dataCompress, indexSeed, indexDNA, startRageDNA);
       indexSeed++
-      if (checkDublicateArt(data_mintings, data)) {
-        dublicate++;
-        console.log("____dublicate", dublicate);
+      
+
+      if(checkDublicateArt(data_mintings, data)) {
+        console.log("____dublicate", indexArt);
+        stuckRangDNA += 1;
         continue;
       }
+
+      dataCompress.DNA[keyDNA].trait--;
+      if(dataCompress.DNA[keyDNA].trait == 0) {
+        indexDNA++;
+        
+      }
+      
+      if(dataCompress.DNA[keyDNA].traits[data.index[1][0]] < rageTriggerDrop) {
+        dataCompress.DNA[keyDNA].traits[data.index[1][0]] *= dropTraitValue;
+      }
+
+      if(dataCompress.elements.Body.traits[data.index[1][1]] < rageTriggerDrop) {
+        dataCompress.elements.Body.traits[data.index[1][1]] *= dropTraitValue;
+      }
+
+      if(dataCompress.elements.Head.traits[data.index[1][2]] < rageTriggerDrop) {
+        dataCompress.elements.Head.traits[data.index[1][2]] *= dropTraitValue;
+      }
+
+      if(dataCompress.elements.Eyes.traits[data.index[1][3]] < rageTriggerDrop) {
+        dataCompress.elements.Eyes.traits[data.index[1][3]] *= dropTraitValue;
+      }
+
+      if(dataCompress.elements.Mouth.traits[data.index[1][4]] < rageTriggerDrop) {
+        dataCompress.elements.Mouth.traits[data.index[1][4]] *= dropTraitValue;
+      }
+
+      console.log('procresss', indexArt)
       data_mintings.push(data);
       console.log('process', indexArt);
       indexArt++;
     }
     console.log('duplicates', indexSeed, dublicate);
 
-    const rarityPath = "migrations/data/cryptoai/datajson/collections.json"
-    await fs.writeFile(rarityPath, JSON.stringify(data_mintings, null, 2));
+    const collectionPath = "migrations/data/cryptoai/datajson/collections.json"
+    await fs.writeFile(collectionPath, JSON.stringify(data_mintings, null, 2));
 
     } catch (error) {
         console.error("Error generating data:", error);
@@ -175,12 +227,16 @@ function traitsDNA(arrAttrs: {trait: number, names: string[], positions: number[
   return 0;
 }
 
-function traitsElement(arrAttrs: number[], seed: number): number {
+function traitsElement(arrAttrs: number[], seed: number, rageDNA: number): number {
   let trs: number[] = []
   let indexMin = 0
 
   for (let i = 0; i < arrAttrs.length; i++) {
-    indexMin += Number(arrAttrs[i])
+    if(rageDNA < arrAttrs[i] && rageDNA != -1){
+      indexMin += 0
+    } else {
+      indexMin += Number(arrAttrs[i])
+    }
     trs[i] = indexMin
   }
 
@@ -192,5 +248,11 @@ function traitsElement(arrAttrs: number[], seed: number): number {
   }
   return 0;
 }
+main().catch(error => {
+    console.error(error);
+    process.exitCode = 1;
+});
 
-main();
+function MathMap (x: number, a: number, b: number, c: number, d: number): number {
+  return parseFloat((((x - a) * (d - c)) / (b - a) + c).toFixed(3));
+};
