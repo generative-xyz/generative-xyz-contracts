@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -10,7 +10,7 @@ import "../libs/helpers/Errors.sol";
  * @dev Implementation of a programmable parameter control.
  *
  * [x] Add (key, value)
- * [x] Add access control 
+ * [x] Add access control
  *
  */
 

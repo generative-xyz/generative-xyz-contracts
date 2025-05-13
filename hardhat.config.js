@@ -11,13 +11,29 @@ var verify = require("@ericxstone/hardhat-blockscout-verify");
 
 module.exports = {
     solidity: {
-        version: "0.8.12",
-        settings: {
-            optimizer: {
-                enabled: true,
-                runs: 200
-            }
-        }
+        compilers: [
+            {
+                version: "0.8.22",
+                settings: {
+                    optimizer: { enabled: true, runs: 2000000 },
+                    viaIR: true,
+                },
+            },
+            {
+                version: "0.8.19",
+                settings: {
+                    optimizer: { enabled: true, runs: 2000000 },
+                    viaIR: true,
+                },
+            },
+            {
+                version: "0.8.20",
+                settings: {
+                    optimizer: { enabled: true, runs: 2000000 },
+                    viaIR: true,
+                },
+            },
+        ],
     },
     defaultNetwork: process.env.NETWORK,
     etherscan: {
