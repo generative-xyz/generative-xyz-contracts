@@ -88,7 +88,6 @@ contract CryptoAI is
         uint256 dna,
         uint256[5] memory traits,
         string memory codeLanguage,
-        string memory personality,
         string memory ability,
         CodePointer[] calldata pointers,
         address[] calldata depsAgents
@@ -104,7 +103,6 @@ contract CryptoAI is
         _setupAgent(
             _indexMint,
             codeLanguage,
-            personality,
             ability,
             pointers,
             depsAgents

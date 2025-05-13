@@ -62,10 +62,6 @@ interface IAgent {
 
     function getCurrentVersion(uint256 tokenId) external view returns (uint16);
 
-    function getAgentPersonality(
-        uint256 tokenId
-    ) external view returns (string memory);
-
     function getAgentAbility(
         uint256 tokenId
     ) external view returns (string memory);

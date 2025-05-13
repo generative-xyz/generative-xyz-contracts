@@ -21,7 +21,6 @@ abstract contract AgentUpgradeable is
     mapping(uint256 tokenId => string) private _codeLanguage; // e.g., "python", "javascript"...
     mapping(uint256 tokenId => uint16) private _currentVersion;
 
-    mapping(uint256 tokenId => string) private _personality;
     mapping(uint256 tokenId => string) private _ability;
 
     mapping(bytes32 digest => bool) private _usedDigests;
@@ -54,28 +53,13 @@ abstract contract AgentUpgradeable is
     function _setupAgent(
         uint256 tokenId,
         string memory codeLanguage,
-        string memory personality,
         string memory ability,
         CodePointer[] calldata pointers,
         address[] calldata depsAgents
     ) internal {
         _codeLanguage[tokenId] = codeLanguage;
-        _personality[tokenId] = personality;
         _ability[tokenId] = ability;
         _publishAgentCode(tokenId, pointers, depsAgents);
-    }
-
-    function updateAgentPersonality(
-        uint256 tokenId,
-        string calldata personality
-    ) external virtual onlyAgentOwner(tokenId) {
-        _personality[tokenId] = personality;
-    }
-
-    function getAgentPersonality(
-        uint256 tokenId
-    ) external view returns (string memory) {
-        return _personality[tokenId];
     }
 
     function updateAgentAbility(

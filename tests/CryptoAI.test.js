@@ -171,7 +171,6 @@ describe("CryptoAI and CryptoAIData", function () {
             const dna = 0;
             const traits = [0, 0, 0, 0, 0];
             const codeLanguage = "Solidity";
-            const personality = "Friendly";
             const ability = "Smart";
             const pointers = [];
             const depsAgents = [];
@@ -184,7 +183,6 @@ describe("CryptoAI and CryptoAIData", function () {
                     dna,
                     traits,
                     codeLanguage,
-                    personality,
                     ability,
                     pointers,
                     depsAgents
@@ -212,7 +210,6 @@ describe("CryptoAI and CryptoAIData", function () {
             const dna = 0;
             const traits = [0, 0, 0, 0, 0];
             const codeLanguage = "Solidity";
-            const personality = "Friendly";
             const ability = "Smart";
             const pointers = [];
             const depsAgents = [];
@@ -226,7 +223,6 @@ describe("CryptoAI and CryptoAIData", function () {
                         dna,
                         traits,
                         codeLanguage,
-                        personality,
                         ability,
                         pointers,
                         depsAgents
@@ -253,7 +249,6 @@ describe("CryptoAI and CryptoAIData", function () {
             const dna = 0;
             const traits = [0, 0, 0, 0, 0];
             const codeLanguage = "Solidity";
-            const personality = "Friendly";
             const ability = "Smart";
             const pointers = [];
             const depsAgents = [];
@@ -266,7 +261,6 @@ describe("CryptoAI and CryptoAIData", function () {
                     dna,
                     traits,
                     codeLanguage,
-                    personality,
                     ability,
                     pointers,
                     depsAgents
@@ -277,7 +271,6 @@ describe("CryptoAI and CryptoAIData", function () {
 
             // Verify agent properties
             expect(await cryptoAI.getCodeLanguage(1)).to.equal(codeLanguage);
-            expect(await cryptoAI.getAgentPersonality(1)).to.equal(personality);
             expect(await cryptoAI.getAgentAbility(1)).to.equal(ability);
 
             expect(await cryptoAI.getCurrentVersion(1)).to.equal(1);
@@ -305,7 +298,6 @@ describe("CryptoAI and CryptoAIData", function () {
             const dna = 12345; // Unique DNA identifier
             const traits = [1, 2, 3, 4, 5]; // Different trait values
             const codeLanguage = "Python"; // Using Python as the code language
-            const personality = "Analytical and Precise"; // More detailed personality
             const ability = "Advanced Code Generation"; // Specific ability
             const pointers = [
                 {
@@ -332,7 +324,6 @@ describe("CryptoAI and CryptoAIData", function () {
                     dna,
                     traits,
                     codeLanguage,
-                    personality,
                     ability,
                     pointers,
                     depsAgents
@@ -343,7 +334,6 @@ describe("CryptoAI and CryptoAIData", function () {
 
             // Verify agent properties
             expect(await cryptoAI.getCodeLanguage(1)).to.equal(codeLanguage);
-            expect(await cryptoAI.getAgentPersonality(1)).to.equal(personality);
             expect(await cryptoAI.getAgentAbility(1)).to.equal(ability);
 
             // Verify version and code
@@ -388,7 +378,6 @@ describe("CryptoAI and CryptoAIData", function () {
             const dna = 12345;
             const traits = [1, 2, 3, 4, 5];
             const codeLanguage = "Python";
-            const personality = "Analytical";
             const ability = "Code Generation";
             const initialPointers = [];
             const initialDepsAgents = [];
@@ -400,7 +389,6 @@ describe("CryptoAI and CryptoAIData", function () {
                     dna,
                     traits,
                     codeLanguage,
-                    personality,
                     ability,
                     initialPointers,
                     initialDepsAgents
