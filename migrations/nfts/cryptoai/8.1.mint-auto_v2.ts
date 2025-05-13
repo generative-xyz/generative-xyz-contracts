@@ -118,8 +118,10 @@ async function main() {
 
       console.log('procresss', indexArt)
       data_mintings.push(data);
+      console.log('process', indexArt);
       indexArt++;
     }
+    console.log('duplicates', indexSeed, dublicate);
 
     const collectionPath = "migrations/data/cryptoai/datajson/collections.json"
     await fs.writeFile(collectionPath, JSON.stringify(data_mintings, null, 2));
