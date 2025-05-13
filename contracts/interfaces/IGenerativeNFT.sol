@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity ^0.8.12;
 
 import "../libs/structs/NFTProject.sol";
 import "./IBaseERC721OwnerSeed.sol";

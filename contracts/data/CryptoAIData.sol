@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import '@openzeppelin/contracts/utils/Base64.sol';
+import "@openzeppelin/contracts/utils/Base64.sol";
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/math/MathUpgradeable.sol";
 
@@ -210,7 +210,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
             result = string(abi.encodePacked(
                 '{"image": "', PLACEHOLDER_IMG,
                 '", "animation_url": "', cryptoAIImageHtml(tokenId),
-                '"}'
+                    '"}'
             ));
         } else {
             result = string(abi.encodePacked(
@@ -410,7 +410,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
 
     function cryptoAIImageSvg(uint256 tokenId)
     public view
-        // onlyAIAgentContract
+            // onlyAIAgentContract
     returns (string memory result) {
         require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
 
@@ -439,16 +439,16 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                     }
 
                     svg = string(abi.encodePacked(
-                        svg,
-                        abi.encodePacked(
-                            SVG_RECT,
-                            StringsUpgradeable.toString(x),
-                            SVG_Y,
-                            StringsUpgradeable.toString(y),
-                            SVG_WIDTH,
-                            string(buffer),
-                            SVG_CLOSE_RECT
-                        )
+                            svg,
+                            abi.encodePacked(
+                                SVG_RECT,
+                                StringsUpgradeable.toString(x),
+                                SVG_Y,
+                                StringsUpgradeable.toString(y),
+                                SVG_WIDTH,
+                                string(buffer),
+                                SVG_CLOSE_RECT
+                            )
                     ));
                 }
             }
