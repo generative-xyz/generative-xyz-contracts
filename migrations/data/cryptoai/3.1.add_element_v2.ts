@@ -114,8 +114,8 @@ async function main(key:string) {
             case DNA.ROBOT:
                 //Add DNA Variant
                 await dataContract.addDNAVariantRobot(address, 0, data.DNA.Robot.names, data.DNA.Robot.traits);
-        await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(0, 5), 0, 5);
-        await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(5, 10), 5, 10);
+                await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(0, 5), 0, 5);
+                await dataContract.addDNAVariantRobotPosition(address, 0, data.DNA.Robot.positions.slice(5, 10), 5, 10);
                 break;
             case ELEMENT.BODY:
                 //Add Element
