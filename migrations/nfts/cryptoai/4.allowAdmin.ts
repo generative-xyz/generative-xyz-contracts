@@ -18,7 +18,7 @@ async function main() {
   await dataContract.allowAdmin(
     config.contractAddress,
     0,
-    "0x8ED58fc1331F92e663fB12A15B02af111d6a49d7",
+    process.env.PUBLIC_KEY,
     true
   );
 }

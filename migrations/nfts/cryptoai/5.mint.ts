@@ -19,7 +19,7 @@ async function main() {
     0,
     process.env.PUBLIC_KEY,
     process.env.PUBLIC_KEY,
-    2,
+    0,
     [0, 19, 13, 16, 17]
   );
 }
