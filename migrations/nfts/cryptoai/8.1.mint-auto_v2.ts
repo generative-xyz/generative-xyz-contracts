@@ -67,7 +67,7 @@ async function main() {
   const data_mintings = [];
   let indexArt = 1
   let indexSeed = 1
-  const dataCompress = require('migrations/data/cryptoai/datajson/data-compressed.json');
+   v
   let indexDNA = 0;
   let startRageDNA = 300;
   let stuckRangDNA = 0;
