@@ -85,11 +85,11 @@ async function main(key:string) {
         switch(key){
             case 'PALETTE_COLOR':
                 //Add palettes Color
-        await dataContract.setPalettes(address, 0, PALETTE_COLOR);
+                await dataContract.setPalettes(address, 0, PALETTE_COLOR);
                 break;
             case 'TRAITS_DNA':
-                 // //ADD DNA
-        await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
+                  //ADD DNA
+                await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
                 break;
             case DNA.DOG:
                 //Add DNA Variant
