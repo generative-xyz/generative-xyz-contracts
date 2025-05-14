@@ -12,8 +12,9 @@ async function main() {
     );
 
     const data = require("../../data/cryptoai/datajson/collections.json");
+    let index = 0;
     for (const entry of data) {
-      console.log(entry.name[0], entry.name[1]);
+      index++;
       await dataContract.mint(
         config.contractAddress,
         0,
@@ -22,6 +23,7 @@ async function main() {
         entry.index[0],
         entry.index[1]
       );
+      console.log("index", index);
     }
   } catch (error) {
     console.error("Error generating data:", error);
