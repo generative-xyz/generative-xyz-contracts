@@ -5,118 +5,140 @@ import {ERC721Upgradeable, Initializable} from "@openzeppelin/contracts-upgradea
 import {EIP712Upgradeable, ECDSAUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/cryptography/EIP712Upgradeable.sol";
 import {IAgent} from "./IAgent.sol";
 import {IFileStore, File} from "./IFileStore.sol";
-
+import {RatingSystem} from "./RatingSystem.sol";
 abstract contract AgentUpgradeable is
     IAgent,
     Initializable,
     ERC721Upgradeable,
-    EIP712Upgradeable
+    EIP712Upgradeable,
+    RatingSystem
 {
-    bytes32 private constant _IPFS_SIG = keccak256(bytes("ipfs"));
+    // --- Constants ---
+    bytes32 private constant IPFS_SIG = keccak256(bytes("ipfs"));
     bytes32 private constant SIGN_DATA_TYPEHASH =
         keccak256(
-            "SignData(CodePointer[] pointers,address[] depsAgents,uint256 tokenId,uint16 currentVersion)CodePointer(address retrieveAddress,uint8 fileType,string fileName)"
+            "SignData(CodePointer[] pointers,address[] depsAgents,uint256 agentId,uint16 currentVersion)CodePointer(address retrieveAddress,uint8 fileType,string fileName)"
         );
 
-    mapping(uint256 tokenId => string) private _codeLanguage; // e.g., "python", "javascript"...
-    mapping(uint256 tokenId => uint16) private _currentVersion;
+    // --- Storage ---
+    mapping(uint256 agentId => string) private _codeLanguage; // e.g., "python", "javascript"...
+    mapping(uint256 agentId => uint16) private _currentVersion;
 
-    mapping(uint256 tokenId => string) private _ability;
+    mapping(uint256 agentId => string) private _name;
+    mapping(uint256 agentId => string) private _ability;
 
     mapping(bytes32 digest => bool) private _usedDigests;
-    mapping(uint256 tokenId => mapping(uint256 version => uint256))
+    mapping(uint256 agentId => mapping(uint256 version => uint256))
         private _pointersNum;
-    mapping(uint256 tokenId => mapping(uint256 version => mapping(uint256 => CodePointer)))
+    mapping(uint256 agentId => mapping(uint256 version => mapping(uint256 => CodePointer)))
         private _codePointers;
-    mapping(uint256 tokenId => mapping(uint256 version => address[]))
+    mapping(uint256 agentId => mapping(uint256 version => address[]))
         private _depsAgents;
 
     uint256[30] private __gap;
 
-    modifier checkVersion(uint256 tokenId, uint16 version) {
-        _validateVersion(tokenId, version);
+    // --- Modifiers ---
+    modifier checkVersion(uint256 agentId, uint16 version) {
+        _validateVersion(agentId, version);
         _;
     }
 
-    modifier onlyAgentOwner(uint256 tokenId) {
-        if (msg.sender != ownerOf(tokenId)) revert Unauthenticated();
+    modifier onlyAgentOwner(uint256 agentId) {
+        if (msg.sender != ownerOf(agentId)) revert Unauthenticated();
         _;
     }
 
+    // --- Initialization ---
     function __Agent_init(
         string memory collectionName,
         string memory collectionVersion
     ) internal onlyInitializing {
         __EIP712_init(collectionName, collectionVersion);
+        __RatingSystem_init();
     }
 
+    // --- Functions ---
     function _setupAgent(
-        uint256 tokenId,
-        string memory codeLanguage,
-        string memory ability,
-        CodePointer[] calldata pointers,
-        address[] calldata depsAgents
+        uint256 agentId,
+        string calldata name,
+        string calldata ability
     ) internal {
-        _codeLanguage[tokenId] = codeLanguage;
-        _ability[tokenId] = ability;
-        _publishAgentCode(tokenId, pointers, depsAgents);
+        _name[agentId] = name;
+        _ability[agentId] = ability;
+    }
+
+    function updateAgentName(
+        uint256 agentId,
+        string calldata name
+    ) external virtual onlyAgentOwner(agentId) {
+        _name[agentId] = name;
     }
 
     function updateAgentAbility(
-        uint256 tokenId,
+        uint256 agentId,
         string calldata ability
-    ) external virtual onlyAgentOwner(tokenId) {
-        _ability[tokenId] = ability;
+    ) external virtual onlyAgentOwner(agentId) {
+        _ability[agentId] = ability;
+    }
+
+    function getAgentName(
+        uint256 agentId
+    ) external view returns (string memory) {
+        return _name[agentId];
     }
 
     function getAgentAbility(
-        uint256 tokenId
+        uint256 agentId
     ) external view returns (string memory) {
-        return _ability[tokenId];
+        return _ability[agentId];
     }
 
     function publishAgentCode(
-        uint256 tokenId,
+        uint256 agentId,
+        string calldata codeLanguage,
         CodePointer[] calldata pointers,
         address[] calldata depsAgents
-    ) external virtual onlyAgentOwner(tokenId) returns (uint16) {
-        return _publishAgentCode(tokenId, pointers, depsAgents);
+    ) external virtual onlyAgentOwner(agentId) returns (uint16) {
+        return _publishAgentCode(agentId, codeLanguage, pointers, depsAgents);
     }
 
     function publishAgentCodeWithSignature(
-        uint256 tokenId,
+        uint256 agentId,
+        string calldata codeLanguage,
         CodePointer[] calldata pointers,
         address[] calldata depsAgents,
         bytes calldata signature
     ) external virtual returns (uint16) {
-        bytes32 digest = getHashToSign(tokenId, pointers, depsAgents);
+        bytes32 digest = getHashToSign(agentId, pointers, depsAgents);
         if (_usedDigests[digest]) {
             revert DigestAlreadyUsed();
         }
-        if (ECDSAUpgradeable.recover(digest, signature) != ownerOf(tokenId)) {
+        if (ECDSAUpgradeable.recover(digest, signature) != ownerOf(agentId)) {
             revert Unauthenticated();
         }
 
         _usedDigests[digest] = true;
 
-        return _publishAgentCode(tokenId, pointers, depsAgents);
+        return _publishAgentCode(agentId, codeLanguage, pointers, depsAgents);
     }
 
     function _publishAgentCode(
-        uint256 tokenId,
+        uint256 agentId,
+        string calldata codeLanguage,
         CodePointer[] calldata pointers,
         address[] calldata depsAgents
     ) internal virtual returns (uint16) {
-        // if (pointers.length == 0) revert InvalidData();
+        if (pointers.length == 0) revert InvalidData();
 
-        uint16 version = _bumpVersion(tokenId);
+        _codeLanguage[agentId] = codeLanguage;
+        uint16 version = _bumpVersion(agentId);
 
         uint256 pLen = pointers.length;
         for (uint256 i = 0; i < pLen; i++) {
             if (bytes(pointers[i].fileName).length == 0) {
                 revert InvalidData();
             }
-            _addNewCodePointer(tokenId, version, pointers[i]);
+            _addNewCodePointer(agentId, version, pointers[i]);
         }
 
         uint256 depsLen = depsAgents.length;
@@ -124,51 +146,51 @@ abstract contract AgentUpgradeable is
             if (depsAgents[i] == address(0)) {
                 revert ZeroAddress();
             }
-            _depsAgents[tokenId][version].push(depsAgents[i]);
+            _depsAgents[agentId][version].push(depsAgents[i]);
         }
 
         return version;
     }
 
-    function _bumpVersion(uint256 tokenId) private returns (uint16) {
-        return ++_currentVersion[tokenId];
+    function _bumpVersion(uint256 agentId) private returns (uint16) {
+        return ++_currentVersion[agentId];
     }
 
     function _addNewCodePointer(
-        uint256 tokenId,
+        uint256 agentId,
         uint16 version,
         CodePointer calldata pointer
     ) internal virtual {
-        uint256 pNum = _getPointersNumber(tokenId, version);
+        uint256 pNum = _getPointersNumber(agentId, version);
 
-        _codePointers[tokenId][version][pNum] = pointer;
+        _codePointers[agentId][version][pNum] = pointer;
 
         emit CodePointerCreated(version, pNum, pointer);
-        _pointersNum[tokenId][version]++;
+        _pointersNum[agentId][version]++;
     }
 
     function getDepsAgents(
-        uint256 tokenId,
+        uint256 agentId,
         uint16 version
-    ) external view checkVersion(tokenId, version) returns (address[] memory) {
-        return _depsAgents[tokenId][version];
+    ) external view checkVersion(agentId, version) returns (address[] memory) {
+        return _depsAgents[agentId][version];
     }
 
     function getAgentCode(
-        uint256 tokenId,
+        uint256 agentId,
         uint16 version
     )
         external
         view
-        checkVersion(tokenId, version)
+        checkVersion(agentId, version)
         returns (string memory code)
     {
-        uint256 len = _getPointersNumber(tokenId, version);
+        uint256 len = _getPointersNumber(agentId, version);
         string memory libsCode = "";
         string memory mainScripts = "";
 
         for (uint256 pIdx = 0; pIdx < len; pIdx++) {
-            CodePointer memory p = _codePointers[tokenId][version][pIdx];
+            CodePointer memory p = _codePointers[agentId][version][pIdx];
 
             string memory codeChunk = _getCodeByPointer(p);
 
@@ -195,7 +217,7 @@ abstract contract AgentUpgradeable is
     function _getCodeByPointer(
         CodePointer memory p
     ) internal view virtual returns (string memory logic) {
-        if (keccak256(bytes(_getStorageMode(p))) == _IPFS_SIG) {
+        if (keccak256(bytes(_getStorageMode(p))) == IPFS_SIG) {
             logic = p.fileName; // return the IPFS hash
         } else {
             logic = IFileStore(p.retrieveAddress).getFile(p.fileName).read();
@@ -212,30 +234,30 @@ abstract contract AgentUpgradeable is
     }
 
     function _getPointersNumber(
-        uint256 tokenId,
+        uint256 agentId,
         uint16 version
     ) internal view returns (uint256) {
-        return _pointersNum[tokenId][version];
+        return _pointersNum[agentId][version];
     }
 
-    function getCurrentVersion(uint256 tokenId) external view returns (uint16) {
-        return _currentVersion[tokenId];
+    function getCurrentVersion(uint256 agentId) external view returns (uint16) {
+        return _currentVersion[agentId];
     }
 
-    function _validateVersion(uint256 tokenId, uint16 version) internal view {
-        if (version > _currentVersion[tokenId]) {
+    function _validateVersion(uint256 agentId, uint16 version) internal view {
+        if (version > _currentVersion[agentId]) {
             revert InvalidVersion();
         }
     }
 
     function getCodeLanguage(
-        uint256 tokenId
+        uint256 agentId
     ) external view returns (string memory) {
-        return _codeLanguage[tokenId];
+        return _codeLanguage[agentId];
     }
 
     function getHashToSign(
-        uint256 tokenId,
+        uint256 agentId,
         CodePointer[] calldata pointers,
         address[] calldata depsAgents
     ) public view virtual returns (bytes32) {
@@ -265,8 +287,8 @@ abstract contract AgentUpgradeable is
                 SIGN_DATA_TYPEHASH,
                 pointersHash,
                 depsAgentsHash,
-                tokenId,
-                _currentVersion[tokenId]
+                agentId,
+                _currentVersion[agentId]
             )
         );
 

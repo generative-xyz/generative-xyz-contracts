@@ -204,7 +204,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     function tokenURI(uint256 tokenId)
     external view
     returns (string memory result) {
-        require(tokenId < TOKEN_LIMIT, Errors.INV_TOKEN);
+        require(tokenId <= TOKEN_LIMIT, Errors.INV_TOKEN);
         require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
         if (unlockedTokens[tokenId].weight == 0) {
             result = string(abi.encodePacked(

@@ -84,13 +84,10 @@ contract CryptoAI is
     //@ERC721
     function mint(
         address to,
-        // address agentAddress,
         uint256 dna,
         uint256[5] memory traits,
-        string memory codeLanguage,
-        string memory ability,
-        CodePointer[] calldata pointers,
-        address[] calldata depsAgents
+        string calldata agentName,
+        string calldata agentAbility
     ) public onlyAdmin {
         require(to != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
@@ -100,13 +97,7 @@ contract CryptoAI is
         cryptoAIDataContract.mintAgent(_indexMint);
         cryptoAIDataContract.unlockRenderAgent(_indexMint, dna, traits);
 
-        _setupAgent(
-            _indexMint,
-            codeLanguage,
-            ability,
-            pointers,
-            depsAgents
-        );
+        _setupAgent(_indexMint, agentName, agentAbility);
 
         _indexMint += 1;
     }

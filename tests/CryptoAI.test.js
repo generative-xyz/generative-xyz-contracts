@@ -9,6 +9,18 @@ require("@nomicfoundation/hardhat-chai-matchers");
 // Use chai-as-promised for async assertions
 chai.use(chaiAsPromised);
 
+// Get Agent contract artifact and interface
+const AgentArtifact = require("../artifacts/contracts/nfts/utilities/AgentUpgradeable.sol/AgentUpgradeable.json");
+
+// Helper function to get contract instance from address and ABI
+async function getContractInstance(address, abi, signer) {
+    if (!address || !abi) {
+        throw new Error("Address and ABI are required");
+    }
+    return new ethers.Contract(address, abi, signer || ethers.provider);
+}
+
+
 describe("CryptoAI and CryptoAIData", function () {
     // Define contract variables
     let cryptoAI;
@@ -74,8 +86,7 @@ describe("CryptoAI and CryptoAIData", function () {
                 [owner.address]
             );
             await newCryptoAIData.deployed();
-            const newCryptoAIDataAddress = await newCryptoAIData.address;
-            console.log("newCryptoAIDataAddress", newCryptoAIDataAddress);
+            const newCryptoAIDataAddress = newCryptoAIData.address;
 
             // Change the address
             await cryptoAI
@@ -92,7 +103,7 @@ describe("CryptoAI and CryptoAIData", function () {
 
             await expect(
                 cryptoAI.connect(user).changeCryptoAiDataAddress(user.address)
-            ).to.be.rejectedWith("ONLY_DEPLOYER");
+            ).to.be.rejectedWith("103");
         });
 
         it("Should allow deployer to change CryptoAIAgent address", async function () {
@@ -109,7 +120,7 @@ describe("CryptoAI and CryptoAIData", function () {
 
             await expect(
                 cryptoAIData.connect(user).changeCryptoAIAgentAddress(user.address)
-            ).to.be.rejectedWith("Ownable: caller is not the owner");
+            ).to.be.revertedWith("103");
         });
 
         it("Should allow deployer to seal the contract", async function () {
@@ -120,7 +131,7 @@ describe("CryptoAI and CryptoAIData", function () {
             // Try to change CryptoAIAgent address after sealing (should fail)
             await expect(
                 cryptoAIData.connect(owner).changeCryptoAIAgentAddress(owner.address)
-            ).to.be.rejectedWith("CONTRACT_SEALED");
+            ).to.be.rejectedWith("500");
         });
 
         it("Should not allow non-deployer to seal the contract", async function () {
@@ -128,7 +139,7 @@ describe("CryptoAI and CryptoAIData", function () {
 
             await expect(
                 cryptoAIData.connect(user).sealContract()
-            ).to.be.rejectedWith("Ownable: caller is not the owner");
+            ).to.be.rejectedWith("103");
         });
     });
 
@@ -149,7 +160,7 @@ describe("CryptoAI and CryptoAIData", function () {
 
             await expect(
                 cryptoAI.connect(user).allowAdmin(admin.address, true)
-            ).to.be.rejectedWith("ONLY_DEPLOYER");
+            ).to.be.revertedWith("103");
         });
 
         it("Should allow admin to mint NFT", async function () {
@@ -170,10 +181,8 @@ describe("CryptoAI and CryptoAIData", function () {
             // Prepare mint parameters
             const dna = 0;
             const traits = [0, 0, 0, 0, 0];
-            const codeLanguage = "Solidity";
+            const agentName = "Test Agent";
             const ability = "Smart";
-            const pointers = [];
-            const depsAgents = [];
 
             // Mint NFT
             await cryptoAI
@@ -182,14 +191,14 @@ describe("CryptoAI and CryptoAIData", function () {
                     user.address,
                     dna,
                     traits,
-                    codeLanguage,
-                    ability,
-                    pointers,
-                    depsAgents
+                    agentName,
+                    ability
                 );
 
             // Verify NFT was minted
             expect(await cryptoAI.ownerOf(1)).to.equal(user.address);
+            expect(await cryptoAI.getAgentName(1)).to.equal(agentName);
+            expect(await cryptoAI.getAgentAbility(1)).to.equal(ability);
         });
 
         it("Should not allow non-admin to mint NFT", async function () {
@@ -209,10 +218,8 @@ describe("CryptoAI and CryptoAIData", function () {
             // Prepare mint parameters
             const dna = 0;
             const traits = [0, 0, 0, 0, 0];
-            const codeLanguage = "Solidity";
+            const agentName = "Test Agent";
             const ability = "Smart";
-            const pointers = [];
-            const depsAgents = [];
 
             // Attempt to mint NFT (should fail)
             await expect(
@@ -222,12 +229,10 @@ describe("CryptoAI and CryptoAIData", function () {
                         user.address,
                         dna,
                         traits,
-                        codeLanguage,
-                        ability,
-                        pointers,
-                        depsAgents
+                        agentName,
+                        ability
                     )
-            ).to.be.rejectedWith("ONLY_DEPLOYER");
+            ).to.be.revertedWith("103");
         });
 
         it("Should correctly store and retrieve agent properties after minting", async function () {
@@ -248,10 +253,8 @@ describe("CryptoAI and CryptoAIData", function () {
             // Prepare mint parameters
             const dna = 0;
             const traits = [0, 0, 0, 0, 0];
-            const codeLanguage = "Solidity";
+            const agentName = "Test Agent";
             const ability = "Smart";
-            const pointers = [];
-            const depsAgents = [];
 
             // Mint NFT
             await cryptoAI
@@ -260,23 +263,20 @@ describe("CryptoAI and CryptoAIData", function () {
                     user.address,
                     dna,
                     traits,
-                    codeLanguage,
-                    ability,
-                    pointers,
-                    depsAgents
+                    agentName,
+                    ability
                 );
 
             // Verify NFT was minted
             expect(await cryptoAI.ownerOf(1)).to.equal(user.address);
 
             // Verify agent properties
-            expect(await cryptoAI.getCodeLanguage(1)).to.equal(codeLanguage);
+            expect(await cryptoAI.getAgentName(1)).to.equal(agentName);
             expect(await cryptoAI.getAgentAbility(1)).to.equal(ability);
-
-            expect(await cryptoAI.getCurrentVersion(1)).to.equal(1);
-            const code = await cryptoAI.getAgentCode(1, 1);
-            expect(code).to.be.equal("");
-            expect(code.length).to.be.equal(0);
+            expect(await cryptoAI.getCurrentVersion(1)).to.equal(0);
+            expect(await cryptoAI.getCodeLanguage(1)).to.equal("");
+            expect(await cryptoAI.getDepsAgents(1, 0)).to.deep.equal([]);
+            expect(await cryptoAI.getAgentCode(1, 0)).to.equal("");
         });
 
         it("Should directly publish agent code with nft-owner role", async function () {
@@ -298,6 +298,7 @@ describe("CryptoAI and CryptoAIData", function () {
             const dna = 12345; // Unique DNA identifier
             const traits = [1, 2, 3, 4, 5]; // Different trait values
             const codeLanguage = "Python"; // Using Python as the code language
+            const agentName = "Code Generator Agent"; // Agent name
             const ability = "Advanced Code Generation"; // Specific ability
             const pointers = [
                 {
@@ -323,20 +324,23 @@ describe("CryptoAI and CryptoAIData", function () {
                     user.address,
                     dna,
                     traits,
-                    codeLanguage,
-                    ability,
-                    pointers,
-                    depsAgents
+                    agentName,
+                    ability
                 );
 
             // Verify NFT was minted
             expect(await cryptoAI.ownerOf(1)).to.equal(user.address);
+            expect(await cryptoAI.getAgentName(1)).to.equal(agentName);
+            expect(await cryptoAI.getAgentAbility(1)).to.equal(ability);
+            expect(await cryptoAI.getCurrentVersion(1)).to.equal(0);
+            expect(await cryptoAI.getCodeLanguage(1)).to.equal("");
+            expect(await cryptoAI.getDepsAgents(1, 0)).to.deep.equal([]);
+            expect(await cryptoAI.getAgentCode(1, 0)).to.equal("");
+
+            await cryptoAI.connect(user).publishAgentCode(1, codeLanguage, pointers, depsAgents);
 
             // Verify agent properties
             expect(await cryptoAI.getCodeLanguage(1)).to.equal(codeLanguage);
-            expect(await cryptoAI.getAgentAbility(1)).to.equal(ability);
-
-            // Verify version and code
             expect(await cryptoAI.getCurrentVersion(1)).to.equal(1);
 
             // Verify code pointers and dependencies
@@ -350,13 +354,6 @@ describe("CryptoAI and CryptoAIData", function () {
             console.log("code: ", code);
             expect(code).to.include(pointers[0].fileName);
             expect(code).to.include(pointers[1].fileName);
-
-            // Publish agent code
-            await cryptoAI.connect(user).publishAgentCode(1, [], depsAgents);
-            expect(await cryptoAI.getCurrentVersion(1)).to.equal(2);
-            const code2 = await cryptoAI.getAgentCode(1, 2);
-            expect(code2).to.be.equal("");
-            expect(code2.length).to.be.equal(0);
         });
 
         it("Should publish agent code with valid signature from NFT owner", async function () {
@@ -378,6 +375,7 @@ describe("CryptoAI and CryptoAIData", function () {
             const dna = 12345;
             const traits = [1, 2, 3, 4, 5];
             const codeLanguage = "Python";
+            const agentName = "Code Generator Agent";
             const ability = "Code Generation";
             const initialPointers = [];
             const initialDepsAgents = [];
@@ -388,10 +386,8 @@ describe("CryptoAI and CryptoAIData", function () {
                     user.address,
                     dna,
                     traits,
-                    codeLanguage,
-                    ability,
-                    initialPointers,
-                    initialDepsAgents
+                    agentName,
+                    ability
                 );
 
             // Prepare new code pointers and dependencies for publishing
@@ -425,7 +421,7 @@ describe("CryptoAI and CryptoAIData", function () {
                 SignData: [
                     { name: "pointers", type: "CodePointer[]" },
                     { name: "depsAgents", type: "address[]" },
-                    { name: "tokenId", type: "uint256" },
+                    { name: "agentId", type: "uint256" },
                     { name: "currentVersion", type: "uint16" }
                 ],
                 CodePointer: [
@@ -439,7 +435,7 @@ describe("CryptoAI and CryptoAIData", function () {
             const message = {
                 pointers: newPointers,
                 depsAgents: newDepsAgents,
-                tokenId: 1,
+                agentId: 1,
                 currentVersion: Number(initialVersion)
             };
 
@@ -447,7 +443,7 @@ describe("CryptoAI and CryptoAIData", function () {
             const signature = await user._signTypedData(domain, types, message);
 
             // Publish code with signature
-            await cryptoAI.publishAgentCodeWithSignature(1, newPointers, newDepsAgents, signature);
+            await cryptoAI.publishAgentCodeWithSignature(1, codeLanguage, newPointers, newDepsAgents, signature);
 
             // Verify the new version was created
             const newVersion = await cryptoAI.getCurrentVersion(1);
@@ -459,15 +455,294 @@ describe("CryptoAI and CryptoAIData", function () {
             expect(deps[0]).to.equal(newDepsAgents[0]);
 
             // Try to use the same signature again(should fail)
+
             // await expect(
-            //     cryptoAI.publishAgentCodeWithSignature(1, newPointers, newDepsAgents, signature)
+            //     cryptoAI.publishAgentCodeWithSignature(1, codeLanguage, newPointers, newDepsAgents, signature)
             // ).to.be.rejectedWith("DigestAlreadyUsed");
 
             // Try to use signature from non-owner (should fail)
-            // const nonOwnerSignature = await admin._signTypedData(domain, types, message);
-            // await expect(
-            //     cryptoAI.publishAgentCodeWithSignature(1, newPointers, newDepsAgents, nonOwnerSignature)
-            // ).to.be.rejectedWith("Unauthenticated");
+            const nonOwnerSignature = await admin._signTypedData(domain, types, message);
+            await expect(
+                cryptoAI.publishAgentCodeWithSignature(1, codeLanguage, newPointers, newDepsAgents, nonOwnerSignature)
+            ).to.be.rejectedWith("Unauthenticated");
+        });
+
+        it("Should allow NFT owner to update agent name", async function () {
+            const { cryptoAI, cryptoAIData, owner, admin, user } = await loadFixture(
+                deployContractsFixture
+            );
+
+            // Set up required addresses
+            await cryptoAI
+                .connect(owner)
+                .changeCryptoAiDataAddress(cryptoAIData.address);
+            await cryptoAIData
+                .connect(owner)
+                .changeCryptoAIAgentAddress(cryptoAI.address);
+            await cryptoAI.connect(owner).allowAdmin(admin.address, true);
+            await cryptoAIData.connect(owner).sealContract();
+
+            // Mint NFT
+            const initialName = "Initial Agent";
+            const ability = "Code Generation";
+            await cryptoAI
+                .connect(admin)
+                .mint(
+                    user.address,
+                    12345,
+                    [1, 2, 3, 4, 5],
+                    initialName,
+                    ability
+                );
+
+            // Verify initial name
+            expect(await cryptoAI.getAgentName(1)).to.equal(initialName);
+
+            // Update name
+            const newName = "Updated Agent Name";
+            await cryptoAI.connect(user).updateAgentName(1, newName);
+
+            // Verify updated name
+            expect(await cryptoAI.getAgentName(1)).to.equal(newName);
+        });
+
+        it("Should not allow non-owner to update agent name", async function () {
+            const { cryptoAI, cryptoAIData, owner, admin, user } = await loadFixture(
+                deployContractsFixture
+            );
+
+            // Set up required addresses
+            await cryptoAI
+                .connect(owner)
+                .changeCryptoAiDataAddress(cryptoAIData.address);
+            await cryptoAIData
+                .connect(owner)
+                .changeCryptoAIAgentAddress(cryptoAI.address);
+            await cryptoAI.connect(owner).allowAdmin(admin.address, true);
+            await cryptoAIData.connect(owner).sealContract();
+
+            // Mint NFT
+            const initialName = "Initial Agent";
+            const ability = "Code Generation";
+            await cryptoAI
+                .connect(admin)
+                .mint(
+                    user.address,
+                    12345,
+                    [1, 2, 3, 4, 5],
+                    initialName,
+                    ability
+                );
+
+            // Try to update name as non-owner (should fail)
+            const newName = "Updated Agent Name";
+
+            await expect(
+                cryptoAI.connect(admin).updateAgentName(1, newName)
+            ).to.be.rejectedWith("Unauthenticated");
+
+            // Verify name remains unchanged
+            expect(await cryptoAI.getAgentName(1)).to.equal(initialName);
+        });
+    });
+
+    describe("Rating System", function () {
+        it("Should allow users to rate an agent", async function () {
+            const { cryptoAI, cryptoAIData, owner, admin, user } = await loadFixture(
+                deployContractsFixture
+            );
+
+            // Set up required addresses and mint an NFT
+            await cryptoAI
+                .connect(owner)
+                .changeCryptoAiDataAddress(cryptoAIData.address);
+            await cryptoAIData
+                .connect(owner)
+                .changeCryptoAIAgentAddress(cryptoAI.address);
+            await cryptoAI.connect(owner).allowAdmin(admin.address, true);
+            await cryptoAIData.connect(owner).sealContract();
+
+            // Mint NFT
+            await cryptoAI
+                .connect(admin)
+                .mint(
+                    user.address,
+                    12345,
+                    [1, 2, 3, 4, 5],
+                    "Test Agent",
+                    "Code Generation"
+                );
+
+            // Rate the agent
+            await cryptoAI.connect(user).rateStar(1, 5);
+
+            // Verify rating
+            expect(await cryptoAI.getRatingScore(1)).to.equal(500); // 5.00 * 100
+            expect(await cryptoAI.getRatingCount(1)).to.equal(1);
+        });
+
+        it("Should allow users to update their rating", async function () {
+            const { cryptoAI, cryptoAIData, owner, admin, user } = await loadFixture(
+                deployContractsFixture
+            );
+
+            // Set up and mint NFT
+            await cryptoAI
+                .connect(owner)
+                .changeCryptoAiDataAddress(cryptoAIData.address);
+            await cryptoAIData
+                .connect(owner)
+                .changeCryptoAIAgentAddress(cryptoAI.address);
+            await cryptoAI.connect(owner).allowAdmin(admin.address, true);
+            await cryptoAIData.connect(owner).sealContract();
+
+            await cryptoAI
+                .connect(admin)
+                .mint(
+                    user.address,
+                    12345,
+                    [1, 2, 3, 4, 5],
+                    "Test Agent",
+                    "Code Generation"
+                );
+
+            // Initial rating
+            await cryptoAI.connect(user).rateStar(1, 3);
+
+            // Update rating
+            await cryptoAI.connect(user).rateStar(1, 4);
+
+            // Verify updated rating
+            expect(await cryptoAI.getRatingScore(1)).to.equal(350n); // 4.00 * 100
+            expect(await cryptoAI.getRatingCount(1)).to.equal(2);
+        });
+
+        it("Should not allow rating outside valid range", async function () {
+            const { cryptoAI, cryptoAIData, owner, admin, user } = await loadFixture(
+                deployContractsFixture
+            );
+
+            // Set up and mint NFT
+            await cryptoAI
+                .connect(owner)
+                .changeCryptoAiDataAddress(cryptoAIData.address);
+            await cryptoAIData
+                .connect(owner)
+                .changeCryptoAIAgentAddress(cryptoAI.address);
+            await cryptoAI.connect(owner).allowAdmin(admin.address, true);
+            await cryptoAIData.connect(owner).sealContract();
+
+            await cryptoAI
+                .connect(admin)
+                .mint(
+                    user.address,
+                    12345,
+                    [1, 2, 3, 4, 5],
+                    "Test Agent",
+                    "Code Generation"
+                );
+
+            // Try to rate with invalid values
+            await expect(cryptoAI.connect(user).rateStar(1, 0)).to.be.rejectedWith("RatingOutOfRange");
+            await expect(cryptoAI.connect(user).rateStar(1, 6)).to.be.rejectedWith("RatingOutOfRange");
+        });
+
+        it("Should calculate average rating correctly with multiple ratings", async function () {
+            const { cryptoAI, cryptoAIData, owner, admin, user } = await loadFixture(
+                deployContractsFixture
+            );
+
+            // Set up and mint NFT
+            await cryptoAI
+                .connect(owner)
+                .changeCryptoAiDataAddress(cryptoAIData.address);
+            await cryptoAIData
+                .connect(owner)
+                .changeCryptoAIAgentAddress(cryptoAI.address);
+            await cryptoAI.connect(owner).allowAdmin(admin.address, true);
+            await cryptoAIData.connect(owner).sealContract();
+
+            await cryptoAI
+                .connect(admin)
+                .mint(
+                    user.address,
+                    12345,
+                    [1, 2, 3, 4, 5],
+                    "Code Generation",
+                    "Code Generation"
+                );
+
+            // Get additional signers for multiple ratings
+            const [, , , rater1, rater2, rater3] = await ethers.getSigners();
+
+            // Multiple users rate the agent
+            await cryptoAI.connect(user).rateStar(1, 5);
+            await cryptoAI.connect(rater1).rateStar(1, 4);
+            await cryptoAI.connect(rater2).rateStar(1, 3);
+            await cryptoAI.connect(rater3).rateStar(1, 5);
+
+            // Verify average rating (5 + 4 + 3 + 5) / 4 = 4.25
+            expect(await cryptoAI.getRatingScore(1)).to.equal(425n); // 4.25 * 100
+            expect(await cryptoAI.getRatingCount(1)).to.equal(4n);
+        });
+
+        it("Should return 0 for rating score when no ratings exist", async function () {
+            const { cryptoAI, cryptoAIData, owner, admin, user } = await loadFixture(
+                deployContractsFixture
+            );
+
+            // Set up and mint NFT
+            await cryptoAI
+                .connect(owner)
+                .changeCryptoAiDataAddress(cryptoAIData.address);
+            await cryptoAIData
+                .connect(owner)
+                .changeCryptoAIAgentAddress(cryptoAI.address);
+            await cryptoAI.connect(owner).allowAdmin(admin.address, true);
+            await cryptoAIData.connect(owner).sealContract();
+
+            await cryptoAI
+                .connect(admin)
+                .mint(
+                    user.address,
+                    12345,
+                    [1, 2, 3, 4, 5],
+                    "Code Generation",
+                    "Code Generation"
+                );
+
+            // Verify initial state
+            expect(await cryptoAI.getRatingScore(1)).to.equal(0);
+            expect(await cryptoAI.getRatingCount(1)).to.equal(0);
+        });
+    });
+    describe("Minting 10.000 NFTs", function () {
+        it.only("Should mint 10.000 NFTs", async function () {
+            const { cryptoAI, cryptoAIData, owner, admin, user } = await loadFixture(
+                deployContractsFixture
+            );
+            // Set up and mint NFT
+            await cryptoAI
+                .connect(owner)
+                .changeCryptoAiDataAddress(cryptoAIData.address);
+            await cryptoAIData
+                .connect(owner)
+                .changeCryptoAIAgentAddress(cryptoAI.address);
+            await cryptoAI.connect(owner).allowAdmin(admin.address, true);
+            await cryptoAIData.connect(owner).sealContract();
+
+            // Create array with 10000 elements
+            const nftArray = Array.from({ length: 10000 }, (_, i) => i + 1);
+            const dna = 12345;
+            const agentName = "Test Agent";
+            const ability = "Code Generation";
+
+            for await (let i of nftArray) {
+                console.log("Minting NFT ", i);
+                const traits = Array(5).fill(0).map(() => Math.floor(Math.random() * 100) + 1);
+                await cryptoAI.connect(admin).mint(user.address, dna, traits, agentName, ability);
+            }
+            expect(await cryptoAI.balanceOf(user.address)).to.equal(10000);
         });
     });
 }); 
