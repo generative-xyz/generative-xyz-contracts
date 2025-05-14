@@ -1,1 +1,530 @@
-{}
+{
+  "attributes": {
+    "2": {
+      "percent": 1.41,
+      "counter": 29
+    },
+    "3": {
+      "percent": 9.25,
+      "counter": 397
+    },
+    "4": {
+      "percent": 95.74,
+      "counter": 9573
+    }
+  },
+  "DNA": {
+    "Human": {
+      "percent": 100,
+      "counter": 16
+    },
+    "Monkey": {
+      "percent": 90.18,
+      "counter": 147
+    },
+    "Dog": {
+      "percent": 83.54,
+      "counter": 827
+    },
+    "Cat": {
+      "percent": 59.21,
+      "counter": 1437
+    },
+    "Frog": {
+      "percent": 49.69,
+      "counter": 2397
+    },
+    "Robot": {
+      "percent": 51.76,
+      "counter": 5175
+    }
+  },
+  "Body": {
+    "Red Scarf": {
+      "percent": 2.86,
+      "counter": 116
+    },
+    "Prison Uniform": {
+      "percent": 1.39,
+      "counter": 118
+    },
+    "Dress": {
+      "percent": 5.07,
+      "counter": 111
+    },
+    "Rainbow Sweater": {
+      "percent": 1.22,
+      "counter": 120
+    },
+    "Tank-top": {
+      "percent": 1.97,
+      "counter": 111
+    },
+    "Bikini": {
+      "percent": 3.15,
+      "counter": 108
+    },
+    "Rock Outfit": {
+      "percent": 2.26,
+      "counter": 110
+    },
+    "Suit n Tie": {
+      "percent": 2.72,
+      "counter": 115
+    },
+    "Checkered": {
+      "percent": 1.82,
+      "counter": 112
+    },
+    "Ball Dress": {
+      "percent": 1.16,
+      "counter": 115
+    },
+    "Unicorn": {
+      "percent": 3.6,
+      "counter": 106
+    },
+    "Gold Chain": {
+      "percent": 1.78,
+      "counter": 114
+    },
+    "Police Uniform": {
+      "percent": 1.83,
+      "counter": 112
+    },
+    "Sweater": {
+      "percent": 4.94,
+      "counter": 119
+    },
+    "Christmas Jacket": {
+      "percent": 3.69,
+      "counter": 118
+    },
+    "Sorcerer Coat": {
+      "percent": 4.76,
+      "counter": 119
+    },
+    "Blue Polo": {
+      "percent": 5.36,
+      "counter": 113
+    },
+    "Tuxedo": {
+      "percent": 1.33,
+      "counter": 114
+    },
+    "Raglan": {
+      "percent": 7.98,
+      "counter": 795
+    },
+    "Astronaut Suit": {
+      "percent": 8.04,
+      "counter": 803
+    },
+    "Short-sleeve Hoodie": {
+      "percent": 8.51,
+      "counter": 850
+    },
+    "Striped": {
+      "percent": 7.99,
+      "counter": 795
+    },
+    "Black Sporty": {
+      "percent": 8.56,
+      "counter": 855
+    },
+    "Football": {
+      "percent": 8.22,
+      "counter": 822
+    },
+    "Ironman Suit": {
+      "percent": 8.29,
+      "counter": 826
+    },
+    "Racing Jacket": {
+      "percent": 6.34,
+      "counter": 634
+    },
+    "Anonymous Hoodie": {
+      "percent": 4.46,
+      "counter": 445
+    },
+    "Robot Tee": {
+      "percent": 3.7,
+      "counter": 370
+    },
+    "Transformer": {
+      "percent": 3.27,
+      "counter": 327
+    },
+    "Cyborg": {
+      "percent": 3.16,
+      "counter": 316
+    }
+  },
+  "Head": {
+    "Headphones": {
+      "percent": 2.22,
+      "counter": 130
+    },
+    "Crown": {
+      "percent": 1.48,
+      "counter": 118
+    },
+    "Helmet": {
+      "percent": 5.98,
+      "counter": 124
+    },
+    "Beanie": {
+      "percent": 3.59,
+      "counter": 140
+    },
+    "Umbrella Cap": {
+      "percent": 5.97,
+      "counter": 125
+    },
+    "Siren": {
+      "percent": 5.97,
+      "counter": 124
+    },
+    "Unicorn": {
+      "percent": 5.71,
+      "counter": 121
+    },
+    "Pirate Hat": {
+      "percent": 4.71,
+      "counter": 133
+    },
+    "Viking Helmet": {
+      "percent": 5.37,
+      "counter": 118
+    },
+    "Watermelon": {
+      "percent": 5.62,
+      "counter": 119
+    },
+    "Wizard Hat": {
+      "percent": 3.48,
+      "counter": 115
+    },
+    "Chef's hat": {
+      "percent": 6.26,
+      "counter": 132
+    },
+    "Bowler Hat": {
+      "percent": 6.4,
+      "counter": 126
+    },
+    "Sombrero": {
+      "percent": 6.15,
+      "counter": 130
+    },
+    "Straw Hat": {
+      "percent": 1.42,
+      "counter": 126
+    },
+    "Top Hat": {
+      "percent": 5.9,
+      "counter": 129
+    },
+    "Military Cap": {
+      "percent": 5.67,
+      "counter": 566
+    },
+    "Sailor Hat": {
+      "percent": 5.97,
+      "counter": 597
+    },
+    "Bandana": {
+      "percent": 6.36,
+      "counter": 631
+    },
+    "Curl Antenna": {
+      "percent": 6.41,
+      "counter": 640
+    },
+    "Black Cap": {
+      "percent": 6.46,
+      "counter": 644
+    },
+    "Baseball Cap": {
+      "percent": 5.67,
+      "counter": 566
+    },
+    "Headset Antenna": {
+      "percent": 5.51,
+      "counter": 551
+    },
+    "Christmas Hat": {
+      "percent": 5.45,
+      "counter": 545
+    },
+    "Red Antenna": {
+      "percent": 5.23,
+      "counter": 523
+    },
+    "Blue Antenna": {
+      "percent": 5.07,
+      "counter": 506
+    },
+    "Green Antenna": {
+      "percent": 5.68,
+      "counter": 567
+    },
+    "Y Antenna": {
+      "percent": 5.3,
+      "counter": 530
+    },
+    "Double Antenna": {
+      "percent": 5.03,
+      "counter": 502
+    },
+    "Magnetic Antenna": {
+      "percent": 4.94,
+      "counter": 494
+    }
+  },
+  "Eyes": {
+    "Makeup": {
+      "percent": 4.18,
+      "counter": 101
+    },
+    "Crazy Eyes": {
+      "percent": 5.15,
+      "counter": 111
+    },
+    "Heart Eyes": {
+      "percent": 3.83,
+      "counter": 122
+    },
+    "No-face": {
+      "percent": 1.61,
+      "counter": 110
+    },
+    "Rolling Eyes": {
+      "percent": 1.18,
+      "counter": 109
+    },
+    "Anime Eyes": {
+      "percent": 3.88,
+      "counter": 108
+    },
+    "Blindfolded": {
+      "percent": 1.16,
+      "counter": 114
+    },
+    "Fashion Glasses": {
+      "percent": 1.17,
+      "counter": 110
+    },
+    "Bloody Eyes": {
+      "percent": 2.7,
+      "counter": 112
+    },
+    "Watery Eyes": {
+      "percent": 1.2,
+      "counter": 109
+    },
+    "Crying": {
+      "percent": 4.09,
+      "counter": 113
+    },
+    "Masquerade Mask": {
+      "percent": 1.14,
+      "counter": 102
+    },
+    "Sparkled Eyes": {
+      "percent": 3.31,
+      "counter": 104
+    },
+    "Gold Monocle": {
+      "percent": 5.1,
+      "counter": 110
+    },
+    "Censored Eyes": {
+      "percent": 3.98,
+      "counter": 118
+    },
+    "Thief Eye Mask": {
+      "percent": 1.21,
+      "counter": 115
+    },
+    "Pepe Eyes": {
+      "percent": 1.84,
+      "counter": 109
+    },
+    "Rainbow Device": {
+      "percent": 1.94,
+      "counter": 109
+    },
+    "Grainy Eyes": {
+      "percent": 1.28,
+      "counter": 111
+    },
+    "Eye Patch": {
+      "percent": 9.29,
+      "counter": 926
+    },
+    "3D Glasses": {
+      "percent": 9.96,
+      "counter": 995
+    },
+    "Round Glasses": {
+      "percent": 9.8,
+      "counter": 980
+    },
+    "Binoculars": {
+      "percent": 7.75,
+      "counter": 774
+    },
+    "Sunglasses": {
+      "percent": 7.21,
+      "counter": 721
+    },
+    "Thug Life Glasses": {
+      "percent": 7.08,
+      "counter": 706
+    },
+    "Laser Eyes": {
+      "percent": 7.48,
+      "counter": 747
+    },
+    "VR Glasses": {
+      "percent": 6.3,
+      "counter": 629
+    },
+    "Futuristic Device": {
+      "percent": 5.22,
+      "counter": 521
+    },
+    "Sci-fi Glasses": {
+      "percent": 5.17,
+      "counter": 517
+    },
+    "Robotic Glasses": {
+      "percent": 2.83,
+      "counter": 283
+    }
+  },
+  "Mouth": {
+    "No Emotion": {
+      "percent": 3.69,
+      "counter": 106
+    },
+    "Lipstick": {
+      "percent": 1.23,
+      "counter": 106
+    },
+    "Bubblegum": {
+      "percent": 3.71,
+      "counter": 117
+    },
+    "Vampire": {
+      "percent": 1.15,
+      "counter": 104
+    },
+    "Puke": {
+      "percent": 1.4,
+      "counter": 114
+    },
+    "Shy": {
+      "percent": 1.34,
+      "counter": 107
+    },
+    "Huh": {
+      "percent": 1.62,
+      "counter": 115
+    },
+    "Sad": {
+      "percent": 1.91,
+      "counter": 117
+    },
+    "Tongue Out": {
+      "percent": 1.69,
+      "counter": 116
+    },
+    "Toothless": {
+      "percent": 2.17,
+      "counter": 105
+    },
+    "Joker": {
+      "percent": 1.77,
+      "counter": 106
+    },
+    "Dribble": {
+      "percent": 1.2,
+      "counter": 98
+    },
+    "Smirk": {
+      "percent": 1.81,
+      "counter": 112
+    },
+    "Clown Nose": {
+      "percent": 1.28,
+      "counter": 115
+    },
+    "Disappointed": {
+      "percent": 1.16,
+      "counter": 114
+    },
+    "Pepe Mouth": {
+      "percent": 1.78,
+      "counter": 109
+    },
+    "Cat Mouth": {
+      "percent": 1.95,
+      "counter": 111
+    },
+    "Dog Mouth": {
+      "percent": 4.8,
+      "counter": 105
+    },
+    "Ew": {
+      "percent": 3.68,
+      "counter": 106
+    },
+    "Rainbow Puke": {
+      "percent": 8.32,
+      "counter": 829
+    },
+    "Smoke Weed": {
+      "percent": 9.35,
+      "counter": 935
+    },
+    "Anonymous Mask": {
+      "percent": 9.52,
+      "counter": 951
+    },
+    "Whistle": {
+      "percent": 9.16,
+      "counter": 916
+    },
+    "Mustache": {
+      "percent": 9.16,
+      "counter": 914
+    },
+    "Cigarette": {
+      "percent": 9.22,
+      "counter": 920
+    },
+    "Gold Teeth": {
+      "percent": 8.82,
+      "counter": 882
+    },
+    "Joyful": {
+      "percent": 7.93,
+      "counter": 793
+    },
+    "Respirator Mask": {
+      "percent": 3.48,
+      "counter": 348
+    },
+    "Robot Mouth": {
+      "percent": 1.83,
+      "counter": 183
+    },
+    "Cyborg Jaw": {
+      "percent": 1.3,
+      "counter": 130
+    }
+  }
+}

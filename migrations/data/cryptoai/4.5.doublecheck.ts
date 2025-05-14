@@ -41,6 +41,7 @@ async function main() {
       const attr = await dataContract.tokenURI(address, i);
       const parse = JSON.parse(attr);
       const attrStr = parse.attributes;
+      console.log("__attrStr", attrStr);
       totalTokens++;
 
       // Original duplicate check
@@ -65,7 +66,9 @@ async function main() {
 
       const art: any = {};
       // Add rarity tracking
-      const attributes = JSON.parse(attr);
+      // const attributes = JSON.parse(attr);
+      const attributes = attrStr;
+      console.log("__attributes", attributes);
       attributes.forEach((attribute: any) => {
         const { trait_type: trait, value } = attribute;
 

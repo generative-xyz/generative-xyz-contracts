@@ -9,6 +9,7 @@ async function main(key: string) {
     console.log("wrong network");
     return;
   }
+  console.log("___key", key);
 
   try {
     let configaaa = await initConfig();
