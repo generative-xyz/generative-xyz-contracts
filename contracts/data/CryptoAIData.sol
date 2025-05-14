@@ -10,7 +10,6 @@ import "../interfaces/ICryptoAIData.sol";
 import "../interfaces/IAgentNFT.sol";
 import "../libs/structs/CryptoAIStructs.sol";
 import "../libs/helpers/Errors.sol";
-import "hardhat/console.sol";
 
 contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     uint256 public constant TOKEN_LIMIT = 0x2710;
