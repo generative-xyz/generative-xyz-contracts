@@ -6,6 +6,7 @@ import {EIP712Upgradeable, ECDSAUpgradeable} from "@openzeppelin/contracts-upgra
 import {IAgent} from "./IAgent.sol";
 import {IFileStore, File} from "./IFileStore.sol";
 import {RatingSystem} from "./RatingSystem.sol";
+
 abstract contract AgentUpgradeable is
     IAgent,
     Initializable,
@@ -14,10 +15,11 @@ abstract contract AgentUpgradeable is
     RatingSystem
 {
     // --- Constants ---
+    uint256 public constant TOKEN_LIMIT = 10000;
     bytes32 private constant IPFS_SIG = keccak256(bytes("ipfs"));
     bytes32 private constant SIGN_DATA_TYPEHASH =
         keccak256(
-            "SignData(CodePointer[] pointers,address[] depsAgents,uint256 agentId,uint16 currentVersion)CodePointer(address retrieveAddress,uint8 fileType,string fileName)"
+            "SignData(CodePointer[] pointers,uint256[] depsAgents,uint256 agentId,uint16 currentVersion)CodePointer(address retrieveAddress,uint8 fileType,string fileName)"
         );
 
     // --- Storage ---
@@ -32,7 +34,7 @@ abstract contract AgentUpgradeable is
         private _pointersNum;
     mapping(uint256 agentId => mapping(uint256 version => mapping(uint256 => CodePointer)))
         private _codePointers;
-    mapping(uint256 agentId => mapping(uint256 version => address[]))
+    mapping(uint256 agentId => mapping(uint256 version => uint256[]))
         private _depsAgents;
 
     uint256[30] private __gap;
@@ -97,7 +99,7 @@ abstract contract AgentUpgradeable is
         uint256 agentId,
         string calldata codeLanguage,
         CodePointer[] calldata pointers,
-        address[] calldata depsAgents
+        uint256[] calldata depsAgents
     ) external virtual onlyAgentOwner(agentId) returns (uint16) {
         return _publishAgentCode(agentId, codeLanguage, pointers, depsAgents);
     }
@@ -106,17 +108,17 @@ abstract contract AgentUpgradeable is
         uint256 agentId,
         string calldata codeLanguage,
         CodePointer[] calldata pointers,
-        address[] calldata depsAgents,
+        uint256[] calldata depsAgents,
         bytes calldata signature
     ) external virtual returns (uint16) {
         bytes32 digest = getHashToSign(agentId, pointers, depsAgents);
+
         if (_usedDigests[digest]) {
             revert DigestAlreadyUsed();
         }
         if (ECDSAUpgradeable.recover(digest, signature) != ownerOf(agentId)) {
             revert Unauthenticated();
         }
-
         _usedDigests[digest] = true;
 
         return _publishAgentCode(agentId, codeLanguage, pointers, depsAgents);
@@ -126,7 +128,7 @@ abstract contract AgentUpgradeable is
         uint256 agentId,
         string calldata codeLanguage,
         CodePointer[] calldata pointers,
-        address[] calldata depsAgents
+        uint256[] calldata depsAgents
     ) internal virtual returns (uint16) {
         if (pointers.length == 0) revert InvalidData();
 
@@ -143,8 +145,8 @@ abstract contract AgentUpgradeable is
 
         uint256 depsLen = depsAgents.length;
         for (uint256 i = 0; i < depsLen; i++) {
-            if (depsAgents[i] == address(0)) {
-                revert ZeroAddress();
+            if (depsAgents[i] == 0 || depsAgents[i] > TOKEN_LIMIT) {
+                revert InvalidDependency();
             }
             _depsAgents[agentId][version].push(depsAgents[i]);
         }
@@ -165,14 +167,14 @@ abstract contract AgentUpgradeable is
 
         _codePointers[agentId][version][pNum] = pointer;
 
-        emit CodePointerCreated(version, pNum, pointer);
+        emit CodePointerCreated(agentId, version, pNum, pointer);
         _pointersNum[agentId][version]++;
     }
 
     function getDepsAgents(
         uint256 agentId,
         uint16 version
-    ) external view checkVersion(agentId, version) returns (address[] memory) {
+    ) external view checkVersion(agentId, version) returns (uint256[] memory) {
         return _depsAgents[agentId][version];
     }
 
@@ -259,7 +261,7 @@ abstract contract AgentUpgradeable is
     function getHashToSign(
         uint256 agentId,
         CodePointer[] calldata pointers,
-        address[] calldata depsAgents
+        uint256[] calldata depsAgents
     ) public view virtual returns (bytes32) {
         bytes32 CODEPOINTER_TYPEHASH = keccak256(
             "CodePointer(address retrieveAddress,uint8 fileType,string fileName)"

@@ -24,6 +24,7 @@ interface IAgent {
 
     // --- Events ---
     event CodePointerCreated(
+        uint256 indexed agentId,
         uint256 indexed version,
         uint256 indexed pIndex,
         CodePointer newPointer
@@ -33,7 +34,7 @@ interface IAgent {
     error Unauthenticated();
     error DigestAlreadyUsed();
     error InvalidData();
-    error ZeroAddress();
+    error InvalidDependency();
     error InvalidVersion();
 
     // --- State-Changing Functions ---
@@ -41,14 +42,14 @@ interface IAgent {
         uint256 agentId,
         string calldata codeLanguage,
         CodePointer[] calldata pointers,
-        address[] calldata depsAgents
+        uint256[] calldata depsAgents
     ) external returns (uint16 version);
 
     function publishAgentCodeWithSignature(
         uint256 agentId,
         string calldata codeLanguage,
         CodePointer[] calldata pointers,
-        address[] calldata depsAgents,
+        uint256[] calldata depsAgents,
         bytes calldata signature
     ) external returns (uint16 version);
 
@@ -63,7 +64,7 @@ interface IAgent {
     function getDepsAgents(
         uint256 agentId,
         uint16 version
-    ) external view returns (address[] memory);
+    ) external view returns (uint256[] memory);
 
     function getAgentCode(
         uint256 agentId,

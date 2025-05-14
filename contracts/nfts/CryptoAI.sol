@@ -24,8 +24,6 @@ contract CryptoAI is
     IERC2981Upgradeable,
     OwnableUpgradeable
 {
-    uint256 public constant TOKEN_LIMIT = 10000;
-
     // deployer
     address public _deployer;
     // CryptoAIData

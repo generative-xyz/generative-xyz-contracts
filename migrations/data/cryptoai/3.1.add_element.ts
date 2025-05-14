@@ -106,7 +106,8 @@ async function main() {
         );
       }
     });
-    // //ADD DNA
+
+    //ADD DNA
     await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
     //ADD DNA Variant
     await dataContract.addDNAVariant(

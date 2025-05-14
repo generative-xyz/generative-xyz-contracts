@@ -2,17 +2,17 @@
 pragma solidity ^0.8.20;
 
 interface IRatingSystem {
-    // --- Constants ---
-    function MAX_RATING() external view returns (uint8);
-    function MIN_RATING() external view returns (uint8);
-
     // --- Events ---
     event Rated(
         address indexed user,
-        uint8 stars,
+        uint256 indexed agentId,
+        uint8 indexed stars,
         uint256 newTotalStarsSum,
         uint256 newTotalRatingCount
     );
+
+    // --- Custom Errors ---
+    error RatingOutOfRange(uint8 stars);
 
     // --- State-Changing Functions ---
     function rateStar(uint256 agentId, uint8 stars) external;
