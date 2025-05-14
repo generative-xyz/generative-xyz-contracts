@@ -152,10 +152,8 @@ module.exports = {
             url: process.env.BASE_MAINNET, accounts: [`0x${process.env.PRIVATE_KEY}`], timeout: 100_000,
         },
         base_testnet: {
-            url: process.env.BASE_TESTNET,
-            accounts: [`0x${process.env.PRIVATE_KEY}`],
-            timeout: 100_000,
-        },
+            url: process.env.BASE_TESTNET, accounts: [`0x${process.env.PRIVATE_KEY}`], timeout: 100_000,
+        }
     },
     mocha: {
         timeout: 40000000,
