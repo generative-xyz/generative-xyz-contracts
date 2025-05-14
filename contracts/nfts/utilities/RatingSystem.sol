@@ -2,28 +2,17 @@
 pragma solidity ^0.8.20;
 
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-
-abstract contract RatingSystem is Initializable {
+import {IRatingSystem} from "./IRatingSystem.sol";
+abstract contract RatingSystem is Initializable, IRatingSystem {
     // --- Constants ---
     uint8 public constant MAX_RATING = 5;
     uint8 public constant MIN_RATING = 1;
-
-    // --- Custom Errors ---
-    error RatingOutOfRange(uint8 stars);
 
     // --- Storage ---
     mapping(uint256 agentId => uint256) private _totalStars;
     mapping(uint256 agentId => uint256) private _totalRatingCount;
 
     uint256[10] private __gap;
-
-    // --- Events ---
-    event Rated(
-        address indexed user,
-        uint8 stars,
-        uint256 newTotalStarsSum,
-        uint256 newTotalRatingCount
-    );
 
     // --- Initialization ---
     function __RatingSystem_init() internal onlyInitializing {}
@@ -39,6 +28,7 @@ abstract contract RatingSystem is Initializable {
 
         emit Rated(
             msg.sender,
+            agentId,
             stars,
             _totalStars[agentId],
             _totalRatingCount[agentId]

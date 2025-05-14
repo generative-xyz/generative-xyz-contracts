@@ -313,8 +313,8 @@ describe("CryptoAI and CryptoAIData", function () {
                 }
             ];
             const depsAgents = [
-                "0x70997970C51812dc3A010C7d01b50e0d17dc79C8", // Example dependency agent address
-                "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"
+                2, // Example dependency agent ID
+                3  // Example dependency agent ID
             ];
 
             // Mint NFT
@@ -346,8 +346,8 @@ describe("CryptoAI and CryptoAIData", function () {
             // Verify code pointers and dependencies
             const deps = await cryptoAI.getDepsAgents(1, 1);
             expect(deps).to.have.lengthOf(2);
-            expect(deps[0]).to.equal(depsAgents[0]);
-            expect(deps[1]).to.equal(depsAgents[1]);
+            expect(deps[0]).to.equal(ethers.BigNumber.from(depsAgents[0]));
+            expect(deps[1]).to.equal(ethers.BigNumber.from(depsAgents[1]));
 
             // Get and verify code (should be IPFS hashes since we used zero address)
             const code = await cryptoAI.getAgentCode(1, 1);
@@ -399,7 +399,7 @@ describe("CryptoAI and CryptoAIData", function () {
                 }
             ];
             const newDepsAgents = [
-                "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+                2 // Example dependency agent ID
             ];
 
             // Get current version
@@ -420,7 +420,7 @@ describe("CryptoAI and CryptoAIData", function () {
             const types = {
                 SignData: [
                     { name: "pointers", type: "CodePointer[]" },
-                    { name: "depsAgents", type: "address[]" },
+                    { name: "depsAgents", type: "uint256[]" },
                     { name: "agentId", type: "uint256" },
                     { name: "currentVersion", type: "uint16" }
                 ],
@@ -452,7 +452,7 @@ describe("CryptoAI and CryptoAIData", function () {
             // Verify the new code pointers and dependencies
             const deps = await cryptoAI.getDepsAgents(1, newVersion);
             expect(deps).to.have.lengthOf(1);
-            expect(deps[0]).to.equal(newDepsAgents[0]);
+            expect(deps[0]).to.equal(ethers.BigNumber.from(newDepsAgents[0]));
 
             // Try to use the same signature again(should fail)
 
@@ -717,7 +717,7 @@ describe("CryptoAI and CryptoAIData", function () {
         });
     });
     describe("Minting 10.000 NFTs", function () {
-        it.only("Should mint 10.000 NFTs", async function () {
+        it.skip("Should mint 10.000 NFTs", async function () {
             const { cryptoAI, cryptoAIData, owner, admin, user } = await loadFixture(
                 deployContractsFixture
             );
