@@ -11,8 +11,6 @@ import "@openzeppelin/contracts/utils/Base64.sol";
 import "../libs/helpers/Errors.sol";
 import "../libs/structs/CryptoAIStructs.sol";
 import "../interfaces/ICryptoAIData.sol";
-
-import "hardhat/console.sol";
 import {IMintableAgent} from "../interfaces/IAgentNFT.sol";
 import {AgentUpgradeable} from "./utilities/AgentUpgradeable.sol";
 
