@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import '@openzeppelin/contracts/utils/Base64.sol';
+import "@openzeppelin/contracts/utils/Base64.sol";
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/math/MathUpgradeable.sol";
 
@@ -10,7 +10,6 @@ import "../interfaces/ICryptoAIData.sol";
 import "../interfaces/IAgentNFT.sol";
 import "../libs/structs/CryptoAIStructs.sol";
 import "../libs/helpers/Errors.sol";
-import "hardhat/console.sol";
 
 contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     uint256 public constant TOKEN_LIMIT = 0x2710;
@@ -190,7 +189,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         require(unlockedTokens[tokenId].weight == 0, Errors.TOKEN_ID_UNLOCKED);
         unlockedTokens[tokenId].weight = 1;
 
-        bytes32 pairHash = keccak256(abi.encodePacked(traits));
+        bytes32 pairHash = keccak256(abi.encodePacked(traits, dna));
         require(!usedPairs[pairHash], Errors.USED_PAIRs);
         usedPairs[pairHash] = true;
         unlockedTokens[tokenId].traits = traits;
@@ -204,13 +203,13 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     function tokenURI(uint256 tokenId)
     external view
     returns (string memory result) {
-        require(tokenId < TOKEN_LIMIT, Errors.INV_TOKEN);
+        require(tokenId <= TOKEN_LIMIT, Errors.INV_TOKEN);
         require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
         if (unlockedTokens[tokenId].weight == 0) {
             result = string(abi.encodePacked(
                 '{"image": "', PLACEHOLDER_IMG,
                 '", "animation_url": "', cryptoAIImageHtml(tokenId),
-                '"}'
+                    '"}'
             ));
         } else {
             result = string(abi.encodePacked(
@@ -410,7 +409,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
 
     function cryptoAIImageSvg(uint256 tokenId)
     public view
-        // onlyAIAgentContract
+            // onlyAIAgentContract
     returns (string memory result) {
         require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
 
@@ -439,16 +438,16 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                     }
 
                     svg = string(abi.encodePacked(
-                        svg,
-                        abi.encodePacked(
-                            SVG_RECT,
-                            StringsUpgradeable.toString(x),
-                            SVG_Y,
-                            StringsUpgradeable.toString(y),
-                            SVG_WIDTH,
-                            string(buffer),
-                            SVG_CLOSE_RECT
-                        )
+                            svg,
+                            abi.encodePacked(
+                                SVG_RECT,
+                                StringsUpgradeable.toString(x),
+                                SVG_Y,
+                                StringsUpgradeable.toString(y),
+                                SVG_WIDTH,
+                                string(buffer),
+                                SVG_CLOSE_RECT
+                            )
                     ));
                 }
             }
