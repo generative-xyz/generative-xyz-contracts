@@ -4,7 +4,7 @@ var data = JSON.parse(fs.readFileSync('./datajson/data-compressed.json', 'utf-8'
 import * as data from "./datajson/data-compressed.json";
 
 export enum ELEMENT {
-  BODY = "Body",
+  EARRING = "Earring",
   MOUTH = "Mouth",
   EYES = "Eyes",
   HEAD = "Head",
@@ -12,10 +12,10 @@ export enum ELEMENT {
 
 const DATA_ELEMENTS_1 = [
   {
-    ele_type: ELEMENT.BODY,
-    names: data.elements.Body.names,
-    rarities: data.elements.Body.traits,
-    positions: data.elements.Body.positions,
+    ele_type: ELEMENT.EARRING,
+    names: data.elements.Earring.names,
+    rarities: data.elements.Earring.traits,
+    positions: data.elements.Earring.positions,
   },
   {
     ele_type: ELEMENT.MOUTH,
@@ -41,21 +41,19 @@ const DATA_ELEMENTS_2 = [
 ];
 
 export enum DNA {
-  MONKEY = "Monkey",
-  CAT = "Cat",
-  DOG = "Dog",
-  FROG = "Frog",
-  ROBOT = "Robot",
+  ALIEN = "Alien",
+  TURTLE = "Turtle",
+  KONG = "Kong",
   HUMAN = "Human",
+  ROBOT = "Robot",
 }
 
-const KEY_DNA = [DNA.HUMAN, DNA.MONKEY, DNA.DOG, DNA.CAT, DNA.FROG, DNA.ROBOT];
+const KEY_DNA = [DNA.ALIEN, DNA.KONG, DNA.TURTLE, DNA.HUMAN, DNA.ROBOT];
 const TRAITS_DNA = [
+  data.DNA.Alien.trait,
+  data.DNA.Kong.trait,
+  data.DNA.Turtle.trait,
   data.DNA.Human.trait,
-  data.DNA.Monkey.trait,
-  data.DNA.Dog.trait,
-  data.DNA.Cat.trait,
-  data.DNA.Frog.trait,
   data.DNA.Robot.trait,
 ].map((item) => Number(item));
 

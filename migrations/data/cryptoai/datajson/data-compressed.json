@@ -9034,7 +9034,7 @@
   },
   "DNA": {
     "Alien": {
-      "trait": "10",
+      "trait": "11",
       "names": [
         "alien 1"
       ],
@@ -9527,7 +9527,7 @@
       ]
     },
     "Kong": {
-      "trait": "350",
+      "trait": "55",
       "names": [
         "Kong 3",
         "Kong 2",
@@ -11456,7 +11456,7 @@
       ]
     },
     "Turtle": {
-      "trait": "850",
+      "trait": "109",
       "names": [
         "Turtle 5",
         "Turtle 4",
@@ -14410,7 +14410,7 @@
       ]
     },
     "Human": {
-      "trait": "3500",
+      "trait": "3275",
       "names": [
         "human 8",
         "human 7",
@@ -18385,7 +18385,7 @@
       ]
     },
     "Robot": {
-      "trait": "5290",
+      "trait": "6550",
       "names": [
         "robot 9",
         "robot 8",
