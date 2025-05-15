@@ -134,51 +134,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         unlockedTokens[tokenId].tokenID = tokenId;
     }
 
-    /*function unlockRenderAgent(uint256 tokenId)
-    external
-    onlyAIAgentContract _sealed
-    () {
-        // agent is minted on nft collection, and unlock render svg by rarity info
-        IMintableAgent nft = IMintableAgent(_cryptoAIAgentAddr);
-        *//* TODO: uncomment when deploy *//*
-        require(unlockedTokens[tokenId].tokenID > 0, Errors.TOKEN_ID_NOT_EXISTED);
-        require(unlockedTokens[tokenId].weight == 0, Errors.TOKEN_ID_UNLOCKED);
-        unlockedTokens[tokenId].weight = nft.getAgentRarity(tokenId);
-        *//* Test *//*
-        *//*unlockedTokens[tokenId].tokenID = tokenId;
-        unlockedTokens[tokenId].weight = tokenId + 1511;
-        if (unlockedTokens[tokenId].weight >= 10000) {
-            unlockedTokens[tokenId].weight = 10000;
-        }*//*
-
-        unlockedTokens[tokenId].dna = selectTrait(DNA_TYPES.c_rarities, DNA_TYPES.rarities, unlockedTokens[tokenId].weight, tokenId, 0);
-        partsName[0] = DNA_TYPES.names[unlockedTokens[tokenId].dna];
-
-        bytes32 pairHash;
-        uint256 maxAttempts = 5;
-        uint256 attempt = 0;
-        do {
-            attempt++;
-            for (uint256 i = 0; i < partsName.length; i++) {
-                uint256[] storage c_rarities = items[partsName[i]].c_rarities;
-                uint256[] storage rarities = items[partsName[i]].rarities;
-
-                uint256 trait = selectTrait(c_rarities, rarities, unlockedTokens[tokenId].weight, tokenId, attempt);
-                unlockedTokens[tokenId].traits[i] = trait;
-                if (rarities[trait] < 300) {
-                    uint256 rarity = c_rarities[trait] * 99 / 100;
-                    c_rarities[trait] = rarity > 0 ? rarity : 1;
-                }
-            }
-            pairHash = keccak256(abi.encodePacked(unlockedTokens[tokenId].traits));
-        }
-        while (usedPairs[pairHash] && attempt < maxAttempts);
-        require(!usedPairs[pairHash] && attempt <= maxAttempts, Errors.USED_PAIRs);
-        if (!usedPairs[pairHash]) {
-            usedPairs[pairHash] = true;
-        }
-    }*/
-
+    
     function unlockRenderAgent(uint256 tokenId, uint256 dna, uint256[5] memory traits)
     external
     onlyAIAgentContract _sealed
