@@ -36,6 +36,7 @@ const convertSvgToPositions = (
   const parsed = parseSync(svgContent);
   const positions: number[] = [];
   const errors: string[] = [];
+  const svgErrors: string[] = [];
 
   const processRect = (rect: any) => {
     try {
@@ -76,8 +77,13 @@ const convertSvgToPositions = (
   };
 
   const findRects = (node: any) => {
+    
     if (node.name === "rect") {
       processRect(node);
+    } else if(node.name !== "svg" && !svgErrors.includes(filePath)) {
+
+      svgErrors.push(filePath);
+      errors.push(`svg not found rect: ${filePath}`);
     }
     if (node.children) {
       node.children.forEach(findRects);
@@ -87,7 +93,10 @@ const convertSvgToPositions = (
   findRects(parsed);
 
   // Write errors to file if any occurred
-  if (errors.length > 0) {
+  if (errors.length > 0 || svgErrors.length > 0) {
+    if (svgErrors.length > 0) {
+      console.log('____svgErrors', svgErrors);
+    }
     let existingErrors = [];
     try {
       if (fs.existsSync(PATH_OUTPUT_ERRORS)) {
