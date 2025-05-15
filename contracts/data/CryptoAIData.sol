@@ -73,7 +73,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         address deployer
     ) initializer
     public {
-        partsName = ["dna", "Body", "Head", "Eyes", "Mouth"];
+        partsName = ["dna", "Earring", "Head", "Eyes", "Mouth"];
         _deployer = deployer;
 
         __Ownable_init();
