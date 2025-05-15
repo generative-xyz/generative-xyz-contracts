@@ -165,16 +165,7 @@ class CryptoAI {
       this.senderPublicKey,
       "latest"
     ); //get latest nonce
-    const fun = temp?.nftContract.methods.mint(
-      to,
-      //   agentAddr,
-      dna,
-      traits,
-      "",
-      "",
-      [],
-      [agentAddr]
-    );
+    const fun = temp?.nftContract.methods.mint(to, dna, traits, "", "");
     //the transaction
     const tx = {
       from: this.senderPublicKey,
