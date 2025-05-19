@@ -68,13 +68,13 @@ async function main() {
       }
     });
 
-    // data.DNA.Turtle.positions.forEach((pos: any[], index: number) => {
-    //   if (pos.find((p) => p === null) === null) {
-    //     throw new Error(
-    //       `Null position found in Turtle DNA - Name: ${data.DNA.Turtle.names[index]}, Trait: ${data.DNA.Turtle.traits[index]}`
-    //     );
-    //   }
-    // });
+    data.DNA.Kong.positions.forEach((pos: any[], index: number) => {
+      if (pos.find((p) => p === null) === null) {
+        throw new Error(
+          `Null position found in Kong DNA - Name: ${data.DNA.Kong.names[index]}, Trait: ${data.DNA.Kong.traits[index]}`
+        );
+      }
+    });
 
     data.DNA.Robot.positions.forEach((pos: any[], index: number) => {
       if (pos.find((p) => p === null) === null) {
@@ -84,10 +84,10 @@ async function main() {
       }
     });
 
-    data.DNA.Human.positions.forEach((pos: any[], index: number) => {
+    data.DNA["Neo-Human"].positions.forEach((pos: any[], index: number) => {
       if (pos.find((p) => p === null) === null) {
         throw new Error(
-          `Null position found in Human DNA - Name: ${data.DNA.Human.names[index]}, Trait: ${data.DNA.Human.traits[index]}`
+          `Null position found in Human DNA - Name: ${data.DNA["Neo-Human"].names[index]}, Trait: ${data.DNA["Neo-Human"].traits[index]}`
         );
       }
     });
@@ -131,10 +131,10 @@ async function main() {
     await dataContract.addDNAVariant(
       address,
       0,
-      DNA.HUMAN,
-      data.DNA.Human.names,
-      data.DNA.Human.traits,
-      data.DNA.Human.positions
+      DNA.NEO_HUMAN,
+      data.DNA["Neo-Human"].names,
+      data.DNA["Neo-Human"].traits,
+      data.DNA["Neo-Human"].positions
     );
 
     await dataContract.addDNAVariant(

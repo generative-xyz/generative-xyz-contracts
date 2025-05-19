@@ -31,7 +31,7 @@ library CryptoAIStructs {
         // weight = 0: draw animation url
         // weight > 0: draw svg image -> completely
 
-        uint256[5] traits; // name attribute[body, head, ....] -> index trait
+        uint256[6] traits; // name attribute[body, head, ....] -> index trait
         uint256 dna;
     }
 }

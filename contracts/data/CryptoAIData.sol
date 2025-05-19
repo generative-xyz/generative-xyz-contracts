@@ -28,7 +28,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     string internal constant PLACEHOLDER_FOOTER = "'</script>";
 
     // elements
-    string[5] private partsName;
+    string[6] private partsName;
     // deployer
     address public _deployer;
     // crypto ai agent address
@@ -73,7 +73,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         address deployer
     ) initializer
     public {
-        partsName = ["dna", "Collar", "Head", "Eyes", "Mouth"];
+        partsName = ["dna", "Collar", "Head", "Eyes", "Mouth", "Earring"];
         _deployer = deployer;
 
         __Ownable_init();
@@ -135,7 +135,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     }
 
     
-    function unlockRenderAgent(uint256 tokenId, uint256 dna, uint256[5] memory traits)
+    function unlockRenderAgent(uint256 tokenId, uint256 dna, uint256[6] memory traits)
     external
     onlyAIAgentContract _sealed
     () {
@@ -289,8 +289,8 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     returns (bytes memory) {
         require(unlockedTokens[tokenId].tokenID > 0 && unlockedTokens[tokenId].weight > 0, Errors.TOKEN_ID_NOT_UNLOCKED);
 
-        uint16[][] memory data = new uint16[][](5);
-        bytes[] memory dataPalette = new bytes[](5);
+        uint16[][] memory data = new uint16[][](6);
+        bytes[] memory dataPalette = new bytes[](6);
         for (uint256 i = 0; i < partsName.length; i++) {
             if (i == 0) {
                 data[i] = items[DNA_TYPES.names[unlockedTokens[tokenId].dna]].positions[unlockedTokens[tokenId].traits[i]];
@@ -313,20 +313,20 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
             }
         }
         bytes memory pixels = new bytes(2304);
-        uint256 totalLength = dataPalette[0].length + dataPalette[1].length + dataPalette[2].length + dataPalette[3].length + dataPalette[4].length;
+        uint256 totalLength = dataPalette[0].length + dataPalette[1].length + dataPalette[2].length + dataPalette[3].length + dataPalette[4].length + dataPalette[5].length;
         for (uint256 i = 0; i < totalLength; i += 5) {
             uint256 idx;
             bytes memory pos;
             uint256 offset = dataPalette[0].length;
             uint256 prevOffset = 0;
-            for (uint256 j = 0; j < 5; j++) {
+            for (uint256 j = 0; j < 6; j++) {
                 if (i < offset) {
                     pos = dataPalette[j];
                     idx = i - prevOffset;
                     break;
                 }
                 prevOffset = offset;
-                if (j < 4) {
+                if (j < 5) {
                     offset += dataPalette[j + 1].length;
                 }
             }

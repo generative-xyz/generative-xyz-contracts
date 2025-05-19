@@ -23,12 +23,7 @@ async function main() {
   for (let i = 1; i <= parseInt(args[0]); i++) {
     const data = await dataContract.tokenURI(config.contractAddress, i);
     const json = JSON.parse(data);
-    htmls +=
-      "<span>" +
-      i +
-      "</span><br><iframe src='" +
-      json.image +
-      "'></iframe><br>";
+    htmls += "<span>" + i + "</span><br>" + parseSVGData(json.image) + "<br>";
     console.log(i, " processed");
   }
   const path = "./migrations/nfts/cryptoai/testhtml.html";
@@ -39,3 +34,10 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+
+function parseSVGData(dataURI: string): any {
+  const svgData = decodeURIComponent(dataURI.split(",")[1]);
+  // const tempDiv = document.createElement("div");
+  // tempDiv.innerHTML = svgData;
+  return svgData;
+}
