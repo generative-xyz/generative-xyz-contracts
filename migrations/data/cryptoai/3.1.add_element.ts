@@ -115,6 +115,14 @@ async function main() {
     await dataContract.addDNAVariant(
       address,
       0,
+      DNA.KONG,
+      data.DNA.Kong.names,
+      data.DNA.Kong.traits,
+      data.DNA.Kong.positions
+    );
+    await dataContract.addDNAVariant(
+      address,
+      0,
       DNA.X_TYPE,
       data.DNA["X-Type"].names,
       data.DNA["X-Type"].traits,
@@ -128,14 +136,7 @@ async function main() {
       data.DNA.Human.traits,
       data.DNA.Human.positions
     );
-    await dataContract.addDNAVariant(
-      address,
-      0,
-      DNA.KONG,
-      data.DNA.Kong.names,
-      data.DNA.Kong.traits,
-      data.DNA.Kong.positions
-    );
+
     await dataContract.addDNAVariant(
       address,
       0,
@@ -208,7 +209,6 @@ async function main() {
       data.elements.Earring.traits,
       data.elements.Earring.positions
     );
-    console.log("add item COLLAR");
   } catch (error) {
     console.log("Error checking positions:", error);
     throw error;
