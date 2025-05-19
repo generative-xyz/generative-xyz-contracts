@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import * as path from "path";
 import { initConfig } from "../../data/cryptoai";
 import { CryptoAI } from "./cryptoAI";
 
@@ -19,15 +20,19 @@ async function main() {
     process.env.PRIVATE_KEY,
     process.env.PUBLIC_KEY
   );
-  let htmls = "";
+
+  const outputDir = "./migrations/nfts/cryptoai/data-mint";
+  // Ensure the directory exists
+  await fs.mkdir(outputDir, { recursive: true });
+
   for (let i = 1; i <= parseInt(args[0]); i++) {
     const data = await dataContract.tokenURI(config.contractAddress, i);
     const json = JSON.parse(data);
-    htmls += "<span>" + i + "</span><br>" + parseSVGData(json.image) + "<br>";
-    console.log(i, " processed");
+    const svgContent = parseSVGData(json.image);
+    const filePath = path.join(outputDir, `${i}.svg`);
+    await fs.writeFile(filePath, svgContent, "utf8");
+    console.log(`Token ${i} processed and saved to ${filePath}`);
   }
-  const path = "./migrations/nfts/cryptoai/testhtml.html";
-  await fs.writeFile(path, htmls);
 }
 
 main().catch((error) => {
@@ -35,9 +40,17 @@ main().catch((error) => {
   process.exitCode = 1;
 });
 
-function parseSVGData(dataURI: string): any {
-  const svgData = decodeURIComponent(dataURI.split(",")[1]);
-  // const tempDiv = document.createElement("div");
-  // tempDiv.innerHTML = svgData;
-  return svgData;
+function parseSVGData(dataURI: string): string {
+  // data:image/svg+xml;utf8,<svg ...>
+  // or data:image/svg+xml;utf8,%3Csvg...
+  // or data:image/svg+xml;base64,...
+  if (dataURI.startsWith("data:image/svg+xml;base64,")) {
+    const base64 = dataURI.split(",")[1];
+    return Buffer.from(base64, "base64").toString("utf8");
+  } else if (dataURI.startsWith("data:image/svg+xml;utf8,")) {
+    return decodeURIComponent(dataURI.split(",")[1]);
+  } else {
+    // fallback
+    return dataURI;
+  }
 }
