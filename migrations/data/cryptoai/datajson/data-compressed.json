@@ -14769,14 +14769,14 @@
         ]
       ]
     },
-    "Human": {
+    "Neo-Human": {
       "trait": "3275",
       "names": [
-        "human",
-        "human",
-        "human",
-        "human",
-        "human"
+        "neo-human",
+        "neo-human",
+        "neo-human",
+        "neo-human",
+        "neo-human"
       ],
       "traits": [
         5,
@@ -17276,7 +17276,7 @@
     "X-Type": {
       "trait": "109",
       "names": [
-        "turtle"
+        "x-type"
       ],
       "traits": [
         1

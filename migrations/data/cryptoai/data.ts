@@ -52,16 +52,16 @@ export enum DNA {
   ALIEN = "Alien",
   KONG = "Kong",
   X_TYPE = "X-Type",
-  HUMAN = "Human",
+  NEO_HUMAN = "Neo-Human",
   ROBOT = "Robot",
 }
 
-const KEY_DNA = [DNA.ALIEN, DNA.KONG, DNA.X_TYPE, DNA.HUMAN, DNA.ROBOT];
+const KEY_DNA = [DNA.ALIEN, DNA.KONG, DNA.X_TYPE, DNA.NEO_HUMAN, DNA.ROBOT];
 const TRAITS_DNA = [
   data.DNA.Alien.trait,
   data.DNA.Kong.trait,
   data.DNA["X-Type"].trait,
-  data.DNA.Human.trait,
+  data.DNA["Neo-Human"].trait,
   data.DNA.Robot.trait,
 ].map((item) => Number(item));
 
