@@ -265,6 +265,7 @@ function traitsElement(
   }
   return 0;
 }
+
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
