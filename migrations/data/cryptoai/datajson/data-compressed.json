@@ -824,7 +824,6 @@
   "elements": {
     "Mouth": {
       "names": [
-        "",
         "Vampire",
         "Toothless",
         "Tongue Out",
@@ -838,6 +837,7 @@
         "Puke",
         "Pepe Mouth",
         "Ooh",
+        "",
         "Neck Gaiter",
         "Mustache",
         "Lipstick",
@@ -857,7 +857,6 @@
         "Bubblegum"
       ],
       "traits": [
-        2031,
         275,
         292,
         422,
@@ -871,6 +870,7 @@
         95,
         92,
         411,
+        2031,
         171,
         283,
         281,
@@ -890,7 +890,6 @@
         186
       ],
       "positions": [
-        [],
         [
           11,
           17,
@@ -1331,6 +1330,7 @@
           18,
           4
         ],
+        [],
         [
           10,
           17,
@@ -2065,7 +2065,6 @@
     },
     "Head": {
       "names": [
-        "",
         "Wizard Hat",
         "White Curly",
         "Watermelon",
@@ -2087,6 +2086,7 @@
         "Pigtails",
         "Orge Ears",
         "Orange Mohawk",
+        "",
         "Mining Helmet",
         "Knife-on-head",
         "King",
@@ -2110,7 +2110,6 @@
         "Antenna"
       ],
       "traits": [
-        993,
         293,
         59,
         280,
@@ -2132,6 +2131,7 @@
         274,
         50,
         389,
+        993,
         421,
         54,
         287,
@@ -2155,7 +2155,6 @@
         433
       ],
       "positions": [
-        [],
         [
           7,
           3,
@@ -5696,6 +5695,7 @@
           10,
           57
         ],
+        [],
         [
           8,
           6,
@@ -8670,7 +8670,6 @@
     },
     "Eyes": {
       "names": [
-        "",
         "VR Goggles",
         "Tinted Lenses",
         "Thug Life Glasses",
@@ -8682,6 +8681,7 @@
         "Pepe Eyes",
         "Overworked",
         "One-eyed",
+        "",
         "No-face",
         "Ninja Mask",
         "Nerd Glasses",
@@ -8713,7 +8713,6 @@
         "3D Glasses"
       ],
       "traits": [
-        1091,
         407,
         285,
         302,
@@ -8725,6 +8724,7 @@
         48,
         105,
         50,
+        1091,
         60,
         384,
         405,
@@ -8756,7 +8756,6 @@
         378
       ],
       "positions": [
-        [],
         [
           7,
           12,
@@ -9787,6 +9786,7 @@
           15,
           3
         ],
+        [],
         [
           9,
           12,
@@ -12207,21 +12207,20 @@
     },
     "Earring": {
       "names": [
-        "",
         "Ruby Earring",
+        "",
         "Gold Earring",
         "Diamond Earring",
         "Cross Earring"
       ],
       "traits": [
-        8072,
         549,
+        8072,
         711,
         261,
         407
       ],
       "positions": [
-        [],
         [
           6,
           19,
@@ -12260,6 +12259,7 @@
           18,
           44
         ],
+        [],
         [
           6,
           18,
