@@ -28,7 +28,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     string internal constant PLACEHOLDER_FOOTER = "'</script>";
 
     // elements
-    string[6] private partsName;
+    string[5] private partsName;
     // deployer
     address public _deployer;
     // crypto ai agent address
@@ -73,7 +73,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         address deployer
     ) initializer
     public {
-        partsName = ["dna", "Collar", "Head", "Eyes", "Mouth", "Earring"];
+        partsName = ["dna", "Collar", "Head", "Eyes", "Mouth"];
         _deployer = deployer;
 
         __Ownable_init();
@@ -135,7 +135,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     }
 
     
-    function unlockRenderAgent(uint256 tokenId, uint256 dna, uint256[6] memory traits)
+    function unlockRenderAgent(uint256 tokenId, uint256 dna, uint256[5] memory traits)
     external
     onlyAIAgentContract _sealed
     () {
