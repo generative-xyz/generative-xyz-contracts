@@ -84,7 +84,7 @@ async function main() {
       let data = generateRandomData(
          key_dna_compress_data.findIndex((item: any) => item === keyDNA),
          keyDNA,
-         dataInputRender[keyDNA][index_input_render],
+         dataInputRender[keyDNA][index_dna_type],
          index_dna_type % dataCompress.DNA[keyDNA].names.length
       );
       
