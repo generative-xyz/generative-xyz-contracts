@@ -3,7 +3,8 @@
   <rect x="13" y="17" width="1" height="1" fill="#000000"/>
   <rect x="14" y="17" width="1" height="1" fill="#000000"/>
   <rect x="11" y="18" width="1" height="1" fill="#000000"/>
-  <rect x="12" y="18" width="1" height="1" fill="#000000"/>
-  <rect x="14" y="18" width="1" height="1" fill="#000000"/>
   <rect x="15" y="18" width="1" height="1" fill="#000000"/>
+  <rect x="12" y="18" width="1" height="1" fill="#FF4E6F"/>
+  <rect x="13" y="18" width="1" height="1" fill="#FF4E6F"/>
+  <rect x="14" y="18" width="1" height="1" fill="#FF4E6F"/>
 </svg>
