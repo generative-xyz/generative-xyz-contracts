@@ -135,7 +135,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     }
 
     
-    function unlockRenderAgent(uint256 tokenId, uint256 dna, uint256[5] memory traits)
+    function unlockRenderAgent(uint256 tokenId, uint256 dna, uint256[6] memory traits)
     external
     onlyAIAgentContract _sealed
     () {
