@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
@@ -13,78 +15,50 @@ import "../libs/structs/CryptoAIStructs.sol";
 import "../interfaces/ICryptoAIData.sol";
 import {IMintableAgent} from "../interfaces/IAgentNFT.sol";
 import {AgentUpgradeable} from "./utilities/AgentUpgradeable.sol";
+import {ICryptoAIUpgradeable} from "../interfaces/ICryptoAIUpgradeable.sol";
 
-contract CryptoAI is
+contract CryptoAIUpgradeable is
     Initializable,
     ERC721Upgradeable,
     ERC721URIStorageUpgradeable,
+    ICryptoAIUpgradeable,
     AgentUpgradeable,
     IERC2981Upgradeable,
     OwnableUpgradeable
 {
-    // deployer
-    address public _deployer;
     // CryptoAIData
-    address public _cryptoAiDataAddr;
-    // admins
-    mapping(address => bool) public _admins;
+    address private _cryptoAiDataAddr;
+    // current index mint
+    uint256 private _indexMint;
+    // subscription fee. Nft id => subscription fee
+    mapping(uint256 => uint256) private _subscriptionFee;
+    // token address. Nft id => token address
+    mapping(uint256 => address) private _tokenAddress;
 
-    uint256 public _indexMint;
-
-    uint256[50] private __gap;
-
-    modifier onlyDeployer() {
-        require(msg.sender == _deployer, Errors.ONLY_DEPLOYER);
-        _;
-    }
-
-    modifier onlyAdmin() {
-        require(_admins[msg.sender], Errors.ONLY_DEPLOYER);
-        _;
-    }
-
-    function initialize(
-        string memory name,
-        string memory symbol,
-        address deployer
+    function __CryptoAI_init(
+        string memory name_,
+        string memory symbol_
     ) initializer public {
-        _deployer = deployer;
+        __CryptoAI_init_unchained(name_, symbol_);
+    }
+
+    function __CryptoAI_init_unchained(string memory name_, string memory symbol_) internal onlyInitializing {
         _indexMint = 1;
 
-        __ERC721_init(name, symbol);
+        __ERC721_init(name_, symbol_);
         __ERC721URIStorage_init();
-        __Agent_init(name, "1.0");
+        __Agent_init(name_, "1.0");
         __Ownable_init();
     }
 
-    function changeDeployer(address newAdm) external onlyDeployer {
-        require(newAdm != Errors.ZERO_ADDR, Errors.INV_ADD);
-        if (_deployer != newAdm) {
-            _deployer = newAdm;
-        }
-    }
-
-    function allowAdmin(address newAdm, bool allow) external onlyDeployer {
-        require(newAdm != Errors.ZERO_ADDR, Errors.INV_ADD);
-        _admins[newAdm] = allow;
-    }
-
-    function changeCryptoAiDataAddress(address newAddr) external onlyDeployer {
-        require(newAddr != Errors.ZERO_ADDR, Errors.ONLY_ADMIN_ALLOWED);
-
-        if (_cryptoAiDataAddr != newAddr) {
-            _cryptoAiDataAddr = newAddr;
-        }
-    }
-
     //@ERC721
-    function mint(
+    function _mint(
         address to,
         uint256 dna,
         uint256[5] memory traits,
         string calldata agentName,
         string calldata agentAbility
-    ) public onlyAdmin {
+    ) internal virtual {
         require(to != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_indexMint <= TOKEN_LIMIT);
@@ -98,17 +72,37 @@ contract CryptoAI is
         _indexMint += 1;
     }
 
-    function unlock(uint256 tokenId, uint256 dna, uint256[5] memory traits) public payable {
+    function _setCryptoAIDataAddr(address cryptoAiDataAddr) internal virtual {
+        _cryptoAiDataAddr = cryptoAiDataAddr;
+    }
+
+    function unlock(uint256 tokenId, uint256 dna, uint256[5] memory traits) public virtual override payable {
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
         cryptoAIDataContract.unlockRenderAgent(tokenId, dna, traits);
+    }
+
+    function setSubscriptionFee(uint256 tokenId, uint256 fee) public virtual override onlyAgentOwner(tokenId) {
+        _subscriptionFee[tokenId] = fee;
+    }
+
+    function subscriptionFee(uint256 tokenId) public virtual view override returns (uint256) {
+        return _subscriptionFee[tokenId];
+    }
+
+    function setTokenAddress(uint256 tokenId, address agentTokenAddress) public virtual override onlyAgentOwner(tokenId) {
+        _tokenAddress[tokenId] = agentTokenAddress;
+    }
+
+    function tokenAddress(uint256 tokenId) public virtual view override returns (address) {
+        return _tokenAddress[tokenId];
     }
 
     function _burn(uint256 tokenId) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable) {
         super._burn(tokenId);
     }
 
-    function tokenURI(uint256 tokenId) public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory result) {
+    function tokenURI(uint256 tokenId) public virtual view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory result) {
         require(_exists(tokenId), 'ERC721: Token does not exist');
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
         result = cryptoAIDataContract.tokenURI(tokenId);
@@ -123,9 +117,14 @@ contract CryptoAI is
     /* @dev EIP2981 royalties implementation.
     // EIP2981 standard royalties return.
     */
-    function royaltyInfo(uint256 _tokenId, uint256 _salePrice) external view virtual override
-    returns (address receiver, uint256 royaltyAmount) {
+    function royaltyInfo(uint256 _tokenId, uint256 _salePrice) external view virtual override returns (address receiver, uint256 royaltyAmount) {
         receiver = this.owner();
         royaltyAmount = _salePrice * 0 / 10000;
     }
+
+    /**
+     * @dev This empty reserved space is put in place to allow future versions to add new
+     * variables without shifting down storage in the inheritance chain.
+     */
+    uint256[45] private __gap;
 }

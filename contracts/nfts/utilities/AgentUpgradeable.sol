@@ -37,8 +37,6 @@ abstract contract AgentUpgradeable is
     mapping(uint256 agentId => mapping(uint256 version => uint256[]))
         private _depsAgents;
 
-    uint256[30] private __gap;
-
     // --- Modifiers ---
     modifier checkVersion(uint256 agentId, uint16 version) {
         _validateVersion(agentId, version);
@@ -296,4 +294,10 @@ abstract contract AgentUpgradeable is
 
         return _hashTypedDataV4(structHash);
     }
+
+    /**
+     * @dev This empty reserved space is put in place to allow future versions to add new
+     * variables without shifting down storage in the inheritance chain.
+     */
+    uint256[45] private __gap;
 }
