@@ -4,9 +4,10 @@ import * as path from "path";
 const { parseSync } = require("svgson");
 
 // Use absolute path to testAssets folder
-const PATH_ASSETS = path.join(__dirname, "../cryptoai/assets");
+const PATH_ASSETS = path.join(__dirname, "../cryptoai/ca-assets-v1");
 const PATH_OUTPUT = "migrations/data/cryptoai/datajson/data-compressed.json";
 const PATH_OUTPUT_ERRORS = "migrations/data/cryptoai/datajson/data-errors.json";
+const DATA_NULL_ELEMENTS = require("./datajson/data-render-input.json");
 
 interface PixelData {
   name: string;
@@ -124,6 +125,10 @@ const convertSvgToPositions = (
 const convertAssetsToJson = (
   assetsPath: string
 ): Record<string, Record<string, any>> => {
+
+
+  console.log('___DATA_NULL_ELEMENTS', DATA_NULL_ELEMENTS)
+
   try {
     if (!fs.existsSync(assetsPath)) {
       throw new Error(`Assets directory not found at: ${assetsPath}`);
@@ -168,7 +173,7 @@ const convertAssetsToJson = (
           : allData[mainFolder][subFolderTitle].traits.length + 1;
 
         allData[mainFolder][subFolderTitle].names.push(
-          name === "Empty" ? "" : name
+          name === "Null" ? "" : name
         );
         allData[mainFolder][subFolderTitle].traits.push(trait);
         allData[mainFolder][subFolderTitle].positions.push(positions);
@@ -186,11 +191,13 @@ const convertAssetsToJson = (
         const positions = convertSvgToPositions(svgContent, filePath);
 
         const [name, traitStr] = path.basename(filePath, ".svg").split("_");
+        const nameFile = name.replace("z.", "");
+
         const trait = traitStr
           ? parseInt(traitStr)
           : allData[mainFolder][subFolder].traits.length + 1;
 
-        allData[mainFolder][subFolder].names.push(name === "Empty" ? "" : name);
+        allData[mainFolder][subFolder].names.push(nameFile === "Null" ? "" : nameFile);
         allData[mainFolder][subFolder].traits.push(trait);
         allData[mainFolder][subFolder].positions.push(positions);
       }
