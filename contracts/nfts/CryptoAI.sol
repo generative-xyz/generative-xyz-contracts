@@ -81,7 +81,7 @@ contract CryptoAI is
     function mint(
         address to,
         uint256 dna,
-        uint256[6] memory traits,
+        uint256[5] memory traits,
         string calldata agentName,
         string calldata agentAbility
     ) public onlyAdmin {
@@ -98,7 +98,7 @@ contract CryptoAI is
         _indexMint += 1;
     }
 
-    function unlock(uint256 tokenId, uint256 dna, uint256[6] memory traits) public payable {
+    function unlock(uint256 tokenId, uint256 dna, uint256[5] memory traits) public payable {
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
         cryptoAIDataContract.unlockRenderAgent(tokenId, dna, traits);
