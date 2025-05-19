@@ -7,7 +7,6 @@ const { parseSync } = require("svgson");
 const PATH_ASSETS = path.join(__dirname, "../cryptoai/ca-assets-v1");
 const PATH_OUTPUT = "migrations/data/cryptoai/datajson/data-compressed.json";
 const PATH_OUTPUT_ERRORS = "migrations/data/cryptoai/datajson/data-errors.json";
-const DATA_NULL_ELEMENTS = require("./datajson/data-render-input.json");
 
 interface PixelData {
   name: string;
@@ -125,9 +124,6 @@ const convertSvgToPositions = (
 const convertAssetsToJson = (
   assetsPath: string
 ): Record<string, Record<string, any>> => {
-
-
-  console.log('___DATA_NULL_ELEMENTS', DATA_NULL_ELEMENTS)
 
   try {
     if (!fs.existsSync(assetsPath)) {
