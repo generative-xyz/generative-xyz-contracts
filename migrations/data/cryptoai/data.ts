@@ -13,16 +13,17 @@ export enum ELEMENT {
 
 const DATA_ELEMENTS_1 = [
   {
-    ele_type: ELEMENT.EARRING,
-    names: data.elements.Earring.names,
-    rarities: data.elements.Earring.traits,
-    positions: data.elements.Earring.positions,
+    ele_type: ELEMENT.COLLAR,
+    names: data.elements.Collar.names,
+    rarities: data.elements.Collar.traits,
+    positions: data.elements.Collar.positions,
   },
+
   {
-    ele_type: ELEMENT.MOUTH,
-    names: data.elements.Mouth.names,
-    rarities: data.elements.Mouth.traits,
-    positions: data.elements.Mouth.positions,
+    ele_type: ELEMENT.HEAD,
+    names: data.elements.Head.names,
+    rarities: data.elements.Head.traits,
+    positions: data.elements.Head.positions,
   },
   {
     ele_type: ELEMENT.EYES,
@@ -34,10 +35,16 @@ const DATA_ELEMENTS_1 = [
 
 const DATA_ELEMENTS_2 = [
   {
-    ele_type: ELEMENT.HEAD,
-    names: data.elements.Head.names,
-    rarities: data.elements.Head.traits,
-    positions: data.elements.Head.positions,
+    ele_type: ELEMENT.MOUTH,
+    names: data.elements.Mouth.names,
+    rarities: data.elements.Mouth.traits,
+    positions: data.elements.Mouth.positions,
+  },
+  {
+    ele_type: ELEMENT.EARRING,
+    names: data.elements.Earring.names,
+    rarities: data.elements.Earring.traits,
+    positions: data.elements.Earring.positions,
   },
 ];
 
@@ -53,7 +60,7 @@ const KEY_DNA = [DNA.ALIEN, DNA.KONG, DNA.X_TYPE, DNA.HUMAN, DNA.ROBOT];
 const TRAITS_DNA = [
   data.DNA.Alien.trait,
   data.DNA.Kong.trait,
-  data.DNA['X-Type'].trait,
+  data.DNA["X-Type"].trait,
   data.DNA.Human.trait,
   data.DNA.Robot.trait,
 ].map((item) => Number(item));

@@ -68,13 +68,13 @@ async function main() {
       }
     });
 
-    data.DNA.Turtle.positions.forEach((pos: any[], index: number) => {
-      if (pos.find((p) => p === null) === null) {
-        throw new Error(
-          `Null position found in Turtle DNA - Name: ${data.DNA.Turtle.names[index]}, Trait: ${data.DNA.Turtle.traits[index]}`
-        );
-      }
-    });
+    // data.DNA.Turtle.positions.forEach((pos: any[], index: number) => {
+    //   if (pos.find((p) => p === null) === null) {
+    //     throw new Error(
+    //       `Null position found in Turtle DNA - Name: ${data.DNA.Turtle.names[index]}, Trait: ${data.DNA.Turtle.traits[index]}`
+    //     );
+    //   }
+    // });
 
     data.DNA.Robot.positions.forEach((pos: any[], index: number) => {
       if (pos.find((p) => p === null) === null) {
@@ -103,6 +103,7 @@ async function main() {
     //ADD DNA
     await dataContract.addDNA(address, 0, KEY_DNA, TRAITS_DNA);
     //ADD DNA Variant
+    console.log("add item DNA Alien");
     await dataContract.addDNAVariant(
       address,
       0,
@@ -111,15 +112,16 @@ async function main() {
       data.DNA.Alien.traits,
       data.DNA.Alien.positions
     );
-
+    console.log("add item DNA X-Type");
     await dataContract.addDNAVariant(
       address,
       0,
-      DNA.TURTLE,
-      data.DNA.Turtle.names,
-      data.DNA.Turtle.traits,
-      data.DNA.Turtle.positions
+      DNA.X_TYPE,
+      data.DNA["X-Type"].names,
+      data.DNA["X-Type"].traits,
+      data.DNA["X-Type"].positions
     );
+    console.log("add item DNA Human");
     await dataContract.addDNAVariant(
       address,
       0,
@@ -128,6 +130,7 @@ async function main() {
       data.DNA.Human.traits,
       data.DNA.Human.positions
     );
+    console.log("add item DNA Kong");
     await dataContract.addDNAVariant(
       address,
       0,
@@ -136,27 +139,42 @@ async function main() {
       data.DNA.Kong.traits,
       data.DNA.Kong.positions
     );
-    await dataContract.addDNAVariantRobot(
+    console.log("add item DNA Robot");
+    await dataContract.addDNAVariant(
       address,
       0,
+      DNA.ROBOT,
       data.DNA.Robot.names,
-      data.DNA.Robot.traits
-    );
-    await dataContract.addDNAVariantRobotPosition(
-      address,
-      0,
-      data.DNA.Robot.positions.slice(0, 5),
-      0,
-      5
-    );
-    await dataContract.addDNAVariantRobotPosition(
-      address,
-      0,
-      data.DNA.Robot.positions.slice(5, 10),
-      5,
-      10
+      data.DNA.Robot.traits,
+      data.DNA.Robot.positions
     );
 
+    // await dataContract.addDNAVariantRobot(
+    //   address,
+    //   0,
+    //   data.DNA.Robot.names,
+    //   data.DNA.Robot.traits,
+    //   data.DNA.Robot.positions
+    // );
+    // console.log("add item DNA Robot 2");
+    // await dataContract.addDNAVariantRobotPosition(
+    //   address,
+    //   0,
+    //   data.DNA.Robot.positions.slice(0, 5),
+    //   0,
+    //   5
+    // );
+    // // console.log("add item DNA Robot 3");
+    // await dataContract.addDNAVariantRobotPosition(
+    //   address,
+    //   0,
+    //   data.DNA.Robot.positions.slice(5, 10),
+    //   5,
+    //   10
+    // );
+
+    console.log("add item EARRING");
+    console.log(data.elements.Earring);
     await dataContract.addItem(
       address,
       0,
@@ -165,6 +183,7 @@ async function main() {
       data.elements.Earring.traits,
       data.elements.Earring.positions
     );
+
     await dataContract.addItem(
       address,
       0,
@@ -173,6 +192,7 @@ async function main() {
       data.elements.Head.traits,
       data.elements.Head.positions
     );
+    console.log("add item HEAD");
     await dataContract.addItem(
       address,
       0,
@@ -181,6 +201,7 @@ async function main() {
       data.elements.Eyes.traits,
       data.elements.Eyes.positions
     );
+    console.log("add item EYES");
     await dataContract.addItem(
       address,
       0,
@@ -189,6 +210,16 @@ async function main() {
       data.elements.Mouth.traits,
       data.elements.Mouth.positions
     );
+    console.log("add item MOUTH");
+    await dataContract.addItem(
+      address,
+      0,
+      ELEMENT.COLLAR,
+      data.elements.Collar.names,
+      data.elements.Collar.traits,
+      data.elements.Collar.positions
+    );
+    console.log("add item COLLAR");
   } catch (error) {
     console.log("Error checking positions:", error);
     throw error;
