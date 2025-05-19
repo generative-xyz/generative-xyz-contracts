@@ -28,7 +28,7 @@ function generateRandomData(
         indexNameHead,
         indexNameEyes,
         indexNameMouth,
-        indexNameEarring,
+        // indexNameEarring,
       ],
     ];
 
@@ -40,7 +40,7 @@ function generateRandomData(
         dataCompress.elements[ELEMENT.HEAD].names[indexNameHead],
         dataCompress.elements[ELEMENT.EYES].names[indexNameEyes],
         dataCompress.elements[ELEMENT.MOUTH].names[indexNameMouth],
-        dataCompress.elements[ELEMENT.EARRING].names[indexNameEarring],
+        // dataCompress.elements[ELEMENT.EARRING].names[indexNameEarring],
       ],
     ];
 
@@ -100,6 +100,9 @@ async function main() {
       data_mintings.push({ id: indexArt, ...data });
       indexArt++;
 
+
+      // console.log(JSON.stringify(data_mintings, null, 2));
+      // return;
     }
 
     const collectionPath = "migrations/data/cryptoai/datajson/collections.json";
