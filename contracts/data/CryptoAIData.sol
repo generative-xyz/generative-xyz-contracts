@@ -16,7 +16,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     uint8 internal constant GRID_SIZE = 0x18;
     bytes16 internal constant _HEX_SYMBOLS = "0123456789abcdef";
     string private constant svgDataType = 'data:image/svg+xml;utf8,';
-    string internal constant SVG_HEADER = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' fill='%23636B96'/>";
+    string internal constant SVG_HEADER = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>";
     string internal constant SVG_FOOTER = '</svg>';
     string internal constant SVG_RECT = "<rect x='";
     string internal constant SVG_Y = "' y='";
@@ -28,7 +28,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     string internal constant PLACEHOLDER_FOOTER = "'</script>";
 
     // elements
-    string[5] private partsName;
+    string[6] private partsName;
     // deployer
     address public _deployer;
     // crypto ai agent address
@@ -73,7 +73,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         address deployer
     ) initializer
     public {
-        partsName = ["dna", "Earring", "Head", "Eyes", "Mouth"];
+        partsName = ["dna", "Collar", "Head", "Eyes", "Mouth", "Earring"];
         _deployer = deployer;
 
         __Ownable_init();
