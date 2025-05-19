@@ -19,7 +19,16 @@ function generateRandomData(
     const indexNameEyes  = dataCompress.elements[ELEMENT.EYES].names.findIndex((name: string) => name === renderInputDate[2]);
     const indexNameEarring = dataCompress.elements[ELEMENT.EARRING].names.findIndex((name: string) => name === renderInputDate[3]);
     const indexNameCollar = dataCompress.elements[ELEMENT.COLLAR].names.findIndex((name: string) => name === renderInputDate[4]);
-    
+
+    if(indexNameHead === -1 || indexNameMouth === -1 || indexNameEyes === -1 || indexNameEarring === -1 || indexNameCollar === -1) {
+      console.log('___errorname', renderInputDate, {
+        head: indexNameHead,
+        mouth: indexNameMouth,
+        eyes: indexNameEyes,
+        earring: indexNameEarring,
+        collar: indexNameCollar,
+      });
+    }
     const randomDataIndex = [
       indexDNA,
       [
