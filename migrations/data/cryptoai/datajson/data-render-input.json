@@ -1,4 +1,18 @@
 {
+  "Alien": [
+  ["", "", "One-eyed", "", ""],
+  ["Black Cap", "", "", "Gold Earring", ""],
+  ["Top Hat", "Smoke Weed", "", "", ""],
+  ["White Curly", "", "Rainbow Vision", "", ""],
+  ["Chef Hat", "", "", "", ""],
+  ["Duck Toy", "", "Thug Life Glasses", "", ""],
+  ["Orange Mohawk", "", "VR Goggles", "", ""],
+  ["Bandana", "", "Ninja Mask", "", ""],
+  ["Orge Ears", "", "Alien Eyes", "", ""],
+  ["Pirate Hat", "", "Eye Patch", "", ""],
+  ["Antenna", "", "Alien Eyes", "", ""]
+]
+,
     "Kong":[
   [
     "Antenna",
