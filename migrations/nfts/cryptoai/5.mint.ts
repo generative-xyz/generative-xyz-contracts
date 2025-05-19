@@ -1,5 +1,6 @@
 import { initConfig } from "../../data/cryptoai";
 import { CryptoAI } from "./cryptoAI";
+const data = require("../../data/cryptoai/datajson/collections.json");
 
 async function main() {
   // if (process.env.NETWORK != "base_mainnet") {
@@ -19,8 +20,8 @@ async function main() {
     0,
     process.env.PUBLIC_KEY,
     process.env.PUBLIC_KEY,
-    0,
-    [0, 19, 13, 16, 17]
+    data[0].index[0],
+    data[0].index[1]
   );
 }
 
