@@ -8,6 +8,7 @@ export enum ELEMENT {
   MOUTH = "Mouth",
   EYES = "Eyes",
   HEAD = "Head",
+  COLLAR = "Collar",
 }
 
 const DATA_ELEMENTS_1 = [
@@ -42,17 +43,17 @@ const DATA_ELEMENTS_2 = [
 
 export enum DNA {
   ALIEN = "Alien",
-  TURTLE = "Turtle",
   KONG = "Kong",
+  X_TYPE = "X-Type",
   HUMAN = "Human",
   ROBOT = "Robot",
 }
 
-const KEY_DNA = [DNA.ALIEN, DNA.KONG, DNA.TURTLE, DNA.HUMAN, DNA.ROBOT];
+const KEY_DNA = [DNA.ALIEN, DNA.KONG, DNA.X_TYPE, DNA.HUMAN, DNA.ROBOT];
 const TRAITS_DNA = [
   data.DNA.Alien.trait,
   data.DNA.Kong.trait,
-  data.DNA.Turtle.trait,
+  data.DNA['X-Type'].trait,
   data.DNA.Human.trait,
   data.DNA.Robot.trait,
 ].map((item) => Number(item));
