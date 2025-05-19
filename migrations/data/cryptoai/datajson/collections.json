@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "id": 1,
     "name": [
       "Alien",
       [
@@ -25,7 +25,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": 2,
     "name": [
       "Alien",
       [
@@ -50,7 +50,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": 3,
     "name": [
       "Alien",
       [
@@ -75,7 +75,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 4,
     "name": [
       "Alien",
       [
@@ -100,7 +100,7 @@
     ]
   },
   {
-    "id": 4,
+    "id": 5,
     "name": [
       "Alien",
       [
@@ -125,7 +125,7 @@
     ]
   },
   {
-    "id": 5,
+    "id": 6,
     "name": [
       "Alien",
       [
@@ -150,7 +150,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 7,
     "name": [
       "Alien",
       [
@@ -175,7 +175,7 @@
     ]
   },
   {
-    "id": 7,
+    "id": 8,
     "name": [
       "Alien",
       [
@@ -200,7 +200,7 @@
     ]
   },
   {
-    "id": 8,
+    "id": 9,
     "name": [
       "Alien",
       [
@@ -225,7 +225,7 @@
     ]
   },
   {
-    "id": 9,
+    "id": 10,
     "name": [
       "Alien",
       [
@@ -250,7 +250,7 @@
     ]
   },
   {
-    "id": 10,
+    "id": 11,
     "name": [
       "Alien",
       [
@@ -275,7 +275,7 @@
     ]
   },
   {
-    "id": 11,
+    "id": 12,
     "name": [
       "Kong",
       [
@@ -300,7 +300,7 @@
     ]
   },
   {
-    "id": 12,
+    "id": 13,
     "name": [
       "Kong",
       [
@@ -325,7 +325,7 @@
     ]
   },
   {
-    "id": 13,
+    "id": 14,
     "name": [
       "Kong",
       [
@@ -350,7 +350,7 @@
     ]
   },
   {
-    "id": 14,
+    "id": 15,
     "name": [
       "Kong",
       [
@@ -375,7 +375,7 @@
     ]
   },
   {
-    "id": 15,
+    "id": 16,
     "name": [
       "Kong",
       [
@@ -400,7 +400,7 @@
     ]
   },
   {
-    "id": 16,
+    "id": 17,
     "name": [
       "Kong",
       [
@@ -425,7 +425,7 @@
     ]
   },
   {
-    "id": 17,
+    "id": 18,
     "name": [
       "Kong",
       [
@@ -450,7 +450,7 @@
     ]
   },
   {
-    "id": 18,
+    "id": 19,
     "name": [
       "Kong",
       [
@@ -475,7 +475,7 @@
     ]
   },
   {
-    "id": 19,
+    "id": 20,
     "name": [
       "Kong",
       [
@@ -500,7 +500,7 @@
     ]
   },
   {
-    "id": 20,
+    "id": 21,
     "name": [
       "Kong",
       [
@@ -525,7 +525,7 @@
     ]
   },
   {
-    "id": 21,
+    "id": 22,
     "name": [
       "Kong",
       [
@@ -550,7 +550,7 @@
     ]
   },
   {
-    "id": 22,
+    "id": 23,
     "name": [
       "Kong",
       [
@@ -575,7 +575,7 @@
     ]
   },
   {
-    "id": 23,
+    "id": 24,
     "name": [
       "Kong",
       [
@@ -600,7 +600,7 @@
     ]
   },
   {
-    "id": 24,
+    "id": 25,
     "name": [
       "Kong",
       [
@@ -625,7 +625,7 @@
     ]
   },
   {
-    "id": 25,
+    "id": 26,
     "name": [
       "Kong",
       [
@@ -650,7 +650,7 @@
     ]
   },
   {
-    "id": 26,
+    "id": 27,
     "name": [
       "Kong",
       [
@@ -675,7 +675,7 @@
     ]
   },
   {
-    "id": 27,
+    "id": 28,
     "name": [
       "Kong",
       [
@@ -700,7 +700,7 @@
     ]
   },
   {
-    "id": 28,
+    "id": 29,
     "name": [
       "Kong",
       [
@@ -725,7 +725,7 @@
     ]
   },
   {
-    "id": 29,
+    "id": 30,
     "name": [
       "Kong",
       [
@@ -750,7 +750,7 @@
     ]
   },
   {
-    "id": 30,
+    "id": 31,
     "name": [
       "Kong",
       [
@@ -775,7 +775,7 @@
     ]
   },
   {
-    "id": 31,
+    "id": 32,
     "name": [
       "Kong",
       [
@@ -800,7 +800,7 @@
     ]
   },
   {
-    "id": 32,
+    "id": 33,
     "name": [
       "Kong",
       [
@@ -825,7 +825,7 @@
     ]
   },
   {
-    "id": 33,
+    "id": 34,
     "name": [
       "Kong",
       [
@@ -850,7 +850,7 @@
     ]
   },
   {
-    "id": 34,
+    "id": 35,
     "name": [
       "Kong",
       [
@@ -875,7 +875,7 @@
     ]
   },
   {
-    "id": 35,
+    "id": 36,
     "name": [
       "Kong",
       [
@@ -900,7 +900,7 @@
     ]
   },
   {
-    "id": 36,
+    "id": 37,
     "name": [
       "Kong",
       [
@@ -925,7 +925,7 @@
     ]
   },
   {
-    "id": 37,
+    "id": 38,
     "name": [
       "Kong",
       [
@@ -950,7 +950,7 @@
     ]
   },
   {
-    "id": 38,
+    "id": 39,
     "name": [
       "Kong",
       [
@@ -975,7 +975,7 @@
     ]
   },
   {
-    "id": 39,
+    "id": 40,
     "name": [
       "Kong",
       [
@@ -1000,7 +1000,7 @@
     ]
   },
   {
-    "id": 40,
+    "id": 41,
     "name": [
       "Kong",
       [
@@ -1025,7 +1025,7 @@
     ]
   },
   {
-    "id": 41,
+    "id": 42,
     "name": [
       "Kong",
       [
@@ -1050,7 +1050,7 @@
     ]
   },
   {
-    "id": 42,
+    "id": 43,
     "name": [
       "Kong",
       [
@@ -1075,7 +1075,7 @@
     ]
   },
   {
-    "id": 43,
+    "id": 44,
     "name": [
       "Kong",
       [
@@ -1100,7 +1100,7 @@
     ]
   },
   {
-    "id": 44,
+    "id": 45,
     "name": [
       "Kong",
       [
@@ -1125,7 +1125,7 @@
     ]
   },
   {
-    "id": 45,
+    "id": 46,
     "name": [
       "Kong",
       [
@@ -1150,7 +1150,7 @@
     ]
   },
   {
-    "id": 46,
+    "id": 47,
     "name": [
       "Kong",
       [
@@ -1175,7 +1175,7 @@
     ]
   },
   {
-    "id": 47,
+    "id": 48,
     "name": [
       "Kong",
       [
@@ -1200,7 +1200,7 @@
     ]
   },
   {
-    "id": 48,
+    "id": 49,
     "name": [
       "Kong",
       [
@@ -1225,7 +1225,7 @@
     ]
   },
   {
-    "id": 49,
+    "id": 50,
     "name": [
       "Kong",
       [
@@ -1250,7 +1250,7 @@
     ]
   },
   {
-    "id": 50,
+    "id": 51,
     "name": [
       "Kong",
       [
@@ -1275,7 +1275,7 @@
     ]
   },
   {
-    "id": 51,
+    "id": 52,
     "name": [
       "Kong",
       [
@@ -1300,7 +1300,7 @@
     ]
   },
   {
-    "id": 52,
+    "id": 53,
     "name": [
       "Kong",
       [
@@ -1325,7 +1325,7 @@
     ]
   },
   {
-    "id": 53,
+    "id": 54,
     "name": [
       "Kong",
       [
@@ -1350,7 +1350,7 @@
     ]
   },
   {
-    "id": 54,
+    "id": 55,
     "name": [
       "Kong",
       [
@@ -1375,7 +1375,7 @@
     ]
   },
   {
-    "id": 55,
+    "id": 56,
     "name": [
       "Kong",
       [
@@ -1400,7 +1400,7 @@
     ]
   },
   {
-    "id": 56,
+    "id": 57,
     "name": [
       "Kong",
       [
@@ -1425,7 +1425,7 @@
     ]
   },
   {
-    "id": 57,
+    "id": 58,
     "name": [
       "Kong",
       [
@@ -1450,7 +1450,7 @@
     ]
   },
   {
-    "id": 58,
+    "id": 59,
     "name": [
       "Kong",
       [
@@ -1475,7 +1475,7 @@
     ]
   },
   {
-    "id": 59,
+    "id": 60,
     "name": [
       "Kong",
       [
@@ -1500,7 +1500,7 @@
     ]
   },
   {
-    "id": 60,
+    "id": 61,
     "name": [
       "Kong",
       [
@@ -1525,7 +1525,7 @@
     ]
   },
   {
-    "id": 61,
+    "id": 62,
     "name": [
       "Kong",
       [
@@ -1550,7 +1550,7 @@
     ]
   },
   {
-    "id": 62,
+    "id": 63,
     "name": [
       "Kong",
       [
@@ -1575,7 +1575,7 @@
     ]
   },
   {
-    "id": 63,
+    "id": 64,
     "name": [
       "Kong",
       [
@@ -1600,7 +1600,7 @@
     ]
   },
   {
-    "id": 64,
+    "id": 65,
     "name": [
       "Kong",
       [
@@ -1625,7 +1625,7 @@
     ]
   },
   {
-    "id": 65,
+    "id": 66,
     "name": [
       "Kong",
       [
@@ -1645,6 +1645,2731 @@
         5,
         27,
         2,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 67,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Cucumber",
+        "Suspicious",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        30,
+        3,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 68,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Sunglasses",
+        "Huh",
+        "Ruby Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        3,
+        20,
+        0
+      ]
+    ]
+  },
+  {
+    "id": 69,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "Future Collar",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        1,
+        21,
+        11,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 70,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Skiing Helmet",
+        "Overworked",
+        "Robot Mouth",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        10,
+        9,
+        8,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 71,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Holographic",
+        "Mustache",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        19,
+        16,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 72,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Orge Ears",
+        "Thug Life Glasses",
+        "Ooh",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        19,
+        2,
+        12,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 73,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Black Cap",
+        "Defective",
+        "",
+        "Gold Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        38,
+        29,
+        13,
+        2
+      ]
+    ]
+  },
+  {
+    "id": 74,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Golden Hoop",
+        "Holographic",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        29,
+        19,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 75,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Censored",
+        "Focusing",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        33,
+        24,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 76,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "",
+        "Cigarette",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        11,
+        28,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 77,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Sombrero",
+        "Ninja Mask",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        9,
+        12,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 78,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Pinwheel",
+        "Half Rim Glasses",
+        "Ooh",
+        "Ruby Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        16,
+        21,
+        12,
+        0
+      ]
+    ]
+  },
+  {
+    "id": 79,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Beanie",
+        "Hero Mask",
+        "Focusing",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        39,
+        20,
+        24,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 80,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Bloody Eyes",
+        "Suspicious",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        35,
+        3,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 81,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Straw Hat",
+        "Hero Mask",
+        "Lipstick",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        7,
+        20,
+        18,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 82,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Black Spiky",
+        "Laser Visor",
+        "Playful",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        37,
+        16,
+        10,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 83,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Antenna",
+        "Pepe Eyes",
+        "Speechless",
+        "Gold Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        42,
+        8,
+        4,
+        2
+      ]
+    ]
+  },
+  {
+    "id": 84,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Top Hat",
+        "VR Goggles",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        4,
+        0,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 85,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Blushing",
+        "Tongue Out",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        34,
+        2,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 86,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Headphones",
+        "Lab Goggles",
+        "Tongue Out",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        26,
+        18,
+        2,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 87,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Scouter",
+        "Speechless",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        5,
+        4,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 88,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Sprout",
+        "Defective",
+        "Huh",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        8,
+        29,
+        20,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 89,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Goggles",
+        "Fang",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        24,
+        25,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 90,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Goggles",
+        "Cyborg Jaw",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        24,
+        26,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 91,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Pop Cap",
+        "3D Glasses",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        14,
+        40,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 92,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Thug Life Glasses",
+        "Speechless",
+        "Cross Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        2,
+        4,
+        4
+      ]
+    ]
+  },
+  {
+    "id": 93,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "Future Collar",
+        "Rabbit Ears",
+        "",
+        "Joker",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        1,
+        12,
+        11,
+        19,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 94,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Headband",
+        "Lab Goggles",
+        "",
+        "Ruby Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        27,
+        18,
+        13,
+        0
+      ]
+    ]
+  },
+  {
+    "id": 95,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Black Cap",
+        "Hero Mask",
+        "Snake Tongue",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        38,
+        20,
+        5,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 96,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Aviators",
+        "Focusing",
+        "Cross Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        37,
+        24,
+        4
+      ]
+    ]
+  },
+  {
+    "id": 97,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Pop Cap",
+        "Hero Mask",
+        "Moody",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        14,
+        20,
+        17,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 98,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "VR Goggles",
+        "Cyborg Jaw",
+        "Diamond Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        0,
+        26,
+        3
+      ]
+    ]
+  },
+  {
+    "id": 99,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Green Code",
+        "Moody",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        22,
+        17,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 100,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Queen",
+        "Determined",
+        "Clown",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        13,
+        28,
+        27,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 101,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Baseball Cap",
+        "Ninja Mask",
+        "Toothless",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        40,
+        12,
+        1,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 102,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Goggles",
+        "Huh",
+        "Cross Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        24,
+        20,
+        4
+      ]
+    ]
+  },
+  {
+    "id": 103,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Crazy Eyes",
+        "Playful",
+        "Ruby Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        32,
+        10,
+        0
+      ]
+    ]
+  },
+  {
+    "id": 104,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Baseball Cap",
+        "Crazy Eyes",
+        "Suspicious",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        40,
+        32,
+        3,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 105,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Rainbow Vision",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        7,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 106,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Golden Hoop",
+        "3D Glasses",
+        "Neck Gaiter",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        29,
+        40,
+        15,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 107,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Holographic",
+        "Smirk",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        19,
+        7,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 108,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Ninja Mask",
+        "Rainbow Puke",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        12,
+        9,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 109,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "Future Collar",
+        "Santa Hat",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        1,
+        11,
+        11,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 110,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Mining Helmet",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        22,
+        11,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 111,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Burnout",
+        "Monster Eyes",
+        "Gold Teeth",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        35,
+        14,
+        21,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 112,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Pirate Hat",
+        "Holographic",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        15,
+        19,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 113,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Sparkles",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        4,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 114,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Top Hat",
+        "Laser Visor",
+        "Pepe Mouth",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        4,
+        16,
+        11,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 115,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Thunderbolt",
+        "",
+        "Robot Mouth",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        5,
+        11,
+        8,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 116,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Headband",
+        "Makeup",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        27,
+        15,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 117,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Skiing Helmet",
+        "Scouter",
+        "Smoke Weed",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        10,
+        5,
+        6,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 118,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "VR Goggles",
+        "Bubblegum",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        0,
+        30,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 119,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Santa Hat",
+        "Rainbow Vision",
+        "Clown",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        11,
+        7,
+        27,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 120,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "VR Goggles",
+        "Clown",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        0,
+        27,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 121,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Antenna",
+        "One-eyed",
+        "Smirk",
+        "Gold Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        42,
+        10,
+        7,
+        2
+      ]
+    ]
+  },
+  {
+    "id": 122,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Sunglasses",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        3,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 123,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Horn",
+        "Nerd Glasses",
+        "Lipstick",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        25,
+        13,
+        18,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 124,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "King",
+        "Sunglasses",
+        "Smoke Weed",
+        "Ruby Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        24,
+        3,
+        6,
+        0
+      ]
+    ]
+  },
+  {
+    "id": 125,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Unicorn",
+        "",
+        "Bunny Teeth",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        3,
+        11,
+        29,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 126,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Crying",
+        "Bunny Teeth",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        31,
+        29,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 127,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Chef Hat",
+        "Blushing",
+        "Bubblegum",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        32,
+        34,
+        30,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 128,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "Future Collar",
+        "Captain Hat",
+        "Crazy Eyes",
+        "Ooh",
+        "Gold Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        1,
+        34,
+        32,
+        12,
+        2
+      ]
+    ]
+  },
+  {
+    "id": 129,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Horn",
+        "Aviators",
+        "Toothless",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        25,
+        37,
+        1,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 130,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Sprout",
+        "Blindfolded",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        8,
+        36,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 131,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Viking Helmet",
+        "Aviators",
+        "Focusing",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        2,
+        37,
+        24,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 132,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "King",
+        "Defective",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        24,
+        29,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 133,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Pepe Eyes",
+        "Huh",
+        "Gold Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        8,
+        20,
+        2
+      ]
+    ]
+  },
+  {
+    "id": 134,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Half Rim Glasses",
+        "Tongue Out",
+        "Gold Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        21,
+        2,
+        2
+      ]
+    ]
+  },
+  {
+    "id": 135,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Thunderbolt",
+        "Rainbow Vision",
+        "Speechless",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        5,
+        7,
+        4,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 136,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "3D Glasses",
+        "Tongue Out",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        40,
+        2,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 137,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Duck Toy",
+        "Half Rim Glasses",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        30,
+        21,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 138,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Viking Helmet",
+        "Nerd Glasses",
+        "Gold Teeth",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        2,
+        13,
+        21,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 139,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Orange Mohawk",
+        "Falling-in-love",
+        "Lipstick",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        20,
+        26,
+        18,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 140,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Knife-on-head",
+        "Eye Patch",
+        "Playful",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        23,
+        27,
+        10,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 141,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Black Spiky",
+        "3D Glasses",
+        "Joker",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        37,
+        40,
+        19,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 142,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "",
+        "",
+        "Gold Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        11,
+        13,
+        2
+      ]
+    ]
+  },
+  {
+    "id": 143,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Beanie",
+        "Gold Monocle",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        39,
+        23,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 144,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Bandana",
+        "",
+        "Moody",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        41,
+        11,
+        17,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 145,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Captain Hat",
+        "Laser Visor",
+        "Robot Mouth",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        34,
+        16,
+        8,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 146,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Queen",
+        "Scouter",
+        "",
+        "Diamond Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        13,
+        5,
+        13,
+        3
+      ]
+    ]
+  },
+  {
+    "id": 147,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Headphones",
+        "Tinted Lenses",
+        "Suspicious",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        26,
+        1,
+        3,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 148,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "",
+        "Moody",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        11,
+        17,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 149,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Scouter",
+        "Vampire",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        5,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 150,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Anime Eyes",
+        "",
+        "Ruby Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        38,
+        13,
+        0
+      ]
+    ]
+  },
+  {
+    "id": 151,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Orange Mohawk",
+        "Goggles",
+        "Frown",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        20,
+        24,
+        23,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 152,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Rabbit Ears",
+        "Nerd Glasses",
+        "Smirk",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        12,
+        13,
+        7,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 153,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Alien Eyes",
+        "",
+        "Diamond Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        39,
+        13,
+        3
+      ]
+    ]
+  },
+  {
+    "id": 154,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Chef Hat",
+        "Laser Eyes",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        32,
+        17,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 155,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Rockstar Shades",
+        "Anonymous",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        6,
+        31,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 156,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Bandana",
+        "Green Code",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        41,
+        22,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 157,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Wizard Hat",
+        "Blushing",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        0,
+        34,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 158,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Target",
+        "",
+        "Vampire",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        6,
+        11,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 159,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Halo",
+        "Alien Eyes",
+        "Smirk",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        28,
+        39,
+        7,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 160,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Halo",
+        "Green Code",
+        "Clown",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        28,
+        22,
+        27,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 161,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Pirate Hat",
+        "Lab Goggles",
+        "Goatee",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        15,
+        18,
+        22,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 162,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Nerd Glasses",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        13,
+        13,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 163,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Mining Helmet",
+        "",
+        "Ooh",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        22,
+        11,
+        12,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 164,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Target",
+        "Aviators",
+        "Cigarette",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        6,
+        37,
+        28,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 165,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Sombrero",
+        "Sunglasses",
+        "Mustache",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        9,
+        3,
+        16,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 166,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Wizard Hat",
+        "One-eyed",
+        "Toothless",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        0,
+        10,
+        1,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 167,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Orge Ears",
+        "Tinted Lenses",
+        "Neck Gaiter",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        19,
+        1,
+        15,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 168,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Straw Hat",
+        "Ninja Mask",
+        "Frown",
+        "Cross Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        7,
+        12,
+        23,
+        4
+      ]
+    ]
+  },
+  {
+    "id": 169,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Knife-on-head",
+        "Tinted Lenses",
+        "",
+        "Gold Earring"
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        23,
+        1,
+        13,
+        2
+      ]
+    ]
+  },
+  {
+    "id": 170,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Pinwheel",
+        "Glitch",
+        "Mustache",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        16,
+        25,
+        16,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 171,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Unicorn",
+        "Thug Life Glasses",
+        "Vampire",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        3,
+        2,
+        0,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 172,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Eye Patch",
+        "Robot Mouth",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        27,
+        8,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 173,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Duck Toy",
+        "Lab Goggles",
+        "Cigarette",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        30,
+        18,
+        28,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 174,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "Burnout",
+        "Monster Eyes",
+        "Cyborg Jaw",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        35,
+        14,
+        26,
+        1
+      ]
+    ]
+  },
+  {
+    "id": 175,
+    "name": [
+      "X-Type",
+      [
+        "x-type",
+        "",
+        "",
+        "Eye Patch",
+        "",
+        ""
+      ]
+    ],
+    "index": [
+      4,
+      [
+        0,
+        0,
+        21,
+        27,
+        13,
         1
       ]
     ]
