@@ -33,7 +33,7 @@ function generateRandomData(
     ];
 
     const randomData = [
-      indexDNA,
+      keyDNA,
       [
         dataCompress.DNA[keyDNA].names[index_dna_type],
         dataCompress.elements[ELEMENT.COLLAR].names[indexNameCollar],
