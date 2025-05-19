@@ -1,0 +1,1564 @@
+[
+  {
+    "id": 0,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/0.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "One-eyed"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/1.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Black Cap"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Gold Earring"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/2.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Top Hat"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Smoke Weed"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/3.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "White Curly"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Rainbow Vision"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/4.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Chef Hat"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/5.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Duck Toy"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Thug Life Glasses"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/6.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Orange Mohawk"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "VR Goggles"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/7.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Bandana"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Ninja Mask"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/8.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Orge Ears"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Alien Eyes"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/9.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Pirate Hat"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Eye Patch"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Alien",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/10.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "alien"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Antenna"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Alien Eyes"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/11.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Antenna"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Aviators"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Gold Earring"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/12.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Pirate Hat"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Censored"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/13.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Wizard Hat"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Blindfolded"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Diamond Earring"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/14.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Blushing"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Mustache"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/15.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Top Hat"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Monster Eyes"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Ruby Earring"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/16.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Pop Cap"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Smoke Weed"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/17.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Laser Eyes"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Goatee"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/18.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Determined"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Cyborg Jaw"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/19.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Orange Mohawk"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Mustache"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/20.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Glitch"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Playful"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/21.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Orange Mohawk"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "VR Goggles"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Cross Earring"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/22.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Golden Hoop"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Half Rim Glasses"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Vampire"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/23.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Rainbow Vision"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Moody"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Gold Earring"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/24.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Burnout"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Thug Life Glasses"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Snake Tongue"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/25.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Knife-on-head"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Bunny Teeth"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/26.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Ninja Mask"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/27.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Halo"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Green Code"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/28.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Black Cap"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Diamond Earring"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/29.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Hero Mask"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/30.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Rockstar Shades"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Ruby Earring"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/31.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Chef Hat"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "One-eyed"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/32.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Collar",
+        "value": "Future Collar"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Santa Hat"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/33.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "3D Glasses"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Focusing"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/34.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Sombrero"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/35.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Target"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Crying"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Speechless"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/36.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Bandana"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/37.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Falling-in-love"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/38.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Pinwheel"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Sparkles"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Suspicious"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/39.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Laser Visor"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Neck Gaiter"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/40.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Defective"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Ooh"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/41.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Rabbit Ears"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Pepe Eyes"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/42.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Cross Earring"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/43.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Headband"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/44.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Cigarette"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/45.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Nerd Glasses"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/46.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Cucumber"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Smirk"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Gold Earring"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/47.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Queen"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Anime Eyes"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Bubblegum"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/48.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Unicorn"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Goggles"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/49.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Skiing Helmet"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Lab Goggles"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Toothless"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/50.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 5
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Beanie"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Tinted Lenses"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Gold Teeth"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Gold Earring"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/51.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Collar",
+        "value": "Future Collar"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Gold Monocle"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Joker"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/52.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Viking Helmet"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Alien Eyes"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Anonymous"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/53.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Captain Hat"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Lipstick"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/54.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Mining Helmet"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Holographic"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/55.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Duck Toy"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Makeup"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Clown"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/56.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Straw Hat"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Bloody Eyes"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/57.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Horn"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Fang"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/58.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 5
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Baseball Cap"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Crazy Eyes"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Frown"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Ruby Earring"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/59.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Gold Monocle"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Pepe Mouth"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Diamond Earring"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/60.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Overworked"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Rainbow Puke"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/61.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "King"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Huh"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/62.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Orge Ears"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Pepe Mouth"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/63.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Sprout"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Sunglasses"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/64.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Headphones"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Scouter"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Robot Mouth"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Kong",
+    "thumbnail": "https://cdn.eternalai.org/homepage/collections/65.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 4
+      },
+      {
+        "trait_type": "DNA",
+        "value": "monkey"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Thunderbolt"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Eye Patch"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Tongue Out"
+      }
+    ]
+  }
+]

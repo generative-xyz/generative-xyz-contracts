@@ -3,65 +3,67 @@ import { promises as fs } from "fs";
 async function main() {
   const collections = require("./datajson/collections.json");
 
-  const data: any = {};
-  const attrs: any = {};
-  for (let i = 0; i < collections.length; i++) {
-    const collection = collections[i];
-    // if(!data[collection.name[0]]){
-    //   data[collection.name[0]] = {
-    //     counter: 1,
-    //     percent:  Number(
-    //   ((1 / collections.length) * 100).toFixed(2)
-    // )
-    //   }
-    // } else {
-    //   data[collection.name[0]].counter++;
-    //    data[collection.name[0]].percent = Number(
-    //   ((data[collection.name[0]].counter / collections.length) * 100).toFixed(2)
-    // );
-    // }
+  interface TraitData {
+    counter: number;
+    percent: number;
+  }
 
+  interface TraitStats {
+    [key: string]: {
+      [key: string]: TraitData;
+    };
+  }
+
+  interface AttributeStats {
+    [key: string]: number;
+  }
+
+  const calculatePercentage = (count: number, total: number): number => 
+    Number(((count / total) * 100).toFixed(2));
+
+  const getTraitKey = (index: number): string => {
+    const traitMap: { [key: number]: string } = {
+      0: 'dna',
+      1: 'body',
+      2: 'head',
+      3: 'eyes',
+      4: 'mouth'
+    };
+    return traitMap[index] || 'unknown';
+  };
+
+  const data: TraitStats = {};
+  const attrs: AttributeStats = {};
+
+  collections.forEach((collection: any) => {
     const elements = collection.name[1];
-    const elements_remove_empty = elements.filter(
-      (element: any) => element !== ""
-    );
-    const attr_key = "attr_" + elements_remove_empty.length;
-    if (!attrs[attr_key]) {
-      attrs[attr_key] = 1;
-    } else {
-      attrs[attr_key]++;
-    }
+    const nonEmptyElements = elements.filter((element: string) => element !== '');
+    const attrKey = `attr_${nonEmptyElements.length}`;
+    
+    attrs[attrKey] = (attrs[attrKey] || 0) + 1;
 
-    elements.forEach((element: any, index: number) => {
-      const el_key = element === "" ? "empty" : element;
-      const pr_key =
-        index === 0
-          ? "dna"
-          : index === 1
-          ? "body"
-          : index === 2
-          ? "head"
-          : index === 3
-          ? "eyes"
-          : index === 4
-          ? "mouth"
-          : "unknown";
-      if (!data[pr_key]) {
-        data[pr_key] = {};
+    elements.forEach((element: string, index: number) => {
+      const elementKey = element || 'empty';
+      const traitKey = getTraitKey(index);
+      
+      if (!data[traitKey]) {
+        data[traitKey] = {};
       }
-      if (!data[pr_key][el_key]) {
-        data[pr_key][el_key] = {
+
+      if (!data[traitKey][elementKey]) {
+        data[traitKey][elementKey] = {
           counter: 1,
-          percent: Number(((1 / collections.length) * 100).toFixed(2)),
+          percent: calculatePercentage(1, collections.length)
         };
       } else {
-        data[pr_key][el_key].counter++;
-        data[pr_key][el_key].percent = Number(
-          ((data[pr_key][el_key].counter / collections.length) * 100).toFixed(2)
+        data[traitKey][elementKey].counter++;
+        data[traitKey][elementKey].percent = calculatePercentage(
+          data[traitKey][elementKey].counter,
+          collections.length
         );
       }
     });
-  }
+  });
 
   const print = {
     attributes: attrs,

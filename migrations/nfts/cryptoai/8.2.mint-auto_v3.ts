@@ -79,7 +79,7 @@ function checkDublicateArt(data_mintings: any[], data: any): boolean {
 async function main() {
 
   const data_mintings: any[] = [];
-  let indexArt = 0;
+  let indexArt = 1;
   let index_input_render = 0;
   let key_input_render = Object.keys(dataInputRender);
   let key_dna_compress_data = Object.keys(dataCompress.DNA).sort();
@@ -109,9 +109,6 @@ async function main() {
       data_mintings.push({ id: indexArt, ...data });
       indexArt++;
 
-
-      // console.log(JSON.stringify(data_mintings, null, 2));
-      // return;
     }
 
     const collectionPath = "migrations/data/cryptoai/datajson/collections.json";
@@ -179,12 +176,25 @@ function consistentSeed(seed: number): number {
 }
 
 function traitsElement(
-  arrAttrs: {name: string, quantity: number}[],
+  arrAttrs: number[],
   seed: number
-): string {
-  return '';
-}
+): number {
+  let trs: number[] = [];
+  let indexMin = 0;
 
+  for (let i = 0; i < arrAttrs.length; i++) {
+      indexMin += Number(arrAttrs[i]);
+    trs[i] = indexMin;
+  }
+
+  const ftrs = Math.floor(consistentRand(seed, 0, indexMin));
+  for (let i = 0; i < trs.length; i++) {
+    if (ftrs < trs[i]) {
+      return i;
+    }
+  }
+  return 0;
+}
 
 main().catch((error) => {
   console.error(error);
