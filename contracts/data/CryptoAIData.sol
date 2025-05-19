@@ -10,6 +10,8 @@ import "../interfaces/ICryptoAIData.sol";
 import "../interfaces/IAgentNFT.sol";
 import "../libs/structs/CryptoAIStructs.sol";
 import "../libs/helpers/Errors.sol";
+import "../nfts/utilities/IAgent.sol";
+
 
 contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
     uint256 public constant TOKEN_LIMIT = 0x2710;
@@ -316,6 +318,15 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
                 byteString = abi.encodePacked(byteString, objString);
             }
         }
+
+        byteString = abi.encodePacked(
+            '{"trait_type": "ORIGIN"',
+            ',"value":"',
+            StringsUpgradeable.toString(IAgent(_cryptoAIAgentAddr).getCurrentVersion(tokenId) > 0 ? 0 : 1),
+            '"},'
+            , byteString
+        );
+        count++;
 
         byteString = abi.encodePacked(
             '{"trait_type": "attributes"',
