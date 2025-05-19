@@ -79,7 +79,7 @@ function checkDublicateArt(data_mintings: any[], data: any): boolean {
 async function main() {
 
   const data_mintings: any[] = [];
-  let indexArt = 0;
+  let indexArt = 1;
   let index_input_render = 0;
   let key_input_render = Object.keys(dataInputRender);
   let key_dna_compress_data = Object.keys(dataCompress.DNA).sort();
