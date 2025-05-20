@@ -64,7 +64,7 @@ async function main() {
     }
 
     await fs.writeFile(
-      "migrations/data/cryptoai/datajson/check-rarity-be.json",
+      "migrations/data/cryptoai/datajson/collections_nfs_be.json",
       JSON.stringify(data, null, 2),
       "utf8"
     );
