@@ -24,10 +24,11 @@ async function main() {
   const getTraitKey = (index: number): string => {
     const traitMap: { [key: number]: string } = {
       0: 'dna',
-      1: 'body',
+      1: 'collar',
       2: 'head',
       3: 'eyes',
-      4: 'mouth'
+      4: 'mouth',
+      5: 'earring',
     };
     return traitMap[index] || 'unknown';
   };
@@ -50,7 +51,7 @@ async function main() {
     attrs[attrKey].collections.push({id: collection['id'], attr: collection.name, thumbnail: `https://cdn.eternalai.org/homepage/data-mint-v2/${collection['id']}.svg`});
 
     elements.forEach((element: string, index: number) => {
-      const elementKey = element || 'empty';
+      const elementKey = element || 'Null';
       const traitKey = getTraitKey(index);
       
       if (!data[traitKey]) {
