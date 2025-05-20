@@ -38,7 +38,7 @@ async function main() {
   collections.forEach((collection: any) => {
     const elements = collection.name[1];
     const nonEmptyElements = elements.filter((element: string) => element !== '');
-    const attrKey = `attr_${nonEmptyElements.length}`;
+    const attrKey = `attr_${nonEmptyElements.length - 1}`;
     
     attrs[attrKey] = (attrs[attrKey] || 0) + 1;
 
