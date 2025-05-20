@@ -72,8 +72,8 @@ contract CryptoAIUpgradeable is
         _indexMint += 1;
     }
 
-    function _setCryptoAIDataAddr(address cryptoAiDataAddr) internal virtual {
-        _cryptoAiDataAddr = cryptoAiDataAddr;
+    function _setCryptoAIDataAddr(address newCryptoAiDataAddr) internal virtual {
+        _cryptoAiDataAddr = newCryptoAiDataAddr;
     }
 
     function unlock(uint256 tokenId, uint256 dna, uint256[5] memory traits) public virtual override payable {
@@ -96,6 +96,10 @@ contract CryptoAIUpgradeable is
 
     function tokenAddress(uint256 tokenId) public virtual view override returns (address) {
         return _tokenAddress[tokenId];
+    }
+
+    function cryptoAiDataAddr() public view override returns (address) {
+        return _cryptoAiDataAddr;
     }
 
     function _burn(uint256 tokenId) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable) {

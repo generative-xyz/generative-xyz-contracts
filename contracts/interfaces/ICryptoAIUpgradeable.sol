@@ -21,4 +21,7 @@ interface ICryptoAIUpgradeable {
 
     // Returns the token address for a specific token identified by tokenId.
     function tokenAddress(uint256 tokenId) external view returns (address);
+
+    // Returns the address of the CryptoAI data contract.
+    function cryptoAiDataAddr() external view returns (address);
 }
