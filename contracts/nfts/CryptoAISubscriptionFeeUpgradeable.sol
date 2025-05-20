@@ -5,17 +5,19 @@ pragma solidity ^0.8.0;
 
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {CryptoAIUpgradeable} from "./CryptoAIUpgradeable.sol";
+import {IEAI721SubscriptionFee} from "../interfaces/IEAI721SubscriptionFee.sol";
 
 /**
  * @dev Extension of {CryptoAIUpgradeable} that allows token owner to set subscription fee.
  * This is useful for subscription-based services or products.
  */
-abstract contract CryptoAISubscriptionFeeUpgradeable is Initializable, CryptoAIUpgradeable {
+abstract contract CryptoAISubscriptionFeeUpgradeable is Initializable, IEAI721SubscriptionFee, CryptoAIUpgradeable {
 
     mapping(uint256 => uint256) private _subscriptionFees;
+    mapping(uint256 => address) private _aiTokens;
 
     event SubscriptionFeeSet(uint256 indexed agentId, uint256 fee);
-
+    event AITokenSet(uint256 indexed agentId, address indexed aiToken);
 
     function __CryptoAISubscriptionFee_init() internal onlyInitializing {
     }
@@ -35,8 +37,24 @@ abstract contract CryptoAISubscriptionFeeUpgradeable is Initializable, CryptoAIU
     /**
      * @dev Get subscription.
      */
-    function getSubscriptionFee(uint256 agentId) public view virtual returns (uint256) {
+    function subscriptionFee(uint256 agentId) public view virtual returns (uint256) {
         return _subscriptionFees[agentId];
+    }
+
+    /**
+     * @dev Set AI token address.
+     */
+    function seAItokenAddress(uint256 agentId, address newAIToken) public virtual onlyAgentOwner(agentId){
+        _aiTokens[agentId] = newAIToken;
+
+        emit AITokenSet(agentId, newAIToken);
+    }   
+
+    /**
+     * @dev Get AI token.
+     */
+    function aiToken(uint256 agentId) public view virtual returns (address) {
+        return _aiTokens[agentId];
     }
 
     /**

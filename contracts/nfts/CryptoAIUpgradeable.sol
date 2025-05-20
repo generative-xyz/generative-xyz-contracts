@@ -15,13 +15,13 @@ import "../libs/structs/CryptoAIStructs.sol";
 import "../interfaces/ICryptoAIData.sol";
 import {IMintableAgent} from "../interfaces/IAgentNFT.sol";
 import {AgentUpgradeable} from "./utilities/AgentUpgradeable.sol";
-import {ICryptoAIUpgradeable} from "../interfaces/ICryptoAIUpgradeable.sol";
+import {IEAI721Art} from "../interfaces/IEAI721Art.sol";
 
 contract CryptoAIUpgradeable is
     Initializable,
     ERC721Upgradeable,
     ERC721URIStorageUpgradeable,
-    ICryptoAIUpgradeable,
+    IEAI721Art,
     AgentUpgradeable,
     IERC2981Upgradeable,
     OwnableUpgradeable
@@ -30,10 +30,6 @@ contract CryptoAIUpgradeable is
     address private _cryptoAiDataAddr;
     // current index mint
     uint256 private _indexMint;
-    // subscription fee. Nft id => subscription fee
-    mapping(uint256 => uint256) private _subscriptionFee;
-    // token address. Nft id => token address
-    mapping(uint256 => address) private _tokenAddress;
 
     function __CryptoAI_init(
         string memory name_,
@@ -52,13 +48,13 @@ contract CryptoAIUpgradeable is
     }
 
     //@ERC721
-    function _mint(
+    function mint(
         address to,
         uint256 dna,
         uint256[5] memory traits,
         string calldata agentName,
         string calldata agentAbility
-    ) internal virtual {
+    ) public virtual {
         require(to != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_indexMint <= TOKEN_LIMIT);
@@ -90,7 +86,7 @@ contract CryptoAIUpgradeable is
         super._burn(tokenId);
     }
 
-    function tokenURI(uint256 tokenId) public virtual view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory result) {
+    function tokenURI(uint256 tokenId) public virtual view override(ERC721Upgradeable, ERC721URIStorageUpgradeable, IEAI721Art) returns (string memory result) {
         require(_exists(tokenId), 'ERC721: Token does not exist');
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
         result = cryptoAIDataContract.tokenURI(tokenId);

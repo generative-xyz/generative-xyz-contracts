@@ -1,10 +1,9 @@
 pragma solidity ^0.8.0;
 
 import {CryptoAISubscriptionFeeUpgradeable} from "./CryptoAISubscriptionFeeUpgradeable.sol";
-import {CryptoAITokenUpgradeable} from "./CryptoAITokenUpgradeable.sol";
 import "../libs/helpers/Errors.sol";
 
-contract CryptoAI is CryptoAISubscriptionFeeUpgradeable, CryptoAITokenUpgradeable {
+contract CryptoAI is CryptoAISubscriptionFeeUpgradeable {
     // deployer
     address public _deployer;
     // admins
@@ -55,8 +54,8 @@ contract CryptoAI is CryptoAISubscriptionFeeUpgradeable, CryptoAITokenUpgradeabl
         uint256[5] memory traits,
         string calldata agentName,
         string calldata agentAbility
-    ) public onlyAdmin {
-        super._mint(to, dna, traits, agentName, agentAbility);
+    ) public virtual override onlyAdmin {
+        super.mint(to, dna, traits, agentName, agentAbility);
     }
 
     uint256[50] private __gap;

@@ -3,12 +3,12 @@ pragma solidity ^0.8.0;
 
 import {ERC721Upgradeable, Initializable} from "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import {EIP712Upgradeable, ECDSAUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/cryptography/EIP712Upgradeable.sol";
-import {IAgent} from "./IAgent.sol";
 import {IFileStore, File} from "./IFileStore.sol";
 import {RatingSystem} from "./RatingSystem.sol";
+import {IEAI721AgentAbility} from "../../interfaces/IEAI721AgentAbility.sol";
 
 abstract contract AgentUpgradeable is
-    IAgent,
+    IEAI721AgentAbility,
     Initializable,
     ERC721Upgradeable,
     EIP712Upgradeable,

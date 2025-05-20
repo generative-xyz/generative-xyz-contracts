@@ -10,7 +10,7 @@ import "../interfaces/ICryptoAIData.sol";
 import "../interfaces/IAgentNFT.sol";
 import "../libs/structs/CryptoAIStructs.sol";
 import "../libs/helpers/Errors.sol";
-import "../nfts/utilities/IAgent.sol";
+import "../interfaces/IEAI721AgentAbility.sol";
 
 
 contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
@@ -322,7 +322,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         byteString = abi.encodePacked(
             '{"trait_type": "ORIGIN"',
             ',"value":"',
-            StringsUpgradeable.toString(IAgent(_cryptoAIAgentAddr).getCurrentVersion(tokenId) > 0 ? 0 : 1),
+            StringsUpgradeable.toString(IEAI721AgentAbility(_cryptoAIAgentAddr).getCurrentVersion(tokenId) > 0 ? 0 : 1),
             '"},'
             , byteString
         );
