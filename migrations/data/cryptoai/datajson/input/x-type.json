@@ -1,7 +1,7 @@
 [
   ["", "Suspicious", "Cucumber", "", ""],
   ["", "Huh", "Sunglasses", "Ruby Earring", ""],
-  ["", "", "", "", "Future Collar"],
+  ["", "Joker", "", "", "Future Collar"],
   ["Skiing Helmet", "Robot Mouth", "Overworked", "", ""],
   ["", "Mustache", "Holographic", "", ""],
   ["Orge Ears", "Ooh", "Thug Life Glasses", "", ""],
@@ -25,7 +25,7 @@
   ["", "Cyborg Jaw", "Goggles", "", ""],
   ["Pop Cap", "", "3D Glasses", "", ""],
   ["", "Speechless", "Thug Life Glasses", "Cross Earring", ""],
-  ["Rabbit Ears", "Joker", "", "", "Future Collar"],
+  ["", "", "", "", ""],
   ["Headband", "", "Lab Goggles", "Ruby Earring", ""],
   ["Black Cap", "Snake Tongue", "Hero Mask", "", ""],
   ["", "Focusing", "Aviators", "Cross Earring", ""],
@@ -80,11 +80,11 @@
   ["Captain Hat", "Robot Mouth", "Laser Visor", "", ""],
   ["Queen", "", "Scouter", "Diamond Earring", ""],
   ["Headphones", "Suspicious", "Tinted Lenses", "", ""],
-  ["", "Moody", "", "", ""],
+  ["", "Moody", "Nerd Glasses", "", "Future Collar"],
   ["", "Vampire", "Scouter", "", ""],
   ["", "", "Anime Eyes", "Ruby Earring", ""],
   ["Orange Mohawk", "Frown", "Goggles", "", ""],
-  ["Rabbit Ears", "Smirk", "Nerd Glasses", "", ""],
+  ["Antenna", "", "", "", ""],
   ["", "", "Alien Eyes", "Diamond Earring", ""],
   ["Chef Hat", "", "Laser Eyes", "", ""],
   ["", "Anonymous", "Rockstar Shades", "", ""],
@@ -107,5 +107,5 @@
   ["", "Robot Mouth", "Eye Patch", "", ""],
   ["Duck Toy", "Cigarette", "Lab Goggles", "", ""],
   ["Burnout", "Cyborg Jaw", "Monster Eyes", "", ""],
-  ["", "", "Eye Patch", "", ""]
+  ["", "Smirk", "Eye Patch", "", ""]
 ]

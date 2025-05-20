@@ -68,7 +68,7 @@ async function main() {
       JSON.stringify(data, null, 2),
       "utf8"
     );
-    console.log("Successfully wrote rarity data to check-rarity-be.json");
+    console.log("Successfully wrote rarity data to collections_nfs_be.json");
   } catch (error) {
     console.error("Error writing rarity data to file:", error);
   }
