@@ -29,5 +29,5 @@ interface IEAI721SubscriptionFee {
      * @param agentId The ID of the agent.
      * @param newAIToken The new AI token address to be set for the agent.
      */
-    function seAItokenAddress(uint256 agentId, address newAIToken) external;
+    function setAItokenAddress(uint256 agentId, address newAIToken) external;
 }
