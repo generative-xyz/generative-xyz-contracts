@@ -8,6 +8,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-05",
+      "Mining Helmet",
+      "Joker",
+      "Overworked",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-05",
       "head": "Mining Helmet",
@@ -25,6 +33,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-04",
+      "Mining Helmet",
+      "Pepe Mouth",
+      "Defective",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-04",
       "head": "Mining Helmet",
@@ -42,6 +58,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-02",
+      "Antenna",
+      "Lipstick",
+      "Half Rim Glasses",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-02",
       "head": "Antenna",
@@ -59,6 +83,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-03",
+      "Captain Hat",
+      "Neck Gaiter",
+      "Holographic",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-03",
       "head": "Captain Hat",
@@ -76,6 +108,14 @@
       "earring": "Ruby Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-01",
+      "Sombrero",
+      "Snake Tongue",
+      "Blushing",
+      "Ruby Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-01",
       "head": "Sombrero",
@@ -93,6 +133,14 @@
       "earring": "Cross Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-05",
+      "Rabbit Ears",
+      "Anonymous",
+      "Monster Eyes",
+      "Cross Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-05",
       "head": "Rabbit Ears",
@@ -110,6 +158,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-03",
+      "Pinwheel",
+      "Gold Teeth",
+      "Nerd Glasses",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-03",
       "head": "Pinwheel",
@@ -127,6 +183,14 @@
       "earring": "Diamond Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-01",
+      "Chef Hat",
+      "Clown",
+      "Crying",
+      "Diamond Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-01",
       "head": "Chef Hat",
@@ -144,6 +208,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-02",
+      "Beanie",
+      "Mustache",
+      "Holographic",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-02",
       "head": "Beanie",
@@ -161,6 +233,14 @@
       "earring": "Cross Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-01",
+      "Baseball Cap",
+      "Clown",
+      "VR Goggles",
+      "Cross Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-01",
       "head": "Baseball Cap",
@@ -178,6 +258,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-01",
+      "Blonde Side-part",
+      "Speechless",
+      "Scouter",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-01",
       "head": "Blonde Side-part",
@@ -195,6 +283,14 @@
       "earring": "Cross Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-05",
+      "Headphones",
+      "Clown",
+      "Half Rim Glasses",
+      "Cross Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-05",
       "head": "Headphones",
@@ -212,6 +308,14 @@
       "earring": "Diamond Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-02",
+      "Orge Ears",
+      "Joker",
+      "Lab Goggles",
+      "Diamond Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-02",
       "head": "Orge Ears",
@@ -229,6 +333,14 @@
       "earring": "Cross Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-05",
+      "Pirate Hat",
+      "Moody",
+      "Rockstar Shades",
+      "Cross Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-05",
       "head": "Pirate Hat",
@@ -246,6 +358,14 @@
       "earring": "Ruby Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-01",
+      "Viking Helmet",
+      "Suspicious",
+      "3D Glasses",
+      "Ruby Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-01",
       "head": "Viking Helmet",
@@ -263,6 +383,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-05",
+      "Baseball Cap",
+      "Ooh",
+      "Blushing",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-05",
       "head": "Baseball Cap",
@@ -280,6 +408,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-03",
+      "Antenna",
+      "Cigarette",
+      "Anime Eyes",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-03",
       "head": "Antenna",
@@ -297,6 +433,14 @@
       "earring": "Gold Earring",
       "collar": "Future Collar"
     },
+    "inputArr": [
+      "neo-human-01",
+      "Mining Helmet",
+      "Robot Mouth",
+      "Adjusted",
+      "Gold Earring",
+      "Future Collar"
+    ],
     "output": {
       "dna": "neo-human-01",
       "head": "Mining Helmet",
@@ -314,6 +458,14 @@
       "earring": "Ruby Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-01",
+      "Beanie",
+      "Pepe Mouth",
+      "Holographic",
+      "Ruby Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-01",
       "head": "Beanie",
@@ -331,6 +483,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-04",
+      "Captain Hat",
+      "Fang",
+      "Tinted Lenses",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-04",
       "head": "Captain Hat",
@@ -348,6 +508,14 @@
       "earring": "Ruby Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-01",
+      "Headband",
+      "Mustache",
+      "Green Code",
+      "Ruby Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-01",
       "head": "Headband",
@@ -365,6 +533,14 @@
       "earring": "Gold Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-02",
+      "Pink Undercut",
+      "Fang",
+      "Lab Goggles",
+      "Gold Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-02",
       "head": "Pink Undercut",
@@ -382,6 +558,14 @@
       "earring": "Adjusted",
       "collar": "Future Collar"
     },
+    "inputArr": [
+      "neo-human-05",
+      "Black Cap",
+      "Frown",
+      "3D Glasses",
+      "Adjusted",
+      "Future Collar"
+    ],
     "output": {
       "dna": "neo-human-05",
       "head": "Black Cap",
@@ -399,6 +583,14 @@
       "earring": "Ruby Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-03",
+      "Top Hat",
+      "Playful",
+      "Lab Goggles",
+      "Ruby Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-03",
       "head": "Top Hat",
@@ -416,6 +608,14 @@
       "earring": "Diamond Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-03",
+      "Captain Hat",
+      "Robot Mouth",
+      "Aviators",
+      "Diamond Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-03",
       "head": "Captain Hat",
@@ -433,6 +633,14 @@
       "earring": "Cross Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-04",
+      "Straw Hat",
+      "Clown",
+      "Nerd Glasses",
+      "Cross Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-04",
       "head": "Straw Hat",
@@ -450,6 +658,14 @@
       "earring": "Cross Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-01",
+      "Headphones",
+      "Fang",
+      "Hero Mask",
+      "Cross Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-01",
       "head": "Headphones",
@@ -467,6 +683,14 @@
       "earring": "Cross Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-02",
+      "Horn",
+      "Clown",
+      "Nerd Glasses",
+      "Cross Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-02",
       "head": "Horn",
@@ -484,6 +708,14 @@
       "earring": "Ruby Earring",
       "collar": "Adjusted"
     },
+    "inputArr": [
+      "neo-human-03",
+      "Pirate Hat",
+      "Focusing",
+      "Green Code",
+      "Ruby Earring",
+      "Adjusted"
+    ],
     "output": {
       "dna": "neo-human-03",
       "head": "Pirate Hat",

@@ -49,6 +49,7 @@ function generateRandomData(
           earring: renderInputDate[3],
           collar: renderInputDate[4],
         },
+        inputArr: [dataCompress.DNA[keyDNA].names[index_dna_type],renderInputDate[0], renderInputDate[1], renderInputDate[2], renderInputDate[3], renderInputDate[4]],
         output: err
       });
 
@@ -163,7 +164,7 @@ async function main() {
 
     if (errorData.length) {
         const collectionPathError = "migrations/data/cryptoai/datajson/collections_error.json";
-      await fs.writeFile(collectionPathError, JSON.stringify(errorData, null, 2));
+       await fs.writeFile(collectionPathError, JSON.stringify(errorData, null, 2));
        console.log('____has Error:', errorData);
     }
    
