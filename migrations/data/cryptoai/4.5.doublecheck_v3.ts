@@ -58,7 +58,7 @@ async function main() {
       data.push({
         id: collection['id'],
         name: name,
-        thumbnail: `https://cdn.eternalai.org/homepage/collections/${collection['id']}.svg`,
+        thumbnail: `https://cdn.eternalai.org/homepage/data-mint/${collection['id']}.svg`,
         trait: ttrs
       })
     }

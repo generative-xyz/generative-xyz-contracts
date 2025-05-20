@@ -1,8 +1,15 @@
-import * as fs from "fs/promises";
+import { promises as fs } from 'fs';
 import { ELEMENT } from "../../data/cryptoai/data";
 
 const dataCompress = require("./../../data/cryptoai/datajson/data-compressed.json");
-const dataInputRender = require("./../../data/cryptoai/datajson/data-render-input.json");
+
+const inputAlien = require("./../../data/cryptoai/datajson/input/alien.json");
+const inputKong = require("./../../data/cryptoai/datajson/input/kong.json");
+const inputXType = require("./../../data/cryptoai/datajson/input/x-type.json");
+const inputNeoHuman = require("./../../data/cryptoai/datajson/input/neo_human_output_swapped.json");
+const inputRobot = require("./../../data/cryptoai/datajson/input/robot_nft_output_swapped.json");
+
+
 
 function generateRandomData(
   indexDNA: number,
@@ -11,6 +18,7 @@ function generateRandomData(
   index_dna_type: number
 ): { name: any; index: any } {
 
+  
 
   try {
     
@@ -78,23 +86,45 @@ function checkDublicateArt(data_mintings: any[], data: any): boolean {
 
 async function main() {
 
+  const dataInputRender: any = {
+    'Alien': inputAlien,
+    'Kong': inputKong,
+    'X-Type': inputXType,
+    'Neo-Human': inputNeoHuman,
+    'Robot': inputRobot,
+  }
+
+
   const data_mintings: any[] = [];
   let indexArt = 1;
   let index_input_render = 0;
   let key_input_render = Object.keys(dataInputRender);
   let key_dna_compress_data = Object.keys(dataCompress.DNA).sort();
   let index_dna_type = 0;
+  let index_dna_type_index = 0;
+  
 
   try {
     while (index_input_render < key_input_render.length) {
 
       const keyDNA = key_input_render[index_input_render];
 
+      if(keyDNA === 'Neo-Human' || keyDNA === 'Robot') {
+       const dataRender = dataInputRender[keyDNA][index_dna_type];
+        index_dna_type_index = dataCompress.DNA[keyDNA].names.findIndex((item: any) => item === dataRender[0]);
+        dataInputRender[keyDNA][index_dna_type] = dataInputRender[keyDNA][index_dna_type].slice(1);
+
+        // console.log('____dataRender', dataInputRender[keyDNA][index_dna_type]);
+      } else {
+        index_dna_type_index = index_dna_type % dataCompress.DNA[keyDNA].names.length;
+      }
+      
+      
       let data = generateRandomData(
          key_dna_compress_data.findIndex((item: any) => item === keyDNA),
          keyDNA,
          dataInputRender[keyDNA][index_dna_type],
-         index_dna_type % dataCompress.DNA[keyDNA].names.length
+         index_dna_type_index
       );
       
       dataCompress.DNA[keyDNA].trait -= 1;
