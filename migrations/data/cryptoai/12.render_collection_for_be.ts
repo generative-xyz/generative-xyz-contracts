@@ -92,14 +92,15 @@ async function main() {
 
       // console.log('___DNA', rarity, dataTraits[name]);
     
-      const ttrs = [
+      const ttrs: any = [
         {
           trait_type: 'Attributes',
           value: traits.filter((t: string) => t !== '').length - 1
         },
         {
           trait_type: 'DNA',
-          value: traits[0]
+          value: traits[0],
+          
         },
               
       ]
@@ -107,7 +108,8 @@ async function main() {
       if(traits[1] !== '') {
         ttrs.push({
           trait_type: 'Collar',
-          value: traits[1]
+          value: traits[1],
+          rarity: dataTraits['collar'][traits[1]].percent
         })
 
         rarity *= dataTraits['collar'][traits[1]].percent;
@@ -116,7 +118,8 @@ async function main() {
       if(traits[2] !== '') {
         ttrs.push({
           trait_type: 'Head',
-          value: traits[2]
+          value: traits[2],
+          rarity: dataTraits['head'][traits[2]].percent
         })
 
         rarity *= dataTraits['head'][traits[2]].percent;
@@ -125,7 +128,8 @@ async function main() {
       if(traits[3] !== '') {
         ttrs.push({
           trait_type: 'Eyes',
-          value: traits[3]
+          value: traits[3],
+          rarity: dataTraits['eyes'][traits[3]].percent
         })
 
         rarity *= dataTraits['eyes'][traits[3]].percent;
@@ -134,7 +138,8 @@ async function main() {
       if(traits[4] !== '') {
         ttrs.push({
           trait_type: 'Mouth',
-          value: traits[4]
+          value: traits[4],
+          rarity: dataTraits['mouth'][traits[4]].percent
         })
 
         rarity *= dataTraits['mouth'][traits[4]].percent;
@@ -143,7 +148,8 @@ async function main() {
       if(traits[5] !== '') {
         ttrs.push({
           trait_type: 'Earring',
-          value: traits[5]
+          value: traits[5],
+          rarity: dataTraits['earring'][traits[5]].percent
         })
 
         rarity *= dataTraits['earring'][traits[5]].percent;
@@ -153,6 +159,7 @@ async function main() {
       data.push({
         id: collection['id'],
         name: name,
+        DNA_Rarity: dataTraits[name].percent,
         thumbnail: `https://cdn.eternalai.org/homepage/data-mint-v2/${collection['id']}.svg`,
         trait: ttrs,
         rarity: rarity
