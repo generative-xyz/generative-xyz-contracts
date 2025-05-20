@@ -33,14 +33,21 @@ async function main() {
   };
 
   const data: TraitStats = {};
-  const attrs: AttributeStats = {};
+  const attrs: any = {};
 
   collections.forEach((collection: any) => {
     const elements = collection.name[1];
     const nonEmptyElements = elements.filter((element: string) => element !== '');
     const attrKey = `attr_${nonEmptyElements.length - 1}`;
     
-    attrs[attrKey] = (attrs[attrKey] || 0) + 1;
+    if (!attrs[attrKey]) {
+      attrs[attrKey] = {
+        counter: 0,
+        collections: []
+      }
+    }
+    attrs[attrKey].counter++;
+    attrs[attrKey].collections.push({id: collection['id'], attr: collection.name, thumbnail: `https://cdn.eternalai.org/homepage/data-mint-v2/${collection['id']}.svg`});
 
     elements.forEach((element: string, index: number) => {
       const elementKey = element || 'empty';
