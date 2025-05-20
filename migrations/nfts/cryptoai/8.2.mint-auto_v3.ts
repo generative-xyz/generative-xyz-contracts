@@ -167,6 +167,7 @@ async function main() {
     
     const collectionPath = "migrations/data/cryptoai/datajson/collections.json";
     await fs.writeFile(collectionPath, JSON.stringify(data_mintings, null, 2));
+    console.log('____Collection rendered');
 
 
     if (errorData.length) {
