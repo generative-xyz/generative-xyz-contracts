@@ -82,22 +82,6 @@ contract CryptoAIUpgradeable is
         cryptoAIDataContract.unlockRenderAgent(tokenId, dna, traits);
     }
 
-    function setSubscriptionFee(uint256 tokenId, uint256 fee) public virtual override onlyAgentOwner(tokenId) {
-        _subscriptionFee[tokenId] = fee;
-    }
-
-    function subscriptionFee(uint256 tokenId) public virtual view override returns (uint256) {
-        return _subscriptionFee[tokenId];
-    }
-
-    function setTokenAddress(uint256 tokenId, address agentTokenAddress) public virtual override onlyAgentOwner(tokenId) {
-        _tokenAddress[tokenId] = agentTokenAddress;
-    }
-
-    function tokenAddress(uint256 tokenId) public virtual view override returns (address) {
-        return _tokenAddress[tokenId];
-    }
-
     function cryptoAiDataAddr() public view override returns (address) {
         return _cryptoAiDataAddr;
     }
