@@ -1,0 +1,495 @@
+[
+  {
+    "input": {
+      "dna": "neo-human-05",
+      "head": "Mining Helmet",
+      "mouth": "Joker",
+      "eyes": "Overworked",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-05",
+      "head": "Mining Helmet",
+      "mouth": "Joker",
+      "eyes": "Overworked",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-04",
+      "head": "Mining Helmet",
+      "mouth": "Pepe Mouth",
+      "eyes": "Defective",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-04",
+      "head": "Mining Helmet",
+      "mouth": "Pepe Mouth",
+      "eyes": "Defective",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-02",
+      "head": "Antenna",
+      "mouth": "Lipstick",
+      "eyes": "Half Rim Glasses",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-02",
+      "head": "Antenna",
+      "mouth": "Lipstick",
+      "eyes": "Half Rim Glasses",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-03",
+      "head": "Captain Hat",
+      "mouth": "Neck Gaiter",
+      "eyes": "Holographic",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-03",
+      "head": "Captain Hat",
+      "mouth": "Neck Gaiter",
+      "eyes": "Holographic",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-01",
+      "head": "Sombrero",
+      "mouth": "Snake Tongue",
+      "eyes": "Blushing",
+      "earring": "Ruby Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-01",
+      "head": "Sombrero",
+      "mouth": "Snake Tongue",
+      "eyes": "Blushing",
+      "earring": "Ruby Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-05",
+      "head": "Rabbit Ears",
+      "mouth": "Anonymous",
+      "eyes": "Monster Eyes",
+      "earring": "Cross Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-05",
+      "head": "Rabbit Ears",
+      "mouth": "Anonymous",
+      "eyes": "Monster Eyes",
+      "earring": "Cross Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-03",
+      "head": "Pinwheel",
+      "mouth": "Gold Teeth",
+      "eyes": "Nerd Glasses",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-03",
+      "head": "Pinwheel",
+      "mouth": "Gold Teeth",
+      "eyes": "Nerd Glasses",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-01",
+      "head": "Chef Hat",
+      "mouth": "Clown",
+      "eyes": "Crying",
+      "earring": "Diamond Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-01",
+      "head": "Chef Hat",
+      "mouth": "Clown",
+      "eyes": "Crying",
+      "earring": "Diamond Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-02",
+      "head": "Beanie",
+      "mouth": "Mustache",
+      "eyes": "Holographic",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-02",
+      "head": "Beanie",
+      "mouth": "Mustache",
+      "eyes": "Holographic",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-01",
+      "head": "Baseball Cap",
+      "mouth": "Clown",
+      "eyes": "VR Goggles",
+      "earring": "Cross Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-01",
+      "head": "Baseball Cap",
+      "mouth": "Clown",
+      "eyes": "VR Goggles",
+      "earring": "Cross Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-01",
+      "head": "Blonde Side-part",
+      "mouth": "Speechless",
+      "eyes": "Scouter",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-01",
+      "head": "Blonde Side-part",
+      "mouth": "Speechless",
+      "eyes": "Scouter",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-05",
+      "head": "Headphones",
+      "mouth": "Clown",
+      "eyes": "Half Rim Glasses",
+      "earring": "Cross Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-05",
+      "head": "Headphones",
+      "mouth": "Clown",
+      "eyes": "Half Rim Glasses",
+      "earring": "Cross Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-02",
+      "head": "Orge Ears",
+      "mouth": "Joker",
+      "eyes": "Lab Goggles",
+      "earring": "Diamond Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-02",
+      "head": "Orge Ears",
+      "mouth": "Joker",
+      "eyes": "Lab Goggles",
+      "earring": "Diamond Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-05",
+      "head": "Pirate Hat",
+      "mouth": "Moody",
+      "eyes": "Rockstar Shades",
+      "earring": "Cross Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-05",
+      "head": "Pirate Hat",
+      "mouth": "Moody",
+      "eyes": "Rockstar Shades",
+      "earring": "Cross Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-01",
+      "head": "Viking Helmet",
+      "mouth": "Suspicious",
+      "eyes": "3D Glasses",
+      "earring": "Ruby Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-01",
+      "head": "Viking Helmet",
+      "mouth": "Suspicious",
+      "eyes": "3D Glasses",
+      "earring": "Ruby Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-05",
+      "head": "Baseball Cap",
+      "mouth": "Ooh",
+      "eyes": "Blushing",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-05",
+      "head": "Baseball Cap",
+      "mouth": "Ooh",
+      "eyes": "Blushing",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-03",
+      "head": "Antenna",
+      "mouth": "Cigarette",
+      "eyes": "Anime Eyes",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-03",
+      "head": "Antenna",
+      "mouth": "Cigarette",
+      "eyes": "Anime Eyes",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-01",
+      "head": "Mining Helmet",
+      "mouth": "Robot Mouth",
+      "eyes": "Adjusted",
+      "earring": "Gold Earring",
+      "collar": "Future Collar"
+    },
+    "output": {
+      "dna": "neo-human-01",
+      "head": "Mining Helmet",
+      "mouth": "Robot Mouth",
+      "earring": "Gold Earring",
+      "collar": "Future Collar"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-01",
+      "head": "Beanie",
+      "mouth": "Pepe Mouth",
+      "eyes": "Holographic",
+      "earring": "Ruby Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-01",
+      "head": "Beanie",
+      "mouth": "Pepe Mouth",
+      "eyes": "Holographic",
+      "earring": "Ruby Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-04",
+      "head": "Captain Hat",
+      "mouth": "Fang",
+      "eyes": "Tinted Lenses",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-04",
+      "head": "Captain Hat",
+      "mouth": "Fang",
+      "eyes": "Tinted Lenses",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-01",
+      "head": "Headband",
+      "mouth": "Mustache",
+      "eyes": "Green Code",
+      "earring": "Ruby Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-01",
+      "head": "Headband",
+      "mouth": "Mustache",
+      "eyes": "Green Code",
+      "earring": "Ruby Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-02",
+      "head": "Pink Undercut",
+      "mouth": "Fang",
+      "eyes": "Lab Goggles",
+      "earring": "Gold Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-02",
+      "head": "Pink Undercut",
+      "mouth": "Fang",
+      "eyes": "Lab Goggles",
+      "earring": "Gold Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-05",
+      "head": "Black Cap",
+      "mouth": "Frown",
+      "eyes": "3D Glasses",
+      "earring": "Adjusted",
+      "collar": "Future Collar"
+    },
+    "output": {
+      "dna": "neo-human-05",
+      "head": "Black Cap",
+      "mouth": "Frown",
+      "eyes": "3D Glasses",
+      "collar": "Future Collar"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-03",
+      "head": "Top Hat",
+      "mouth": "Playful",
+      "eyes": "Lab Goggles",
+      "earring": "Ruby Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-03",
+      "head": "Top Hat",
+      "mouth": "Playful",
+      "eyes": "Lab Goggles",
+      "earring": "Ruby Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-03",
+      "head": "Captain Hat",
+      "mouth": "Robot Mouth",
+      "eyes": "Aviators",
+      "earring": "Diamond Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-03",
+      "head": "Captain Hat",
+      "mouth": "Robot Mouth",
+      "eyes": "Aviators",
+      "earring": "Diamond Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-04",
+      "head": "Straw Hat",
+      "mouth": "Clown",
+      "eyes": "Nerd Glasses",
+      "earring": "Cross Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-04",
+      "head": "Straw Hat",
+      "mouth": "Clown",
+      "eyes": "Nerd Glasses",
+      "earring": "Cross Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-01",
+      "head": "Headphones",
+      "mouth": "Fang",
+      "eyes": "Hero Mask",
+      "earring": "Cross Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-01",
+      "head": "Headphones",
+      "mouth": "Fang",
+      "eyes": "Hero Mask",
+      "earring": "Cross Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-02",
+      "head": "Horn",
+      "mouth": "Clown",
+      "eyes": "Nerd Glasses",
+      "earring": "Cross Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-02",
+      "head": "Horn",
+      "mouth": "Clown",
+      "eyes": "Nerd Glasses",
+      "earring": "Cross Earring"
+    }
+  },
+  {
+    "input": {
+      "dna": "neo-human-03",
+      "head": "Pirate Hat",
+      "mouth": "Focusing",
+      "eyes": "Green Code",
+      "earring": "Ruby Earring",
+      "collar": "Adjusted"
+    },
+    "output": {
+      "dna": "neo-human-03",
+      "head": "Pirate Hat",
+      "mouth": "Focusing",
+      "eyes": "Green Code",
+      "earring": "Ruby Earring"
+    }
+  }
+]

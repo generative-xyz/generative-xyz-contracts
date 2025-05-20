@@ -10,6 +10,7 @@ const inputNeoHuman = require("./../../data/cryptoai/datajson/input/neo_human_ou
 const inputRobot = require("./../../data/cryptoai/datajson/input/robot_nft_output_swapped.json");
 
 
+const errorData: any[] = [];
 
 function generateRandomData(
   indexDNA: number,
@@ -28,15 +29,32 @@ function generateRandomData(
     const indexNameEarring = dataCompress.elements[ELEMENT.EARRING].names.findIndex((name: string) => name === renderInputDate[3]);
     const indexNameCollar = dataCompress.elements[ELEMENT.COLLAR].names.findIndex((name: string) => name === renderInputDate[4]);
 
-    if(indexNameHead === -1 || indexNameMouth === -1 || indexNameEyes === -1 || indexNameEarring === -1 || indexNameCollar === -1) {
-      console.log('___errorname', renderInputDate, {
-        head: indexNameHead,
-        mouth: indexNameMouth,
-        eyes: indexNameEyes,
-        earring: indexNameEarring,
-        collar: indexNameCollar,
+    if (indexNameHead === -1 || indexNameMouth === -1 || indexNameEyes === -1 || indexNameEarring === -1 || indexNameCollar === -1) {
+      
+      const err = {
+        dna: dataCompress.DNA[keyDNA].names[index_dna_type],
+        head: dataCompress.elements[ELEMENT.HEAD].names[indexNameHead],
+        mouth: dataCompress.elements[ELEMENT.MOUTH].names[indexNameMouth],
+        eyes: dataCompress.elements[ELEMENT.EYES].names[indexNameEyes],
+        earring: dataCompress.elements[ELEMENT.EARRING].names[indexNameEarring],
+        collar: dataCompress.elements[ELEMENT.COLLAR].names[indexNameCollar],
+      }
+
+      errorData.push({
+        input: {
+          dna: dataCompress.DNA[keyDNA].names[index_dna_type],
+          head: renderInputDate[0],
+          mouth: renderInputDate[1],
+          eyes: renderInputDate[2],
+          earring: renderInputDate[3],
+          collar: renderInputDate[4],
+        },
+        output: err
       });
+
     }
+
+
     const randomDataIndex = [
       indexDNA,
       [
@@ -94,7 +112,6 @@ async function main() {
     'Robot': inputRobot,
   }
 
-
   const data_mintings: any[] = [];
   let indexArt = 1;
   let index_input_render = 0;
@@ -139,9 +156,17 @@ async function main() {
 
     }
 
+    
     const collectionPath = "migrations/data/cryptoai/datajson/collections.json";
     await fs.writeFile(collectionPath, JSON.stringify(data_mintings, null, 2));
 
+
+    if (errorData.length) {
+        const collectionPathError = "migrations/data/cryptoai/datajson/collections_error.json";
+      await fs.writeFile(collectionPathError, JSON.stringify(errorData, null, 2));
+       console.log('____has Error:', errorData);
+    }
+   
     
   } catch (error) {
     console.error("Error generating data:", error);
