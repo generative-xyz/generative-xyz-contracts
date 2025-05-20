@@ -44,7 +44,7 @@ abstract contract CryptoAISubscriptionFeeUpgradeable is Initializable, IEAI721Su
     /**
      * @dev Set AI token address.
      */
-    function seAItokenAddress(uint256 agentId, address newAIToken) public virtual onlyAgentOwner(agentId){
+    function setAItokenAddress(uint256 agentId, address newAIToken) public virtual onlyAgentOwner(agentId){
         _aiTokens[agentId] = newAIToken;
 
         emit AITokenSet(agentId, newAIToken);
