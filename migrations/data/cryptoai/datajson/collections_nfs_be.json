@@ -182,19 +182,11 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 2
+        "value": 0
       },
       {
         "trait_type": "DNA",
         "value": "alien"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Orge Ears"
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Alien Eyes"
       }
     ]
   },
@@ -520,7 +512,7 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 3
+        "value": 2
       },
       {
         "trait_type": "DNA",
@@ -529,10 +521,6 @@
       {
         "trait_type": "Head",
         "value": "Golden Hoop"
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Half Rim Glasses"
       },
       {
         "trait_type": "Mouth",
@@ -980,11 +968,15 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 1
+        "value": 2
       },
       {
         "trait_type": "DNA",
         "value": "monkey"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Half Rim Glasses"
       },
       {
         "trait_type": "Earring",
@@ -1218,11 +1210,15 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 3
+        "value": 5
       },
       {
         "trait_type": "DNA",
         "value": "monkey"
+      },
+      {
+        "trait_type": "Collar",
+        "value": "Future Collar"
       },
       {
         "trait_type": "Head",
@@ -1235,6 +1231,10 @@
       {
         "trait_type": "Mouth",
         "value": "Anonymous"
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Gold Earring"
       }
     ]
   },
@@ -1395,23 +1395,11 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 3
+        "value": 0
       },
       {
         "trait_type": "DNA",
         "value": "monkey"
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Gold Monocle"
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Pepe Mouth"
-      },
-      {
-        "trait_type": "Earring",
-        "value": "Diamond Earring"
       }
     ]
   },
@@ -1618,7 +1606,7 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 1
+        "value": 2
       },
       {
         "trait_type": "DNA",
@@ -1627,6 +1615,10 @@
       {
         "trait_type": "Collar",
         "value": "Future Collar"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Joker"
       }
     ]
   },
@@ -2214,23 +2206,11 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 3
+        "value": 0
       },
       {
         "trait_type": "DNA",
         "value": "x-type"
-      },
-      {
-        "trait_type": "Collar",
-        "value": "Future Collar"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Rabbit Ears"
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Joker"
       }
     ]
   },
@@ -3607,11 +3587,19 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 1
+        "value": 3
       },
       {
         "trait_type": "DNA",
         "value": "x-type"
+      },
+      {
+        "trait_type": "Collar",
+        "value": "Future Collar"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Nerd Glasses"
       },
       {
         "trait_type": "Mouth",
@@ -3699,7 +3687,7 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 3
+        "value": 1
       },
       {
         "trait_type": "DNA",
@@ -3707,15 +3695,7 @@
       },
       {
         "trait_type": "Head",
-        "value": "Rabbit Ears"
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Nerd Glasses"
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Smirk"
+        "value": "Antenna"
       }
     ]
   },
@@ -4284,7 +4264,7 @@
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 1
+        "value": 2
       },
       {
         "trait_type": "DNA",
@@ -4293,6 +4273,10 @@
       {
         "trait_type": "Eyes",
         "value": "Eye Patch"
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Smirk"
       }
     ]
   },
