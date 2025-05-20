@@ -110,11 +110,10 @@ async function main() {
       const keyDNA = key_input_render[index_input_render];
 
       if(keyDNA === 'Neo-Human' || keyDNA === 'Robot') {
-       const dataRender = dataInputRender[keyDNA][index_dna_type];
+        const dataRender = dataInputRender[keyDNA][index_dna_type];
+        console.log('___dataCompress.DNA[keyDNA].names', dataCompress.DNA[keyDNA].names);
         index_dna_type_index = dataCompress.DNA[keyDNA].names.findIndex((item: any) => item === dataRender[0]);
         dataInputRender[keyDNA][index_dna_type] = dataInputRender[keyDNA][index_dna_type].slice(1);
-
-        // console.log('____dataRender', dataInputRender[keyDNA][index_dna_type]);
       } else {
         index_dna_type_index = index_dna_type % dataCompress.DNA[keyDNA].names.length;
       }

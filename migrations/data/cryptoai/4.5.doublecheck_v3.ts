@@ -15,7 +15,7 @@ async function main() {
       const ttrs = [
         {
           trait_type: 'Attributes',
-          value: traits.filter((t:string) => t !== '').length
+          value: traits.filter((t: string) => t !== '').length - 1
         },
         {
           trait_type: 'DNA',

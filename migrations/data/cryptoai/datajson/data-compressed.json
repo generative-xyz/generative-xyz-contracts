@@ -12073,18 +12073,18 @@
     "Robot": {
       "trait": "6550",
       "names": [
-        "robot",
-        "robot",
-        "robot",
-        "robot",
-        "robot"
+        "robot-05",
+        "robot-04",
+        "robot-03",
+        "robot-02",
+        "robot-01"
       ],
       "traits": [
-        5,
-        4,
-        3,
-        2,
-        1
+        99,
+        99,
+        99,
+        99,
+        99
       ],
       "positions": [
         [
@@ -14772,18 +14772,18 @@
     "Neo-Human": {
       "trait": "3275",
       "names": [
-        "neo-human",
-        "neo-human",
-        "neo-human",
-        "neo-human",
-        "neo-human"
+        "neo-human-05",
+        "neo-human-04",
+        "neo-human-03",
+        "neo-human-02",
+        "neo-human-01"
       ],
       "traits": [
-        5,
-        4,
-        3,
-        2,
-        1
+        99,
+        99,
+        99,
+        99,
+        99
       ],
       "positions": [
         [
