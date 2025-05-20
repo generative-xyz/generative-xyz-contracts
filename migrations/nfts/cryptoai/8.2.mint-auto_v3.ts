@@ -177,9 +177,14 @@ async function main() {
        await fs.writeFile(collectionPathError, JSON.stringify(errorData, null, 2));
        console.log('____has Error:', errorData);
     } else {
-    const collectionPathError = "migrations/data/cryptoai/datajson/collections_error.json";
-    await fs.unlink(collectionPathError);
-    console.log('____removed error file');
+      const collectionPathError = "migrations/data/cryptoai/datajson/collections_error.json";
+      try {
+        await fs.access(collectionPathError);
+        await fs.unlink(collectionPathError);
+        console.log('____removed error file');
+      } catch (error) {
+        // File doesn't exist, which is fine
+      }
     }
    
     console.log('___key_dna_compress_data', key_input_render)
