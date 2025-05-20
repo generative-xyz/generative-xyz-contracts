@@ -124,7 +124,7 @@ async function main() {
   let indexArt = 1;
   let index_input_render = 0;
   let key_input_render = Object.keys(dataInputRender);
-  let key_dna_compress_data = Object.keys(dataCompress.DNA).sort();
+  let key_dna_compress_data = Object.keys(dataCompress.DNA);
   let index_dna_type = 0;
   let index_dna_type_index = 0;
   
@@ -133,6 +133,8 @@ async function main() {
     while (index_input_render < key_input_render.length) {
 
       const keyDNA = key_input_render[index_input_render];
+
+      // console.log('___index_input_render', index_input_render, keyDNA);
 
       if(keyDNA === 'Neo-Human' || keyDNA === 'Robot') {
         const dataRender = dataInputRender[keyDNA][index_dna_type];
