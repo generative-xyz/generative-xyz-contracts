@@ -22,6 +22,13 @@
       "mouth": "Joker",
       "eyes": "Overworked",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 22,
+      "mouth": 19,
+      "eyes": 9,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -47,6 +54,13 @@
       "mouth": "Pepe Mouth",
       "eyes": "Defective",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 22,
+      "mouth": 11,
+      "eyes": 29,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -72,6 +86,13 @@
       "mouth": "Lipstick",
       "eyes": "Half Rim Glasses",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 42,
+      "mouth": 18,
+      "eyes": 21,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -97,6 +118,13 @@
       "mouth": "Neck Gaiter",
       "eyes": "Holographic",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 34,
+      "mouth": 15,
+      "eyes": 19,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -122,6 +150,13 @@
       "mouth": "Snake Tongue",
       "eyes": "Blushing",
       "earring": "Ruby Earring"
+    },
+    "error": {
+      "head": 9,
+      "mouth": 5,
+      "eyes": 34,
+      "earring": 0,
+      "collar": -1
     }
   },
   {
@@ -147,6 +182,13 @@
       "mouth": "Anonymous",
       "eyes": "Monster Eyes",
       "earring": "Cross Earring"
+    },
+    "error": {
+      "head": 12,
+      "mouth": 31,
+      "eyes": 14,
+      "earring": 4,
+      "collar": -1
     }
   },
   {
@@ -172,6 +214,13 @@
       "mouth": "Gold Teeth",
       "eyes": "Nerd Glasses",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 16,
+      "mouth": 21,
+      "eyes": 13,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -197,6 +246,13 @@
       "mouth": "Clown",
       "eyes": "Crying",
       "earring": "Diamond Earring"
+    },
+    "error": {
+      "head": 32,
+      "mouth": 27,
+      "eyes": 31,
+      "earring": 3,
+      "collar": -1
     }
   },
   {
@@ -222,6 +278,13 @@
       "mouth": "Mustache",
       "eyes": "Holographic",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 39,
+      "mouth": 16,
+      "eyes": 19,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -247,6 +310,13 @@
       "mouth": "Clown",
       "eyes": "VR Goggles",
       "earring": "Cross Earring"
+    },
+    "error": {
+      "head": 40,
+      "mouth": 27,
+      "eyes": 0,
+      "earring": 4,
+      "collar": -1
     }
   },
   {
@@ -272,6 +342,13 @@
       "mouth": "Speechless",
       "eyes": "Scouter",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 36,
+      "mouth": 4,
+      "eyes": 5,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -297,6 +374,13 @@
       "mouth": "Clown",
       "eyes": "Half Rim Glasses",
       "earring": "Cross Earring"
+    },
+    "error": {
+      "head": 26,
+      "mouth": 27,
+      "eyes": 21,
+      "earring": 4,
+      "collar": -1
     }
   },
   {
@@ -322,6 +406,13 @@
       "mouth": "Joker",
       "eyes": "Lab Goggles",
       "earring": "Diamond Earring"
+    },
+    "error": {
+      "head": 19,
+      "mouth": 19,
+      "eyes": 18,
+      "earring": 3,
+      "collar": -1
     }
   },
   {
@@ -347,6 +438,13 @@
       "mouth": "Moody",
       "eyes": "Rockstar Shades",
       "earring": "Cross Earring"
+    },
+    "error": {
+      "head": 15,
+      "mouth": 17,
+      "eyes": 6,
+      "earring": 4,
+      "collar": -1
     }
   },
   {
@@ -372,6 +470,13 @@
       "mouth": "Suspicious",
       "eyes": "3D Glasses",
       "earring": "Ruby Earring"
+    },
+    "error": {
+      "head": 2,
+      "mouth": 3,
+      "eyes": 40,
+      "earring": 0,
+      "collar": -1
     }
   },
   {
@@ -397,6 +502,13 @@
       "mouth": "Ooh",
       "eyes": "Blushing",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 40,
+      "mouth": 12,
+      "eyes": 34,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -422,6 +534,13 @@
       "mouth": "Cigarette",
       "eyes": "Anime Eyes",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 42,
+      "mouth": 28,
+      "eyes": 38,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -447,6 +566,13 @@
       "mouth": "Robot Mouth",
       "earring": "Gold Earring",
       "collar": "Future Collar"
+    },
+    "error": {
+      "head": 22,
+      "mouth": 8,
+      "eyes": -1,
+      "earring": 2,
+      "collar": 1
     }
   },
   {
@@ -472,6 +598,13 @@
       "mouth": "Pepe Mouth",
       "eyes": "Holographic",
       "earring": "Ruby Earring"
+    },
+    "error": {
+      "head": 39,
+      "mouth": 11,
+      "eyes": 19,
+      "earring": 0,
+      "collar": -1
     }
   },
   {
@@ -497,6 +630,13 @@
       "mouth": "Fang",
       "eyes": "Tinted Lenses",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 34,
+      "mouth": 25,
+      "eyes": 1,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -522,6 +662,13 @@
       "mouth": "Mustache",
       "eyes": "Green Code",
       "earring": "Ruby Earring"
+    },
+    "error": {
+      "head": 27,
+      "mouth": 16,
+      "eyes": 22,
+      "earring": 0,
+      "collar": -1
     }
   },
   {
@@ -547,6 +694,13 @@
       "mouth": "Fang",
       "eyes": "Lab Goggles",
       "earring": "Gold Earring"
+    },
+    "error": {
+      "head": 17,
+      "mouth": 25,
+      "eyes": 18,
+      "earring": 2,
+      "collar": -1
     }
   },
   {
@@ -572,6 +726,13 @@
       "mouth": "Frown",
       "eyes": "3D Glasses",
       "collar": "Future Collar"
+    },
+    "error": {
+      "head": 38,
+      "mouth": 23,
+      "eyes": 40,
+      "earring": -1,
+      "collar": 1
     }
   },
   {
@@ -597,6 +758,13 @@
       "mouth": "Playful",
       "eyes": "Lab Goggles",
       "earring": "Ruby Earring"
+    },
+    "error": {
+      "head": 4,
+      "mouth": 10,
+      "eyes": 18,
+      "earring": 0,
+      "collar": -1
     }
   },
   {
@@ -622,6 +790,13 @@
       "mouth": "Robot Mouth",
       "eyes": "Aviators",
       "earring": "Diamond Earring"
+    },
+    "error": {
+      "head": 34,
+      "mouth": 8,
+      "eyes": 37,
+      "earring": 3,
+      "collar": -1
     }
   },
   {
@@ -647,6 +822,13 @@
       "mouth": "Clown",
       "eyes": "Nerd Glasses",
       "earring": "Cross Earring"
+    },
+    "error": {
+      "head": 7,
+      "mouth": 27,
+      "eyes": 13,
+      "earring": 4,
+      "collar": -1
     }
   },
   {
@@ -672,6 +854,13 @@
       "mouth": "Fang",
       "eyes": "Hero Mask",
       "earring": "Cross Earring"
+    },
+    "error": {
+      "head": 26,
+      "mouth": 25,
+      "eyes": 20,
+      "earring": 4,
+      "collar": -1
     }
   },
   {
@@ -697,6 +886,13 @@
       "mouth": "Clown",
       "eyes": "Nerd Glasses",
       "earring": "Cross Earring"
+    },
+    "error": {
+      "head": 25,
+      "mouth": 27,
+      "eyes": 13,
+      "earring": 4,
+      "collar": -1
     }
   },
   {
@@ -722,6 +918,13 @@
       "mouth": "Focusing",
       "eyes": "Green Code",
       "earring": "Ruby Earring"
+    },
+    "error": {
+      "head": 15,
+      "mouth": 24,
+      "eyes": 22,
+      "earring": 0,
+      "collar": -1
     }
   }
 ]

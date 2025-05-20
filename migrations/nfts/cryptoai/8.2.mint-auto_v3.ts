@@ -50,7 +50,14 @@ function generateRandomData(
           collar: renderInputDate[4],
         },
         inputArr: [dataCompress.DNA[keyDNA].names[index_dna_type],renderInputDate[0], renderInputDate[1], renderInputDate[2], renderInputDate[3], renderInputDate[4]],
-        output: err
+        output: err,
+        error: {
+          head: indexNameHead,
+          mouth: indexNameMouth,
+          eyes: indexNameEyes,
+          earring: indexNameEarring,
+          collar: indexNameCollar,
+        }
       });
 
     }
