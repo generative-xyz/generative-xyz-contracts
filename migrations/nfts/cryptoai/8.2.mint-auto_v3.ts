@@ -111,7 +111,6 @@ async function main() {
 
       if(keyDNA === 'Neo-Human' || keyDNA === 'Robot') {
         const dataRender = dataInputRender[keyDNA][index_dna_type];
-        console.log('___dataCompress.DNA[keyDNA].names', dataCompress.DNA[keyDNA].names);
         index_dna_type_index = dataCompress.DNA[keyDNA].names.findIndex((item: any) => item === dataRender[0]);
         dataInputRender[keyDNA][index_dna_type] = dataInputRender[keyDNA][index_dna_type].slice(1);
       } else {

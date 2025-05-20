@@ -23,15 +23,15 @@ async function main() {
 
       console.log('____progress', i + 1);
       if (checkDuplicateArt(data2Check, collection)) {
-      
-        duplicate.push([
-          collection.name[1],
-          collection.name[2],
-          collection.name[3],
-          collection.name[4],
-          collection.name[0]
-        ]
-        );
+
+        console.log('____duplicate', counter);
+
+        const tt= [collection.name[1][1],
+          collection.name[1][2],
+          collection.name[1][3],
+          collection.name[1][4],
+          collection.name[1][0]]
+        duplicate.push(tt);
         counter++;
         continue;
       }
