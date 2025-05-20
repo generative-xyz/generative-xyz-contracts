@@ -4480,7 +4480,7 @@
       "Neo-Human",
       [
         "neo-human-05",
-        null,
+        "",
         "Mining Helmet",
         "Overworked",
         "Joker",
@@ -4491,7 +4491,7 @@
       2,
       [
         0,
-        -1,
+        0,
         22,
         9,
         19,
@@ -4580,7 +4580,7 @@
       "Neo-Human",
       [
         "neo-human-04",
-        null,
+        "",
         "Mining Helmet",
         "Defective",
         "Pepe Mouth",
@@ -4591,7 +4591,7 @@
       2,
       [
         1,
-        -1,
+        0,
         22,
         29,
         11,
@@ -4655,7 +4655,7 @@
       "Neo-Human",
       [
         "neo-human-02",
-        null,
+        "",
         "Antenna",
         "Half Rim Glasses",
         "Lipstick",
@@ -4666,7 +4666,7 @@
       2,
       [
         3,
-        -1,
+        0,
         42,
         21,
         18,
@@ -4930,7 +4930,7 @@
       "Neo-Human",
       [
         "neo-human-03",
-        null,
+        "",
         "Captain Hat",
         "Holographic",
         "Neck Gaiter",
@@ -4941,7 +4941,7 @@
       2,
       [
         2,
-        -1,
+        0,
         34,
         19,
         15,
@@ -5130,7 +5130,7 @@
       "Neo-Human",
       [
         "neo-human-01",
-        null,
+        "",
         "Sombrero",
         "Blushing",
         "Snake Tongue",
@@ -5141,7 +5141,7 @@
       2,
       [
         4,
-        -1,
+        0,
         9,
         34,
         5,
@@ -5230,7 +5230,7 @@
       "Neo-Human",
       [
         "neo-human-05",
-        null,
+        "",
         "Rabbit Ears",
         "Monster Eyes",
         "Anonymous",
@@ -5241,7 +5241,7 @@
       2,
       [
         0,
-        -1,
+        0,
         12,
         14,
         31,
@@ -5555,7 +5555,7 @@
       "Neo-Human",
       [
         "neo-human-03",
-        null,
+        "",
         "Pinwheel",
         "Nerd Glasses",
         "Gold Teeth",
@@ -5566,7 +5566,7 @@
       2,
       [
         2,
-        -1,
+        0,
         16,
         13,
         21,
@@ -5630,7 +5630,7 @@
       "Neo-Human",
       [
         "neo-human-01",
-        null,
+        "",
         "Chef Hat",
         "Crying",
         "Clown",
@@ -5641,7 +5641,7 @@
       2,
       [
         4,
-        -1,
+        0,
         32,
         31,
         27,
@@ -5655,7 +5655,7 @@
       "Neo-Human",
       [
         "neo-human-02",
-        null,
+        "",
         "Beanie",
         "Holographic",
         "Mustache",
@@ -5666,7 +5666,7 @@
       2,
       [
         3,
-        -1,
+        0,
         39,
         19,
         16,
@@ -5755,7 +5755,7 @@
       "Neo-Human",
       [
         "neo-human-01",
-        null,
+        "",
         "Baseball Cap",
         "VR Goggles",
         "Clown",
@@ -5766,7 +5766,7 @@
       2,
       [
         4,
-        -1,
+        0,
         40,
         0,
         27,
@@ -5880,7 +5880,7 @@
       "Neo-Human",
       [
         "neo-human-01",
-        null,
+        "",
         "Blonde Side-part",
         "Scouter",
         "Speechless",
@@ -5891,7 +5891,7 @@
       2,
       [
         4,
-        -1,
+        0,
         36,
         5,
         4,
@@ -6105,7 +6105,7 @@
       "Neo-Human",
       [
         "neo-human-05",
-        null,
+        "",
         "Headphones",
         "Half Rim Glasses",
         "Clown",
@@ -6116,7 +6116,7 @@
       2,
       [
         0,
-        -1,
+        0,
         26,
         21,
         27,
@@ -6280,7 +6280,7 @@
       "Neo-Human",
       [
         "neo-human-02",
-        null,
+        "",
         "Orge Ears",
         "Lab Goggles",
         "Joker",
@@ -6291,7 +6291,7 @@
       2,
       [
         3,
-        -1,
+        0,
         19,
         18,
         19,
@@ -6480,7 +6480,7 @@
       "Neo-Human",
       [
         "neo-human-05",
-        null,
+        "",
         "Pirate Hat",
         "Rockstar Shades",
         "Moody",
@@ -6491,7 +6491,7 @@
       2,
       [
         0,
-        -1,
+        0,
         15,
         6,
         17,
@@ -6505,7 +6505,7 @@
       "Neo-Human",
       [
         "neo-human-01",
-        null,
+        "",
         "Viking Helmet",
         "3D Glasses",
         "Suspicious",
@@ -6516,7 +6516,7 @@
       2,
       [
         4,
-        -1,
+        0,
         2,
         40,
         3,
@@ -6605,7 +6605,7 @@
       "Neo-Human",
       [
         "neo-human-05",
-        null,
+        "",
         "Baseball Cap",
         "Blushing",
         "Ooh",
@@ -6616,7 +6616,7 @@
       2,
       [
         0,
-        -1,
+        0,
         40,
         34,
         12,
@@ -6680,7 +6680,7 @@
       "Neo-Human",
       [
         "neo-human-03",
-        null,
+        "",
         "Antenna",
         "Anime Eyes",
         "Cigarette",
@@ -6691,7 +6691,7 @@
       2,
       [
         2,
-        -1,
+        0,
         42,
         38,
         28,
@@ -6882,7 +6882,7 @@
         "neo-human-01",
         "Future Collar",
         "Mining Helmet",
-        null,
+        "",
         "Robot Mouth",
         "Gold Earring"
       ]
@@ -6893,7 +6893,7 @@
         4,
         1,
         22,
-        -1,
+        11,
         8,
         2
       ]
@@ -7255,7 +7255,7 @@
       "Neo-Human",
       [
         "neo-human-01",
-        null,
+        "",
         "Beanie",
         "Holographic",
         "Pepe Mouth",
@@ -7266,7 +7266,7 @@
       2,
       [
         4,
-        -1,
+        0,
         39,
         19,
         11,
@@ -7330,7 +7330,7 @@
       "Neo-Human",
       [
         "neo-human-04",
-        null,
+        "",
         "Captain Hat",
         "Tinted Lenses",
         "Fang",
@@ -7341,7 +7341,7 @@
       2,
       [
         1,
-        -1,
+        0,
         34,
         1,
         25,
@@ -7380,7 +7380,7 @@
       "Neo-Human",
       [
         "neo-human-01",
-        null,
+        "",
         "Headband",
         "Green Code",
         "Mustache",
@@ -7391,7 +7391,7 @@
       2,
       [
         4,
-        -1,
+        0,
         27,
         22,
         16,
@@ -7405,7 +7405,7 @@
       "Neo-Human",
       [
         "neo-human-02",
-        null,
+        "",
         "Pink Undercut",
         "Lab Goggles",
         "Fang",
@@ -7416,7 +7416,7 @@
       2,
       [
         3,
-        -1,
+        0,
         17,
         18,
         25,
@@ -7609,7 +7609,7 @@
         "Black Cap",
         "3D Glasses",
         "Frown",
-        null
+        ""
       ]
     ],
     "index": [
@@ -7620,7 +7620,7 @@
         38,
         40,
         23,
-        -1
+        1
       ]
     ]
   },
@@ -8055,7 +8055,7 @@
       "Neo-Human",
       [
         "neo-human-03",
-        null,
+        "",
         "Top Hat",
         "Lab Goggles",
         "Playful",
@@ -8066,7 +8066,7 @@
       2,
       [
         2,
-        -1,
+        0,
         4,
         18,
         10,
@@ -8430,7 +8430,7 @@
       "Neo-Human",
       [
         "neo-human-03",
-        null,
+        "",
         "Captain Hat",
         "Aviators",
         "Robot Mouth",
@@ -8441,7 +8441,7 @@
       2,
       [
         2,
-        -1,
+        0,
         34,
         37,
         8,
@@ -8455,7 +8455,7 @@
       "Neo-Human",
       [
         "neo-human-04",
-        null,
+        "",
         "Straw Hat",
         "Nerd Glasses",
         "Clown",
@@ -8466,7 +8466,7 @@
       2,
       [
         1,
-        -1,
+        0,
         7,
         13,
         27,
@@ -8505,7 +8505,7 @@
       "Neo-Human",
       [
         "neo-human-01",
-        null,
+        "",
         "Headphones",
         "Hero Mask",
         "Fang",
@@ -8516,7 +8516,7 @@
       2,
       [
         4,
-        -1,
+        0,
         26,
         20,
         25,
@@ -8655,7 +8655,7 @@
       "Neo-Human",
       [
         "neo-human-02",
-        null,
+        "",
         "Horn",
         "Nerd Glasses",
         "Clown",
@@ -8666,7 +8666,7 @@
       2,
       [
         3,
-        -1,
+        0,
         25,
         13,
         27,
@@ -8680,7 +8680,7 @@
       "Neo-Human",
       [
         "neo-human-03",
-        null,
+        "",
         "Pirate Hat",
         "Green Code",
         "Focusing",
@@ -8691,7 +8691,7 @@
       2,
       [
         2,
-        -1,
+        0,
         15,
         22,
         24,
