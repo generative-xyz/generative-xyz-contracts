@@ -2,6 +2,11 @@
 pragma solidity ^0.8.0;
 
 interface IEAI721 {
+
+    // =============================================
+    // IEAI721AgentAbility
+    // =============================================
+
     // --- Enums ---
     enum FileType {
         LIBRARY,
@@ -118,6 +123,10 @@ interface IEAI721 {
         uint256[] calldata depsAgents
     ) external view returns (bytes32);
 
+    // =============================================
+    // IEAI721Art
+    // =============================================
+
     /**
      * @dev Unlocks a token with the specified tokenId, dna, and traits. Requires a payment.
      * @param tokenId The unique identifier of the token to unlock.
@@ -142,6 +151,10 @@ interface IEAI721 {
      * @return The URI string of the token.
      */
     function tokenURI(uint256 tokenId) external view returns (string memory);
+
+    // =============================================
+    // IEAI721Monetization
+    // =============================================
 
     /**
      * @dev Retrieves the subscription fee for a specific agent.
@@ -169,5 +182,5 @@ interface IEAI721 {
      * @param agentId The ID of the agent.
      * @param newAIToken The new AI token address to be set for the agent.
      */
-    function setAItokenAddress(uint256 agentId, address newAIToken) external;
+    function setAITokenAddress(uint256 agentId, address newAIToken) external;
 }

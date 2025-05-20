@@ -5,13 +5,13 @@ pragma solidity ^0.8.0;
 
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {CryptoAIUpgradeable} from "./CryptoAIUpgradeable.sol";
-import {IEAI721SubscriptionFee} from "../interfaces/IEAI721SubscriptionFee.sol";
+import {IEAI721Monetization} from "../interfaces/IEAI721Monetization.sol";
 
 /**
  * @dev Extension of {CryptoAIUpgradeable} that allows token owner to set subscription fee.
  * This is useful for subscription-based services or products.
  */
-abstract contract CryptoAISubscriptionFeeUpgradeable is Initializable, IEAI721SubscriptionFee, CryptoAIUpgradeable {
+abstract contract CryptoAIMonetizationUpgradeable is Initializable, IEAI721Monetization, CryptoAIUpgradeable {
 
     mapping(uint256 => uint256) private _subscriptionFees;
     mapping(uint256 => address) private _aiTokens;
@@ -44,7 +44,7 @@ abstract contract CryptoAISubscriptionFeeUpgradeable is Initializable, IEAI721Su
     /**
      * @dev Set AI token address.
      */
-    function setAItokenAddress(uint256 agentId, address newAIToken) public virtual onlyAgentOwner(agentId){
+    function setAITokenAddress(uint256 agentId, address newAIToken) public virtual onlyAgentOwner(agentId){
         _aiTokens[agentId] = newAIToken;
 
         emit AITokenSet(agentId, newAIToken);

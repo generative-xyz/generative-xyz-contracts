@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-interface IEAI721SubscriptionFee {
+interface IEAI721Monetization {
     /**
      * @dev Retrieves the subscription fee for a specific agent.
      * @param agentId The ID of the agent.
@@ -29,5 +29,5 @@ interface IEAI721SubscriptionFee {
      * @param agentId The ID of the agent.
      * @param newAIToken The new AI token address to be set for the agent.
      */
-    function setAItokenAddress(uint256 agentId, address newAIToken) external;
+    function setAITokenAddress(uint256 agentId, address newAIToken) external;
 }

@@ -1,9 +1,9 @@
 pragma solidity ^0.8.0;
 
-import {CryptoAISubscriptionFeeUpgradeable} from "./CryptoAISubscriptionFeeUpgradeable.sol";
+import {CryptoAIMonetizationUpgradeable} from "./CryptoAIMonetizationUpgradeable.sol";
 import "../libs/helpers/Errors.sol";
 
-contract CryptoAI is CryptoAISubscriptionFeeUpgradeable {
+contract CryptoAI is CryptoAIMonetizationUpgradeable {
     // deployer
     address public _deployer;
     // admins
