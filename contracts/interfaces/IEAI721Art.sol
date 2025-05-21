@@ -3,23 +3,22 @@
 pragma solidity ^0.8.0;
 
 interface IEAI721Art {
+
     /**
-     * @dev Unlocks a token with the specified tokenId, dna, and traits. Requires a payment.
-     * @param tokenId The unique identifier of the token to unlock.
-     * @param dna The DNA value associated with the token.
-     * @param traits An array of 5 traits associated with the token.
+     * @dev Mints a new token to the specified address with the given dna, traits, agent name, and agent ability.
+     * @param to The address to which the new token will be minted.
+     * @param dna The DNA value for the new token.
+     * @param traits An array of traits for the new token.
+     * @param agentName The name of the agent associated with the token.
+     * @param agentAbility The ability of the agent associated with the token.
      */
-    function unlock(
-        uint256 tokenId,
-        uint256 dna,
-        uint256[5] memory traits
-    ) external payable;
-     
-    /**
-     * @dev Returns the address of the CryptoAI data contract.
-     * @return The address of the CryptoAI data contract.
-     */
-    function cryptoAiDataAddr() external view returns (address);
+    function mint(
+        address to, 
+        uint256 dna, 
+        uint256[5] memory traits, 
+        string calldata agentName, 
+        string calldata agentAbility
+    ) external;
 
     /**
      * @dev Retrieves the URI for a specific token.

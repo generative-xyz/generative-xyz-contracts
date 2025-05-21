@@ -322,7 +322,7 @@ contract CryptoAIData is OwnableUpgradeable, ICryptoAIData {
         byteString = abi.encodePacked(
             '{"trait_type": "ORIGIN"',
             ',"value":"',
-            StringsUpgradeable.toString(IEAI721AgentAbility(_cryptoAIAgentAddr).getCurrentVersion(tokenId) > 0 ? 0 : 1),
+            StringsUpgradeable.toString(IEAI721AgentAbility(_cryptoAIAgentAddr).currentVersion(tokenId) > 1 ? 0 : 1),
             '"},'
             , byteString
         );

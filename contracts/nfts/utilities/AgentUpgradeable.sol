@@ -67,27 +67,27 @@ abstract contract AgentUpgradeable is
         _ability[agentId] = ability;
     }
 
-    function updateAgentName(
+    function setAgentName(
         uint256 agentId,
         string calldata name
     ) external virtual onlyAgentOwner(agentId) {
         _name[agentId] = name;
     }
 
-    function updateAgentAbility(
+    function setAgentAbility(
         uint256 agentId,
         string calldata ability
     ) external virtual onlyAgentOwner(agentId) {
         _ability[agentId] = ability;
     }
 
-    function getAgentName(
+    function agentName(
         uint256 agentId
     ) external view returns (string memory) {
         return _name[agentId];
     }
 
-    function getAgentAbility(
+    function agentAbility(
         uint256 agentId
     ) external view returns (string memory) {
         return _ability[agentId];
@@ -109,7 +109,7 @@ abstract contract AgentUpgradeable is
         uint256[] calldata depsAgents,
         bytes calldata signature
     ) external virtual returns (uint16) {
-        bytes32 digest = getHashToSign(agentId, pointers, depsAgents);
+        bytes32 digest = hashToSign(agentId, pointers, depsAgents);
 
         if (_usedDigests[digest]) {
             revert DigestAlreadyUsed();
@@ -169,14 +169,14 @@ abstract contract AgentUpgradeable is
         _pointersNum[agentId][version]++;
     }
 
-    function getDepsAgents(
+    function depsAgents(
         uint256 agentId,
         uint16 version
     ) external view checkVersion(agentId, version) returns (uint256[] memory) {
         return _depsAgents[agentId][version];
     }
 
-    function getAgentCode(
+    function agentCode(
         uint256 agentId,
         uint16 version
     )
@@ -240,7 +240,7 @@ abstract contract AgentUpgradeable is
         return _pointersNum[agentId][version];
     }
 
-    function getCurrentVersion(uint256 agentId) external view returns (uint16) {
+    function currentVersion(uint256 agentId) external view returns (uint16) {
         return _currentVersion[agentId];
     }
 
@@ -250,13 +250,13 @@ abstract contract AgentUpgradeable is
         }
     }
 
-    function getCodeLanguage(
+    function codeLanguage(
         uint256 agentId
     ) external view returns (string memory) {
         return _codeLanguage[agentId];
     }
 
-    function getHashToSign(
+    function hashToSign(
         uint256 agentId,
         CodePointer[] calldata pointers,
         uint256[] calldata depsAgents

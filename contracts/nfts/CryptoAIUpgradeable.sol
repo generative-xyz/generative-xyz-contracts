@@ -72,13 +72,13 @@ contract CryptoAIUpgradeable is
         _cryptoAiDataAddr = newCryptoAiDataAddr;
     }
 
-    function unlock(uint256 tokenId, uint256 dna, uint256[5] memory traits) public virtual override payable {
+    function unlock(uint256 tokenId, uint256 dna, uint256[5] memory traits) public virtual payable {
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
         ICryptoAIData cryptoAIDataContract = ICryptoAIData(_cryptoAiDataAddr);
         cryptoAIDataContract.unlockRenderAgent(tokenId, dna, traits);
     }
 
-    function cryptoAiDataAddr() public view override returns (address) {
+    function cryptoAiDataAddr() public view returns (address) {
         return _cryptoAiDataAddr;
     }
 
