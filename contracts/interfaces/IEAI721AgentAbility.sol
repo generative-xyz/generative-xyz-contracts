@@ -110,17 +110,4 @@ interface IEAI721AgentAbility {
      * @return The programming language of the agent's code.
      */
     function codeLanguage(uint256 agentId) external view returns (string memory);
-
-    /**
-     * @dev Generates a hash to sign for publishing agent code.
-     * @param agentId The unique identifier of the agent.
-     * @param pointers An array of code pointers for the agent.
-     * @param depsAgents An array of dependent agent IDs.
-     * @return The hash to be signed.
-     */
-    function hashToSign(
-        uint256 agentId,
-        CodePointer[] calldata pointers,
-        uint256[] calldata depsAgents
-    ) external view returns (bytes32);
 }
