@@ -52,10 +52,9 @@ contract CryptoAI is CryptoAIMonetizationUpgradeable {
         address to,
         uint256 dna,
         uint256[5] memory traits,
-        string calldata agentName,
-        string calldata agentAbility
+        string calldata agentName
     ) public virtual override onlyAdmin {
-        super.mint(to, dna, traits, agentName, agentAbility);
+        super.mint(to, dna, traits, agentName);
     }
 
     uint256[50] private __gap;

@@ -28,25 +28,11 @@ interface IEAI721 {
     function setAgentName(uint256 agentId, string calldata name) external;
 
     /**
-     * @dev Updates the ability of a specific agent.
-     * @param agentId The unique identifier of the agent.
-     * @param ability The new ability to assign to the agent.
-     */
-    function setAgentAbility(uint256 agentId, string calldata ability) external;
-
-    /**
      * @dev Retrieves the name of a specific agent.
      * @param agentId The unique identifier of the agent.
      * @return The name of the agent.
      */
     function agentName(uint256 agentId) external view returns (string memory);
-
-    /**
-     * @dev Retrieves the ability of a specific agent.
-     * @param agentId The unique identifier of the agent.
-     * @return The ability of the agent.
-     */
-    function agentAbility(uint256 agentId) external view returns (string memory);
 
     /**
      * @dev Publishes the code for a specific agent.
@@ -103,14 +89,12 @@ interface IEAI721 {
      * @param dna The DNA value for the new token.
      * @param traits An array of traits for the new token.
      * @param agentName The name of the agent associated with the token.
-     * @param agentAbility The ability of the agent associated with the token.
      */
     function mint(
         address to, 
         uint256 dna, 
         uint256[5] memory traits, 
-        string calldata agentName, 
-        string calldata agentAbility
+        string calldata agentName
     ) external;
 
     /**

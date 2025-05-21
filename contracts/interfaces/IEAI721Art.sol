@@ -10,14 +10,12 @@ interface IEAI721Art {
      * @param dna The DNA value for the new token.
      * @param traits An array of traits for the new token.
      * @param agentName The name of the agent associated with the token.
-     * @param agentAbility The ability of the agent associated with the token.
      */
     function mint(
         address to, 
         uint256 dna, 
         uint256[5] memory traits, 
-        string calldata agentName, 
-        string calldata agentAbility
+        string calldata agentName
     ) external;
 
     /**

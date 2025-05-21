@@ -27,7 +27,6 @@ abstract contract AgentUpgradeable is
     mapping(uint256 agentId => uint16) private _currentVersion;
 
     mapping(uint256 agentId => string) private _name;
-    mapping(uint256 agentId => string) private _ability;
 
     mapping(bytes32 digest => bool) private _usedDigests;
     mapping(uint256 agentId => mapping(uint256 version => uint256))
@@ -60,11 +59,9 @@ abstract contract AgentUpgradeable is
     // --- Functions ---
     function _setupAgent(
         uint256 agentId,
-        string calldata name,
-        string calldata ability
+        string calldata name
     ) internal {
         _name[agentId] = name;
-        _ability[agentId] = ability;
     }
 
     function setAgentName(
@@ -74,42 +71,29 @@ abstract contract AgentUpgradeable is
         _name[agentId] = name;
     }
 
-    function setAgentAbility(
-        uint256 agentId,
-        string calldata ability
-    ) external virtual onlyAgentOwner(agentId) {
-        _ability[agentId] = ability;
-    }
-
     function agentName(
         uint256 agentId
     ) external view returns (string memory) {
         return _name[agentId];
     }
 
-    function agentAbility(
-        uint256 agentId
-    ) external view returns (string memory) {
-        return _ability[agentId];
-    }
-
     function publishAgentCode(
         uint256 agentId,
-        string calldata codeLanguage,
+        string calldata newCodeLanguage,
         CodePointer[] calldata pointers,
-        uint256[] calldata depsAgents
+        uint256[] calldata newAepsAgents
     ) external virtual onlyAgentOwner(agentId) returns (uint16) {
-        return _publishAgentCode(agentId, codeLanguage, pointers, depsAgents);
+        return _publishAgentCode(agentId, newCodeLanguage, pointers, newAepsAgents);
     }
 
     function publishAgentCodeWithSignature(
         uint256 agentId,
-        string calldata codeLanguage,
+        string calldata newCodeLanguage,
         CodePointer[] calldata pointers,
-        uint256[] calldata depsAgents,
+        uint256[] calldata newDepsAgents,
         bytes calldata signature
     ) external virtual returns (uint16) {
-        bytes32 digest = hashToSign(agentId, pointers, depsAgents);
+        bytes32 digest = hashToSign(agentId, pointers, newDepsAgents);
 
         if (_usedDigests[digest]) {
             revert DigestAlreadyUsed();
@@ -119,18 +103,18 @@ abstract contract AgentUpgradeable is
         }
         _usedDigests[digest] = true;
 
-        return _publishAgentCode(agentId, codeLanguage, pointers, depsAgents);
+        return _publishAgentCode(agentId, newCodeLanguage, pointers, newDepsAgents);
     }
 
     function _publishAgentCode(
         uint256 agentId,
-        string calldata codeLanguage,
+        string calldata newCodeLanguage,
         CodePointer[] calldata pointers,
-        uint256[] calldata depsAgents
+        uint256[] calldata newDepsAgents
     ) internal virtual returns (uint16) {
         if (pointers.length == 0) revert InvalidData();
 
-        _codeLanguage[agentId] = codeLanguage;
+        _codeLanguage[agentId] = newCodeLanguage;
         uint16 version = _bumpVersion(agentId);
 
         uint256 pLen = pointers.length;
@@ -141,12 +125,12 @@ abstract contract AgentUpgradeable is
             _addNewCodePointer(agentId, version, pointers[i]);
         }
 
-        uint256 depsLen = depsAgents.length;
+        uint256 depsLen = newDepsAgents.length;
         for (uint256 i = 0; i < depsLen; i++) {
-            if (depsAgents[i] == 0 || depsAgents[i] > TOKEN_LIMIT) {
+            if (newDepsAgents[i] == 0 || newDepsAgents[i] > TOKEN_LIMIT) {
                 revert InvalidDependency();
             }
-            _depsAgents[agentId][version].push(depsAgents[i]);
+            _depsAgents[agentId][version].push(newDepsAgents[i]);
         }
 
         return version;
@@ -259,7 +243,7 @@ abstract contract AgentUpgradeable is
     function hashToSign(
         uint256 agentId,
         CodePointer[] calldata pointers,
-        uint256[] calldata depsAgents
+        uint256[] calldata newDepsAgents
     ) public view virtual returns (bytes32) {
         bytes32 CODEPOINTER_TYPEHASH = keccak256(
             "CodePointer(address retrieveAddress,uint8 fileType,string fileName)"
@@ -280,7 +264,7 @@ abstract contract AgentUpgradeable is
         }
 
         bytes32 pointersHash = keccak256(abi.encodePacked(pointerHashes));
-        bytes32 depsAgentsHash = keccak256(abi.encodePacked(depsAgents));
+        bytes32 depsAgentsHash = keccak256(abi.encodePacked(newDepsAgents));
 
         bytes32 structHash = keccak256(
             abi.encode(

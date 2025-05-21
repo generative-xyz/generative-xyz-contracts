@@ -52,8 +52,7 @@ contract CryptoAIUpgradeable is
         address to,
         uint256 dna,
         uint256[5] memory traits,
-        string calldata agentName,
-        string calldata agentAbility
+        string calldata agentName
     ) public virtual {
         require(to != Errors.ZERO_ADDR, Errors.INV_ADD);
         require(_cryptoAiDataAddr != Errors.ZERO_ADDR, Errors.INV_ADD);
@@ -63,7 +62,7 @@ contract CryptoAIUpgradeable is
         cryptoAIDataContract.mintAgent(_indexMint);
         cryptoAIDataContract.unlockRenderAgent(_indexMint, dna, traits);
 
-        _setupAgent(_indexMint, agentName, agentAbility);
+        _setupAgent(_indexMint, agentName);
 
         _indexMint += 1;
     }
