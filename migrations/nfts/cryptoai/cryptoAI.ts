@@ -164,7 +164,7 @@ class CryptoAI {
     async mint(contractAddress: any, gas: any, to: any, agentAddr: any, dna: number, traits: any) {
         let temp = this.getContract(contractAddress);
         const nonce = await temp?.web3.eth.getTransactionCount(this.senderPublicKey, "latest") //get latest nonce
-        const fun = temp?.nftContract.methods.mint(to, dna, traits, "Optimus pride", "Optimus Ability")
+        const fun = temp?.nftContract.methods.mint(to, dna, traits, "Optimus pride")
         //the transaction
         const tx = {
             from: this.senderPublicKey,
