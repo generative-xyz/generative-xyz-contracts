@@ -20,7 +20,7 @@ interface IEAI721 {
         string fileName;
     }
 
-  /**
+    /**
      * @dev Updates the name of a specific agent.
      * @param agentId The unique identifier of the agent.
      * @param name The new name to assign to the agent.
