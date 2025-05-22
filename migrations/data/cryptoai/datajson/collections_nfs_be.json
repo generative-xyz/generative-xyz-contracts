@@ -267,6 +267,65 @@
     "rarity": 0.47801600000000005
   },
   {
+    "id": 114,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/114.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Pepe Eyes",
+        "rarity": 0.47
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Pepe Mouth",
+        "rarity": 1
+      }
+    ],
+    "rarity": 0.5123
+  },
+  {
+    "id": 111,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/111.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Burnout",
+        "rarity": 0.87
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Monster Eyes",
+        "rarity": 0.62
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Fang",
+        "rarity": 0.9
+      }
+    ],
+    "rarity": 0.5291513999999999
+  },
+  {
     "id": 60,
     "name": "Kong",
     "DNA_Rarity": 0.55,
@@ -282,33 +341,6 @@
       }
     ],
     "rarity": 0.55
-  },
-  {
-    "id": 130,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/130.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 2
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Sprout",
-        "rarity": 0.86
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Blindfolded",
-        "rarity": 0.6
-      }
-    ],
-    "rarity": 0.5624399999999999
   },
   {
     "id": 44,
@@ -436,6 +468,33 @@
     "rarity": 0.6160000000000001
   },
   {
+    "id": 174,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/174.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Monster Eyes",
+        "rarity": 0.62
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Snake Tongue",
+        "rarity": 0.95
+      }
+    ],
+    "rarity": 0.6420100000000001
+  },
+  {
     "id": 113,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
@@ -456,6 +515,33 @@
       }
     ],
     "rarity": 0.6431
+  },
+  {
+    "id": 115,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/115.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Thunderbolt",
+        "rarity": 0.72
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Rainbow Puke",
+        "rarity": 1
+      }
+    ],
+    "rarity": 0.7848
   },
   {
     "id": 3,
@@ -593,38 +679,6 @@
     "rarity": 0.9640400000000001
   },
   {
-    "id": 111,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/111.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 3
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Burnout",
-        "rarity": 0.87
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Monster Eyes",
-        "rarity": 0.62
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Gold Teeth",
-        "rarity": 1.72
-      }
-    ],
-    "rarity": 1.0112671199999999
-  },
-  {
     "id": 52,
     "name": "Kong",
     "DNA_Rarity": 0.55,
@@ -726,6 +780,38 @@
       }
     ],
     "rarity": 1.24509
+  },
+  {
+    "id": 166,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/166.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Orge Ears",
+        "rarity": 0.81
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "One-eyed",
+        "rarity": 0.51
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Toothless",
+        "rarity": 3.01
+      }
+    ],
+    "rarity": 1.3553397900000002
   },
   {
     "id": 48,
@@ -947,38 +1033,6 @@
       }
     ],
     "rarity": 1.6965850000000005
-  },
-  {
-    "id": 174,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/174.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 3
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Burnout",
-        "rarity": 0.87
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Monster Eyes",
-        "rarity": 0.62
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Cyborg Jaw",
-        "rarity": 3.13
-      }
-    ],
-    "rarity": 1.84027098
   },
   {
     "id": 28,
@@ -1440,10 +1494,37 @@
     "rarity": 2.7489800000000004
   },
   {
-    "id": 137,
+    "id": 85,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/137.svg",
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/85.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Blindfolded",
+        "rarity": 0.6
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Tongue Out",
+        "rarity": 4.23
+      }
+    ],
+    "rarity": 2.7664200000000005
+  },
+  {
+    "id": 88,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/88.svg",
     "trait": [
       {
         "trait_type": "Attributes",
@@ -1455,16 +1536,16 @@
       },
       {
         "trait_type": "Head",
-        "value": "Duck Toy",
-        "rarity": 0.85
+        "value": "Sprout",
+        "rarity": 0.86
       },
       {
         "trait_type": "Eyes",
-        "value": "Half Rim Glasses",
-        "rarity": 3.03
+        "value": "Defective",
+        "rarity": 2.96
       }
     ],
-    "rarity": 2.807295
+    "rarity": 2.774704
   },
   {
     "id": 17,
@@ -1764,10 +1845,10 @@
     "rarity": 3.4117
   },
   {
-    "id": 115,
+    "id": 137,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/115.svg",
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/137.svg",
     "trait": [
       {
         "trait_type": "Attributes",
@@ -1779,16 +1860,16 @@
       },
       {
         "trait_type": "Head",
-        "value": "Thunderbolt",
-        "rarity": 0.72
+        "value": "Duck Toy",
+        "rarity": 0.85
       },
       {
-        "trait_type": "Mouth",
-        "value": "Robot Mouth",
-        "rarity": 4.44
+        "trait_type": "Eyes",
+        "value": "Hero Mask",
+        "rarity": 3.87
       }
     ],
-    "rarity": 3.4845120000000005
+    "rarity": 3.5855550000000003
   },
   {
     "id": 156,
@@ -1818,33 +1899,6 @@
     "rarity": 3.72344
   },
   {
-    "id": 89,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/89.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 2
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Goggles",
-        "rarity": 4.06
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Fang",
-        "rarity": 0.9
-      }
-    ],
-    "rarity": 3.98286
-  },
-  {
     "id": 110,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
@@ -1865,33 +1919,6 @@
       }
     ],
     "rarity": 4.1311
-  },
-  {
-    "id": 108,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/108.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 2
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Ninja Mask",
-        "rarity": 3.88
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Rainbow Puke",
-        "rarity": 1
-      }
-    ],
-    "rarity": 4.2292000000000005
   },
   {
     "id": 162,
@@ -1960,38 +1987,6 @@
     "rarity": 4.479900000000001
   },
   {
-    "id": 167,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/167.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 3
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Orge Ears",
-        "rarity": 0.81
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Tinted Lenses",
-        "rarity": 2.85
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Neck Gaiter",
-        "rarity": 1.81
-      }
-    ],
-    "rarity": 4.554439650000002
-  },
-  {
     "id": 67,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
@@ -2019,10 +2014,10 @@
     "rarity": 4.761120000000001
   },
   {
-    "id": 166,
+    "id": 175,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/166.svg",
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/175.svg",
     "trait": [
       {
         "trait_type": "Attributes",
@@ -2034,21 +2029,21 @@
       },
       {
         "trait_type": "Head",
-        "value": "Wizard Hat",
-        "rarity": 2.9
+        "value": "Burnout",
+        "rarity": 0.87
       },
       {
         "trait_type": "Eyes",
-        "value": "One-eyed",
-        "rarity": 0.51
+        "value": "Eye Patch",
+        "rarity": 2.94
       },
       {
         "trait_type": "Mouth",
-        "value": "Toothless",
-        "rarity": 3.01
+        "value": "Gold Teeth",
+        "rarity": 1.72
       }
     ],
-    "rarity": 4.8524511
+    "rarity": 4.79536344
   },
   {
     "id": 66,
@@ -2550,26 +2545,31 @@
     "rarity": 7.493636640000001
   },
   {
-    "id": 142,
+    "id": 89,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/142.svg",
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/89.svg",
     "trait": [
       {
         "trait_type": "Attributes",
-        "value": 1
+        "value": 2
       },
       {
         "trait_type": "DNA",
         "value": "x-type"
       },
       {
-        "trait_type": "Earring",
-        "value": "Gold Earring",
-        "rarity": 7.11
+        "trait_type": "Eyes",
+        "value": "Goggles",
+        "rarity": 4.06
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Gold Teeth",
+        "rarity": 1.72
       }
     ],
-    "rarity": 7.749900000000001
+    "rarity": 7.611687999999999
   },
   {
     "id": 55,
@@ -2931,38 +2931,6 @@
     "rarity": 11.235785400000001
   },
   {
-    "id": 88,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/88.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 3
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Sprout",
-        "rarity": 0.86
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Defective",
-        "rarity": 2.96
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Huh",
-        "rarity": 4.13
-      }
-    ],
-    "rarity": 11.459527519999998
-  },
-  {
     "id": 91,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
@@ -2988,6 +2956,38 @@
       }
     ],
     "rarity": 11.485875000000002
+  },
+  {
+    "id": 130,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/130.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Sprout",
+        "rarity": 0.86
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Blushing",
+        "rarity": 3.07
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Huh",
+        "rarity": 4.13
+      }
+    ],
+    "rarity": 11.88538834
   },
   {
     "id": 71,
@@ -3017,38 +3017,6 @@
     "rarity": 12.09464
   },
   {
-    "id": 170,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/170.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 3
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Pinwheel",
-        "rarity": 3.89
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Glitch",
-        "rarity": 0.98
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Mustache",
-        "rarity": 2.92
-      }
-    ],
-    "rarity": 12.133470160000003
-  },
-  {
     "id": 149,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
@@ -3074,38 +3042,6 @@
       }
     ],
     "rarity": 12.69196
-  },
-  {
-    "id": 114,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/114.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 3
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Top Hat",
-        "rarity": 3.91
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Laser Visor",
-        "rarity": 3.07
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Pepe Mouth",
-        "rarity": 1
-      }
-    ],
-    "rarity": 13.084033000000002
   },
   {
     "id": 99,
@@ -3160,60 +3096,6 @@
       }
     ],
     "rarity": 13.851501999999998
-  },
-  {
-    "id": 175,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/175.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 2
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Eye Patch",
-        "rarity": 2.94
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Smirk",
-        "rarity": 4.41
-      }
-    ],
-    "rarity": 14.132286
-  },
-  {
-    "id": 85,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/85.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 2
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Blushing",
-        "rarity": 3.07
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Tongue Out",
-        "rarity": 4.23
-      }
-    ],
-    "rarity": 14.154849000000002
   },
   {
     "id": 172,
@@ -3398,38 +3280,6 @@
     "rarity": 15.264775
   },
   {
-    "id": 95,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/95.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 3
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Black Cap",
-        "rarity": 3.86
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Hero Mask",
-        "rarity": 3.87
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Snake Tongue",
-        "rarity": 0.95
-      }
-    ],
-    "rarity": 15.468506099999997
-  },
-  {
     "id": 129,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
@@ -3548,6 +3398,38 @@
     "rarity": 16.054049999999997
   },
   {
+    "id": 167,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/167.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Wizard Hat",
+        "rarity": 2.9
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Tinted Lenses",
+        "rarity": 2.85
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Neck Gaiter",
+        "rarity": 1.81
+      }
+    ],
+    "rarity": 16.3060185
+  },
+  {
     "id": 161,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
@@ -3627,33 +3509,6 @@
       }
     ],
     "rarity": 16.987424999999998
-  },
-  {
-    "id": 136,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/136.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 2
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "3D Glasses",
-        "rarity": 3.75
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Tongue Out",
-        "rarity": 4.23
-      }
-    ],
-    "rarity": 17.290125000000003
   },
   {
     "id": 163,
@@ -3806,6 +3661,38 @@
     "rarity": 17.935117200000004
   },
   {
+    "id": 170,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/170.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Pinwheel",
+        "rarity": 3.89
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Glitch",
+        "rarity": 0.98
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Focusing",
+        "rarity": 4.34
+      }
+    ],
+    "rarity": 18.033993320000004
+  },
+  {
     "id": 107,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
@@ -3890,6 +3777,33 @@
       }
     ],
     "rarity": 18.47124137
+  },
+  {
+    "id": 108,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/108.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Ninja Mask",
+        "rarity": 3.88
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Robot Mouth",
+        "rarity": 4.44
+      }
+    ],
+    "rarity": 18.777648000000003
   },
   {
     "id": 120,
@@ -4052,38 +3966,6 @@
       }
     ],
     "rarity": 21.074625
-  },
-  {
-    "id": 138,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/138.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 3
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Viking Helmet",
-        "rarity": 2.82
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Nerd Glasses",
-        "rarity": 4.01
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Gold Teeth",
-        "rarity": 1.72
-      }
-    ],
-    "rarity": 21.20061336
   },
   {
     "id": 2032,
@@ -4265,6 +4147,33 @@
     "rarity": 23.58
   },
   {
+    "id": 142,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/142.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 2
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Laser Visor",
+        "rarity": 3.07
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Gold Earring",
+        "rarity": 7.11
+      }
+    ],
+    "rarity": 23.792193000000005
+  },
+  {
     "id": 94,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
@@ -4415,6 +4324,38 @@
       }
     ],
     "rarity": 26.527500000000003
+  },
+  {
+    "id": 79,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/79.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Beanie",
+        "rarity": 2.78
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Half Rim Glasses",
+        "rarity": 3.03
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Mustache",
+        "rarity": 2.92
+      }
+    ],
+    "rarity": 26.80999752
   },
   {
     "id": 1979,
@@ -6892,10 +6833,10 @@
     "rarity": 50.05266048
   },
   {
-    "id": 79,
+    "id": 95,
     "name": "X-Type",
     "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/79.svg",
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/95.svg",
     "trait": [
       {
         "trait_type": "Attributes",
@@ -6907,8 +6848,8 @@
       },
       {
         "trait_type": "Head",
-        "value": "Beanie",
-        "rarity": 2.78
+        "value": "Black Cap",
+        "rarity": 3.86
       },
       {
         "trait_type": "Eyes",
@@ -6917,11 +6858,11 @@
       },
       {
         "trait_type": "Mouth",
-        "value": "Focusing",
-        "rarity": 4.34
+        "value": "Cyborg Jaw",
+        "rarity": 3.13
       }
     ],
-    "rarity": 50.89463316
+    "rarity": 50.96465693999999
   },
   {
     "id": 2670,
@@ -7497,6 +7438,38 @@
       }
     ],
     "rarity": 54.33225000000001
+  },
+  {
+    "id": 138,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/138.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Viking Helmet",
+        "rarity": 2.82
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Nerd Glasses",
+        "rarity": 4.01
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Smirk",
+        "rarity": 4.41
+      }
+    ],
+    "rarity": 54.35738658
   },
   {
     "id": 9215,
@@ -8648,43 +8621,6 @@
     "rarity": 65.04028825
   },
   {
-    "id": 83,
-    "name": "X-Type",
-    "DNA_Rarity": 1.09,
-    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/83.svg",
-    "trait": [
-      {
-        "trait_type": "Attributes",
-        "value": 4
-      },
-      {
-        "trait_type": "DNA",
-        "value": "x-type"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Antenna",
-        "rarity": 4.09
-      },
-      {
-        "trait_type": "Eyes",
-        "value": "Pepe Eyes",
-        "rarity": 0.47
-      },
-      {
-        "trait_type": "Mouth",
-        "value": "Speechless",
-        "rarity": 4.37
-      },
-      {
-        "trait_type": "Earring",
-        "value": "Gold Earring",
-        "rarity": 7.11
-      }
-    ],
-    "rarity": 65.1026552049
-  },
-  {
     "id": 3411,
     "name": "Neo-Human",
     "DNA_Rarity": 32.75,
@@ -9060,6 +8996,38 @@
       }
     ],
     "rarity": 67.59599999999999
+  },
+  {
+    "id": 136,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/136.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Top Hat",
+        "rarity": 3.91
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "3D Glasses",
+        "rarity": 3.75
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Tongue Out",
+        "rarity": 4.23
+      }
+    ],
+    "rarity": 67.60438875000003
   },
   {
     "id": 244,
@@ -20814,6 +20782,38 @@
       }
     ],
     "rarity": 138.471192
+  },
+  {
+    "id": 83,
+    "name": "X-Type",
+    "DNA_Rarity": 1.09,
+    "thumbnail": "https://cdn.eternalai.org/homepage/data-mint-v2/83.svg",
+    "trait": [
+      {
+        "trait_type": "Attributes",
+        "value": 3
+      },
+      {
+        "trait_type": "DNA",
+        "value": "x-type"
+      },
+      {
+        "trait_type": "Head",
+        "value": "Antenna",
+        "rarity": 4.09
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Speechless",
+        "rarity": 4.37
+      },
+      {
+        "trait_type": "Earring",
+        "value": "Gold Earring",
+        "rarity": 7.11
+      }
+    ],
+    "rarity": 138.51628767
   },
   {
     "id": 924,
