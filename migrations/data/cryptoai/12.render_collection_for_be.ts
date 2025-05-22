@@ -83,19 +83,21 @@ async function main() {
   });
     
     // console.log('____dataTraits', dataTraits);
-    for(let i = 0; i < collections.length; i++) {
+    for (let i = 0; i < collections.length; i++) {
       const collection = collections[i];
       const traits = collection['name'][1];
       const name = collection['name'][0];
 
-      let rarity = dataTraits[name].percent;
+      const attrNumber = traits.filter((t: string) => t !== '').length - 1;
+
+      let rarity = attrNumber > 0 ? 1 : 0;//dataTraits[name].percent;
 
       // console.log('___DNA', rarity, dataTraits[name]);
     
       const ttrs: any = [
         {
           trait_type: 'Attributes',
-          value: traits.filter((t: string) => t !== '').length - 1
+          value: attrNumber
         },
         {
           trait_type: 'DNA',
@@ -105,7 +107,7 @@ async function main() {
               
       ]
 
-      if(traits[1] !== '') {
+      if (traits[1] !== '') {
         ttrs.push({
           trait_type: 'Collar',
           value: traits[1],
@@ -115,7 +117,7 @@ async function main() {
         rarity *= dataTraits['collar'][traits[1]].percent;
         // console.log('___collar', rarity, dataTraits['collar'][traits[1]]);
       }
-      if(traits[2] !== '') {
+      if (traits[2] !== '') {
         ttrs.push({
           trait_type: 'Head',
           value: traits[2],
@@ -125,7 +127,7 @@ async function main() {
         rarity *= dataTraits['head'][traits[2]].percent;
         // console.log('___head', rarity, dataTraits['head'][traits[2]]);
       }
-      if(traits[3] !== '') {
+      if (traits[3] !== '') {
         ttrs.push({
           trait_type: 'Eyes',
           value: traits[3],
@@ -135,7 +137,7 @@ async function main() {
         rarity *= dataTraits['eyes'][traits[3]].percent;
         // console.log('___eyes', rarity, dataTraits['eyes'][traits[3]]);
       }
-      if(traits[4] !== '') {
+      if (traits[4] !== '') {
         ttrs.push({
           trait_type: 'Mouth',
           value: traits[4],
@@ -145,7 +147,7 @@ async function main() {
         rarity *= dataTraits['mouth'][traits[4]].percent;
         // console.log('___mouth', rarity, dataTraits['mouth'][traits[4]]);
       }
-      if(traits[5] !== '') {
+      if (traits[5] !== '') {
         ttrs.push({
           trait_type: 'Earring',
           value: traits[5],
@@ -156,13 +158,32 @@ async function main() {
         // console.log('___earring', rarity, dataTraits['earring'][traits[5]]);
       }
 
+
+      let weight = 1;
+      switch (name) {
+        case 'Kong':
+          weight = 1000;
+          break;
+        case 'X-Type':
+          weight = 100000;
+          break;
+        case 'Neo-Human':
+          weight = 10000000;
+          break;
+        case 'Robot':
+          weight = 1000000000;
+          break;
+      }
+   
+          
+
       data.push({
         id: collection['id'],
         name: name,
         DNA_Rarity: dataTraits[name].percent,
         thumbnail: `https://cdn.eternalai.org/homepage/data-mint-v2/${collection['id']}.svg`,
         trait: ttrs,
-        rarity: rarity
+        rarity: weight + rarity
       })
     }
 
